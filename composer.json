@@ -54,6 +54,25 @@
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover"
+        ],
+        "env": [
+            "php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+        ],
+        "refresh": [
+            "php artisan migrate:fresh --seed"
+        ],
+        "setup-eloquent": [
+            "sudo chmod g+w * -R",
+            "sudo chgrp www-data * -R",
+            "php artisan key:generate",
+            "php artisan migrate --seed",
+            "php artisan storage:link"
+        ],
+        "start": [
+            "php -S 127.0.0.1:8000 -t public"
+        ],
+        "test": [
+            "phpunit"
         ]
     },
     "config": {
