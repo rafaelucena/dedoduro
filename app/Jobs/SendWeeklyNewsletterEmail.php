@@ -3,7 +3,7 @@
 namespace App\Jobs;
 
 use Mail;
-use App\Blog;
+use App\Http\Models\Blog;
 use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;

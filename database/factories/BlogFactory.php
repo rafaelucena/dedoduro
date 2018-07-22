@@ -1,8 +1,9 @@
 <?php
 
+use App\Http\Models\Blog;
 use Faker\Generator as Faker;
 
-$factory->define(App\Blog::class, function (Faker $faker) {
+$factory->define(Blog::class, function (Faker $faker) {
     return [
         'title' => $faker->sentence(5),
         'image' => 'http://placehold.it/700x450',

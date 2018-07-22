@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Guest;
 
-use App\Blog;
+use App\Http\Models\Blog;
 use App\Subscriber;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;

@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Http\Models\Blog;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -42,7 +43,7 @@ class User extends Authenticatable
      */
     public function blogs()
     {
-        return $this->hasMany('App\Blog');
+        return $this->hasMany(Blog::class);
     }
 
     /**

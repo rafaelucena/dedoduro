@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Http\Models\Blog;
 use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model
@@ -20,7 +21,7 @@ class Comment extends Model
      */
     public function blog()
     {
-        return $this->belongsTo('App\Blog');
+        return $this->belongsTo(Blog::class);
     }
 
     public function scopeActive($query)

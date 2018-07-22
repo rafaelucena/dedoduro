@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App;
 use URL;
-use App\Blog;
+use App\Http\Models\Blog;
 use Illuminate\Http\Request;
 
 class FeedsController extends Controller

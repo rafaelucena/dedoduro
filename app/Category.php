@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Http\Models\Blog;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
@@ -43,7 +44,7 @@ class Category extends Model
      */
     public function blogs()
     {
-        return $this->belongsToMany('App\Blog');
+        return $this->belongsToMany(Blog::class);
     }
 
     /**
