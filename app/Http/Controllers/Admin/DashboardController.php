@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Models\Blog;
 use App\Models\Category;
 use App\Models\Comment;
-use App\User;
+use App\Models\User;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;

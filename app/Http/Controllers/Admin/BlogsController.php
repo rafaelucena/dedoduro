@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Http\Models\Blog;
-use App\User;
-use App\Models\Category;
-use Illuminate\Http\File;
-use Illuminate\Http\Request;
-use Yajra\Datatables\Datatables;
-use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreBlogPost;
 use App\Http\Requests\UpdateBlogPost;
-use App\Http\Controllers\Controller;
+use App\Models\Category;
+use App\Models\User;
+use Illuminate\Http\File;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Yajra\Datatables\Datatables;
 
 class BlogsController extends Controller
 {

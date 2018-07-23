@@ -1,7 +1,7 @@
 <?php
 
-use App\User;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Seeder;
 
