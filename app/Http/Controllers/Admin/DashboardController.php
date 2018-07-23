@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Models\Blog;
+use App\Models\Category;
 use App\User;
-use App\Category;
 use App\Comment;
 
 use Illuminate\Http\Request;

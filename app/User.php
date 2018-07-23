@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Http\Models\Blog;
+use App\Models\Category;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -51,7 +52,7 @@ class User extends Authenticatable
      */
     public function categories()
     {
-        return $this->hasMany('App\Category');
+        return $this->hasMany(Category::class);
     }
 
     /**

@@ -2,12 +2,12 @@
 
 namespace App\Providers;
 
+use App;
+use App\Models\Category;
+use App\Setting;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Schema;
-use App\Category;
-use App\Setting;
-use App;
 
 class AppServiceProvider extends ServiceProvider
 {

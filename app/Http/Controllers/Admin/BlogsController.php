@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Models\Blog;
 use App\User;
-use App\Category;
+use App\Models\Category;
 use Illuminate\Http\File;
 use Illuminate\Http\Request;
 use Yajra\Datatables\Datatables;

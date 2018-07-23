@@ -2,10 +2,11 @@
 
 namespace App\Http\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\Category;
 use Cviebrock\EloquentSluggable\Sluggable;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Blog extends Model
 {
@@ -98,6 +99,6 @@ class Blog extends Model
      */
     public function categories()
     {
-        return $this->belongsToMany('App\Category');
+        return $this->belongsToMany(Category::class);
     }
 }

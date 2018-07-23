@@ -44,7 +44,7 @@
                                 @foreach (old('categories') as $oldCategory)
                                 <option value="{{ $oldCategory }}" selected="selected">
                                     @if(is_numeric($oldCategory))
-                                        {{ App\Category::where('id', $oldCategory)->get()->pluck('name')[0] }}
+                                        {{ App\Models\Category::where('id', $oldCategory)->get()->pluck('name')[0] }}
                                     @else
                                         {{ $oldCategory }}
                                     @endif
