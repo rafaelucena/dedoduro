@@ -3,6 +3,7 @@
 namespace App\Http\Models;
 
 use App\Models\Category;
+use App\Models\Comment;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use Illuminate\Database\Eloquent\Model;
@@ -91,7 +92,7 @@ class Blog extends Model
      */
     public function comments()
     {
-        return $this->hasMany('App\Comment');
+        return $this->hasMany(Comment::class);
     }
 
     /**

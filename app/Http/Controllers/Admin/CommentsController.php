@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Comment;
+use App\Http\Controllers\Controller;
+use App\Models\Comment;
 use Illuminate\Http\Request;
 use Yajra\Datatables\Datatables;
-use App\Http\Controllers\Controller;
 
 class CommentsController extends Controller
 {
