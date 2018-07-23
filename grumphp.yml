@@ -1,0 +1,13 @@
+parameters:
+    git_dir: .
+    bin_dir: vendor/bin
+    ascii:
+        failed: resources/grumphp/grumphp-failed.txt
+        succeeded: resources/grumphp/grumphp-happy.txt
+    tasks:
+        phpcpd: ~
+        php_codesniffer:
+            standard: PSR2
+#        phpcs: ~
+        phpmd: ~
+        phpspec: ~
