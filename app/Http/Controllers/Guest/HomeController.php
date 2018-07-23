@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Guest;
 
-use App\Http\Models\Blog;
-use App\Subscriber;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Storage;
+use App\Http\Models\Blog;
 use App\Jobs\SendSubscriptionVerificationEmail;
 use App\Listeners\EmailSubscribedListener;
+use App\Models\Subscriber;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class HomeController extends Controller
 {

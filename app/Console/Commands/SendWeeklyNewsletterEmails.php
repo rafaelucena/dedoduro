@@ -4,9 +4,9 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 
-use App\Subscriber;
 use App\Jobs\SendWeeklyNewsletterEmail;
 use App\Listeners\WeeklyNewsletterEmailListener;
+use App\Models\Subscriber;
 
 class SendWeeklyNewsletterEmails extends Command
 {

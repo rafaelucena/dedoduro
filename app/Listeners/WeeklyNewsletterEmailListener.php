@@ -2,8 +2,8 @@
 
 namespace App\Listeners;
 
-use App\Subscriber;
 use App\Events\Event;
+use App\Models\Subscriber;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 

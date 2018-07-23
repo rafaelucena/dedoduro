@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Subscriber;
+use App\Http\Controllers\Controller;
+use App\Models\Subscriber;
 use Illuminate\Http\Request;
 use Yajra\Datatables\Datatables;
-use App\Http\Controllers\Controller;
 
 class SubscribersController extends Controller
 {
