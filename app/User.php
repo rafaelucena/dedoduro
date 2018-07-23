@@ -4,6 +4,7 @@ namespace App;
 
 use App\Http\Models\Blog;
 use App\Models\Category;
+use App\Models\Role;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -60,7 +61,7 @@ class User extends Authenticatable
      */
     public function roles()
     {
-        return $this->belongsToMany('App\Role');
+        return $this->belongsToMany(Role::class);
     }
 
     /**

@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\User;
-use App\Role;
-use Illuminate\Http\Request;
-use Yajra\Datatables\Datatables;
-use Illuminate\Support\Facades\Hash;
+use App\Models\Role;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Yajra\Datatables\Datatables;
 
 class UsersController extends Controller
 {
