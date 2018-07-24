@@ -74,7 +74,7 @@ class Blog extends Model
      *
      * @return string
      */
-    public function scopeOrLike($query, $field, $value)
+    public function scopeOrLike($query, $field,$value)
     {
         return $query->orWhere($field, 'LIKE', "%$value%");
     }
