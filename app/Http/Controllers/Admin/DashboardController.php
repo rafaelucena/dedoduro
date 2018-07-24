@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Models\Blog;
 use App\Http\Models\Category;
-use App\Models\Comment;
+use App\Http\Models\Comment;
 use App\Models\User;
 
 use Illuminate\Http\Request;

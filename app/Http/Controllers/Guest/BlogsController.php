@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Guest;
 use App\Http\Controllers\Controller;
 use App\Http\Models\Blog;
 use App\Http\Models\Category;
-use App\Models\Comment;
+use App\Http\Models\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
