@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Models\Category;
 use Illuminate\Http\Request;
-use Yajra\Datatables\Datatables;
 use Illuminate\Support\Facades\Auth;
+use Yajra\Datatables\Datatables;
 
 class CategoriesController extends Controller
 {

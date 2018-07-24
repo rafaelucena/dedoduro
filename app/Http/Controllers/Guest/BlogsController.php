@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Guest;
 
+use App\Http\Controllers\Controller;
 use App\Http\Models\Blog;
 use App\Http\Models\Category;
 use App\Models\Comment;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 
 class BlogsController extends Controller
