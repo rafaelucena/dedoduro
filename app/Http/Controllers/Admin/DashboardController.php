@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Models\Blog;
-use App\Models\Category;
+use App\Http\Models\Category;
 use App\Models\Comment;
 use App\Models\User;
 

@@ -2,7 +2,7 @@
 
 namespace App\Http\Models;
 
-use App\Models\Category;
+use App\Http\Models\Category;
 use App\Models\Comment;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;

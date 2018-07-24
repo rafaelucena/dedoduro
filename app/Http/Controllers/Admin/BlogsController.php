@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Models\Blog;
+use App\Http\Models\Category;
 use App\Http\Requests\StoreBlogPost;
 use App\Http\Requests\UpdateBlogPost;
-use App\Models\Category;
 use App\Models\User;
 use Illuminate\Http\File;
 use Illuminate\Http\Request;

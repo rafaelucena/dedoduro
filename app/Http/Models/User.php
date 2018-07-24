@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use App\Http\Models\Blog;
-use App\Models\Category;
+use App\Http\Models\Category;
 use App\Models\Role;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;

@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 use App;
-use App\Models\Category;
+use App\Http\Models\Category;
 use App\Models\Setting;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;

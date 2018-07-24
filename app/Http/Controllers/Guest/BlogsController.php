@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Guest;
 
 use App\Http\Models\Blog;
-use App\Models\Category;
+use App\Http\Models\Category;
 use App\Models\Comment;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
