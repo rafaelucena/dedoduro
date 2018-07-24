@@ -4,14 +4,13 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Models\Role;
-use App\Models\User;
+use App\Http\Models\User;
+use App\Jobs\SendUserVerificationEmail;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Foundation\Auth\RegistersUsers;
-
-use Illuminate\Auth\Events\Registered;
-use Illuminate\Http\Request;
-use App\Jobs\SendUserVerificationEmail;
 
 class RegisterController extends Controller
 {

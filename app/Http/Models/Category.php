@@ -3,10 +3,10 @@
 namespace App\Http\Models;
 
 use App\Http\Models\Blog;
-use App\Models\User;
-use Illuminate\Database\Eloquent\Model;
+use App\Http\Models\User;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
+use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {

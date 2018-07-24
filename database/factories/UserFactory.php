@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\User;
+use App\Http\Models\User;
 use Faker\Generator as Faker;
 
 /*

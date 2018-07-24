@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Http\Models\Blog;
 use App\Http\Models\Category;
 use App\Http\Models\Comment;
-use App\Models\User;
-
+use App\Http\Models\User;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
 class DashboardController extends Controller
 {

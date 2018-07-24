@@ -7,7 +7,7 @@ use App\Http\Models\Blog;
 use App\Http\Models\Category;
 use App\Http\Requests\StoreBlogPost;
 use App\Http\Requests\UpdateBlogPost;
-use App\Models\User;
+use App\Http\Models\User;
 use Illuminate\Http\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
