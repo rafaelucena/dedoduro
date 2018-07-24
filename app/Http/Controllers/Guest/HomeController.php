@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Guest;
 
 use App\Http\Controllers\Controller;
 use App\Http\Models\Blog;
+use App\Http\Models\Subscriber;
 use App\Jobs\SendSubscriptionVerificationEmail;
 use App\Listeners\EmailSubscribedListener;
-use App\Models\Subscriber;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 

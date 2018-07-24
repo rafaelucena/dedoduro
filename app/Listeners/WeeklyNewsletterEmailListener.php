@@ -3,7 +3,7 @@
 namespace App\Listeners;
 
 use App\Events\Event;
-use App\Models\Subscriber;
+use App\Http\Models\Subscriber;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
