@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Role;
+use App\Http\Models\Role;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
