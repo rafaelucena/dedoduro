@@ -85,4 +85,10 @@ class _Blog
      * @ORM\Column(type="datetime", nullable=true)
      */
     protected $deletedAt;
+
+    protected $user;
+
+    protected $comments;
+
+    protected $categories;
 }
