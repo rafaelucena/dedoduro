@@ -2,6 +2,9 @@
 
 namespace App\Http\Models;
 
+use App\Http\Models\_Blog;
+use App\Http\Models\_Category;
+use App\Http\Models\_UserRole;
 use Doctrine\ORM\Mapping AS ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
@@ -11,16 +14,6 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class _User
 {
-//`id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-//`name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-//`about` text COLLATE utf8mb4_unicode_ci,
-//`email` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
-//`password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-//`confirmation_token` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-//`is_active` tinyint(4) DEFAULT '0',
-//`remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-//`created_at` timestamp NULL DEFAULT NULL,
-//`updated_at` timestamp NULL DEFAULT NULL,
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -73,9 +66,18 @@ class _User
      */
     protected $updatedAt;
 
+    /**
+     * @ORM\OneToMany(targetEntity="_Blog", mappedBy="user")
+     */
     protected $blogs;
 
+    /**
+     * @ORM\OneToMany(targetEntity="_Category", mappedBy="user")
+     */
     protected $categories;
 
-    protected $roles;
+    /**
+     * @ORM\OneToMany(targetEntity="_UserRole", mappedBy="user")
+     */
+    protected $userRoles;
 }
