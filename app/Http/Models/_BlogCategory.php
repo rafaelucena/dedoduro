@@ -46,7 +46,7 @@ class _BlogCategory
     protected $blog;
 
     /**
-     * @ORM\ManyToOne(targetEntity="_Category", inversedBy="categoryBlogs")
+     * @ORM\ManyToOne(targetEntity="_Category", inversedBy="blogsCategory")
      */
     protected $category;
 }
