@@ -2,6 +2,9 @@
 
 namespace App\Http\Models;
 
+use App\Http\Models\_BlogCategory;
+use App\Http\Models\_Comment;
+use App\Http\Models\_User;
 use Doctrine\ORM\Mapping AS ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
@@ -11,19 +14,6 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class _Blog
 {
-//`id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-//`title` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
-//`slug` varchar(180) COLLATE utf8mb4_unicode_ci NOT NULL,
-//`image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-//`excerpt` text COLLATE utf8mb4_unicode_ci NOT NULL,
-//`description` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-//`views` int(10) unsigned NOT NULL DEFAULT '1',
-//`user_id` int(10) unsigned NOT NULL,
-//`is_active` tinyint(3) unsigned NOT NULL DEFAULT '0',
-//`allow_comments` tinyint(3) unsigned NOT NULL DEFAULT '1',
-//`created_at` timestamp NULL DEFAULT NULL,
-//`updated_at` timestamp NULL DEFAULT NULL,
-//`deleted_at` timestamp NULL DEFAULT NULL,
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -86,9 +76,18 @@ class _Blog
      */
     protected $deletedAt;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="_User", inversedBy="blogs")
+     */
     protected $user;
 
+    /**
+     * @ORM\OneToMany(targetEntity="_Comment", mappedBy="blog")
+     */
     protected $comments;
 
-    protected $categories;
+    /**
+     * @ORM\OneToMany(targetEntity="_BlogCategory", mappedBy="blog")
+     */
+    protected $blogCategories;
 }
