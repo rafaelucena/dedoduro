@@ -13,12 +13,6 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class _Category
 {
-//`id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-//`name` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
-//`slug` varchar(180) COLLATE utf8mb4_unicode_ci NOT NULL,
-//`user_id` int(10) unsigned NOT NULL,
-//`created_at` timestamp NULL DEFAULT NULL,
-//`updated_at` timestamp NULL DEFAULT NULL,
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
