@@ -2,6 +2,7 @@
 
 namespace App\Http\Models;
 
+use App\Http\Models\_UserRole;
 use Doctrine\ORM\Mapping AS ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
@@ -11,9 +12,6 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class _Role
 {
-//`id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-//`role` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
-//`description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -41,5 +39,8 @@ class _Role
      */
     protected $updatedAt;
 
-    protected $users;
+    /**
+     * @ORM\OneToMany(targetEntity="_UserRole", mappedBy="role")
+     */
+    protected $usersRole;
 }
