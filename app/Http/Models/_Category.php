@@ -2,6 +2,8 @@
 
 namespace App\Http\Models;
 
+use App\Http\Models\_BlogCategory;
+use App\Http\Models\_User;
 use Doctrine\ORM\Mapping AS ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
@@ -44,7 +46,13 @@ class _Category
      */
     protected $updatedAt;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="_User", inversedBy="categories")
+     */
     protected $user;
 
-    protected $blogs;
+    /**
+     * @ORM\OneToMany(targetEntity="_BlogCategory", mappedBy="category")
+     */
+    protected $blogsCategory;
 }
