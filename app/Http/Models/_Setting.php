@@ -11,10 +11,6 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class _Setting
 {
-//`id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-//`setting_name` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
-//`setting_value` text COLLATE utf8mb4_unicode_ci NOT NULL,
-//`description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
