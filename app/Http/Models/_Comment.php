@@ -2,6 +2,7 @@
 
 namespace App\Http\Models;
 
+use App\Http\Models\_Blog;
 use Doctrine\ORM\Mapping AS ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
@@ -56,5 +57,8 @@ class _Comment
      */
     protected $updatedAt;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="_Blog", inversedBy="comments")
+     */
     protected $blog;
 }
