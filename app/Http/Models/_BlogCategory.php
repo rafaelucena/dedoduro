@@ -13,11 +13,6 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class _BlogCategory
 {
-//$table->increments('id');
-//$table->integer('blog_id')->unsigned()->nullable(false);
-//$table->foreign('blog_id')->references('id')->on('blogs');
-//$table->integer('category_id')->unsigned()->nullable(false);
-//$table->foreign('category_id')->references('id')->on('categories');
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
