@@ -3,8 +3,9 @@
 namespace App\Http\Models;
 
 use App\Http\Models\_Blog;
-use Doctrine\ORM\Mapping AS ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping AS ORM;
+use Doctrine\ORM\Event\PreUpdateEventArgs;
 
 /**
  * @ORM\Entity
@@ -17,40 +18,59 @@ class _Comment
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer", nullable=false)
      */
-    protected $id;
+    public $id;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=false)
      */
-    protected $name;
+    public $name;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=false)
      */
-    protected $email;
+    public $email;
 
     /**
      * @ORM\Column(type="text", nullable=false)
      */
-    protected $body;
+    public $body;
 
     /**
      * @ORM\Column(type="integer", nullable=false)
      */
-    protected $isActive;
+    public $isActive;
 
     /**
      * @ORM\Column(type="datetime", nullable=false)
      */
-    protected $createdAt;
+    public $createdAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=false)
      */
-    protected $updatedAt;
+    public $updatedAt;
 
     /**
      * @ORM\ManyToOne(targetEntity="_Blog", inversedBy="comments")
      */
-    protected $blog;
+    public $blog;
+
+    /**
+     * @ORM\PrePersist()
+     */
+    public function onPrePersist()
+    {
+        $this->createdAt = time();
+    }
+
+    /**
+     * @param PreUpdateEventArgs $eventArgs
+     * @ORM\PreUpdate()
+     */
+    public function onPreUpdate(PreUpdateEventArgs $eventArgs)
+    {
+        if (!empty($eventArgs->getEntityChangeSet())) {
+            $this->updatedAt = time();
+        }
+    }
 }
