@@ -4,7 +4,7 @@ namespace App\Http\Models;
 
 use App\Http\Models\Blog;
 use App\Http\Models\Category;
-use App\Http\Models\_UserRole;
+use App\Http\Models\UserRole;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping AS ORM;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
@@ -78,7 +78,7 @@ class _User
     public $categories;
 
     /**
-     * @ORM\OneToMany(targetEntity="_UserRole", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="UserRole", mappedBy="user")
      */
     public $userRoles;
 

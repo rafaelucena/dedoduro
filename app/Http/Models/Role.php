@@ -2,7 +2,7 @@
 
 namespace App\Http\Models;
 
-use App\Http\Models\_UserRole;
+use App\Http\Models\UserRole;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping AS ORM;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
@@ -41,7 +41,7 @@ class Role
     public $updatedAt;
 
     /**
-     * @ORM\OneToMany(targetEntity="_UserRole", mappedBy="role")
+     * @ORM\OneToMany(targetEntity="UserRole", mappedBy="role")
      */
     public $usersRole;
 

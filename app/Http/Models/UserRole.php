@@ -12,7 +12,7 @@ use Doctrine\ORM\Event\PreUpdateEventArgs;
  * @ORM\Entity()
  * @ORM\Table(name="user_role")
  */
-class _UserRole
+class UserRole
 {
     /**
      * @ORM\Id()
