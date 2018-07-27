@@ -46,7 +46,7 @@ class _Comment
     public $createdAt;
 
     /**
-     * @ORM\Column(type="datetime", nullable=false)
+     * @ORM\Column(type="datetime", nullable=true)
      */
     public $updatedAt;
 
