@@ -3,7 +3,7 @@
 namespace App\Http\Models;
 
 use App\Http\Models\Blog;
-use App\Http\Models\_Category;
+use App\Http\Models\Category;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping AS ORM;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
@@ -42,7 +42,7 @@ class BlogCategory
     public $blog;
 
     /**
-     * @ORM\ManyToOne(targetEntity="_Category", inversedBy="blogsCategory")
+     * @ORM\ManyToOne(targetEntity="Category", inversedBy="blogsCategory")
      */
     public $category;
 
