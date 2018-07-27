@@ -2,7 +2,7 @@
 
 namespace App\Http\Models;
 
-use App\Http\Models\_User;
+use App\Http\Models\User;
 use App\Http\Models\Role;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping AS ORM;
@@ -37,7 +37,7 @@ class UserRole
     public $deletedAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity="_User", inversedBy="userRoles")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="userRoles")
      */
     public $user;
 

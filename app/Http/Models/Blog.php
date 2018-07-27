@@ -4,7 +4,7 @@ namespace App\Http\Models;
 
 use App\Http\Models\BlogCategory;
 use App\Http\Models\Comment;
-use App\Http\Models\_User;
+use App\Http\Models\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping AS ORM;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
@@ -89,8 +89,8 @@ class Blog
     public $deletedAt;
 
     /**
-     * @var _User
-     * @ORM\ManyToOne(targetEntity="_User", inversedBy="blogs")
+     * @var User
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="blogs")
      */
     public $user;
 
