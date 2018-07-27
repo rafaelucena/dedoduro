@@ -3,7 +3,7 @@
 namespace App\Http\Models;
 
 use App\Http\Models\_User;
-use App\Http\Models\_Role;
+use App\Http\Models\Role;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping AS ORM;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
@@ -42,7 +42,7 @@ class _UserRole
     public $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity="_Role", inversedBy="usersRole")
+     * @ORM\ManyToOne(targetEntity="Role", inversedBy="usersRole")
      */
     public $role;
 

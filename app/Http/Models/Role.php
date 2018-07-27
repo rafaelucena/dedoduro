@@ -11,7 +11,7 @@ use Doctrine\ORM\Event\PreUpdateEventArgs;
  * @ORM\Entity()
  * @ORM\Table(name="role")
  */
-class _Role
+class Role
 {
     /**
      * @ORM\Id()
