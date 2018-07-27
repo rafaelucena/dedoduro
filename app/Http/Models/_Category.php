@@ -2,7 +2,7 @@
 
 namespace App\Http\Models;
 
-use App\Http\Models\_BlogCategory;
+use App\Http\Models\BlogCategory;
 use App\Http\Models\_User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping AS ORM;
@@ -47,7 +47,7 @@ class _Category
     public $user;
 
     /**
-     * @ORM\OneToMany(targetEntity="_BlogCategory", mappedBy="category")
+     * @ORM\OneToMany(targetEntity="BlogCategory", mappedBy="category")
      */
     public $blogsCategory;
 
