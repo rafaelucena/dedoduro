@@ -13,36 +13,36 @@ use Doctrine\ORM\Event\PreUpdateEventArgs;
 class _Setting
 {
     /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
      * @ORM\Column(type="integer", nullable=false)
      */
-    protected $id;
+    public $id;
 
     /**
      * @ORM\Column(type="string", length=127, nullable=false)
      */
-    protected $settingName;
+    public $settingName;
 
     /**
      * @ORM\Column(type="text", nullable=false)
      */
-    protected $settingValue;
+    public $settingValue;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=false)
      */
-    protected $description;
+    public $description;
 
     /**
      * @ORM\Column(type="datetime", nullable=false)
      */
-    protected $createdAt;
+    public $createdAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    protected $updatedAt;
+    public $updatedAt;
 
     /**
      * @ORM\PrePersist()
