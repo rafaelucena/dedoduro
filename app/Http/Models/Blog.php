@@ -13,7 +13,7 @@ use Doctrine\ORM\Event\PreUpdateEventArgs;
  * @ORM\Entity()
  * @ORM\Table(name="blog")
  */
-class _Blog
+class Blog
 {
     /**
      * @ORM\Id()

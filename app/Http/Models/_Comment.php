@@ -2,7 +2,7 @@
 
 namespace App\Http\Models;
 
-use App\Http\Models\_Blog;
+use App\Http\Models\Blog;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping AS ORM;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
@@ -51,7 +51,7 @@ class _Comment
     public $updatedAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity="_Blog", inversedBy="comments")
+     * @ORM\ManyToOne(targetEntity="Blog", inversedBy="comments")
      */
     public $blog;
 

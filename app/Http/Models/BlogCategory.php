@@ -2,7 +2,7 @@
 
 namespace App\Http\Models;
 
-use App\Http\Models\_Blog;
+use App\Http\Models\Blog;
 use App\Http\Models\_Category;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping AS ORM;
@@ -37,7 +37,7 @@ class BlogCategory
     public $deletedAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity="_Blog", inversedBy="blogCategories")
+     * @ORM\ManyToOne(targetEntity="Blog", inversedBy="blogCategories")
      */
     public $blog;
 

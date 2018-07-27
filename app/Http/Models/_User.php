@@ -2,7 +2,7 @@
 
 namespace App\Http\Models;
 
-use App\Http\Models\_Blog;
+use App\Http\Models\Blog;
 use App\Http\Models\_Category;
 use App\Http\Models\_UserRole;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -68,7 +68,7 @@ class _User
     public $updatedAt;
 
     /**
-     * @ORM\OneToMany(targetEntity="_Blog", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="Blog", mappedBy="user")
      */
     public $blogs;
 
