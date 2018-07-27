@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping AS ORM;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity()
  * @ORM\Table(name="setting")
  */
 class _Setting
