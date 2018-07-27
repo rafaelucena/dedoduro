@@ -10,7 +10,7 @@ use Doctrine\ORM\Event\PreUpdateEventArgs;
  * @ORM\Entity()
  * @ORM\Table(name="subscriber")
  */
-class _Subscriber
+class Subscriber
 {
     /**
      * @ORM\Id()
