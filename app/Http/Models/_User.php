@@ -5,79 +5,99 @@ namespace App\Http\Models;
 use App\Http\Models\_Blog;
 use App\Http\Models\_Category;
 use App\Http\Models\_UserRole;
-use Doctrine\ORM\Mapping AS ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping AS ORM;
+use Doctrine\ORM\Event\PreUpdateEventArgs;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity()
  * @ORM\Table(name="user")
  */
 class _User
 {
     /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
      * @ORM\Column(type="integer", nullable=false)
      */
-    protected $id;
+    public $id;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=false)
      */
-    protected $name;
+    public $name;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      */
-    protected $about;
+    public $about;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=false)
      */
-    protected $email;
+    public $email;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=false)
      */
-    protected $password;
+    public $password;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=false)
      */
-    protected $confirmationToken;
+    public $confirmationToken;
 
     /**
      * @ORM\Column(type="integer", nullable=false)
      */
-    protected $isActive;
+    public $isActive;
 
     /**
      * @ORM\Column(type="string", length=127, nullable=true)
      */
-    protected $rememberToken;
+    public $rememberToken;
 
     /**
      * @ORM\Column(type="datetime", nullable=false)
      */
-    protected $createdAt;
+    public $createdAt;
 
     /**
-     * @ORM\Column(type="datetime", nullable=false)
+     * @ORM\Column(type="datetime", nullable=true)
      */
-    protected $updatedAt;
+    public $updatedAt;
 
     /**
      * @ORM\OneToMany(targetEntity="_Blog", mappedBy="user")
      */
-    protected $blogs;
+    public $blogs;
 
     /**
      * @ORM\OneToMany(targetEntity="_Category", mappedBy="user")
      */
-    protected $categories;
+    public $categories;
 
     /**
      * @ORM\OneToMany(targetEntity="_UserRole", mappedBy="user")
      */
-    protected $userRoles;
+    public $userRoles;
+
+    /**
+     * @ORM\PrePersist()
+     */
+    public function onPrePersist()
+    {
+        $this->createdAt = time();
+    }
+
+    /**
+     * @param PreUpdateEventArgs $eventArgs
+     * @ORM\PreUpdate()
+     */
+    public function onPreUpdate(PreUpdateEventArgs $eventArgs)
+    {
+        if (!empty($eventArgs->getEntityChangeSet())) {
+            $this->updatedAt = time();
+        }
+    }
 }
