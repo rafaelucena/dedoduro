@@ -11,7 +11,7 @@ use Doctrine\ORM\Event\PreUpdateEventArgs;
  * @ORM\Entity()
  * @ORM\Table(name="comment")
  */
-class _Comment
+class Comment
 {
     /**
      * @ORM\Id()

@@ -3,7 +3,7 @@
 namespace App\Http\Models;
 
 use App\Http\Models\BlogCategory;
-use App\Http\Models\_Comment;
+use App\Http\Models\Comment;
 use App\Http\Models\_User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping AS ORM;
@@ -95,8 +95,8 @@ class Blog
     public $user;
 
     /**
-     * @var ArrayCollection|_Comment[]
-     * @ORM\OneToMany(targetEntity="_Comment", mappedBy="blog")
+     * @var ArrayCollection|Comment[]
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="blog")
      */
     public $comments;
 
