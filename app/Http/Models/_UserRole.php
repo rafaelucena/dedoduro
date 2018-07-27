@@ -6,6 +6,7 @@ use App\Http\Models\_User;
 use App\Http\Models\_Role;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping AS ORM;
+use Doctrine\ORM\Event\PreUpdateEventArgs;
 
 /**
  * @ORM\Entity()
