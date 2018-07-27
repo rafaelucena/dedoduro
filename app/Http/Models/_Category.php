@@ -9,14 +9,14 @@ use Doctrine\ORM\Mapping AS ORM;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity()
  * @ORM\Table(name="category")
  */
 class _Category
 {
     /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
      * @ORM\Column(type="integer", nullable=false)
      */
     public $id;
