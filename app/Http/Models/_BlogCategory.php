@@ -18,30 +18,49 @@ class _BlogCategory
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer", nullable=false)
      */
-    protected $id;
+    public $id;
 
     /**
      * @ORM\Column(type="datetime", nullable=false)
      */
-    protected $createdAt;
-
-    /**
-     * @ORM\Column(type="datetime", nullable=false)
-     */
-    protected $updatedAt;
+    public $createdAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    protected $deletedAt;
+    public $updatedAt;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    public $deletedAt;
 
     /**
      * @ORM\ManyToOne(targetEntity="_Blog", inversedBy="blogCategories")
      */
-    protected $blog;
+    public $blog;
 
     /**
      * @ORM\ManyToOne(targetEntity="_Category", inversedBy="blogsCategory")
      */
-    protected $category;
+    public $category;
+
+    /**
+     * @ORM\PrePersist()
+     */
+    public function onPrePersist()
+    {
+        $this->createdAt = time();
+    }
+
+    /**
+     * @param PreUpdateEventArgs $eventArgs
+     * @ORM\PreUpdate()
+     */
+    public function onPreUpdate(PreUpdateEventArgs $eventArgs)
+    {
+        if (!empty($eventArgs->getEntityChangeSet())) {
+            $this->updatedAt = time();
+        }
+    }
 }
