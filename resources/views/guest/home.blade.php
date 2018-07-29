@@ -10,7 +10,7 @@
 
         <div class="row">
             <div class="col-md-12">
-                {{ $blogs->links() }}
+                {{ 'what for' /*@TODO IDENTIFY WHAT FOR*/ }}
             </div>
         </div>
 
