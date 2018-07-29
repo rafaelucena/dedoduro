@@ -7,11 +7,26 @@ use App\Http\Models\Blog;
 use App\Http\Models\Subscriber;
 use App\Jobs\SendSubscriptionVerificationEmail;
 use App\Listeners\EmailSubscribedListener;
+use Doctrine\ORM\EntityManagerInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class HomeController extends Controller
 {
+    /**
+     * @var EntityManagerInterface
+     */
+    private $em;
+
+    /**
+     * HomeController constructor.
+     * @param EntityManagerInterface $em
+     */
+    public function __construct(EntityManagerInterface $em)
+    {
+        $this->em = $em;
+    }
+
     /**
      * Show the Blogs Homepage.
      *
@@ -19,8 +34,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $blogs = Blog::active()->orderBy('created_at', 'desc')
-                            ->simplePaginate(app('global_settings')[2]['setting_value']);
+        $blogs = $this->em->getRepository(Blog::class)->findBy(
+            ['isActive' => true],
+            ['createdAt' => 'DESC']
+        );
+//        $blogs = Blog::active()->orderBy('created_at', 'desc')
+//                            ->simplePaginate(app('global_settings')[2]['setting_value']);
         return view('guest/home', ['blogs' => $blogs]);
     }
     /**
