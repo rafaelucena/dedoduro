@@ -8,12 +8,14 @@ use App\Http\Models\UserRole;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping AS ORM;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 /**
  * @ORM\Entity()
  * @ORM\Table(name="user")
  */
-class User
+class User extends Authenticatable
 {
     /**
      * @ORM\Id()
@@ -99,5 +101,15 @@ class User
         if (!empty($eventArgs->getEntityChangeSet())) {
             $this->updatedAt = time();
         }
+    }
+
+    /**
+     * Check one role
+     * @param string $role
+     */
+    public function hasRole($role)
+    {
+//        return null !== $this->roles()->where('role', $role)->first();
+        return true;
     }
 }
