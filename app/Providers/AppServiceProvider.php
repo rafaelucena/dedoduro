@@ -31,6 +31,7 @@ class AppServiceProvider extends ServiceProvider
         if ($settings = $em->getRepository(Setting::class)->findAll()) {
             // You can keep this in your filters.php file
             App::singleton('global_settings', function () use ($settings) {
+//                return Setting::select('setting_name', 'setting_value')->get();
                 return $settings;
             });
             // If you use this line of code then it'll be available in any view
