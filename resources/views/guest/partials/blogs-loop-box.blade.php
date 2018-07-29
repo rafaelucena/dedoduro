@@ -17,7 +17,7 @@
                 @endauth
             </div>
             <div class="card-footer text-muted">
-            {{ date('F d, Y h:i A', strtotime($blog->created_at)) }}
+            {{ $blog->createdAt->format('F d, Y h:i A') }}
             </div>
         </div>
     </div>
