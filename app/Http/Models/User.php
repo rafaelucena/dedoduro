@@ -8,16 +8,22 @@ use App\Http\Models\UserRole;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping AS ORM;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
+use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 
 /**
  * @ORM\Entity()
  * @ORM\Table(name="user")
  */
-class User extends Authenticatable
+class User implements
+    AuthenticatableContract/*,
+    AuthorizableContract,
+    CanResetPasswordContract*/
 {
     /**
+     * @var integer
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer", nullable=false)
@@ -40,6 +46,7 @@ class User extends Authenticatable
     public $email;
 
     /**
+     * @var string
      * @ORM\Column(type="string", length=255, nullable=false)
      */
     public $password;
@@ -55,6 +62,7 @@ class User extends Authenticatable
     public $isActive;
 
     /**
+     * @var string
      * @ORM\Column(type="string", length=127, nullable=true)
      */
     public $rememberToken;
@@ -101,6 +109,55 @@ class User extends Authenticatable
         if (!empty($eventArgs->getEntityChangeSet())) {
             $this->updatedAt = time();
         }
+    }
+
+    /**
+     * @return int
+     */
+    public function getAuthIdentifier()
+    {
+        return $this->id;
+    }
+
+    public function getAuthIdentifierName()
+    {
+        return 'id';
+    }
+
+    /**
+     * @return string
+     */
+    public function getAuthPassword()
+    {
+        return $this->password;
+    }
+
+    /**
+     * @param string $rememberToken
+     *
+     * @return $this
+     */
+    public function setRememberToken($rememberToken)
+    {
+        $this->rememberToken = $rememberToken;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRememberToken()
+    {
+        return $this->rememberToken;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRememberTokenName()
+    {
+        return 'rememberToken';
     }
 
     /**
