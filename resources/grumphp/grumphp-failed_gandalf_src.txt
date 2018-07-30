@@ -1,54 +1,34 @@
 
-
-                                                     `.
-                                                     ,;
-                               .,                    ,i
-      `+`                      ;i                    .i
-      ;x#                      +#                    .*
-      +xx.                     nx`                   .*
-      ixx`                    ,xx:                   `+
-       #+                     ixx*                   `+
-       .*                     #xxz                    +
-        +                    `xxxx`                   #
-        +                    :xxxx;                   #
-        +`                 ``*xxxx+```                #
-        i,           :+#nxxxxxxxxxxxxxxnz+:           #
-        :;           ,zxxxxxxxxxxxxxxxxxxz:           #
-        .*             ,+xxxxxxxxxxxxxx+,          .,:z;:,
-         #               `:#xxxxxxxx#:`            .,:n:.`
-        `n:                ixxxxxxxx*                :x+
-        ;xx:zn*.           +xxxxxxxx#           .izn;nx#
-        ;xx*xxxx#;`        :xxMWWMxx;        `:#xxxx+nx:
-        ,xx,xxxxxxx#i:,.`.:#xx@##Wxx#:.`.,:i#xxxxxxx;`*.
-         ;# nxxxxxxxxxxxxxxxxM####Mxxxxxxxxxxxxxxxxx
-          # #xxxxxxxxxxxxxxxxW@WW@Wxxxxxxxxxxxxxxxxz
-          z *xxxxxxxxxxxxxxxx@####@xxxxxxxxxxxxxxxx+
-          +.:xxxxxxxxxxxxxxxx@####@xxxxxxxxxxxxxxxx;
-          i:`xxxxxxxxxxxxxxxx@####@xxxxxxxxxxxxxxxx.
-          :i #xxxxxxxn##zxxxx@####@xxxxz##nxxxxxxxz
-          .+ :xxx#i,`    .xxx@####@xxx,    `,i#xxx;
-          `z  ,.          nxx@####@xxx          .:
-           z              nxxW####Wxxx
-           #.             xxxM####Mxxx`
-           *:            .xxxx@##@xxxx,
-           ;i            :xxxxMWWMxxxx;
-           ,+            ixxxxxxxxxxxx*
-           `z            +xxxxxxxxxxxx#
-            n            nxxxxxxxxxxxxx
-            #.          .xxxxxxxxxxxxxx,
-            *:          ;xxxxxxxxxxxxxxi
-            ;i          +xxxxxxxxxxxxxx#
-            ,+          nxxxxxxxxxxxxxxx`
-            `n         .xxxxxxxxxxxxxxxx:
-             n`        ixxxxxxxxxxxxxxxx*
-             #.        #xxxxxxxxxxxxxxxxz
-             *;       `xxxxxxxxxxxxxxxxxx.
-             ;*       ;xxxxxxxxxxxxxxxxxxi
-             ,#       +xxxxxxxxxxxxxxxxxx#
-             `n      `xxxxxxxxxxxxxxxxxxxx`
-              n`     :xxxxxxxxxxxxxxxxxxxx;
-              #,     +xxxxxxxxxxxxxxxxxxxx#
-              `      nxxxxxxxxxxxxxxxxxxxxx`
-                    :xxxxxxxxxxxxxxxxxxxxxx;
-                    ,iiiiiiiiiiiiiiiiiiiiii:
-
+          `+h
+         `mMN`
+         hMN-               `s`      :smmhds
+        oMM:               :dM:     :hNmdMd
+       :MM/             -omMMs      .+.  dh
+      .NM+            `yNMMN/            :M:
+     `dMo            `hMMMN-              dd
+     yMs             yMMMMh               :M+
+  . +My`           `oMMMMMM/-.`            dN`
+ `++Nd-.        ./yNMMMMMMMMNNmdo:         /Ms         YOU SHALL NOT PASS!
+ hNMNo-`  `.:/ohdddhMMMMMMmsosssyys:`     `:NNy`
+ +MMNNdo-  `.-..```+NMmmmMN`      ``  .:ohmNMMM.
+ -s:.hMMNds+/:-.`.:yNh:y++Nho/---::/odNMMMM/+hM/
+     dMMMMMMMMNNmmMMN:`.``yMMMNNNNMMMMMMMMM  `Nm`
+     NMMMMMMMMMMMMMMo     /NMMMMMMMMMMMMMMN   /My
+    .MMMMMMMMMMMMMMM+     -MMMMMMMMMMMMMMMm    hM/
+    /MMMMMMMMMMMMmMM:     +MhsmMMMMMMMMMMMm    -Nm`
+    oMMMMMMMMMMMh:MMm     sMh .+mMMMMMMMMMd     oMs
+    yMMMMMMMMMNo`oMMM-`  +sMd   .sMMMMMMMMd     `dM:
+    hMMMMMMMMm:  mMMMms--MNMN     /NMMMMMMh      -Md`
+    yMMMMMMMh.  :MMMMMNmmMMMM.     -mMMMMMy       oM+
+    +MMMMMMs`   yMMMMMMMMMMMM+      -mMMMM+       `dN.
+    -MMMMN+    `NMMMMMMMMMMMMy       -NMMM.        -Ns
+     dMMN:     +MMMMMMMMMMMMMN`       /MMd          oM-
+     /MN-      dMMMMMMMMMMMMMM/        oMo           dh
+      y:      :MMMMMMMMMMMMMMMh         h.           .N:
+      `       dMMMMMMMMMMMMMMMM-        `             +o
+             :MMMMMMMMMMMMMMMMMy                       `
+             dMMMMMMMMMMMMMMMMMM-
+            /MMMMMMMMMMMMMMMMMMMh
+           `mMM'MMMMMMMMMMMMMMMMM:
+           `-::'++oo+oooo++oo+//:-
+               .yyyo      /yyy:
