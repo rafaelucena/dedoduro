@@ -12,25 +12,16 @@ use Illuminate\Http\Request;
 class DashboardController extends Controller
 {
     /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-    }
-
-    /**
      * Show the application dashboard.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $blogs_count = Blog::count();
-        $comments_count = Comment::count();
-        $categories_count = Category::count();
-        $users_count = User::count();
+        $blogs_count = count($this->em->getRepository(Blog::class)->findAll());
+        $comments_count = count($this->em->getRepository(Comment::class)->findAll());
+        $categories_count = count($this->em->getRepository(Category::class)->findAll());
+        $users_count = count($this->em->getRepository(User::class)->findAll());
 
         return view('admin/dashboard', [
             'blogs_count' => $blogs_count,
