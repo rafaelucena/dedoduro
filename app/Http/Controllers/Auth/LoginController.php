@@ -49,7 +49,7 @@ class LoginController extends Controller
      */
     public function authenticated(Request $request, $user)
     {
-        if ($user->is_active === 0) {
+        if ($user->isActive === 0) {
             auth()->logout();
             return back();
             // ->with(
