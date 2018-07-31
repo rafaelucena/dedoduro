@@ -25,7 +25,7 @@ class BlogsController extends Controller
         // Get Comments
         $comments = $blog->comments()->active()
                                     ->orderBy('created_at', 'desc')
-                                    ->simplePaginate(app('global_settings')[3]['setting_value']);
+                                    ->simplePaginate(app('global_settings')[3]->settingValue);
         // Get Count of Comments
         $total_comments = $blog->comments()->active()->count();
 
@@ -42,7 +42,7 @@ class BlogsController extends Controller
     {
         $blogs = $category->blogs()->active()
                                 ->orderBy('created_at', 'desc')
-                                ->simplePaginate(app('global_settings')[2]['setting_value']);
+                                ->simplePaginate(app('global_settings')[2]->settingValue);
         return view('guest/category', ['blogs'=> $blogs, 'category' => $category]);
     }
 
@@ -99,11 +99,20 @@ class BlogsController extends Controller
         }
 
         // Get blogs by Search Query and active ones
-        $blogs = Blog::like('title', $query)
-                        ->orLike('excerpt', $query)
-                        ->active()
-                        ->orderBy('created_at', 'desc')
-                        ->simplePaginate(app('global_settings')[2]['setting_value']);
+        $qb = $this->em->createQueryBuilder();
+        $blogs = $qb->select('b')
+            ->from(Blog::class, 'b')
+            ->where('b.isActive = 1')
+            ->andWhere('(b.title LIKE :query) OR (b.excerpt LIKE :query)')
+            ->orderBy('b.createdAt', 'desc')
+            ->setParameter('query', $query)
+            ->getQuery()
+            ->getResult();
+//        $blogs = Blog::like('title', $query)
+//                        ->orLike('excerpt', $query)
+//                        ->active()
+//                        ->orderBy('created_at', 'desc')
+//                        ->simplePaginate(app('global_settings')[2]->settingValue);
         // Return View
         return view('guest/search', ['blogs' => $blogs, 'query' => $query]);
     }
