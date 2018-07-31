@@ -17,6 +17,7 @@ class CategoriesController extends Controller
     public function __construct(EntityManagerInterface $em)
     {
         parent::__construct($em);
+
         $this->middleware('role:view_all_category', ['only' => ['index','categoriesData']]);
         $this->middleware('role:view_category', ['only' => ['show']]);
 
