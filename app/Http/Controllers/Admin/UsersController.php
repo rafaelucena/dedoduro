@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Models\Role;
 use App\Http\Models\User;
 use App\Http\Controllers\Controller;
+use Doctrine\ORM\EntityManagerInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -15,8 +16,10 @@ class UsersController extends Controller
     /**
      * Enforce middleware.
      */
-    public function __construct()
+    public function __construct(EntityManagerInterface $em)
     {
+        parent::__construct($em);
+
         $this->middleware('role:view_all_user', ['only' => ['index', 'usersData']]);
         $this->middleware('role:view_user', ['only' => ['show']]);
 
@@ -46,13 +49,29 @@ class UsersController extends Controller
      */
     public function usersData()
     {
-        $users = User::select(['id', 'name', 'email', 'is_active', 'created_at']);
+        $users = $this->em->createQueryBuilder()
+            ->select([
+                'u.id',
+                'u.name',
+                'u.email',
+                'u.isActive',
+                'u.createdAt',
+            ])
+            ->from(User::class, 'u')
+            ->getQuery()
+            ->getResult();
+//        $users = $this->em->getRepository(User::class)->findAll();
+//        $users = User::select(['id', 'name', 'email', 'is_active', 'created_at']);
+
         return Datatables::of($users)
                 ->editColumn('created_at', function ($model) {
-                    return "<abbr title='".$model->created_at->format('F d, Y @ h:i A')."'>".$model->created_at->format('F d, Y')."</abbr>";
+                    $setTitle = $model['createdAt']->format('F d, Y @ h:i A');
+                    $setValue = $model['createdAt']->format('F d, Y');
+
+                    return "<abbr title='$setTitle'>$setValue</abbr>";
                 })
                 ->editColumn('is_active', function ($model) {
-                    if ($model->is_active == 0) {
+                    if ($model['isActive'] == 0) {
                         return '<div class="text-danger">No <span class="badge badge-light"><i class="fas fa-times"></i></span></div>';
                     } else {
                         return '<div class="text-success">Yes <span class="badge badge-light"><i class="fas fa-check"></i></span></div>';
@@ -60,10 +79,10 @@ class UsersController extends Controller
                 })
                 ->addColumn('bulkAction', '<input type="checkbox" name="selected_ids[]" id="bulk_ids" value="{{ $id }}">')
                 ->addColumn('actions', function ($model) {
-                    if ($model->is_active == 0) {
-                        $status_action = '<a class="dropdown-item" href="'.route('users.activeStatus', $model->id).'" onclick="return confirm(\'Are you sure?\')"><i class="fas fa-check"></i> Activate</a>';
+                    if ($model['isActive'] == 0) {
+                        $status_action = '<a class="dropdown-item" href="'.route('users.activeStatus', $model['id']).'" onclick="return confirm(\'Are you sure?\')"><i class="fas fa-check"></i> Activate</a>';
                     } else {
-                        $status_action = '<a class="dropdown-item" href="'.route('users.activeStatus', $model->id).'" onclick="return confirm(\'Are you sure?\')"><i class="fas fa-times"></i> Inactivate</a>';
+                        $status_action = '<a class="dropdown-item" href="'.route('users.activeStatus', $model['id']).'" onclick="return confirm(\'Are you sure?\')"><i class="fas fa-times"></i> Inactivate</a>';
                     }
                     return '
                      <div class="dropdown float-right">
@@ -71,15 +90,15 @@ class UsersController extends Controller
                         <i class="fas fa-cog"></i> Action
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="'.route('users.show', $model->id).'"><i class="fas fa-eye"></i> View</a>
-                            <a class="dropdown-item" href="'.route('users.edit', $model->id).'"><i class="fas fa-edit"></i> Edit</a>
+                            <a class="dropdown-item" href="'.route('users.show', $model['id']).'"><i class="fas fa-eye"></i> View</a>
+                            <a class="dropdown-item" href="'.route('users.edit', $model['id']).'"><i class="fas fa-edit"></i> Edit</a>
                             '.$status_action.'
-                            <a class="dropdown-item" href="'.route('users.editRoles', $model->id).'"><i class="fas fa-shield-alt"></i> Manage Roles</a>
-                            <a class="dropdown-item text-danger" href="#" onclick="callDeletItem(\''.$model->id.'\', \'users\');"><i class="fas fa-trash"></i> Delete</a>
+                            <a class="dropdown-item" href="'.route('users.editRoles', $model['id']).'"><i class="fas fa-shield-alt"></i> Manage Roles</a>
+                            <a class="dropdown-item text-danger" href="#" onclick="callDeletItem(\''.$model['id'].'\', \'users\');"><i class="fas fa-trash"></i> Delete</a>
                         </div>
                     </div>';
                 })
-                ->rawColumns(['actions','is_active','bulkAction','created_at'])
+                ->rawColumns(['actions','isActive','bulkAction','createdAt'])
                 ->make(true);
     }
 
