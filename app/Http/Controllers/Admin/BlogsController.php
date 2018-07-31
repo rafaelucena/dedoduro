@@ -8,6 +8,7 @@ use App\Http\Models\Category;
 use App\Http\Requests\StoreBlogPost;
 use App\Http\Requests\UpdateBlogPost;
 use App\Http\Models\User;
+use Doctrine\ORM\EntityManagerInterface;
 use Illuminate\Http\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,8 +20,10 @@ class BlogsController extends Controller
     /**
      * Enforce middleware.
      */
-    public function __construct()
+    public function __construct(EntityManagerInterface $em)
     {
+        parent::__construct($em);
+
         $this->middleware('role:view_all_blog', ['only' => ['index', 'blogsData', 'trashed', 'blogsAjaxTrashedData']]);
         $this->middleware('role:view_blog', ['only' => ['show']]);
 
@@ -38,7 +41,8 @@ class BlogsController extends Controller
      */
     public function index()
     {
-        $trashed_items = Blog::onlyTrashed()->count();
+        $trashed_items = count($this->em->getRepository(Blog::class)->findBy(['isActive' => 0]));
+//        $trashed_items = Blog::onlyTrashed()->count();
         return view('admin/blogs/index', ['trashed_items_count' => $trashed_items]);
     }
 
@@ -49,8 +53,9 @@ class BlogsController extends Controller
      */
     public function blogsData()
     {
-        $blogs = Blog::join('users', 'blogs.user_id', '=', 'users.id')
-                        ->select(['blogs.id', 'blogs.title', 'blogs.user_id', 'blogs.is_active', 'users.name', 'blogs.created_at']);
+        $blogs = $this->em->getRepository(Blog::class)->findAll();
+//        $blogs = Blog::join('users', 'blogs.user_id', '=', 'users.id')
+//                        ->select(['blogs.id', 'blogs.title', 'blogs.user_id', 'blogs.is_active', 'users.name', 'blogs.created_at']);
 
         return Datatables::of($blogs)
                 ->editColumn('created_at', function ($model) {
