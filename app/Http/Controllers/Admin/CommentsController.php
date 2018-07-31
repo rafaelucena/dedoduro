@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Models\Comment;
+use Doctrine\ORM\EntityManagerInterface;
 use Illuminate\Http\Request;
 use Yajra\Datatables\Datatables;
 
@@ -12,8 +13,10 @@ class CommentsController extends Controller
     /**
      * Enforce middleware.
      */
-    public function __construct()
+    public function __construct(EntityManagerInterface $em)
     {
+        parent::__construct($em);
+
         $this->middleware('role:view_all_comment', ['only' => ['index']]);
         $this->middleware('role:view_comment', ['only' => ['show']]);
 
@@ -39,8 +42,9 @@ class CommentsController extends Controller
      */
     public function commentsData()
     {
-        $comments = Comment::join('blogs', 'comments.blog_id', '=', 'blogs.id')
-                        ->select(['comments.id', 'comments.name', 'comments.email', 'comments.body', 'comments.created_at', 'comments.is_active', 'comments.blog_id', 'blogs.title']);
+        $comments = $this->em->getRepository(Comment::class)->findAll();
+//        $comments = Comment::join('blogs', 'comments.blog_id', '=', 'blogs.id')
+//                        ->select(['comments.id', 'comments.name', 'comments.email', 'comments.body', 'comments.created_at', 'comments.is_active', 'comments.blog_id', 'blogs.title']);
 
         return Datatables::of($comments)
                 ->editColumn('created_at', function ($model) {
