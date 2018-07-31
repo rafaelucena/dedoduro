@@ -1,28 +1,34 @@
-  |█████████████████████████████████|
-  |█████████▀▀'~||~~~``▀████████████|
-  |███████▀'   .':     o`▀██████████|
-  |███████' oo | |o  o    ▀█████████|
-  |███████ 8  .'.'    8 o  █████████|
-  |███████ 8  | |     8    █████████|
-  |███████ _._| |_,...8    █████████|
-  |█████▀'~--.   .--. `.  `▀████████|
-  |████▀'     =8     ~  \ o ████████|
-  |███▀'   _.  8._ ::.   \ o▀███████|
-  |██▀'       ,.ooo~~.    \ o`██████|
-  |█▀'   . -. 88`78o/:     \  `█████|
-  |█'      /. o o \ ::      \88`████|   "Fix it or die."
-  |█;     o|| 8 8 |d.        `8 `███|
-  |█.       - ^ ^ -'           `-`██|
-  |██.                          .███|
-  |█████.....           ::'     ``██|
-  |████████-'`-        88          `|
-  |█████-'.          -       ::     |
-  |█-~. . .                   :     |
-  | .. .   ..:   o:8      88o       |
-  |. .     :::   8:P     d888. . .  |
-  |.   .   :88   88      888'  . .  |
-  |   o8  d88P . 88   ' d88P   ..   |
-  |  88P  888   d8P   ' 888         |
-  |   8  d88P.'d:8  .- dP~ o8       |   Darth Vader
-  |      888   888    d~ o888    LS |
-  |_________________________________|
+
+          `+h
+         `mMN`
+         hMN-               `s`      :smmhds
+        oMM:               :dM:     :hNmdMd
+       :MM/             -omMMs      .+.  dh
+      .NM+            `yNMMN/            :M:
+     `dMo            `hMMMN-              dd
+     yMs             yMMMMh               :M+
+  . +My`           `oMMMMMM/-.`            dN`
+ `++Nd-.        ./yNMMMMMMMMNNmdo:         /Ms
+ hNMNo-`  `.:/ohdddhMMMMMMmsosssyys:`     `:NNy`
+ +MMNNdo-  `.-..```+NMmmmMN`      ``  .:ohmNMMM.
+ -s:.hMMNds+/:-.`.:yNh:y++Nho/---::/odNMMMM/+hM/
+     dMMMMMMMMNNmmMMN:`.``yMMMNNNNMMMMMMMMM  `Nm`    YOU SHALL NOT PASS!
+     NMMMMMMMMMMMMMMo     /NMMMMMMMMMMMMMMN   /My
+    .MMMMMMMMMMMMMMM+     -MMMMMMMMMMMMMMMm    hM/
+    /MMMMMMMMMMMMmMM:     +MhsmMMMMMMMMMMMm    -Nm`
+    oMMMMMMMMMMMh:MMm     sMh .+mMMMMMMMMMd     oMs
+    yMMMMMMMMMNo`oMMM-`  +sMd   .sMMMMMMMMd     `dM:
+    hMMMMMMMMm:  mMMMms--MNMN     /NMMMMMMh      -Md`
+    yMMMMMMMh.  :MMMMMNmmMMMM.     -mMMMMMy       oM+
+    +MMMMMMs`   yMMMMMMMMMMMM+      -mMMMM+       `dN.
+    -MMMMN+    `NMMMMMMMMMMMMy       -NMMM.        -Ns
+     dMMN:     +MMMMMMMMMMMMMN`       /MMd          oM-
+     /MN-      dMMMMMMMMMMMMMM/        oMo           dh
+      y:      :MMMMMMMMMMMMMMMh         h.           .N:
+      `       dMMMMMMMMMMMMMMMM-        `             +o
+             :MMMMMMMMMMMMMMMMMy                       `
+             dMMMMMMMMMMMMMMMMMM-
+            /MMMMMMMMMMMMMMMMMMMh
+           `mMM'MMMMMMMMMMMMMMMMM:
+           `-::'++oo+oooo++oo+//:-
+               .yyyo      /yyy:
