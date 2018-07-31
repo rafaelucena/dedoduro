@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('pageTitle', 'Category "'.$category->name.'" - '.app('global_settings')[0]['setting_value'])
+@section('pageTitle', 'Category "'.$category->name.'" - '.app('global_settings')[0]->settingValue)
 
 @section('content')
 <div class="card">

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('pageTitle', 'Search "'.$query.'" - '.app('global_settings')[0]['setting_value'])
+@section('pageTitle', 'Search "'.$query.'" - '.app('global_settings')[0]->settingValue)
 
 @section('content')
 <div class="card">
@@ -12,7 +12,7 @@
 
         <div class="row">
             <div class="col-md-12">
-                {{ $blogs->appends(['q' => $query])->links() }}
+                {{ 'what for' /*$blogs->appends(['q' => $query])->links()*/ //@TODO FIX PAGINATION }}
             </div>
         </div>
 

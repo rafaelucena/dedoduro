@@ -24,7 +24,7 @@ class HomeController extends Controller
             ['createdAt' => 'DESC']
         );
 //        $blogs = Blog::active()->orderBy('created_at', 'desc')
-//                            ->simplePaginate(app('global_settings')[2]['setting_value']);
+//                            ->simplePaginate(app('global_settings')[2]->settingValue);
         return view('guest/home', ['blogs' => $blogs]);
     }
     /**
