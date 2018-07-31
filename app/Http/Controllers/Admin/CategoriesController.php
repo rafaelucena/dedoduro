@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Models\Category;
+use Doctrine\ORM\EntityManagerInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Yajra\Datatables\Datatables;
@@ -13,8 +14,9 @@ class CategoriesController extends Controller
     /**
      * Enforce middleware.
      */
-    public function __construct()
+    public function __construct(EntityManagerInterface $em)
     {
+        parent::__construct($em);
         $this->middleware('role:view_all_category', ['only' => ['index','categoriesData']]);
         $this->middleware('role:view_category', ['only' => ['show']]);
 
@@ -42,8 +44,9 @@ class CategoriesController extends Controller
      */
     public function categoriesData()
     {
-        $categories = Category::join('users', 'categories.user_id', '=', 'users.id')
-                        ->select(['categories.id', 'categories.name AS category_name', 'categories.user_id', 'users.name', 'categories.created_at']);
+        $categories = $this->em->getRepository(Category::class)->findAll();
+//        $categories = Category::join('users', 'categories.user_id', '=', 'users.id')
+//                        ->select(['categories.id', 'categories.name AS category_name', 'categories.user_id', 'users.name', 'categories.created_at']);
 
         return Datatables::of($categories)
                 ->editColumn('created_at', function ($model) {
