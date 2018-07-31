@@ -98,7 +98,7 @@ class UsersController extends Controller
                         </div>
                     </div>';
                 })
-                ->rawColumns(['actions','isActive','bulkAction','createdAt'])
+                ->rawColumns(['actions','is_active','bulkAction','created_at'])
                 ->make(true);
     }
 
