@@ -12,7 +12,7 @@
 
         <div class="row">
             <div class="col-md-12">
-                {{ $blogs->links() }}
+                {{ 'what for' /*@TODO FIX PAGINATION*/ }}
             </div>
         </div>
 

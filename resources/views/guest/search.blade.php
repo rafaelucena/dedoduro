@@ -12,7 +12,7 @@
 
         <div class="row">
             <div class="col-md-12">
-                {{ 'what for' /*$blogs->appends(['q' => $query])->links()*/ //@TODO FIX PAGINATION }}
+                {{ 'what for'/*@TODO FIX PAGINATION*/ }}
             </div>
         </div>
 

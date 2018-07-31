@@ -31,7 +31,7 @@
 
             </div>
             <div class="col-md-12">
-                {{ $comments->fragment('comments_section')->links() }}
+                {{ 'what for' /*@TODO FIX PAGINATION*/ }}
             </div>
         </div>
 

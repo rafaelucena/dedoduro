@@ -10,7 +10,7 @@
 
         <div class="row">
             <div class="col-md-12">
-                {{ 'what for' /*@TODO IDENTIFY WHAT FOR*/ }}
+                {{ 'what for' /*@TODO FIX PAGINATION*/ }}
             </div>
         </div>
 
