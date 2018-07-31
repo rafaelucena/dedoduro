@@ -64,13 +64,13 @@ class UsersController extends Controller
 //        $users = User::select(['id', 'name', 'email', 'is_active', 'created_at']);
 
         return Datatables::of($users)
-                ->editColumn('created_at', function ($model) {
+                ->editColumn('createdAt', function ($model) {
                     $setTitle = $model['createdAt']->format('F d, Y @ h:i A');
                     $setValue = $model['createdAt']->format('F d, Y');
 
                     return "<abbr title='$setTitle'>$setValue</abbr>";
                 })
-                ->editColumn('is_active', function ($model) {
+                ->editColumn('isActive', function ($model) {
                     if ($model['isActive'] == 0) {
                         return '<div class="text-danger">No <span class="badge badge-light"><i class="fas fa-times"></i></span></div>';
                     } else {
@@ -98,7 +98,7 @@ class UsersController extends Controller
                         </div>
                     </div>';
                 })
-                ->rawColumns(['actions','is_active','bulkAction','created_at'])
+                ->rawColumns(['actions','isActive','bulkAction','createdAt'])
                 ->make(true);
     }
 

@@ -86,8 +86,8 @@ $(document).ready(function() {
             { data: 'id', name: 'id' },
             { data: 'name', name: 'name' },
             { data: 'email', name: 'email' },
-            { data: 'created_at', name: 'created_at' },
-            { data: 'is_active', name: 'is_active' },
+            { data: 'createdAt', name: 'createdAt' },
+            { data: 'isActive', name: 'isActive' },
             { data: 'actions', name: 'actions' }
         ],
         "order": [[ 4, "desc" ]],
