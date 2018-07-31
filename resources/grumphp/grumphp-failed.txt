@@ -1,34 +1,27 @@
 
-          `+h
-         `mMN`
-         hMN-               `s`      :smmhds
-        oMM:               :dM:     :hNmdMd
-       :MM/             -omMMs      .+.  dh
-      .NM+            `yNMMN/            :M:
-     `dMo            `hMMMN-              dd
-     yMs             yMMMMh               :M+
-  . +My`           `oMMMMMM/-.`            dN`
- `++Nd-.        ./yNMMMMMMMMNNmdo:         /Ms
- hNMNo-`  `.:/ohdddhMMMMMMmsosssyys:`     `:NNy`
- +MMNNdo-  `.-..```+NMmmmMN`      ``  .:ohmNMMM.
- -s:.hMMNds+/:-.`.:yNh:y++Nho/---::/odNMMMM/+hM/
-     dMMMMMMMMNNmmMMN:`.``yMMMNNNNMMMMMMMMM  `Nm`    YOU SHALL NOT PASS!
-     NMMMMMMMMMMMMMMo     /NMMMMMMMMMMMMMMN   /My
-    .MMMMMMMMMMMMMMM+     -MMMMMMMMMMMMMMMm    hM/
-    /MMMMMMMMMMMMmMM:     +MhsmMMMMMMMMMMMm    -Nm`
-    oMMMMMMMMMMMh:MMm     sMh .+mMMMMMMMMMd     oMs
-    yMMMMMMMMMNo`oMMM-`  +sMd   .sMMMMMMMMd     `dM:
-    hMMMMMMMMm:  mMMMms--MNMN     /NMMMMMMh      -Md`
-    yMMMMMMMh.  :MMMMMNmmMMMM.     -mMMMMMy       oM+
-    +MMMMMMs`   yMMMMMMMMMMMM+      -mMMMM+       `dN.
-    -MMMMN+    `NMMMMMMMMMMMMy       -NMMM.        -Ns
-     dMMN:     +MMMMMMMMMMMMMN`       /MMd          oM-
-     /MN-      dMMMMMMMMMMMMMM/        oMo           dh
-      y:      :MMMMMMMMMMMMMMMh         h.           .N:
-      `       dMMMMMMMMMMMMMMMM-        `             +o
-             :MMMMMMMMMMMMMMMMMy                       `
-             dMMMMMMMMMMMMMMMMMM-
-            /MMMMMMMMMMMMMMMMMMMh
-           `mMM'MMMMMMMMMMMMMMMMM:
-           `-::'++oo+oooo++oo+//:-
-               .yyyo      /yyy:
+           +d
+          sMh             `     .:/:-:
+         +Md`           `sd    `/dMMN.
+        -Mm`          :yNN/    `o-`od
+       `mm.         .mMMm.         `m:
+       hN.         `mMMN.           +m`
+    ` sN-         `dMMMM:`          `N+
+   `/oN+.      `/yNMMMMMMMNds-       +N.
+   +MMd/`  .:+shyohMMMMN/://+o+.   `:oMN-       YOU...
+   `NysMNs:`     `yNoysNo.     `:smMMdmM/       SHALL NOT...
+      -MMMMMMNmhhNMy./.oMMNmmNMMMMMMM  ym`      PASSSSSSSS!!!
+      /MMMMMMMMMMMm.   .NMMMMMMMMMMMN  .Ns
+      sMMMMMMMMMMMm    `mNMMMMMMMMMMm   +M:
+      dMMMMMMMMMsMd:   :Mo-sMMMMMMMMm    dm`
+      NMMMMMMMm-/MMo` ./My  .hMMMMMMm    -No
+      NMMMMMMh` dMMNh:yMMd    oMMMMMd     oN.
+      mMMMMMo  .MMMMMMMMMN`    /MMMMy      dh
+      yMMMN:   sMMMMMMMMMM:     /MMM+      .N/
+      :MMm.   `mMMMMMMMMMMs      oMN`       +m`
+       dm`    /MMMMMMMMMMMm`      yh         ho
+       ..     dMMMMMMMMMMMM/      `-         .d`
+             /MMMMMMMMMMMMMd                  -`
+             mMMMMMMMMMMMMMM/
+            +MMMMMMMMMMMMMMMm
+            syhhddmmmmmmdddhh:
+               +ss-    .sso
