@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Models\Category;
+use App\Http\Models\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -45,16 +46,30 @@ class CategoriesController extends Controller
      */
     public function categoriesData()
     {
-        $categories = $this->em->getRepository(Category::class)->findAll();
+        $categories = $this->em->createQueryBuilder()
+            ->select([
+                'c.id',
+                'c.name',
+                'c.createdAt',
+                'u.id as userId',
+                'u.name as userName',
+            ])
+            ->from(Category::class, 'c')
+            ->innerJoin(User::class, 'u')
+            ->getQuery()
+            ->getResult();
 //        $categories = Category::join('users', 'categories.user_id', '=', 'users.id')
 //                        ->select(['categories.id', 'categories.name AS category_name', 'categories.user_id', 'users.name', 'categories.created_at']);
 
         return Datatables::of($categories)
+                ->editColumn('category_name', function ($model) {
+                    return $model['name'];
+                })
                 ->editColumn('created_at', function ($model) {
-                    return "<abbr title='".$model->created_at->format('F d, Y @ h:i A')."'>".$model->created_at->format('F d, Y')."</abbr>";
+                    return "<abbr title='".$model['createdAt']->format('F d, Y @ h:i A')."'>".$model['createdAt']->format('F d, Y')."</abbr>";
                 })
                 ->editColumn('users.name', function ($model) {
-                    return '<a href="'.route('users.show', $model->user_id).'" class="link">'.$model->name.' <i class="fas fa-external-link-alt"></i></a>';
+                    return '<a href="'.route('users.show', $model['userId']).'" class="link">'.$model['userName'].' <i class="fas fa-external-link-alt"></i></a>';
                 })
                 ->addColumn('bulkAction', '<input type="checkbox" name="selected_ids[]" id="bulk_ids" value="{{ $id }}">')
                 ->addColumn('actions', function ($model) {
@@ -64,9 +79,9 @@ class CategoriesController extends Controller
                         <i class="fas fa-cog"></i> Action
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="'.route('categories.show', $model->id).'"><i class="fas fa-eye"></i> View</a>
-                            <a class="dropdown-item" href="'.route('categories.edit', $model->id).'"><i class="fas fa-edit"></i> Edit</a>
-                            <a class="dropdown-item text-danger" href="#" onclick="callDeletItem(\''.$model->id.'\', \'categories\');"><i class="fas fa-trash"></i> Delete</a>
+                            <a class="dropdown-item" href="'.route('categories.show', $model['id']).'"><i class="fas fa-eye"></i> View</a>
+                            <a class="dropdown-item" href="'.route('categories.edit', $model['id']).'"><i class="fas fa-edit"></i> Edit</a>
+                            <a class="dropdown-item text-danger" href="#" onclick="callDeletItem(\''.$model['id'].'\', \'categories\');"><i class="fas fa-trash"></i> Delete</a>
                         </div>
                     </div>';
                 })
