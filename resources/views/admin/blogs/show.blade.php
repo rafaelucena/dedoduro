@@ -10,7 +10,7 @@
     <div class="card-body">
         <div class="row">
             <div class="col-md-8">
-                <p><b>ID:</b> {{ $blog->id }}, <b>Views:</b> {{ $blog->views }}, <b>Created at</b>: {{ $blog->created_at }}, <b>Updated At</b> {{ $blog->updated_at }}</p>
+                <p><b>ID:</b> {{ $blog->id }}, <b>Views:</b> {{ $blog->views }}, <b>Created at</b>: {{ $blog->createdAt->format('Y-m-d') }}, <b>Updated At</b> {{ $blog->updatedAt ? $blog->updatedAt->format('Y-m-d') : '' }}</p>
                 <div class="form-group">
                     <label for="title"><b>Title:</b></label>
                     <p>{{ $blog->title }}</p>
@@ -33,8 +33,8 @@
                 <div class="form-group">
                     <label for="categories"><b>Categories:</b></label>
                     <ul>
-                    @foreach($blog->categories as $category)
-                        <li>{{ $category->name }}</li>
+                    @foreach($blog->blogCategories as $blogCategory)
+                        <li>{{ $blogCategory->category->name }}</li>
                     @endforeach
                     </ul>
                 </div>
@@ -44,11 +44,11 @@
                 </div>
                 <div class="form-group">
                     <label for="is_active"><b>Publish:</b></label>
-                    {{ $blog->is_active == 1 ? 'Yes' : 'No' }}
+                    {{ $blog->isActive == 1 ? 'Yes' : 'No' }}
                 </div>
                 <div class="form-group">
                     <label for="allow_comments"><b>Allow Comments:</b></label>
-                    {{ $blog->allow_comments == 1 ? 'Yes' : 'No' }}
+                    {{ $blog->allowComments == 1 ? 'Yes' : 'No' }}
                 </div>
             </div>
         </div>

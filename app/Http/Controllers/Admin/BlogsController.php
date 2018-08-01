@@ -228,7 +228,8 @@ class BlogsController extends Controller
      */
     public function show($id)
     {
-        $blog = Blog::findOrFail($id);
+        $blog = $this->em->getRepository(Blog::class)->find($id);
+//        $blog = Blog::findOrFail($id);
         return view('admin/blogs/show', ['blog' => $blog]);
     }
 
@@ -241,11 +242,13 @@ class BlogsController extends Controller
     public function edit($id)
     {
         // Blog Details
-        $blog = Blog::findOrFail($id);
+        $blog = $this->em->getRepository(Blog::class)->find($id);
+//        $blog = Blog::findOrFail($id);
         // Authors List
-        $authors = User::active()->whereHas('roles', function ($query) {
-            $query->where('role', '=', 'add_blog');
-        })->get();
+        $authors = $this->em->getRepository(User::class)->findAll();
+//        $authors = User::active()->whereHas('roles', function ($query) {
+//            $query->where('role', '=', 'add_blog');
+//        })->get();
 
         return view('admin/blogs/edit', ['blog' => $blog, 'authors' => $authors]);
     }
