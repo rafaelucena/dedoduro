@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Models\Setting;
+use Doctrine\ORM\EntityManagerInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -12,8 +13,10 @@ class SettingsController extends Controller
     /**
      * Enforce middleware.
      */
-    public function __construct()
+    public function __construct(EntityManagerInterface $em)
     {
+        parent::__construct($em);
+
         $this->middleware('role:manage_settings');
     }
 
@@ -24,7 +27,8 @@ class SettingsController extends Controller
      */
     public function index()
     {
-        $settings = Setting::get();
+        $settings = $this->em->getRepository(Setting::class)->findAll();
+//        $settings = Setting::get();
         return view('admin/settings/index', ['settings' => $settings]);
     }
 
