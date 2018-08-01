@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Models\Blog;
 use App\Http\Models\Comment;
 use Doctrine\ORM\EntityManagerInterface;
 use Illuminate\Http\Request;
@@ -42,33 +43,47 @@ class CommentsController extends Controller
      */
     public function commentsData()
     {
-        $comments = $this->em->getRepository(Comment::class)->findAll();
+        $comments = $this->em->createQueryBuilder()
+            ->select([
+                'c.id',
+                'c.name',
+                'c.email',
+                'c.body',
+                'c.createdAt',
+                'c.isActive',
+                'b.id as blogId',
+                'b.title',
+            ])
+            ->from(Comment::class, 'c')
+            ->innerJoin(Blog::class, 'b')
+            ->getQuery()
+            ->getResult();
 //        $comments = Comment::join('blogs', 'comments.blog_id', '=', 'blogs.id')
 //                        ->select(['comments.id', 'comments.name', 'comments.email', 'comments.body', 'comments.created_at', 'comments.is_active', 'comments.blog_id', 'blogs.title']);
 
         return Datatables::of($comments)
                 ->editColumn('created_at', function ($model) {
-                    return "<abbr title='".$model->created_at->format('F d, Y @ h:i A')."'>".$model->created_at->format('F d, Y')."</abbr>";
+                    return "<abbr title='".$model['createdAt']->format('F d, Y @ h:i A')."'>".$model['createdAt']->format('F d, Y')."</abbr>";
                 })
                 ->editColumn('is_active', function ($model) {
-                    if ($model->is_active == 1) {
+                    if ($model['isActive'] == 1) {
                         return '<div class="text-danger">No <span class="badge badge-light"><i class="fas fa-times"></i></span></div>';
                     } else {
                         return '<div class="text-success">Yes <span class="badge badge-light"><i class="fas fa-check"></i></span></div>';
                     }
                 })
                 ->addColumn('blogTitle', function ($model) {
-                    return '<a href="' . route("blogs.show", $model->blog_id) . '">' . $model->title . ' <i class="fas fa-external-link-alt"></i></a>';
+                    return '<a href="' . route("blogs.show", $model['blogId']) . '">' . $model['title'] . ' <i class="fas fa-external-link-alt"></i></a>';
                 })
                 ->addColumn('author', function ($model) {
-                    return $model->name . "<br>" . $model->email;
+                    return $model['name'] . "<br>" . $model['email'];
                 })
                 ->addColumn('bulkAction', '<input type="checkbox" name="selected_ids[]" id="bulk_ids" value="{{ $id }}">')
                 ->addColumn('actions', function ($model) {
-                    if ($model->is_active == 1) {
-                        $spam_action = '<a class="dropdown-item" href="'.route('comments.spamStatus', $model->id).'" onclick="return confirm(\'Are you sure?\')"><i class="fas fa-bug"></i> Mark Spam</a>';
+                    if ($model['isActive'] == 1) {
+                        $spam_action = '<a class="dropdown-item" href="'.route('comments.spamStatus', $model['id']).'" onclick="return confirm(\'Are you sure?\')"><i class="fas fa-bug"></i> Mark Spam</a>';
                     } else {
-                        $spam_action = '<a class="dropdown-item" href="'.route('comments.spamStatus', $model->id).'" onclick="return confirm(\'Are you sure?\')"><i class="fas fa-comment"></i> Not Spam</a>';
+                        $spam_action = '<a class="dropdown-item" href="'.route('comments.spamStatus', $model['id']).'" onclick="return confirm(\'Are you sure?\')"><i class="fas fa-comment"></i> Not Spam</a>';
                     }
                     return '
                      <div class="dropdown float-right">
@@ -76,9 +91,9 @@ class CommentsController extends Controller
                         <i class="fas fa-cog"></i> Action
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="'.route('comments.show', $model->id).'"><i class="fas fa-eye"></i> View</a>
+                            <a class="dropdown-item" href="'.route('comments.show', $model['id']).'"><i class="fas fa-eye"></i> View</a>
                             '.$spam_action.'
-                            <a class="dropdown-item text-danger" href="#" onclick="callDeletItem(\''.$model->id.'\', \'comments\');"><i class="fas fa-trash"></i> Delete</a>
+                            <a class="dropdown-item text-danger" href="#" onclick="callDeletItem(\''.$model['id'].'\', \'comments\');"><i class="fas fa-trash"></i> Delete</a>
                         </div>
                     </div>';
                 })
