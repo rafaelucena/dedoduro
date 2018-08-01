@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Models\Subscriber;
+use Doctrine\ORM\EntityManagerInterface;
 use Illuminate\Http\Request;
 use Yajra\Datatables\Datatables;
 
@@ -12,8 +13,10 @@ class SubscribersController extends Controller
     /**
      * Enforce middleware.
      */
-    public function __construct()
+    public function __construct(EntityManagerInterface $em)
     {
+        parent::__construct($em);
+
         $this->middleware('role:view_all_subscriber', ['only' => ['index','subscribersData']]);
 
         $this->middleware('role:edit_subscriber', ['only' => ['updateActiveStatus']]);
@@ -38,24 +41,34 @@ class SubscribersController extends Controller
      */
     public function subscribersData()
     {
-        $subscribers = Subscriber::select(['id', 'email', 'is_active', 'created_at']);
+        $subscribers = $this->em->createQueryBuilder()
+            ->select([
+                's.id',
+                's.email',
+                's.isActive',
+                's.createdAt',
+            ])
+            ->from(Subscriber::class, 's')
+            ->getQuery()
+            ->getResult();
+//        $subscribers = Subscriber::select(['id', 'email', 'is_active', 'created_at']);
 
         return Datatables::of($subscribers)
                 ->editColumn('created_at', function ($model) {
-                    return "<abbr title='".$model->created_at->format('F d, Y @ h:i A')."'>".$model->created_at->format('F d, Y')."</abbr>";
+                    return "<abbr title='".$model['createdAt']->format('F d, Y @ h:i A')."'>".$model['createdAt']->format('F d, Y')."</abbr>";
                 })
                 ->editColumn('is_active', function ($model) {
-                    if ($model->is_active == 0) {
+                    if ($model['isActive'] == 0) {
                         return '<div class="text-danger">No <span class="badge badge-light"><i class="fas fa-times"></i></span></div>';
                     } else {
                         return '<div class="text-success">Yes <span class="badge badge-light"><i class="fas fa-check"></i></span></div>';
                     }
                 })
                 ->addColumn('actions', function ($model) {
-                    if ($model->is_active == 0) {
-                        $active_action = '<a class="dropdown-item" href="'.route('subscribers.activeStatus', $model->id).'" onclick="return confirm(\'Are you sure?\')"><i class="fas fa-check"></i> Activate</a>';
+                    if ($model['isActive'] == 0) {
+                        $active_action = '<a class="dropdown-item" href="'.route('subscribers.activeStatus', $model['id']).'" onclick="return confirm(\'Are you sure?\')"><i class="fas fa-check"></i> Activate</a>';
                     } else {
-                        $active_action = '<a class="dropdown-item" href="'.route('subscribers.activeStatus', $model->id).'" onclick="return confirm(\'Are you sure?\')"><i class="fas fa-times"></i> Inactivate</a>';
+                        $active_action = '<a class="dropdown-item" href="'.route('subscribers.activeStatus', $model['id']).'" onclick="return confirm(\'Are you sure?\')"><i class="fas fa-times"></i> Inactivate</a>';
                     }
                     return '
                      <div class="dropdown float-right">
@@ -64,7 +77,7 @@ class SubscribersController extends Controller
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             '.$active_action.'
-                            <a class="dropdown-item text-danger" href="#" onclick="callDeletItem(\''.$model->id.'\', \'subscribers\');"><i class="fas fa-trash"></i> Delete</a>
+                            <a class="dropdown-item text-danger" href="#" onclick="callDeletItem(\''.$model['id'].'\', \'subscribers\');"><i class="fas fa-trash"></i> Delete</a>
                         </div>
                     </div>';
                 })
