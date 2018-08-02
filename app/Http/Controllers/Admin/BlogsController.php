@@ -256,7 +256,7 @@ class BlogsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  UpdateBlogPost $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
@@ -266,7 +266,9 @@ class BlogsController extends Controller
         // Update the item
 
         // Get the item to update
-        $blog = Blog::findOrFail($id);
+        $blog = $this->em->getRepository(Blog::class)->find($id);
+//        $blog = Blog::findOrFail($id);
+
 
         // Store File & Get Path
         if ($request->hasFile('image')) {
@@ -297,15 +299,17 @@ class BlogsController extends Controller
         $blog->excerpt = $request->excerpt;
         $blog->description = $request->description;
         $blog->image = $imagePath;
-        $blog->user_id = $request->user_id;
-        $blog->is_active = $request->is_active;
-        $blog->allow_comments = $request->allow_comments;
+//        $blog->user_id = $request->user_id;
+        $blog->isActive = $request->is_active;
+        $blog->allowComments = $request->allow_comments;
 
         // Step 2 - Save Item
-        $blog->save();
+        $this->em->persist($blog);
+        $this->em->flush();
+//        $blog->save();
 
         // Step 3 - Attach/Sync Related Items
-        $blog->categories()->sync($categoryArr);
+//        $blog->categories()->sync($categoryArr);
 
         // Back to index with success
         return back()->with('custom_success', 'Blog has been updated successfully');

@@ -29,7 +29,7 @@ class StoreBlogPost extends FormRequest
             'description' => 'required',
             'image' => 'required|file|image|max:2048|mimes:jpg,jpeg,bmp,png,gif',
             'categories' => 'required|array',
-            'user_id' => 'required|integer|exists:users,id',
+            'user_id' => 'required|integer|exists:App\Http\Models\User,id',
             'is_active' => 'required|boolean',
             'allow_comments' => 'required|boolean',
         ];
