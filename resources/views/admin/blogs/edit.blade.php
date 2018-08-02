@@ -51,8 +51,8 @@
                                 </option>
                                 @endforeach
                             @else
-                                @foreach($blog->categories as $category)
-                                <option value="{{ $category->id }}" selected>{{ $category->name }}</option>
+                                @foreach($blog->blogCategories as $blogCategory)
+                                <option value="{{ $blogCategory->category->id }}" selected>{{ $blogCategory->category->name }}</option>
                                 @endforeach
                             @endif
                         </select>
@@ -61,22 +61,22 @@
                         <label for="user_id">Author <span class="required">*</span></label>
                         <select class="form-control" id="user_id" name="user_id" required>
                             @foreach($authors as $author)
-                            <option value="{{ $author->id }}" @if(old('user_id', $blog->user_id) == $author->id) selected @endif>{{ $author->name }} ({{ $author->email }})</option>
+                            <option value="{{ $author->id }}" @if(old('user_id', $blog->user->id) == $author->id) selected @endif>{{ $author->name }} ({{ $author->email }})</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="is_active">Publish <span class="required">*</span></label>
                         <select class="form-control" id="is_active" name="is_active" required>
-                            <option value="1" @if(old('is_active', $blog->is_active) == 1) selected @endif>Yes</option>
-                            <option value="0" @if(old('is_active', $blog->is_active) == 0) selected @endif>No</option>
+                            <option value="1" @if(old('is_active', $blog->isActive) == 1) selected @endif>Yes</option>
+                            <option value="0" @if(old('is_active', $blog->isActive) == 0) selected @endif>No</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="allow_comments">Allow Comments <span class="required">*</span></label>
                         <select class="form-control" id="allow_comments" name="allow_comments" required>
-                            <option value="1" @if(old('allow_comments', $blog->allow_comments) == 1) selected @endif>Yes</option>
-                            <option value="0" @if(old('allow_comments', $blog->allow_comments) == 0) selected @endif>No</option>
+                            <option value="1" @if(old('allow_comments', $blog->allowComments) == 1) selected @endif>Yes</option>
+                            <option value="0" @if(old('allow_comments', $blog->allowComments) == 0) selected @endif>No</option>
                         </select>
                     </div>
                 </div>
