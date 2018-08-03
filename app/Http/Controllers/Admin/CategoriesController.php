@@ -109,7 +109,7 @@ class CategoriesController extends Controller
                 ->select('c')
                 ->from(Category::class, 'c')
                 ->where('c.name LIKE :term')
-                ->orderBy('name')
+                ->orderBy('c.name')
                 ->setParameter('term', $request->term)
                 ->getQuery()
                 ->getResult();

@@ -288,7 +288,14 @@ class BlogsController extends Controller
             } else {
                 // if the item not numeric that means that its new item and we should create it
                 // User Id will automatically set by mutator in Category model
-                $newCategory = Category::create(['name' => $category, 'user_id' => Auth::user()->id]);
+                $newCategory = new Category();
+                $newCategory->name = $category;
+                $newCategory->user = Auth::user();
+
+                $this->em->persist($newCategory);
+                $this->em->flush();
+
+//                $newCategory = Category::create(['name' => $category, 'user_id' => Auth::user()->id]);
                 // include the new item to array
                 $categoryArr[] = $newCategory->id;
             }

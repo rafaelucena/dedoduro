@@ -84,7 +84,7 @@ $(document).ready(function() {
             { data: 'id', name: 'categories.id' },
             { data: 'category_name', name: 'categories.name' },
             { data: 'users.name', name: 'users.name' },
-            { data: 'created_at', name: 'categories.created_at' },
+            { data: 'created_at', name: 'created_at' },
             { data: 'actions', name: 'actions' }
         ],
         "order": [[ 4, "desc" ]],

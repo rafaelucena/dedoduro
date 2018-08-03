@@ -4,13 +4,16 @@ namespace App\Http\Models;
 
 use App\Http\Models\BlogCategory;
 use App\Http\Models\User;
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping AS ORM;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
+use Illuminate\Support\Str;
 
 /**
  * @ORM\Entity()
  * @ORM\Table(name="category")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Category
 {
@@ -56,7 +59,8 @@ class Category
      */
     public function onPrePersist()
     {
-        $this->createdAt = time();
+        $this->slug = Str::slug($this->name);
+        $this->createdAt = new DateTime();
     }
 
     /**
