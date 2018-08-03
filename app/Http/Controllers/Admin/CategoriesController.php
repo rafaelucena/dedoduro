@@ -105,17 +105,27 @@ class CategoriesController extends Controller
 
             $offset = ($page - 1) * $resultCount;
 
-            $categories = Category::where('name', 'LIKE', '%' . $request->term. '%')
-                                ->orderBy('name')
-                                ->skip($offset)
-                                ->take($resultCount)
-                                ->selectRaw('id, name as text')
-                                ->get();
+            $categories = $this->em->createQueryBuilder()
+                ->select('c')
+                ->from(Category::class, 'c')
+                ->where('c.name LIKE :term')
+                ->orderBy('name')
+                ->setParameter('term', $request->term)
+                ->getQuery()
+                ->getResult();
+//            $categories = $this->em->getRepository(Category::class)->findBy(['name' => $request->term]);
+//            $categories = Category::where('name', 'LIKE', '%' . $request->term. '%')
+//                                ->orderBy('name')
+//                                ->skip($offset)
+//                                ->take($resultCount)
+//                                ->selectRaw('id, name as text')
+//                                ->get();
 
-            $count = Count(Category::where('name', 'LIKE', '%' . $request->term. '%')
-                                ->orderBy('name')
-                                ->selectRaw('id, name as text')
-                                ->get());
+            $count = count($categories);
+//            $count = Count(Category::where('name', 'LIKE', '%' . $request->term. '%')
+//                                ->orderBy('name')
+//                                ->selectRaw('id, name as text')
+//                                ->get());
 
             $endCount = $offset + $resultCount;
             $morePages = $count > $endCount;

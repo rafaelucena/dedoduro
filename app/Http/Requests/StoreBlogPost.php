@@ -24,7 +24,7 @@ class StoreBlogPost extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'bail|required|unique:blogs|max:60',
+            'title' => 'bail|required|unique:App\Http\Models\Blog|max:60',
             'excerpt' => 'required|max:280',
             'description' => 'required',
             'image' => 'required|file|image|max:2048|mimes:jpg,jpeg,bmp,png,gif',
