@@ -187,7 +187,8 @@ class CategoriesController extends Controller
      */
     public function show($id)
     {
-        $category = Category::findOrFail($id);
+        $category = $this->em->getRepository(Category::class)->find($id);
+//        $category = Category::findOrFail($id);
         return view('admin/categories/show', ['category' => $category]);
     }
 
@@ -199,7 +200,8 @@ class CategoriesController extends Controller
      */
     public function edit($id)
     {
-        $category = Category::findOrFail($id);
+        $category = $this->em->getRepository(Category::class)->find($id);
+//        $category = Category::findOrFail($id);
         return view('admin/categories/edit', ['category' => $category]);
     }
 

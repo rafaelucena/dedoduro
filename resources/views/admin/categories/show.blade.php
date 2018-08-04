@@ -22,11 +22,11 @@
                 </div>
                 <div class="form-group">
                     <label for="user_id"><b>Created at:</b></label>
-                    {{ $category->created_at }}
+                    {{ $category->createdAt->format('Y-m-d H:i:s') }}
                 </div>
                 <div class="form-group">
                     <label for="user_id"><b>Updated at:</b></label>
-                    {{ $category->updated_at }}
+                    {{ $category->updatedAt->format('Y-m-d H:i:s') }}
                 </div>
             </div>
         </div>
