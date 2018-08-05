@@ -44,7 +44,7 @@
                                 @foreach (old('categories') as $oldCategory)
                                 <option value="{{ $oldCategory }}" selected="selected">
                                     @if(is_numeric($oldCategory))
-                                        {{ \App\Http\Models\Category::where('id', $oldCategory)->get()->pluck('name')[0] }}
+                                        {{ app('em')->getRepository(App\Http\Models\Category::class)->find($oldCategory)->name }}
                                     @else
                                         {{ $oldCategory }}
                                     @endif
@@ -141,11 +141,11 @@ $(document).ready(function() {
             dataType: 'json',
             cache: true,
             data: function(params) {
-              return {
-                  term: params.term || '',
-                  page: params.page || 1
-              }
-          },
+                return {
+                    term: params.term || '',
+                    page: params.page || 1
+                };
+            },
         }
     });
     $('#categories').trigger('change');

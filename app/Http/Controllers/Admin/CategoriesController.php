@@ -110,7 +110,7 @@ class CategoriesController extends Controller
                 ->from(Category::class, 'c')
                 ->where('c.name LIKE :term')
                 ->orderBy('c.name')
-                ->setParameter('term', $request->term)
+                ->setParameter('term', '%' . $request->term . '%')
                 ->getQuery()
                 ->getResult();
 //            $categories = $this->em->getRepository(Category::class)->findBy(['name' => $request->term]);
@@ -121,7 +121,15 @@ class CategoriesController extends Controller
 //                                ->selectRaw('id, name as text')
 //                                ->get();
 
-            $count = count($categories);
+            $resultSelect2 = [];
+            foreach ($categories as $category) {
+                $resultSelect2[] = [
+                    'id' => $category->id,
+                    'text' => $category->name,
+                ];
+            }
+
+            $count = count($resultSelect2);
 //            $count = Count(Category::where('name', 'LIKE', '%' . $request->term. '%')
 //                                ->orderBy('name')
 //                                ->selectRaw('id, name as text')
@@ -130,12 +138,12 @@ class CategoriesController extends Controller
             $endCount = $offset + $resultCount;
             $morePages = $count > $endCount;
 
-            $results = array(
-              "results" => $categories,
-              "pagination" => array(
-                  "more" => $morePages
-                  )
-              );
+            $results = [
+                "results" => $resultSelect2,
+                "pagination" => [
+                    "more" => $morePages,
+                ]
+            ];
             return response()->json($results);
         }
     }

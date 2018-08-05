@@ -4,6 +4,7 @@ namespace App\Http\Models;
 
 use App\Http\Models\Blog;
 use App\Http\Models\Category;
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping AS ORM;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
@@ -11,6 +12,7 @@ use Doctrine\ORM\Event\PreUpdateEventArgs;
 /**
  * @ORM\Entity()
  * @ORM\Table(name="blog_category")
+ * @ORM\HasLifecycleCallbacks()
  */
 class BlogCategory
 {
@@ -51,7 +53,7 @@ class BlogCategory
      */
     public function onPrePersist()
     {
-        $this->createdAt = time();
+        $this->createdAt = new DateTime();
     }
 
     /**
@@ -61,7 +63,7 @@ class BlogCategory
     public function onPreUpdate(PreUpdateEventArgs $eventArgs)
     {
         if (!empty($eventArgs->getEntityChangeSet())) {
-            $this->updatedAt = time();
+            $this->createdAt = new DateTime();
         }
     }
 }

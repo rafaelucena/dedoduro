@@ -71,7 +71,7 @@ class Category implements UrlRoutable
     public function onPreUpdate(PreUpdateEventArgs $eventArgs)
     {
         if (!empty($eventArgs->getEntityChangeSet())) {
-            $this->updatedAt = time();
+            $this->createdAt = new DateTime();
         }
     }
 

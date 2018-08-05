@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Models\Blog;
+use App\Http\Models\BlogCategory;
 use App\Http\Models\Category;
 use App\Http\Requests\StoreBlogPost;
 use App\Http\Requests\UpdateBlogPost;
@@ -291,9 +292,12 @@ class BlogsController extends Controller
                 $newCategory = new Category();
                 $newCategory->name = $category;
                 $newCategory->user = Auth::user();
-
                 $this->em->persist($newCategory);
-                $this->em->flush();
+
+                $newBlogCategory = new BlogCategory();
+                $newBlogCategory->category = $newCategory;
+                $newBlogCategory->blog = $blog;
+                $this->em->persist($newBlogCategory);
 
 //                $newCategory = Category::create(['name' => $category, 'user_id' => Auth::user()->id]);
                 // include the new item to array
