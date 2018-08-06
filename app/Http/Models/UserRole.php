@@ -11,6 +11,7 @@ use Doctrine\ORM\Event\PreUpdateEventArgs;
 /**
  * @ORM\Entity()
  * @ORM\Table(name="user_role")
+ * @ORM\HasLifecycleCallbacks()
  */
 class UserRole
 {

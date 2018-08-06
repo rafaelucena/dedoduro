@@ -16,6 +16,7 @@ use Illuminate\Notifications\Notifiable;
 /**
  * @ORM\Entity()
  * @ORM\Table(name="user")
+ * @ORM\HasLifecycleCallbacks()
  */
 class User implements
     AuthenticatableContract/*,

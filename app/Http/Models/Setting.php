@@ -9,6 +9,7 @@ use Doctrine\ORM\Event\PreUpdateEventArgs;
 /**
  * @ORM\Entity()
  * @ORM\Table(name="setting")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Setting
 {

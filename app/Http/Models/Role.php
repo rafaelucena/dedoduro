@@ -10,6 +10,7 @@ use Doctrine\ORM\Event\PreUpdateEventArgs;
 /**
  * @ORM\Entity()
  * @ORM\Table(name="role")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Role
 {
