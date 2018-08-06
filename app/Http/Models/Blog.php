@@ -6,6 +6,7 @@ use App\Http\Models\BlogCategory;
 use App\Http\Models\Comment;
 use App\Http\Models\User;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\Mapping AS ORM;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
 
@@ -106,6 +107,11 @@ class Blog
      */
     public $blogCategories;
 
+    public function __construct()
+    {
+        $this->blogCategories = new ArrayCollection();
+    }
+
     /**
      * @ORM\PrePersist()
      */
@@ -123,5 +129,14 @@ class Blog
         if (!empty($eventArgs->getEntityChangeSet())) {
             $this->updatedAt = time();
         }
+    }
+
+    public function getCategories($all = false)
+    {
+        $criteria = Criteria::create();
+        if ($all !== true) {
+            $criteria->where(Criteria::expr()->eq('isActive', true));
+        }
+        return $this->blogCategories->matching($criteria);
     }
 }

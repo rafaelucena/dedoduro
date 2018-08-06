@@ -51,7 +51,7 @@
                                 </option>
                                 @endforeach
                             @else
-                                @foreach($blog->blogCategories as $blogCategory)
+                                @foreach($blog->getCategories() as $blogCategory)
                                 <option value="{{ $blogCategory->category->id }}" selected>{{ $blogCategory->category->name }}</option>
                                 @endforeach
                             @endif

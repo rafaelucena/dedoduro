@@ -281,29 +281,7 @@ class BlogsController extends Controller
         }
 
         // Store & Get Categories
-        $categoryArr = array();
-        foreach ($request->categories as $category) {
-            if (is_numeric($category)) {
-                // Store in array
-                $categoryArr[] = $category;
-            } else {
-                // if the item not numeric that means that its new item and we should create it
-                // User Id will automatically set by mutator in Category model
-                $newCategory = new Category();
-                $newCategory->name = $category;
-                $newCategory->user = Auth::user();
-                $this->em->persist($newCategory);
-
-                $newBlogCategory = new BlogCategory();
-                $newBlogCategory->category = $newCategory;
-                $newBlogCategory->blog = $blog;
-                $this->em->persist($newBlogCategory);
-
-//                $newCategory = Category::create(['name' => $category, 'user_id' => Auth::user()->id]);
-                // include the new item to array
-                $categoryArr[] = $newCategory->id;
-            }
-        }
+        $this->updateBlogCategories($blog, $request->categories);
 
         // Step 1 - Set item fields
         $blog->title = $request->title;
@@ -324,6 +302,51 @@ class BlogsController extends Controller
 
         // Back to index with success
         return back()->with('custom_success', 'Blog has been updated successfully');
+    }
+
+    /**
+     * @param Blog $blog
+     * @param array $categoriesInput
+     */
+    private function updateBlogCategories(Blog $blog, array $categoriesInput)
+    {
+        $currentBlogCategories = $blog->getCategories();
+        $toDisableBlogCategories = [];
+        foreach ($currentBlogCategories as $currentBlogCategory) {
+            $toDisableBlogCategories[$currentBlogCategory->category->id] = $currentBlogCategory;
+        }
+
+        foreach ($categoriesInput as $categoryInput) {
+            unset($toDisableBlogCategories[$categoryInput]);
+
+            $category = $this->em->getRepository(Category::class)->find($categoryInput);
+            if (!$category) {
+                $category = new Category();
+                $category->name = $categoryInput;
+                $category->user = Auth::user();
+                $this->em->persist($category);
+            }
+
+            $blogCategory = $this->em->getRepository(BlogCategory::class)->findOneBy([
+                'blog' => $blog,
+                'category' => $category,
+            ]);
+            if (!$blogCategory) {
+                $blogCategory = new BlogCategory();
+                $blogCategory->category = $category;
+                $blogCategory->blog = $blog;
+            }
+            $blogCategory->isActive = (int) true;
+            $blogCategory->deletedAt = null;
+            $this->em->persist($blogCategory);
+        }
+
+        foreach ($toDisableBlogCategories as $toDisableBlogCategory) {
+            $toDisableBlogCategory->isActive = (int) false;
+            $toDisableBlogCategory->deletedAt = new \DateTime();
+
+            $this->em->persist($toDisableBlogCategory);
+        }
     }
 
     /**

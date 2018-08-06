@@ -24,6 +24,12 @@ class BlogCategory
     public $id;
 
     /**
+     * @var integer
+     * @ORM\Column(type="integer", nullable=false)
+     */
+    public $isActive;
+
+    /**
      * @ORM\Column(type="datetime", nullable=false)
      */
     public $createdAt;
@@ -63,7 +69,7 @@ class BlogCategory
     public function onPreUpdate(PreUpdateEventArgs $eventArgs)
     {
         if (!empty($eventArgs->getEntityChangeSet())) {
-            $this->createdAt = new DateTime();
+            $this->updatedAt = new DateTime();
         }
     }
 }
