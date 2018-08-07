@@ -36,15 +36,20 @@ class HomeController extends Controller
     {
         // Validate data
         $validatedData = $request->validate([
-            'email' => 'required|email|unique:subscribers'
+            'email' => 'required|email|unique:App\Http\Models\Subscriber'
         ]);
 
         if ($validatedData) {
             // Save Subscriber
             $subscriber = new Subscriber;
             $subscriber->email = $request->email;
-            $subscriber->confirmation_token = md5(uniqid($request->email, true));
-            $subscriber->save();
+            $subscriber->confirmationToken = md5(uniqid($request->email, true));
+            $subscriber->isActive = (int) false;
+
+            $this->em->persist($subscriber);
+            $this->em->flush();
+
+//            $subscriber->save();
             // Automatic Send Email for confirmation
             event(new EmailSubscribedListener($subscriber));
             SendSubscriptionVerificationEmail::dispatch($subscriber);
@@ -57,10 +62,15 @@ class HomeController extends Controller
 
     public function subscribeVerify($token)
     {
-        $subscriber = Subscriber::where('confirmation_token', $token)->first();
-        $subscriber->is_active = 1;
-        if ($subscriber->save()) {
+        $subscriber = $this->em->getRepository(Subscriber::class)->findOneBy(['confirmationToken' => $token]);
+//        $subscriber = Subscriber::where('confirmation_token', $token)->first();
+        $subscriber->isActive = 1;
+
+        $this->em->persist($subscriber);
+        $this->em->flush();
+
+//        if ($subscriber->save()) {
             return view('guest.subscribe-confirmation', ['subscriber' => $subscriber]);
-        }
+//        }
     }
 }

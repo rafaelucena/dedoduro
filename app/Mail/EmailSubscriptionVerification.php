@@ -31,7 +31,7 @@ class EmailSubscriptionVerification extends Mailable
     public function build()
     {
         return $this->view('emails.subscription-confirmation', [
-            'email_token' => $this->subscriber->confirmation_token
+            'email_token' => $this->subscriber->confirmationToken,
         ]);
     }
 }
