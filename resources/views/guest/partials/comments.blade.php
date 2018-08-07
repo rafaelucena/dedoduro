@@ -1,4 +1,4 @@
-@if($blog->allow_comments == 1)
+@if($blog->allowComments == 1)
 <!-- Comments List Box -->
 <div class="card mb-3" id="comments_section">
     <div class="card-header">Comments <small class="float-right">{{ $total_comments }} Comments</small></div>

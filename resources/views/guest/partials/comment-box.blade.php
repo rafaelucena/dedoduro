@@ -7,7 +7,7 @@
         <div class="row">
             <div class="col-md-12">
 
-                @if($blog->allow_comments == 1)
+                @if($blog->allowComments == 1)
                     <form action="{{ url('post/comment') }}" method="post">
                         {{ csrf_field() }}
                         <div class="form-row">

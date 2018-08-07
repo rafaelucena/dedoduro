@@ -5,16 +5,18 @@ namespace App\Http\Models;
 use App\Http\Models\BlogCategory;
 use App\Http\Models\Comment;
 use App\Http\Models\User;
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping AS ORM;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
+use LaravelDoctrine\ORM\Contracts\UrlRoutable;
 
 /**
  * @ORM\Entity()
  * @ORM\Table(name="blog")
  * @ORM\HasLifecycleCallbacks()
  */
-class Blog
+class Blog implements UrlRoutable
 {
     /**
      * @ORM\Id()
@@ -112,7 +114,7 @@ class Blog
      */
     public function onPrePersist()
     {
-        $this->createdAt = time();
+        $this->createdAt = new DateTime();
     }
 
     /**
@@ -122,7 +124,16 @@ class Blog
     public function onPreUpdate(PreUpdateEventArgs $eventArgs)
     {
         if (!empty($eventArgs->getEntityChangeSet())) {
-            $this->updatedAt = time();
+            $this->updatedAt = new DateTime();
         }
+    }
+
+    /**
+     *
+     * @return string
+     */
+    public static function getRouteKeyName(): string
+    {
+        return 'slug';
     }
 }
