@@ -75,7 +75,7 @@
             "php artisan storage:link"
         ],
         "start": [
-            "php -S 127.0.0.1:8000 -t public"
+            "php -S 127.0.0.1:4000 -t public"
         ],
         "test": [
             "phpunit"
