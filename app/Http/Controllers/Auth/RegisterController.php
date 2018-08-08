@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Models\Role;
 use App\Http\Models\User;
 use App\Jobs\SendUserVerificationEmail;
+use Doctrine\ORM\EntityManagerInterface;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
@@ -39,8 +40,10 @@ class RegisterController extends Controller
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(EntityManagerInterface $em)
     {
+        parent::__construct($em);
+
         $this->middleware('guest');
     }
 
@@ -67,12 +70,23 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-            'confirmation_token' => md5(uniqid($data['email'], true) . time()),
-        ]);
+        $user = new User();
+        $user->name = $data['name'];
+        $user->email = $data['email'];
+        $user->isActive = (int) false;
+        $user->password = Hash::make($data['password']);
+        $user->confirmationToken = md5(uniqid($data['email'], true) . time());
+
+        $this->em->persist($user);
+        $this->em->flush();
+
+        return $user;
+//        return User::create([
+//            'name' => $data['name'],
+//            'email' => $data['email'],
+//            'password' => Hash::make($data['password']),
+//            'confirmation_token' => md5(uniqid($data['email'], true) . time()),
+//        ]);
     }
 
     /**
@@ -88,17 +102,16 @@ class RegisterController extends Controller
         dispatch(new SendUserVerificationEmail($user));
 
         // Count Users
-        $countUsers = User::count();
-        if ($countUsers == 1) {
+        if ($user->id == 1) {
             // attach roles to first user
             $this->attachRoles($user);
             // Activate first user
             $this->activateFirst($user);
             // return view('auth/login');
             return redirect('/login')->with('custom_success', 'You have got all the super admin roles, login now.');
-        } else {
-            return view('auth/verification-msg');
         }
+
+        return view('auth/verification-msg');
     }
 
     /**
@@ -109,11 +122,15 @@ class RegisterController extends Controller
     */
     public function verify($token)
     {
-        $user = User::where('confirmation_token', $token)->first();
-        $user->is_active = 1;
-        if ($user->save()) {
+        $user = $this->em->getRepository(User::class)->findOneBy(['confirmationToken' => $token]);
+        $user->isActive = 1;
+
+        $this->em->persist($user);
+        $this->em->flush();
+//        $user = User::where('confirmation_token', $token)->first();
+//        if ($user->save()) {
             return view('auth/email-confirmation', ['user' => $user]);
-        }
+//        }
     }
 
     /**

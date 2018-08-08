@@ -5,6 +5,7 @@ namespace App\Http\Models;
 use App\Http\Models\Blog;
 use App\Http\Models\Category;
 use App\Http\Models\UserRole;
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping AS ORM;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
@@ -98,7 +99,7 @@ class User implements
      */
     public function onPrePersist()
     {
-        $this->createdAt = time();
+        $this->createdAt = new DateTime();
     }
 
     /**
@@ -108,7 +109,7 @@ class User implements
     public function onPreUpdate(PreUpdateEventArgs $eventArgs)
     {
         if (!empty($eventArgs->getEntityChangeSet())) {
-            $this->updatedAt = time();
+            $this->updatedAt = new DateTime();
         }
     }
 

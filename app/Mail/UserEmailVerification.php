@@ -29,6 +29,6 @@ class UserEmailVerification extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.user-confirmation', ['email_token' => $this->user->confirmation_token]);
+        return $this->view('emails.user-confirmation', ['email_token' => $this->user->confirmationToken]);
     }
 }
