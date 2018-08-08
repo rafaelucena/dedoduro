@@ -17,7 +17,7 @@
                 </a>
             </div>
             <div class="col-md-6">
-                <p><i class="fas fa-calendar-alt"></i> Posted on: {{ date('F d, Y h:i A', strtotime($blog->created_at)) }}</p>
+                <p><i class="fas fa-calendar-alt"></i> Posted on: {{ $blog->createdAt->format('F d, Y h:i A') }}</p>
             </div>
             <div class="col-md-6">
                 <p><i class="fas fa-user"></i> Posted by: <a href="#author_section">{{ $blog->user->name }}</a></p>
@@ -25,8 +25,8 @@
             <div class="col-md-7">
                 <p>
                     <i class="fas fa-tags"></i> Categories:
-                    @foreach($blog->categories as $category)
-                    <a href="{{ url('category/'.$category->slug) }}" class="badge badge-primary">{{ $category->name }}</a>
+                    @foreach($blog->blogCategories as $blogCategory)
+                    <a href="{{ url('category/'.$blogCategory->category->slug) }}" class="badge badge-primary">{{ $blogCategory->category->name }}</a>
                     @endforeach
                 </p>
             </div>

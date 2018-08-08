@@ -5,7 +5,7 @@
           @foreach($sidebar_categories as $category)
           <li class="list-group-item">
             <a href="{{ url('category/'.$category->slug) }}">
-                {{ $category->name }} ({{ '' /*@TODO IMPLEMENT USAGE*/ /*$category->blogs()->active()->count()*/ }})
+                {{ $category->name }} ({{ count($category->blogsCategory) /*@TODO IMPLEMENT USAGE*/ /*$category->blogs()->active()->count()*/ }})
             </a>
           </li>
           @endforeach

@@ -20,14 +20,17 @@ class BlogsController extends Controller
     {
         // Increase Views of blog
         $blog->views = $blog->views + 1;
-        $blog->save();
+
+        $this->em->persist($blog);
+        $this->em->flush();
 
         // Get Comments
-        $comments = $blog->comments()->active()
-                                    ->orderBy('created_at', 'desc')
-                                    ->simplePaginate(app('global_settings')[3]->settingValue);
+        $comments = $blog->comments;
+//        $comments = $blog->comments()->active()
+//                                    ->orderBy('created_at', 'desc')
+//                                    ->simplePaginate(app('global_settings')[3]->settingValue);
         // Get Count of Comments
-        $total_comments = $blog->comments()->active()->count();
+        $total_comments = count($comments);
 
         // Return View
         return view('guest/single', ['blog' => $blog, 'comments' => $comments,  'total_comments' => $total_comments]);
@@ -40,6 +43,7 @@ class BlogsController extends Controller
      */
     public function category(Category $category)
     {
+//        $test = $this->em->getRepository(Category::class)->findBy(['slug' => 'etc']);
         $blogs = $category->blogs()->active()
                                 ->orderBy('created_at', 'desc')
                                 ->simplePaginate(app('global_settings')[2]->settingValue);
