@@ -5,9 +5,11 @@ parameters:
         failed: resources/grumphp/grumphp-failed.txt
         succeeded: resources/grumphp/grumphp-happy.txt
     tasks:
-        phpcpd: ~
+        phpcpd:
+            exclude: ['storage', 'vendor']
         php_codesniffer:
             standard: PSR2
 #        phpcs: ~
-        phpmd: ~
+        phpmd:
+            ruleset: ['cleancode', 'codesize', 'naming']
         phpspec: ~
