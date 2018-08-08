@@ -64,7 +64,7 @@ class BlogsController extends Controller
                 'u.name',
             ])
             ->from(Blog::class, 'b')
-            ->innerJoin(User::class, 'u')
+            ->innerJoin(User::class, 'u', 'WITH', 'b.user = u')
             ->getQuery()
             ->getResult();
 //        $blogs = Blog::join('users', 'blogs.user_id', '=', 'users.id')
@@ -163,9 +163,10 @@ class BlogsController extends Controller
      */
     public function create()
     {
-        $authors = User::active()->whereHas('roles', function ($query) {
-            $query->where('role', '=', 'add_blog');
-        })->get();
+        $authors = $this->em->getRepository(User::class)->findAll();
+//        $authors = User::active()->whereHas('roles', function ($query) {
+//            $query->where('role', '=', 'add_blog');
+//        })->get();
 
         return view('admin/blogs/create', ['authors' => $authors]);
     }
@@ -184,38 +185,29 @@ class BlogsController extends Controller
         // Store File & Get Path
         $imagePath = Storage::putFile('images', $request->file('image'));
 
-        // Store & Get Categories
-        $categoryArr = array();
-        foreach ($request->categories as $category) {
-            if (is_numeric($category)) {
-                // Store in array
-                $categoryArr[] = $category;
-            } else {
-                // if the item not numeric that means that its new item and we should create it
-                // User Id will automatically set by mutator in Category model
-                $newCategory = Category::create(['name' => $category, 'user_id' => Auth::user()->id]);
-                // include the new item to array
-                $categoryArr[] = $newCategory->id;
-            }
-        }
 
         // Step 1 - Init item Obj
-        $blog = new Blog;
+        $blog = new Blog();
+
+        // Store & Get Categories
+        $this->updateBlogCategories($blog, $request->categories);
 
         // Set item fields
         $blog->title = $request->title;
         $blog->excerpt = $request->excerpt;
         $blog->description = $request->description;
         $blog->image = $imagePath;
-        $blog->user_id = $request->user_id;
-        $blog->is_active = $request->is_active;
-        $blog->allow_comments = $request->allow_comments;
+        $blog->user = $this->em->getRepository(User::class)->find($request->user_id);
+        $blog->isActive = $request->is_active;
+        $blog->allowComments = $request->allow_comments;
 
         // Step 2 - Save Item
-        $blog->save();
+        $this->em->persist($blog);
+        $this->em->flush();
+//        $blog->save();
 
         // Step 3 - Attach/Sync Related Items
-        $blog->categories()->sync($categoryArr);
+//        $blog->categories()->sync($categoryArr);
 
         // Back to index with success
         return redirect()->route('blogs.index')->with('custom_success', 'Blog has been added successfully');
@@ -288,7 +280,7 @@ class BlogsController extends Controller
         $blog->excerpt = $request->excerpt;
         $blog->description = $request->description;
         $blog->image = $imagePath;
-//        $blog->user_id = $request->user_id;
+        $blog->user = $this->em->getRepository(User::class)->find($request->user_id);
         $blog->isActive = $request->is_active;
         $blog->allowComments = $request->allow_comments;
 

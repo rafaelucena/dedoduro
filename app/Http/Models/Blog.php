@@ -10,6 +10,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\Mapping AS ORM;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
+use Illuminate\Support\Str;
 use LaravelDoctrine\ORM\Contracts\UrlRoutable;
 
 /**
@@ -58,7 +59,7 @@ class Blog implements UrlRoutable
 
     /**
      * @var integer
-     * @ORM\Column(type="integer", nullable=false)
+     * @ORM\Column(type="integer", nullable=true)
      */
     public $views;
 
@@ -120,6 +121,7 @@ class Blog implements UrlRoutable
      */
     public function onPrePersist()
     {
+        $this->slug = Str::slug($this->title);
         $this->createdAt = new DateTime();
     }
 

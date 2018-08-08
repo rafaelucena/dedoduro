@@ -86,7 +86,7 @@ $(document).ready(function() {
             { data: 'id', name: 'blogs.id' },
             { data: 'title', name: 'blogs.title' },
             { data: 'users.name', name: 'users.name' },
-            { data: 'created_at', name: 'blogs.created_at' },
+            { data: 'created_at', name: 'created_at' },
             { data: 'is_active', name: 'blogs.is_active' },
             { data: 'actions', name: 'actions' }
         ],
