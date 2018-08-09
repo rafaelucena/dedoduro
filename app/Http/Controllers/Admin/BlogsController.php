@@ -117,7 +117,8 @@ class BlogsController extends Controller
      */
     public function trashed()
     {
-        $trashed_items = Blog::onlyTrashed()->count();
+        $trashed_items = $this->em->getRepository(Blog::class)->findBy(['isActive' => (int) false]);
+//        $trashed_items = Blog::onlyTrashed()->count();
         return view('admin/blogs/trashed-index', ['trashed_items_count' => $trashed_items]);
     }
 
@@ -377,18 +378,23 @@ class BlogsController extends Controller
     public function destroy($id)
     {
         // Find the blog by $id
-        $blog = Blog::findOrFail($id);
+        $blog = $this->em->getRepository(Blog::class)->find($id);
+//        $blog = Blog::findOrFail($id);
 
         // Soft Delet the blog and transfer to Trash Items
-        $blog->delete();
+        $blog->isActive = (int) false;
+        $blog->deletedAt = new \DateTime();
+//        $blog->delete();
 
-        if ($blog->trashed()) {
+        $this->em->flush($blog);
+
+//        if ($blog->trashed()) {
             // If success
             return back()->with('custom_success', 'Blog has been deleted and transfered to trash items.');
-        } else {
-            // If no success
-            return back()->with('custom_errors', 'Blog was not deleted. Something went wrong.');
-        }
+//        } else {
+//            // If no success
+//            return back()->with('custom_errors', 'Blog was not deleted. Something went wrong.');
+//        }
     }
 
     /**
