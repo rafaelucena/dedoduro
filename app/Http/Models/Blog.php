@@ -73,6 +73,12 @@ class Blog implements UrlRoutable
      * @var integer
      * @ORM\Column(type="integer", nullable=false)
      */
+    public $isDeleted;
+
+    /**
+     * @var integer
+     * @ORM\Column(type="integer", nullable=false)
+     */
     public $allowComments;
 
     /**

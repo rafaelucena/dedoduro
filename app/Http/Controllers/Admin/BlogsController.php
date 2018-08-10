@@ -65,6 +65,8 @@ class BlogsController extends Controller
             ])
             ->from(Blog::class, 'b')
             ->innerJoin(User::class, 'u', 'WITH', 'b.user = u')
+            ->where('b.isDeleted = :isDeleted')
+            ->setParameter('isDeleted', (int) false)
             ->getQuery()
             ->getResult();
 //        $blogs = Blog::join('users', 'blogs.user_id', '=', 'users.id')
@@ -117,7 +119,7 @@ class BlogsController extends Controller
      */
     public function trashed()
     {
-        $trashed_items = $this->em->getRepository(Blog::class)->findBy(['isActive' => (int) false]);
+        $trashed_items = count($this->em->getRepository(Blog::class)->findBy(['isActive' => (int) false, 'isDeleted' => (int) true]));
 //        $trashed_items = Blog::onlyTrashed()->count();
         return view('admin/blogs/trashed-index', ['trashed_items_count' => $trashed_items]);
     }
@@ -129,16 +131,30 @@ class BlogsController extends Controller
      */
     public function blogsAjaxTrashedData()
     {
-        $blogs = Blog::join('users', 'blogs.user_id', '=', 'users.id')
-                        ->select(['blogs.id', 'blogs.title', 'blogs.user_id', 'users.name', 'blogs.deleted_at'])
-                        ->onlyTrashed();
+        $blogs = $this->em->createQueryBuilder()
+            ->select([
+                'b.id',
+                'b.title',
+                'b.deletedAt',
+                'u.id as userId',
+                'u.name',
+            ])
+            ->from(Blog::class, 'b')
+            ->innerJoin(User::class, 'u', 'WITH', 'b.user = u')
+            ->where('b.isDeleted = :isDeleted')
+            ->setParameter('isDeleted', (int) true)
+            ->getQuery()
+            ->getResult();
+//        $blogs = Blog::join('users', 'blogs.user_id', '=', 'users.id')
+//                        ->select(['blogs.id', 'blogs.title', 'blogs.user_id', 'users.name', 'blogs.deleted_at'])
+//                        ->onlyTrashed();
 
         return Datatables::of($blogs)
                 ->editColumn('trashed_at', function ($model) {
-                    return $model->deleted_at->format('F d, Y h:i A');
+                    return $model['deletedAt']->format('F d, Y h:i A');
                 })
                 ->editColumn('users.name', function ($model) {
-                    return '<a href="'.route('users.show', $model->user_id).'" class="link">'.$model->name.' <i class="fas fa-external-link-alt"></i></a>';
+                    return '<a href="'.route('users.show', $model['userId']).'" class="link">'.$model['name'].' <i class="fas fa-external-link-alt"></i></a>';
                 })
                 ->addColumn('bulkAction', '<input type="checkbox" name="selected_ids[]" id="bulk_ids" value="{{ $id }}">')
                 ->addColumn('actions', function ($model) {
@@ -148,8 +164,8 @@ class BlogsController extends Controller
                         <i class="fas fa-cog"></i> Action
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="'.route('blogs.restore', $model->id).'" onclick="return confirm(\'Are you sure?\')"><i class="fas fa-history"></i> Restore</a>
-                            <a class="dropdown-item text-danger" href="'.route('blogs.permanentDelet', $model->id).'" onclick="return confirm(\'Are you sure?\')"><i class="fas fa-trash"></i> Permanent Delet</a>
+                            <a class="dropdown-item" href="'.route('blogs.restore', $model['id']).'" onclick="return confirm(\'Are you sure?\')"><i class="fas fa-history"></i> Restore</a>
+                            <a class="dropdown-item text-danger" href="'.route('blogs.permanentDelet', $model['id']).'" onclick="return confirm(\'Are you sure?\')"><i class="fas fa-trash"></i> Permanent Delet</a>
                         </div>
                     </div>';
                 })

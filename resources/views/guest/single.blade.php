@@ -26,7 +26,7 @@
                 <p>
                     <i class="fas fa-tags"></i> Categories:
                     @foreach($blog->blogCategories as $blogCategory)
-                    <a href="{{ url('category/'.$blogCategory->category->slug) }}" class="badge badge-primary">{{ $blogCategory->category->name }}</a>
+                    <a href="{{ url('category/'.$blogCategory->category->slug) }}" class="badge badge-primary">{{ $blogCategorycategory->name }}</a>
                     @endforeach
                 </p>
             </div>
