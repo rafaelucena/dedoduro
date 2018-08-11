@@ -80,7 +80,7 @@ $(document).ready(function() {
             { data: 'id', name: 'blogs.id' },
             { data: 'title', name: 'blogs.title' },
             { data: 'users.name', name: 'users.name' },
-            { data: 'trashed_at', name: 'blogs.deleted_at' },
+            { data: 'trashed_at', name: 'trashed_at' },
             { data: 'actions', name: 'actions' }
         ],
         "order": [[ 4, "desc" ]],

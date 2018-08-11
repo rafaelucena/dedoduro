@@ -42,7 +42,11 @@ class BlogsController extends Controller
      */
     public function index()
     {
-        $trashed_items = count($this->em->getRepository(Blog::class)->findBy(['isActive' => 0]));
+        $trashed_items = count($this->em->getRepository(Blog::class)->findBy([
+            'isActive' => 0,
+            'isDeleted' => 1,
+        ]));
+
 //        $trashed_items = Blog::onlyTrashed()->count();
         return view('admin/blogs/index', ['trashed_items_count' => $trashed_items]);
     }
@@ -367,22 +371,25 @@ class BlogsController extends Controller
     public function updateActiveStatus($id)
     {
         // get all trashed blogs and permanent Delet the blogs
-        $blog = Blog::findOrFail($id);
+        $blog = $this->em->getRepository(Blog::class)->find($id);
+//        $blog = Blog::findOrFail($id);
 
-        if ($blog->is_active == 0) {
-            $blog->is_active = 1;
+        if ($blog->isActive) {
+            $blog->isActive = (int) false;
         } else {
-            $blog->is_active = 0;
+            $blog->isActive = (int) true;
         }
-        $status = $blog->save();
+        $this->em->persist($blog);
+        $this->em->flush();
+//        $status = $blog->save();
 
-        if ($status) {
+//        if ($status) {
             // If success
             return back()->with('custom_success', 'Blog publish status updated.');
-        } else {
-            // If no success
-            return back()->with('custom_errors', 'Failed to change publish status. Something went wrong.');
-        }
+//        } else {
+//            // If no success
+//            return back()->with('custom_errors', 'Failed to change publish status. Something went wrong.');
+//        }
     }
 
     /**
@@ -399,6 +406,7 @@ class BlogsController extends Controller
 
         // Soft Delet the blog and transfer to Trash Items
         $blog->isActive = (int) false;
+        $blog->isDeleted = (int) true;
         $blog->deletedAt = new \DateTime();
 //        $blog->delete();
 
@@ -441,18 +449,27 @@ class BlogsController extends Controller
     public function restore($id)
     {
         // Find the blog by $id
-        $blog = Blog::onlyTrashed()->findOrFail($id);
+        $blog = $this->em->getRepository(Blog::class)->findOneBy([
+            'isDeleted' => (int) true,
+            'id' => $id,
+        ]);
+//        $blog = Blog::onlyTrashed()->findOrFail($id);
 
         // Restore the blog
-        $blog->restore();
+        $blog->isDeleted = (int) false;
+        $blog->deletedAt = null;
 
-        if (!$blog->trashed()) {
+        $this->em->persist($blog);
+        $this->em->flush();
+//        $blog->restore();
+
+//        if (!$blog->trashed()) {
             // If success
             return back()->with('custom_success', 'Blog has been restored.');
-        } else {
+//        } else {
             // If no success
-            return back()->with('custom_errors', 'Blog was not able to restore. Something went wrong.');
-        }
+//            return back()->with('custom_errors', 'Blog was not able to restore. Something went wrong.');
+//        }
     }
 
     /**
