@@ -79,6 +79,18 @@ Route::prefix('admin')->group(function () {
     Route::put('users/roles/{id}', 'Admin\UsersController@updateRoles')->name('users.updateRoles');
     Route::resource('users', 'Admin\UsersController');
 
+    // Politicians
+//    Route::get('blogsData', 'Admin\BlogsController@blogsData')->name('blogs.ajaxData');
+//    Route::get('blogs/bulk/trash', 'Admin\BlogsController@bulkTrash')->name('blogs.bulkTrash');
+//    Route::get('blogs/bulk/restore', 'Admin\BlogsController@bulkRestore')->name('blogs.bulkRestore');
+//    Route::get('blogs/trashed', 'Admin\BlogsController@trashed')->name('blogs.trashedData');
+//    Route::get('blogsTrashedData', 'Admin\BlogsController@blogsAjaxTrashedData')->name('blogs.ajaxTrashedData');
+//    Route::get('blogs/restore/{id}', 'Admin\BlogsController@restore')->name('blogs.restore');
+//    Route::get('blogs/delet/permanent/{id}', 'Admin\BlogsController@permanentDelet')->name('blogs.permanentDelet');
+//    Route::get('blogs/trash/empty', 'Admin\BlogsController@emptyTrash')->name('blogs.emptyTrash');
+//    Route::get('blogs/publish/status/{id}', 'Admin\BlogsController@updateActiveStatus')->name('blogs.publishStatus');
+    Route::resource('politicians', 'Admin\PoliticiansController');
+
     // Settings
     Route::get('settings', 'Admin\SettingsController@index')->name('settings.index');
     Route::put('settings/update', 'Admin\SettingsController@update')->name('settings.update');

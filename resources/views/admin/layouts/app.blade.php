@@ -47,6 +47,7 @@
                             <li><a class="nav-link" href="{{ route('register') }}">Register</a></li>
                         @else
                             <li><a class="nav-link" href="{{ route('dashboard') }}">Dashboard</a></li>
+                            <li><a class="nav-link" href="{{ route('politicians.index') }}">Politicians</a></li>
                             <li><a class="nav-link" href="{{ route('blogs.index') }}">Blogs</a></li>
                             <li><a class="nav-link" href="{{ route('categories.index') }}">Categories</a></li>
                             <li><a class="nav-link" href="{{ route('comments.index') }}">Comments</a></li>
