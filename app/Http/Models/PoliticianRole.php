@@ -14,7 +14,7 @@ use Doctrine\ORM\Event\PreUpdateEventArgs;
  * @ORM\Table(name="politician_role")
  * @ORM\HasLifecycleCallbacks()
  */
-class Politician
+class PoliticianRole
 {
     /**
      * @ORM\Id()

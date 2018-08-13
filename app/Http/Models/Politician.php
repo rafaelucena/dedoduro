@@ -59,6 +59,24 @@ class Politician
      */
     public $createdBy;
 
+    /**
+     * @var Persona
+     * @ORM\ManyToOne(targetEntity="Persona", inversedBy="politicians")
+     */
+    public $persona;
+
+    /**
+     * @var Party
+     * @ORM\ManyToOne(targetEntity="Party", inversedBy="politicians")
+     */
+    public $party;
+
+    /**
+     * @var PoliticianRole
+     * @ORM\ManyToOne(targetEntity="PoliticianRole", inversedBy="politicians")
+     */
+    public $role;
+
     public function __construct()
     {
         //@TODO
