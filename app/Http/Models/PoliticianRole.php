@@ -65,6 +65,12 @@ class PoliticianRole
      */
     public $createdBy;
 
+    /**
+     * @var ArrayCollection|Politician[]
+     * @ORM\OneToMany(targetEntity="Politician", mappedBy="role")
+     */
+    public $politicians;
+
     public function __construct()
     {
         //@TODO

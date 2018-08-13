@@ -97,6 +97,12 @@ class Party implements UrlRoutable
      */
     public $createdBy;
 
+    /**
+     * @var ArrayCollection|Politician[]
+     * @ORM\OneToMany(targetEntity="Politician", mappedBy="party")
+     */
+    public $politicians;
+
     public function __construct()
     {
         //@TODO
