@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Models\Blog;
 use App\Http\Models\BlogCategory;
 use App\Http\Models\Category;
+use App\Http\Models\Party;
+use App\Http\Models\Politician;
+use App\Http\Models\Persona;
 use App\Http\Requests\StoreBlogPost;
 use App\Http\Requests\UpdateBlogPost;
 use App\Http\Models\User;
@@ -39,13 +42,13 @@ class PoliticiansController extends Controller
      */
     public function index()
     {
-        $trashed_items = count($this->em->getRepository(Blog::class)->findBy([
+        $trashedItemsAmount = count($this->em->getRepository(Politician::class)->findBy([
             'isActive' => 0,
             'isDeleted' => 1,
         ]));
 
 //        $trashed_items = Blog::onlyTrashed()->count();
-        return view('admin/blogs/index', ['trashed_items_count' => $trashed_items]);
+        return view('admin/politicians/index', ['trashed_items_count' => $trashedItemsAmount]);
     }
 
     /**
@@ -53,62 +56,115 @@ class PoliticiansController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function blogsData()
+    protected function getPoliticians()
     {
-        $blogs = $this->em->createQueryBuilder()
+        $politicians = $this->em->createQueryBuilder()
             ->select([
-                'b.id',
-                'b.title',
-                'b.isActive',
-                'b.createdAt',
+                'po.id',
+                'pe.shortName as personaShortName',
+                'pa.shortName as partyShortName',
+                'po.isActive',
+                'po.createdAt',
                 'u.id as userId',
-                'u.name',
+                'u.name as userName',
             ])
-            ->from(Blog::class, 'b')
-            ->innerJoin(User::class, 'u', 'WITH', 'b.user = u')
-            ->where('b.isDeleted = :isDeleted')
+            ->from(Politician::class, 'po')
+            ->innerJoin( Persona::class, 'pe', 'WITH', 'po.persona = pe')
+            ->innerJoin(Party::class, 'pa', 'WITH', 'po.party = pa')
+            ->innerJoin(User::class, 'u', 'WITH', 'po.createdBy = u')
+            ->where('po.isDeleted = :isDeleted')
             ->setParameter('isDeleted', (int) false)
             ->getQuery()
             ->getResult();
-//        $blogs = Blog::join('users', 'blogs.user_id', '=', 'users.id')
-//                        ->select(['blogs.id', 'blogs.title', 'blogs.user_id', 'blogs.is_active', 'users.name', 'blogs.created_at']);
 
-        return Datatables::of($blogs)
-                ->editColumn('created_at', function ($model) {
-                    return "<abbr title='".$model['createdAt']->format('F d, Y @ h:i A')."'>".$model['createdAt']->format('F d, Y')."</abbr>";
-                })
-                ->editColumn('is_active', function ($model) {
-                    if ($model['isActive'] == 0) {
-                        return '<div class="text-danger">No <span class="badge badge-light"><i class="fas fa-times"></i></span></div>';
-                    } else {
-                        return '<div class="text-success">Yes <span class="badge badge-light"><i class="fas fa-check"></i></span></div>';
-                    }
-                })
-                ->editColumn('users.name', function ($model) {
-                    return '<a href="'.route('users.show', $model['userId']).'" class="link">'.$model['name'].' <i class="fas fa-external-link-alt"></i></a>';
-                })
-                ->addColumn('bulkAction', '<input type="checkbox" name="selected_ids[]" id="bulk_ids" value="{{ $id }}">')
-                ->addColumn('actions', function ($model) {
-                    if ($model['isActive'] == 0) {
-                        $publish_action = '<a class="dropdown-item" href="'.route('blogs.publishStatus', $model['id']).'" onclick="return confirm(\'Are you sure?\')"><i class="fas fa-check"></i> Publish</a>';
-                    } else {
-                        $publish_action = '<a class="dropdown-item" href="'.route('blogs.publishStatus', $model['id']).'" onclick="return confirm(\'Are you sure?\')"><i class="fas fa-times"></i> Unpublish</a>';
-                    }
-                    return '
-                     <div class="dropdown float-right">
-                        <button class="btn btn-sm btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fas fa-cog"></i> Action
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="'.route('blogs.show', $model['id']).'"><i class="fas fa-eye"></i> View</a>
-                            <a class="dropdown-item" href="'.route('blogs.edit', $model['id']).'"><i class="fas fa-edit"></i> Edit</a>
-                            '.$publish_action.'
-                            <a class="dropdown-item text-danger" href="#" onclick="callDeletItem(\''.$model['id'].'\', \'blogs\');"><i class="fas fa-trash"></i> Trash</a>
-                        </div>
-                    </div>';
-                })
-                ->rawColumns(['actions','users.name','is_active','bulkAction','created_at'])
-                ->make(true);
+        return Datatables::of($politicians)
+            ->addColumn('bulkAction', '<input type="checkbox" name="selected_ids[]" id="bulk_ids" value="{{ $id }}">')
+            ->editColumn('politician.id', function ($model) {
+                return $model['id'];
+            })
+            ->editColumn('persona.shortName', function ($model) {
+                return $model['personaShortName'];
+            })
+            ->editColumn('party.shortName', function ($model) {
+                return $model['partyShortName'];
+            })
+            ->editColumn('user.name', function ($model) {
+                $route = route('users.show', $model['userId']);
+                $userName = $model['userName'];
+
+                return vsprintf(
+                    '<a href="%s" class="link">%s <i class="fas fa-external-link-alt"></i></a>',
+                    [
+                        $route,
+                        $userName,
+                    ]
+                );
+            })
+            ->editColumn('politician.isActive', function ($model) {
+                $divClass = 'text-success';
+                $divValue = 'Yes';
+                $iClass = 'fa-check';
+
+                if ($model['isActive'] == 0) {
+                    $divClass = 'text-danger';
+                    $divValue = 'No';
+                    $iClass = 'fa-times';
+                }
+
+                return vsprintf(
+                    '<div class="%s">%s <span class="badge badge-light"><i class="fas %s"></i></span></div>',
+                    [
+                        $divClass,
+                        $divValue,
+                        $iClass,
+                    ]
+                );
+            })
+            ->editColumn('politician.createdAt', function ($model) {
+                $createdAtTitle = $model['createdAt']->format('F d, Y @ h:i A');
+                $createdAtValue = $model['createdAt']->format('F d, Y');
+                return vsprintf(
+                    '<abbr title="%s">%s</abbr>',
+                    [
+                        $createdAtTitle,
+                        $createdAtValue,
+                    ]
+                );
+            })
+            ->addColumn('actions', function ($model) {
+                $route = route('blogs.publishStatus', $model['id']);
+                $publishValue = 'Unpublish';
+                $iClass = 'fa-times';
+
+                if ($model['isActive'] == 0) {
+                    $publishValue = 'Publish';
+                    $iClass = 'fa-check';
+                }
+
+                $publish_action = vsprintf(
+                    '<a class="dropdown-item" href="%s" onclick="return confirm(\'Are you sure?\')"><i class="fas %s"></i> %s</a>',
+                    [
+                        $route,
+                        $iClass,
+                        $publishValue
+                    ]
+                );
+
+                return '
+                 <div class="dropdown float-right">
+                    <button class="btn btn-sm btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-cog"></i> Action
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="'.route('blogs.show', $model['id']).'"><i class="fas fa-eye"></i> View</a>
+                        <a class="dropdown-item" href="'.route('blogs.edit', $model['id']).'"><i class="fas fa-edit"></i> Edit</a>
+                        '.$publish_action.'
+                        <a class="dropdown-item text-danger" href="#" onclick="callDeletItem(\''.$model['id'].'\', \'blogs\');"><i class="fas fa-trash"></i> Trash</a>
+                    </div>
+                </div>';
+            })
+            ->rawColumns(['actions','user.name','politician.isActive','bulkAction','politician.createdAt'])
+            ->make(true);
     }
 
 

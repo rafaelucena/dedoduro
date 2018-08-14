@@ -80,7 +80,7 @@ Route::prefix('admin')->group(function () {
     Route::resource('users', 'Admin\UsersController');
 
     // Politicians
-//    Route::get('blogsData', 'Admin\BlogsController@blogsData')->name('blogs.ajaxData');
+    Route::get('getPoliticians', 'Admin\PoliticiansController@getPoliticians')->name('politicians');
 //    Route::get('blogs/bulk/trash', 'Admin\BlogsController@bulkTrash')->name('blogs.bulkTrash');
 //    Route::get('blogs/bulk/restore', 'Admin\BlogsController@bulkRestore')->name('blogs.bulkRestore');
 //    Route::get('blogs/trashed', 'Admin\BlogsController@trashed')->name('blogs.trashedData');
