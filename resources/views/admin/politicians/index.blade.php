@@ -82,7 +82,7 @@ $(document).ready(function() {
             },
         },
         serverSide: true,
-        ajax: '{!! route('politicians') !!}',
+        ajax: '{!! route('politicians.datatable') !!}',
         columns: [
             { data: 'bulkAction'},
             { data: 'politician.id'},

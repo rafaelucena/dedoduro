@@ -25,7 +25,7 @@ class PoliticiansController extends Controller
     /**
      * Enforce middleware.
      */
-    public function __construct(EntityManagerInterface $em)
+    protected function __construct(EntityManagerInterface $em)
     {
         parent::__construct($em);
 
@@ -57,7 +57,7 @@ class PoliticiansController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    protected function getPoliticians()
+    protected function getDatatable()
     {
         $politicians = $this->em->createQueryBuilder()
             ->select([
@@ -67,14 +67,11 @@ class PoliticiansController extends Controller
                 'po.isActive',
                 'po.createdAt',
                 'pr.name as politicianRoleName',
-//                'u.id as userId',
-//                'u.name as userName',
             ])
             ->from(Politician::class, 'po')
+            ->innerJoin( Party::class, 'pa', 'WITH', 'po.party = pa')
             ->innerJoin( Persona::class, 'pe', 'WITH', 'po.persona = pe')
-            ->innerJoin(Party::class, 'pa', 'WITH', 'po.party = pa')
             ->innerJoin( PoliticianRole::class, 'pr', 'WITH', 'pr = po.role')
-//            ->innerJoin(User::class, 'u', 'WITH', 'po.createdBy = u')
             ->where('po.isDeleted = :isDeleted')
             ->setParameter('isDeleted', (int) false)
             ->getQuery()
@@ -94,18 +91,6 @@ class PoliticiansController extends Controller
             ->editColumn('politicianRole.name', function ($model) {
                 return $model['politicianRoleName'];
             })
-//            ->editColumn('user.name', function ($model) {
-//                $route = route('users.show', $model['userId']);
-//                $userName = $model['userName'];
-//
-//                return vsprintf(
-//                    '<a href="%s" class="link">%s <i class="fas fa-external-link-alt"></i></a>',
-//                    [
-//                        $route,
-//                        $userName,
-//                    ]
-//                );
-//            })
             ->editColumn('politician.isActive', function ($model) {
                 $divClass = 'text-success';
                 $divValue = 'Yes';
@@ -119,11 +104,7 @@ class PoliticiansController extends Controller
 
                 return vsprintf(
                     '<div class="%s">%s <span class="badge badge-light"><i class="fas %s"></i></span></div>',
-                    [
-                        $divClass,
-                        $divValue,
-                        $iClass,
-                    ]
+                    [$divClass, $divValue, $iClass]
                 );
             })
             ->editColumn('politician.createdAt', function ($model) {
@@ -131,10 +112,7 @@ class PoliticiansController extends Controller
                 $createdAtValue = $model['createdAt']->format('F d, Y');
                 return vsprintf(
                     '<abbr title="%s">%s</abbr>',
-                    [
-                        $createdAtTitle,
-                        $createdAtValue,
-                    ]
+                    [$createdAtTitle, $createdAtValue]
                 );
             })
             ->addColumn('actions', function ($model) {
@@ -149,11 +127,7 @@ class PoliticiansController extends Controller
 
                 $publish_action = vsprintf(
                     '<a class="dropdown-item" href="%s" onclick="return confirm(\'Are you sure?\')"><i class="fas %s"></i> %s</a>',
-                    [
-                        $route,
-                        $iClass,
-                        $publishValue
-                    ]
+                    [$route, $iClass, $publishValue]
                 );
 
                 return '
@@ -162,8 +136,8 @@ class PoliticiansController extends Controller
                     <i class="fas fa-cog"></i> Action
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="'.route('blogs.show', $model['id']).'"><i class="fas fa-eye"></i> View</a>
-                        <a class="dropdown-item" href="'.route('blogs.edit', $model['id']).'"><i class="fas fa-edit"></i> Edit</a>
+                        <a class="dropdown-item" href="'.route('politician.get', $model['id']).'"><i class="fas fa-eye"></i> View</a>
+                        <a class="dropdown-item" href="'.route('politician.put', $model['id']).'"><i class="fas fa-edit"></i> Edit</a>
                         '.$publish_action.'
                         <a class="dropdown-item text-danger" href="#" onclick="callDeletItem(\''.$model['id'].'\', \'blogs\');"><i class="fas fa-trash"></i> Trash</a>
                     </div>
@@ -180,7 +154,7 @@ class PoliticiansController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function trashed()
+    protected function trashed()
     {
         $trashed_items = count($this->em->getRepository(Blog::class)->findBy(['isActive' => (int) false, 'isDeleted' => (int) true]));
 //        $trashed_items = Blog::onlyTrashed()->count();
@@ -192,7 +166,7 @@ class PoliticiansController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function blogsAjaxTrashedData()
+    protected function blogsAjaxTrashedData()
     {
         $blogs = $this->em->createQueryBuilder()
             ->select([
@@ -241,7 +215,7 @@ class PoliticiansController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    protected function create()
     {
         $authors = $this->em->getRepository(User::class)->findAll();
 //        $authors = User::active()->whereHas('roles', function ($query) {
@@ -257,7 +231,7 @@ class PoliticiansController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreBlogPost $request)
+    protected function store(StoreBlogPost $request)
     {
         // Pre Validations are done in StoreBlogPost Request
         // Store the item
@@ -299,7 +273,7 @@ class PoliticiansController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    protected function show($id)
     {
         $blog = $this->em->getRepository(Blog::class)->find($id);
 //        $blog = Blog::findOrFail($id);
@@ -312,7 +286,7 @@ class PoliticiansController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    protected function edit($id)
     {
         // Blog Details
         $blog = $this->em->getRepository(Blog::class)->find($id);
@@ -333,7 +307,7 @@ class PoliticiansController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateBlogPost $request, $id)
+    protected function update(UpdateBlogPost $request, $id)
     {
         // Pre Validations are done in UpdateBlogPost Request
         // Update the item
@@ -427,7 +401,7 @@ class PoliticiansController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function updateActiveStatus($id)
+    protected function updateActiveStatus($id)
     {
         // get all trashed blogs and permanent Delet the blogs
         $blog = $this->em->getRepository(Blog::class)->find($id);
@@ -457,7 +431,7 @@ class PoliticiansController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    protected function destroy($id)
     {
         // Find the blog by $id
         $blog = $this->em->getRepository(Blog::class)->find($id);
@@ -485,7 +459,7 @@ class PoliticiansController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function bulkTrash(Request $request)
+    protected function bulkTrash(Request $request)
     {
         $arrId = explode(",", $request->ids);
         $status = Blog::destroy($arrId);
@@ -505,7 +479,7 @@ class PoliticiansController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function restore($id)
+    protected function restore($id)
     {
         // Find the blog by $id
         $blog = $this->em->getRepository(Blog::class)->findOneBy([
@@ -536,7 +510,7 @@ class PoliticiansController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function bulkRestore(Request $request)
+    protected function bulkRestore(Request $request)
     {
         $arrId = explode(",", $request->ids);
         $status = Blog::onlyTrashed()->restore($arrId);
@@ -556,7 +530,7 @@ class PoliticiansController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function permanentDelet($id)
+    protected function permanentDelet($id)
     {
         // Find the blog by $id
         $blog = Blog::onlyTrashed()->findOrFail($id);
@@ -585,7 +559,7 @@ class PoliticiansController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function emptyTrash()
+    protected function emptyTrash()
     {
         // get all trashed blogs and permanent Delet the blogs
         $blogs = Blog::onlyTrashed()->get();
