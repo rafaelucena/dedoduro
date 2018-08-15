@@ -11,8 +11,8 @@ use App\Http\Models\Politician;
 use App\Http\Models\Persona;
 use App\Http\Models\PoliticianRole;
 use App\Http\Requests\StoreBlogPost;
-use App\Http\Requests\UpdateBlogPost;
 use App\Http\Models\User;
+use App\Http\Requests\UpdatePolitician;
 use Doctrine\ORM\EntityManagerInterface;
 use Illuminate\Http\File;
 use Illuminate\Http\Request;
@@ -306,43 +306,44 @@ class PoliticiansController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  UpdateBlogPost $request
+     * @param  UpdatePolitician $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    protected function update(UpdateBlogPost $request, $id)
+    protected function update(UpdatePolitician $request, $id)
     {
         // Pre Validations are done in UpdateBlogPost Request
         // Update the item
 
         // Get the item to update
-        $blog = $this->em->getRepository(Blog::class)->find($id);
+        $politician = $this->em->getRepository(Politician::class)->find($id);
+        /** $persona Persona **/
+        $persona = $politician->persona;
 //        $blog = Blog::findOrFail($id);
-
 
         // Store File & Get Path
         if ($request->hasFile('image')) {
             $imagePath = Storage::putFile('images', $request->file('image'));
             // Delet Old Image
-            Storage::delete($blog->image);
+            Storage::delete($persona->image);
         } else {
-            $imagePath = $blog->image;
+            $imagePath = $persona->image;
         }
 
-        // Store & Get Categories
-        $this->updateBlogCategories($blog, $request->categories);
+        // Step 1 - Set Persona
+        $persona->shortName = $request->short_name;
+        $persona->firstName = $request->first_name;
+        $persona->lastName = $request->last_name;
+        $persona->description = $request->description;
+        $persona->image = $imagePath;
+        $persona->isActive = $request->is_active;
+        $this->em->persist($persona);
 
-        // Step 1 - Set item fields
-        $blog->title = $request->title;
-        $blog->excerpt = $request->excerpt;
-        $blog->description = $request->description;
-        $blog->image = $imagePath;
-        $blog->user = $this->em->getRepository(User::class)->find($request->user_id);
-        $blog->isActive = $request->is_active;
-        $blog->allowComments = $request->allow_comments;
+        // Step 2 - Save Politician
+        $politician->party = $this->em->getRepository(Party::class)->find($request->party_id);
+        $politician->role = $this->em->getRepository(PoliticianRole::class)->find($request->role_id);
+        $this->em->persist($politician);
 
-        // Step 2 - Save Item
-        $this->em->persist($blog);
         $this->em->flush();
 //        $blog->save();
 
@@ -351,51 +352,6 @@ class PoliticiansController extends Controller
 
         // Back to index with success
         return back()->with('custom_success', 'Blog has been updated successfully');
-    }
-
-    /**
-     * @param Blog $blog
-     * @param array $categoriesInput
-     */
-    private function updateBlogCategories(Blog $blog, array $categoriesInput)
-    {
-        $currentBlogCategories = $blog->getCategories();
-        $toDisableBlogCategories = [];
-        foreach ($currentBlogCategories as $currentBlogCategory) {
-            $toDisableBlogCategories[$currentBlogCategory->category->id] = $currentBlogCategory;
-        }
-
-        foreach ($categoriesInput as $categoryInput) {
-            unset($toDisableBlogCategories[$categoryInput]);
-
-            $category = $this->em->getRepository(Category::class)->find($categoryInput);
-            if (!$category) {
-                $category = new Category();
-                $category->name = $categoryInput;
-                $category->user = Auth::user();
-                $this->em->persist($category);
-            }
-
-            $blogCategory = $this->em->getRepository(BlogCategory::class)->findOneBy([
-                'blog' => $blog,
-                'category' => $category,
-            ]);
-            if (!$blogCategory) {
-                $blogCategory = new BlogCategory();
-                $blogCategory->category = $category;
-                $blogCategory->blog = $blog;
-            }
-            $blogCategory->isActive = (int) true;
-            $blogCategory->deletedAt = null;
-            $this->em->persist($blogCategory);
-        }
-
-        foreach ($toDisableBlogCategories as $toDisableBlogCategory) {
-            $toDisableBlogCategory->isActive = (int) false;
-            $toDisableBlogCategory->deletedAt = new \DateTime();
-
-            $this->em->persist($toDisableBlogCategory);
-        }
     }
 
     /**
