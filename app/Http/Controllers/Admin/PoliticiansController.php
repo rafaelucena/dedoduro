@@ -288,16 +288,19 @@ class PoliticiansController extends Controller
      */
     protected function edit($id)
     {
-        // Blog Details
-        $blog = $this->em->getRepository(Blog::class)->find($id);
-//        $blog = Blog::findOrFail($id);
-        // Authors List
-        $authors = $this->em->getRepository(User::class)->findAll();
-//        $authors = User::active()->whereHas('roles', function ($query) {
-//            $query->where('role', '=', 'add_blog');
-//        })->get();
+        // Politician Details
+        $politician = $this->em->getRepository(Politician::class)->find($id);
+        // Persona Details
+        $persona = $politician->persona;
+        // Party list
+        $parties = $this->em->getRepository(Party::class)->findAll();
+        // Roles List
+        $roles = $this->em->getRepository(PoliticianRole::class)->findAll();
 
-        return view('admin/blogs/edit', ['blog' => $blog, 'authors' => $authors]);
+        return view(
+            'admin/politicians/edit',
+            ['politician' => $politician, 'persona' => $persona, 'parties' => $parties, 'roles' => $roles]
+        );
     }
 
     /**
