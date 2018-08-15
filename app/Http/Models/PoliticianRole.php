@@ -62,6 +62,7 @@ class PoliticianRole
     /**
      * @var User
      * @ORM\ManyToOne(targetEntity="User", inversedBy="politicians")
+     * @ORM\JoinColumn(name="created_by", referencedColumnName="id", nullable=false)
      */
     public $createdBy;
 

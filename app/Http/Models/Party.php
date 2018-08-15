@@ -94,6 +94,7 @@ class Party implements UrlRoutable
     /**
      * @var User
      * @ORM\ManyToOne(targetEntity="User", inversedBy="personas")
+     * @ORM\JoinColumn(name="created_by", referencedColumnName="id", nullable=false)
      */
     public $createdBy;
 

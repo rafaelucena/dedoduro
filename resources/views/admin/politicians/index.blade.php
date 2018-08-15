@@ -19,7 +19,7 @@
                         <th>ID</th>
                         <th>Name</th>
                         <th>Party</th>
-                        <th>User</th>
+                        <th>Role</th>
                         <th>Published</th>
                         <th>Created on</th>
                         <th></th>
@@ -75,9 +75,9 @@ $(document).ready(function() {
             "processing": '<i class="text-primary fas fa-circle-notch fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span> ',
             "emptyTable": "No Blogs Found, Create the first blog.",
             "oPaginate": {
-                sNext: 'Next <i class="fas fa-chevron-right"></i>',
-                sPrevious: '<i class="fas fa-chevron-left"></i> Previous',
                 sFirst: '<i class="fas fa-step-backward"></i> First',
+                sPrevious: '<i class="fas fa-chevron-left"></i> Previous',
+                sNext: 'Next <i class="fas fa-chevron-right"></i>',
                 sLast: 'Last <i class="fas fa-step-forward"></i>'
             },
         },
@@ -88,7 +88,7 @@ $(document).ready(function() {
             { data: 'politician.id'},
             { data: 'persona.shortName'},
             { data: 'party.shortName'},
-            { data: 'user.name'},
+            { data: 'politicianRole.name'},
             { data: 'politician.isActive'},
             { data: 'politician.createdAt'},
             { data: 'actions'}

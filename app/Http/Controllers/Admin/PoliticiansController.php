@@ -9,6 +9,7 @@ use App\Http\Models\Category;
 use App\Http\Models\Party;
 use App\Http\Models\Politician;
 use App\Http\Models\Persona;
+use App\Http\Models\PoliticianRole;
 use App\Http\Requests\StoreBlogPost;
 use App\Http\Requests\UpdateBlogPost;
 use App\Http\Models\User;
@@ -40,7 +41,7 @@ class PoliticiansController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    protected function index()
     {
         $trashedItemsAmount = count($this->em->getRepository(Politician::class)->findBy([
             'isActive' => 0,
@@ -65,13 +66,15 @@ class PoliticiansController extends Controller
                 'pa.shortName as partyShortName',
                 'po.isActive',
                 'po.createdAt',
-                'u.id as userId',
-                'u.name as userName',
+                'pr.name as politicianRoleName',
+//                'u.id as userId',
+//                'u.name as userName',
             ])
             ->from(Politician::class, 'po')
             ->innerJoin( Persona::class, 'pe', 'WITH', 'po.persona = pe')
             ->innerJoin(Party::class, 'pa', 'WITH', 'po.party = pa')
-            ->innerJoin(User::class, 'u', 'WITH', 'po.createdBy = u')
+            ->innerJoin( PoliticianRole::class, 'pr', 'WITH', 'pr = po.role')
+//            ->innerJoin(User::class, 'u', 'WITH', 'po.createdBy = u')
             ->where('po.isDeleted = :isDeleted')
             ->setParameter('isDeleted', (int) false)
             ->getQuery()
@@ -88,18 +91,21 @@ class PoliticiansController extends Controller
             ->editColumn('party.shortName', function ($model) {
                 return $model['partyShortName'];
             })
-            ->editColumn('user.name', function ($model) {
-                $route = route('users.show', $model['userId']);
-                $userName = $model['userName'];
-
-                return vsprintf(
-                    '<a href="%s" class="link">%s <i class="fas fa-external-link-alt"></i></a>',
-                    [
-                        $route,
-                        $userName,
-                    ]
-                );
+            ->editColumn('politicianRole.name', function ($model) {
+                return $model['politicianRoleName'];
             })
+//            ->editColumn('user.name', function ($model) {
+//                $route = route('users.show', $model['userId']);
+//                $userName = $model['userName'];
+//
+//                return vsprintf(
+//                    '<a href="%s" class="link">%s <i class="fas fa-external-link-alt"></i></a>',
+//                    [
+//                        $route,
+//                        $userName,
+//                    ]
+//                );
+//            })
             ->editColumn('politician.isActive', function ($model) {
                 $divClass = 'text-success';
                 $divValue = 'Yes';
