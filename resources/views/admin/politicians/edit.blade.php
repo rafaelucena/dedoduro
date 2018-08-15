@@ -75,7 +75,7 @@
                             <option value="0" @if(old('is_active', $politician->isActive) == 0) selected @endif>No</option>
                         </select>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group text-right">
                         <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Update</button>
                     </div>
                 </div>
