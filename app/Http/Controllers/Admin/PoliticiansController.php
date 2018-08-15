@@ -25,7 +25,7 @@ class PoliticiansController extends Controller
     /**
      * Enforce middleware.
      */
-    protected function __construct(EntityManagerInterface $em)
+    public function __construct(EntityManagerInterface $em)
     {
         parent::__construct($em);
 
