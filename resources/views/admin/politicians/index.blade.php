@@ -73,7 +73,7 @@ $(document).ready(function() {
         processing: true,
         "language": {
             "processing": '<i class="text-primary fas fa-circle-notch fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span> ',
-            "emptyTable": "No Blogs Found, Create the first blog.",
+            "emptyTable": "No politicians found. =(",
             "oPaginate": {
                 sFirst: '<i class="fas fa-step-backward"></i> First',
                 sPrevious: '<i class="fas fa-chevron-left"></i> Previous',
