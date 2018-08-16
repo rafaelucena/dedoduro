@@ -297,9 +297,22 @@ class PoliticiansController extends Controller
         // Roles List
         $roles = $this->em->getRepository(PoliticianRole::class)->findAll();
 
+        $formHelper = new \stdClass();
+        $formHelper->title = 'Politicians - Edit';
+        $formHelper->action = route('politicians.update', $politician->id);
+        $formHelper->submit = 'Update';
+
         return view(
             'admin/politicians/edit',
-            ['politician' => $politician, 'persona' => $persona, 'parties' => $parties, 'roles' => $roles]
+            [
+                // Helpers
+                'formHelper' => $formHelper,
+                // Objects
+                'parties' => $parties,
+                'persona' => $persona,
+                'politician' => $politician,
+                'roles' => $roles,
+            ]
         );
     }
 
