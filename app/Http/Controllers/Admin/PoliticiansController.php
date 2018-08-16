@@ -12,6 +12,7 @@ use App\Http\Models\Persona;
 use App\Http\Models\PoliticianRole;
 use App\Http\Requests\StoreBlogPost;
 use App\Http\Models\User;
+use App\Http\Requests\StorePolitician;
 use App\Http\Requests\UpdatePolitician;
 use Doctrine\ORM\EntityManagerInterface;
 use Illuminate\Http\File;
@@ -217,12 +218,32 @@ class PoliticiansController extends Controller
      */
     protected function create()
     {
-        $authors = $this->em->getRepository(User::class)->findAll();
-//        $authors = User::active()->whereHas('roles', function ($query) {
-//            $query->where('role', '=', 'add_blog');
-//        })->get();
+        // Politician Details
+        $politician = new Politician();
+        // Persona Details
+        $persona = new Persona();
+        // Party list
+        $parties = $this->em->getRepository(Party::class)->findAll();
+        // Roles List
+        $roles = $this->em->getRepository(PoliticianRole::class)->findAll();
 
-        return view('admin/blogs/create', ['authors' => $authors]);
+        $formHelper = new \stdClass();
+        $formHelper->title = 'Politicians - New';
+        $formHelper->action = route('politicians.store');
+        $formHelper->submit = 'Create';
+
+        return view(
+            'admin/politicians/create',
+            [
+                // Helper
+                'formHelper' => $formHelper,
+                // Objects
+                'parties' => $parties,
+                'persona' => $persona,
+                'politician' => $politician,
+                'roles' => $roles,
+            ]
+        );
     }
 
     /**
@@ -231,40 +252,34 @@ class PoliticiansController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    protected function store(StoreBlogPost $request)
+    protected function store(StorePolitician $request)
     {
         // Pre Validations are done in StoreBlogPost Request
-        // Store the item
-
         // Store File & Get Path
         $imagePath = Storage::putFile('images', $request->file('image'));
 
+        // Step 1 - Set Persona
+        $persona = new Persona();
+        $persona->shortName = $request->short_name;
+        $persona->firstName = $request->first_name;
+        $persona->lastName = $request->last_name;
+        $persona->description = $request->description;
+        $persona->image = $imagePath;
+        $persona->isActive = $request->is_active;
+        $this->em->persist($persona);
 
-        // Step 1 - Init item Obj
-        $blog = new Blog();
+        // Step 2 - Save Politician
+        $politician = new Politician();
+        $politician->persona = $persona;
+        $politician->party = $this->em->getRepository(Party::class)->find($request->party_id);
+        $politician->role = $this->em->getRepository(PoliticianRole::class)->find($request->role_id);
+        $this->em->persist($politician);
 
-        // Store & Get Categories
-        $this->updateBlogCategories($blog, $request->categories);
-
-        // Set item fields
-        $blog->title = $request->title;
-        $blog->excerpt = $request->excerpt;
-        $blog->description = $request->description;
-        $blog->image = $imagePath;
-        $blog->user = $this->em->getRepository(User::class)->find($request->user_id);
-        $blog->isActive = $request->is_active;
-        $blog->allowComments = $request->allow_comments;
-
-        // Step 2 - Save Item
-        $this->em->persist($blog);
+        // Step 3 - Flush everything
         $this->em->flush();
-//        $blog->save();
-
-        // Step 3 - Attach/Sync Related Items
-//        $blog->categories()->sync($categoryArr);
 
         // Back to index with success
-        return redirect()->route('blogs.index')->with('custom_success', 'Blog has been added successfully');
+        return redirect()->route('politicians.index')->with('custom_success', 'Politician has been created successfully');
     }
 
     /**

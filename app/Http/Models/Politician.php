@@ -89,6 +89,8 @@ class Politician
     public function onPrePersist()
     {
         $this->createdAt = new DateTime();
+        $this->createdBy = auth()->user();
+        $this->isDeleted = (int) false;
     }
 
     /**

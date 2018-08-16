@@ -121,7 +121,10 @@ class Persona implements UrlRoutable
     public function onPrePersist()
     {
         $this->slug = Str::slug($this->shortName);
+        $this->createdBy = auth()->user();
         $this->createdAt = new DateTime();
+        $this->isActive = (int) true;
+        $this->isDeleted = (int) false;
     }
 
     /**
