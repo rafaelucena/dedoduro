@@ -8,15 +8,13 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\Mapping AS ORM;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
-use Illuminate\Support\Str;
-use LaravelDoctrine\ORM\Contracts\UrlRoutable;
 
 /**
  * @ORM\Entity()
- * @ORM\Table(name="persona")
+ * @ORM\Table(name="persona_slug")
  * @ORM\HasLifecycleCallbacks()
  */
-class Persona implements UrlRoutable
+class PersonaSlug
 {
     /**
      * @ORM\Id()
@@ -24,48 +22,6 @@ class Persona implements UrlRoutable
      * @ORM\Column(type="integer", nullable=false)
      */
     public $id;
-
-    /**
-     * @var string
-     * @ORM\Column(type="string", length=127, nullable=false)
-     */
-    public $firstName;
-
-    /**
-     * @var string
-     * @ORM\Column(type="string", length=255, nullable=false)
-     */
-    public $lastName;
-
-    /**
-     * @var string
-     * @ORM\Column(type="string", length=255, nullable=false)
-     */
-    public $shortName;
-
-    /**
-     * @var string
-     * @ORM\Column(type="string", length=255, nullable=false)
-     */
-    public $slug;
-
-    /**
-     * @var string
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    public $image;
-
-    /**
-     * @var string
-     * @ORM\Column(type="text", nullable=true)
-     */
-    public $description;
-
-    /**
-     * @var integer
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    public $views;
 
     /**
      * @var integer
@@ -99,22 +55,22 @@ class Persona implements UrlRoutable
 
     /**
      * @var User
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="personas")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="personaSlugs")
      * @ORM\JoinColumn(name="created_by", referencedColumnName="id", nullable=false)
      */
     public $createdBy;
 
     /**
-     * @var ArrayCollection|Politician[]
-     * @ORM\OneToMany(targetEntity="Politician", mappedBy="persona")
+     * @var Persona
+     * @ORM\ManyToOne(targetEntity="Persona", inversedBy="personaSlugs")
      */
-    public $politicians;
+    public $persona;
 
     /**
-     * @var ArrayCollection|PersonaSlug[]
-     * @ORM\OneToMany(targetEntity="PersonaSlug", inversedBy="persona")
+     * @var Slug
+     * @ORM\ManyToOne(targetEntity="Slug", inversedBy="personasSlug")
      */
-    public $personaSlugs;
+    public $slug;
 
     public function __construct()
     {
@@ -126,10 +82,8 @@ class Persona implements UrlRoutable
      */
     public function onPrePersist()
     {
-        $this->slug = Str::slug($this->shortName);
-        $this->createdBy = auth()->user();
         $this->createdAt = new DateTime();
-        $this->isActive = (int) true;
+        $this->createdBy = auth()->user();
         $this->isDeleted = (int) false;
     }
 
@@ -142,14 +96,5 @@ class Persona implements UrlRoutable
         if (!empty($eventArgs->getEntityChangeSet())) {
             $this->updatedAt = new DateTime();
         }
-    }
-
-    /**
-     *
-     * @return string
-     */
-    public static function getRouteKeyName(): string
-    {
-        return 'slug';
     }
 }

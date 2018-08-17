@@ -142,7 +142,7 @@ class Blog implements UrlRoutable
         }
     }
 
-    public function getCategories($all = false)
+    public function getCategories(bool $all = false)
     {
         $criteria = Criteria::create();
         if ($all !== true) {
