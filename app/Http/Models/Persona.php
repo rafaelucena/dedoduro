@@ -112,7 +112,7 @@ class Persona implements UrlRoutable
 
     /**
      * @var ArrayCollection|PersonaSlug[]
-     * @ORM\OneToMany(targetEntity="PersonaSlug", inversedBy="persona")
+     * @ORM\OneToMany(targetEntity="PersonaSlug", mappedBy="persona")
      */
     public $personaSlugs;
 
@@ -142,6 +142,19 @@ class Persona implements UrlRoutable
         if (!empty($eventArgs->getEntityChangeSet())) {
             $this->updatedAt = new DateTime();
         }
+    }
+
+    /**
+     * @param bool $all
+     * @return ArrayCollection|Slug[]
+     */
+    public function getSlugs(bool $all = false)
+    {
+        $criteria = Criteria::create();
+        if ($all !== true) {
+            $criteria->where(Criteria::expr()->eq('isActive', true));
+        }
+        return $this->personaSlugs->matching($criteria);
     }
 
     /**

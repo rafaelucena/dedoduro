@@ -7,9 +7,11 @@ use App\Http\Models\Blog;
 use App\Http\Models\BlogCategory;
 use App\Http\Models\Category;
 use App\Http\Models\Party;
+use App\Http\Models\PersonaSlug;
 use App\Http\Models\Politician;
 use App\Http\Models\Persona;
 use App\Http\Models\PoliticianRole;
+use App\Http\Models\Slug;
 use App\Http\Requests\StoreBlogPost;
 use App\Http\Models\User;
 use App\Http\Requests\StorePolitician;
@@ -227,9 +229,15 @@ class PoliticiansController extends Controller
         // Roles List
         $roles = $this->em->getRepository(PoliticianRole::class)->findAll();
 
+        $select2Helper = new \stdClass();
+        $select2Helper->placeholder = 'Create slugs...';
+        $select2Helper->ajaxUrl = route('slugs.ajaxSelect');
+        $select2Helper->allowDynamicOption = true;
+
         $formHelper = new \stdClass();
         $formHelper->title = 'Politicians - New';
         $formHelper->action = route('politicians.store');
+        $formHelper->select2Helper = $select2Helper;
         $formHelper->submit = 'Create';
 
         return view(
@@ -312,9 +320,15 @@ class PoliticiansController extends Controller
         // Roles List
         $roles = $this->em->getRepository(PoliticianRole::class)->findAll();
 
+        $select2Helper = new \stdClass();
+        $select2Helper->placeholder = 'Update slugs...';
+        $select2Helper->ajaxUrl = route('slugs.ajaxSelect');
+        $select2Helper->allowDynamicOption = true;
+
         $formHelper = new \stdClass();
         $formHelper->title = 'Politicians - Edit';
         $formHelper->action = route('politicians.update', $politician->id);
+        $formHelper->select2Helper = $select2Helper;
         $formHelper->submit = 'Update';
 
         return view(
@@ -358,6 +372,9 @@ class PoliticiansController extends Controller
             $imagePath = $persona->image;
         }
 
+        // Store and Update Slugs
+        $this->updateSlugs($persona, $request->slugs);
+
         // Step 1 - Set Persona
         $persona->shortName = $request->short_name;
         $persona->firstName = $request->first_name;
@@ -380,6 +397,52 @@ class PoliticiansController extends Controller
 
         // Back to index with success
         return back()->with('custom_success', 'Blog has been updated successfully');
+    }
+
+    /**
+     * @param Persona $persona
+     * @param array $slugsInput
+     */
+    private function updateSlugs(Persona $persona, array $slugsInput)
+    {
+        $currentPersonaSlugs = $persona->getSlugs();
+        $toDisablePersonaSlugs = [];
+        foreach ($currentPersonaSlugs as $currentSlug) {
+            $toDisablePersonaSlugs[$currentSlug->category->id] = $currentSlug;
+        }
+
+        foreach ($slugsInput as $slugInput) {
+            unset($toDisablePersonaSlugs[$slugInput]);
+
+            $slug = $this->em->getRepository(Slug::class)->find($slugInput);
+            if (!$slug) {
+                $slug = new Slug();
+                $slug->name = $slugInput;
+                $slug->createdBy = auth()->user();
+                $this->em->persist($slug);
+            }
+
+            $personaSlug = $this->em->getRepository(PersonaSlug::class)->findOneBy([
+//                'persona' => $persona,
+                'slug' => $slug,
+                'isActive' => (int) true,
+            ]);
+            if (!$personaSlug) {
+                $personaSlug = new PersonaSlug();
+                $personaSlug->slug = $slug;
+                $personaSlug->persona = $persona;
+            }
+            $personaSlug->isActive = (int) true;
+            $personaSlug->deletedAt = null;
+            $this->em->persist($personaSlug);
+        }
+
+        foreach ($toDisablePersonaSlugs as $toDisablePersonaSlug) {
+            $toDisablePersonaSlug->isActive = (int) false;
+            $toDisablePersonaSlug->deletedAt = new \DateTime();
+
+            $this->em->persist($toDisablePersonaSlug);
+        }
     }
 
     /**

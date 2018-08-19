@@ -4,7 +4,7 @@
     <div class="card-body">
         <form method="post" action="{{ $formHelper->action }}" enctype="multipart/form-data" novalidate>
             @csrf
-{{--            {{ method_field('PUT') }}--}}
+            {{ method_field('PUT') }}
             <div class="row">
                 <div class="col-md-8">
                     <div class="form-group">
@@ -35,11 +35,23 @@
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="party_id">Party <span class="required">*</span></label>
-                        <select class="form-control" id="party_id" name="party_id" required>
-                            @foreach($parties as $party)
-                                <option value="{{ $party->id }}" @if(old('party_id', $politician->party ? $politician->party->id : '') == $party->id) selected @endif>{{ $party->shortName }}</option>
-                            @endforeach
+                        <label for="slugs">Slugs <span class="required">*</span></label>
+                        <select class="form-control select2-input" id="slugs" name="slugs[]" required multiple>
+                            @if (is_array(old('slugs')))
+                                @foreach (old('slugs') as $oldSlug)
+                                    <option value="{{ $oldSlug }}" selected="selected">
+                                        @if(is_numeric($oldSlug))
+                                            {{ app('em')->getRepository(App\Http\Models\Slug::class)->find($oldSlug)->name }}
+                                        @else
+                                            {{ $oldSlug }}
+                                        @endif
+                                    </option>
+                                @endforeach
+                            @else
+                                @foreach($persona->getSlugs() as $personaSlug)
+                                    <option value="{{ $personaSlug->slug->id }}" selected>{{ $personaSlug->slug->name }}</option>
+                                @endforeach
+                            @endif
                         </select>
                     </div>
                 </div>
@@ -52,6 +64,14 @@
                     </div>
                 </div>
                 <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="party_id">Party <span class="required">*</span></label>
+                        <select class="form-control" id="party_id" name="party_id" required>
+                            @foreach($parties as $party)
+                                <option value="{{ $party->id }}" @if(old('party_id', $politician->party ? $politician->party->id : '') == $party->id) selected @endif>{{ $party->shortName }}</option>
+                            @endforeach
+                        </select>
+                    </div>
                     <div class="form-group">
                         <label for="role_id">Role <span class="required">*</span></label>
                         <select class="form-control" id="role_id" name="role_id" required>

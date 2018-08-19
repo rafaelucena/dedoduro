@@ -25,7 +25,7 @@ class Slug
 
     /**
      * @var string
-     * @ORM\Column(type="string", length=127, nullable=false)
+     * @ORM\Column(type="string", length=127, nullable=false, unique=true)
      */
     public $name;
 
@@ -84,6 +84,7 @@ class Slug
     {
         $this->createdAt = new DateTime();
         $this->createdBy = auth()->user();
+        $this->isActive = (int) true;
         $this->isDeleted = (int) false;
     }
 

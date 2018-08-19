@@ -97,6 +97,9 @@ Route::prefix('admin')->group(function () {
     Route::get('settings', 'Admin\SettingsController@index')->name('settings.index');
     Route::put('settings/update', 'Admin\SettingsController@update')->name('settings.update');
 
+    // Slugs
+    Route::get('slugs/ajax-select', 'Admin\SlugsController@slugsAjaxSelect')->name('slugs.ajaxSelect');
+
     // Subscribers
     Route::get('subscribers/active/{id}', 'Admin\SubscribersController@updateActiveStatus')->name('subscribers.activeStatus');
     Route::get('subscribersData', 'Admin\SubscribersController@subscribersData')->name('subscribers.ajaxData');

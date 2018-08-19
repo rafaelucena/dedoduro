@@ -48,26 +48,7 @@ var editor_config = {
 tinymce.init(editor_config);
 
 $(document).ready(function() {
-    $('#categories').select2({
-        theme: "bootstrap",
-        tags: true,
-        placeholder: "Choose Categories...",
-        minimumInputLength: 2,
-        delay : 200,
-        tokenSeparators: [',','.'],
-        ajax: {
-            url: '{{ route("categories.ajaxSelectData") }}',
-            dataType: 'json',
-            cache: true,
-            data: function(params) {
-                return {
-                    term: params.term || '',
-                    page: params.page || 1
-                };
-            },
-        }
-    });
-    $('#categories').trigger('change');
+    @include('includes/partials/select2-input')
 });
 
 // Count Char Helper
