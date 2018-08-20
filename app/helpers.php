@@ -1,8 +1,14 @@
 <?php
 use Illuminate\Support\Facades\Storage;
-if (! function_exists('eita')) {
-    function eita($key, $default = null) {
+use Illuminate\Support\Str;
+
+if (! function_exists('strslug')) {
+    /**
+     * @param string $string
+     * @return string
+     */
+    function strslug(string $string) {
         // ...
-        return Storage();
+        return Str::slug($string);
     }
 }

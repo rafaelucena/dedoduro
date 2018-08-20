@@ -417,7 +417,7 @@ class PoliticiansController extends Controller
             $slug = $this->em->getRepository(Slug::class)->find($slugInput);
             if (!$slug) {
                 $slug = new Slug();
-                $slug->name = $slugInput;
+                $slug->name = strslug($slugInput);
                 $slug->createdBy = auth()->user();
                 $this->em->persist($slug);
             }
