@@ -408,7 +408,7 @@ class PoliticiansController extends Controller
         $currentPersonaSlugs = $persona->getSlugs();
         $toDisablePersonaSlugs = [];
         foreach ($currentPersonaSlugs as $currentSlug) {
-            $toDisablePersonaSlugs[$currentSlug->category->id] = $currentSlug;
+            $toDisablePersonaSlugs[$currentSlug->slug->id] = $currentSlug;
         }
 
         foreach ($slugsInput as $slugInput) {
@@ -417,7 +417,8 @@ class PoliticiansController extends Controller
             $slug = $this->em->getRepository(Slug::class)->find($slugInput);
             if (!$slug) {
                 $slug = new Slug();
-                $slug->name = strslug($slugInput);
+                $slug->name = $slugInput;
+                $slug->slug = strslug($slugInput);
                 $slug->createdBy = auth()->user();
                 $this->em->persist($slug);
             }
