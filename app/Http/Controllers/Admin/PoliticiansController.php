@@ -169,49 +169,49 @@ class PoliticiansController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    protected function blogsAjaxTrashedData()
-    {
-        $blogs = $this->em->createQueryBuilder()
-            ->select([
-                'b.id',
-                'b.title',
-                'b.deletedAt',
-                'u.id as userId',
-                'u.name',
-            ])
-            ->from(Blog::class, 'b')
-            ->innerJoin(User::class, 'u', 'WITH', 'b.user = u')
-            ->where('b.isDeleted = :isDeleted')
-            ->setParameter('isDeleted', (int) true)
-            ->getQuery()
-            ->getResult();
-//        $blogs = Blog::join('users', 'blogs.user_id', '=', 'users.id')
-//                        ->select(['blogs.id', 'blogs.title', 'blogs.user_id', 'users.name', 'blogs.deleted_at'])
-//                        ->onlyTrashed();
-
-        return Datatables::of($blogs)
-                ->editColumn('trashed_at', function ($model) {
-                    return $model['deletedAt']->format('F d, Y h:i A');
-                })
-                ->editColumn('users.name', function ($model) {
-                    return '<a href="'.route('users.show', $model['userId']).'" class="link">'.$model['name'].' <i class="fas fa-external-link-alt"></i></a>';
-                })
-                ->addColumn('bulkAction', '<input type="checkbox" name="selected_ids[]" id="bulk_ids" value="{{ $id }}">')
-                ->addColumn('actions', function ($model) {
-                    return '
-                     <div class="dropdown float-right">
-                        <button class="btn btn-sm btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fas fa-cog"></i> Action
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="'.route('blogs.restore', $model['id']).'" onclick="return confirm(\'Are you sure?\')"><i class="fas fa-history"></i> Restore</a>
-                            <a class="dropdown-item text-danger" href="'.route('blogs.permanentDelet', $model['id']).'" onclick="return confirm(\'Are you sure?\')"><i class="fas fa-trash"></i> Permanent Delet</a>
-                        </div>
-                    </div>';
-                })
-                ->rawColumns(['actions','users.name','bulkAction'])
-                ->make(true);
-    }
+//    protected function blogsAjaxTrashedData()
+//    {
+//        $blogs = $this->em->createQueryBuilder()
+//            ->select([
+//                'b.id',
+//                'b.title',
+//                'b.deletedAt',
+//                'u.id as userId',
+//                'u.name',
+//            ])
+//            ->from(Blog::class, 'b')
+//            ->innerJoin(User::class, 'u', 'WITH', 'b.user = u')
+//            ->where('b.isDeleted = :isDeleted')
+//            ->setParameter('isDeleted', (int) true)
+//            ->getQuery()
+//            ->getResult();
+////        $blogs = Blog::join('users', 'blogs.user_id', '=', 'users.id')
+////                        ->select(['blogs.id', 'blogs.title', 'blogs.user_id', 'users.name', 'blogs.deleted_at'])
+////                        ->onlyTrashed();
+//
+//        return Datatables::of($blogs)
+//                ->editColumn('trashed_at', function ($model) {
+//                    return $model['deletedAt']->format('F d, Y h:i A');
+//                })
+//                ->editColumn('users.name', function ($model) {
+//                    return '<a href="'.route('users.show', $model['userId']).'" class="link">'.$model['name'].' <i class="fas fa-external-link-alt"></i></a>';
+//                })
+//                ->addColumn('bulkAction', '<input type="checkbox" name="selected_ids[]" id="bulk_ids" value="{{ $id }}">')
+//                ->addColumn('actions', function ($model) {
+//                    return '
+//                     <div class="dropdown float-right">
+//                        <button class="btn btn-sm btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+//                        <i class="fas fa-cog"></i> Action
+//                        </button>
+//                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+//                            <a class="dropdown-item" href="'.route('blogs.restore', $model['id']).'" onclick="return confirm(\'Are you sure?\')"><i class="fas fa-history"></i> Restore</a>
+//                            <a class="dropdown-item text-danger" href="'.route('blogs.permanentDelet', $model['id']).'" onclick="return confirm(\'Are you sure?\')"><i class="fas fa-trash"></i> Permanent Delet</a>
+//                        </div>
+//                    </div>';
+//                })
+//                ->rawColumns(['actions','users.name','bulkAction'])
+//                ->make(true);
+//    }
 
     /**
      * Show the form for creating a new resource.
@@ -264,7 +264,7 @@ class PoliticiansController extends Controller
     {
         // Pre Validations are done in StoreBlogPost Request
         // Store File & Get Path
-        $imagePath = Storage::putFile('images', $request->file('image'));
+        $imagePath = storage_put('images', $request->file('image'));
 
         // Step 1 - Set Persona
         $persona = new Persona();
@@ -364,12 +364,11 @@ class PoliticiansController extends Controller
 //        $blog = Blog::findOrFail($id);
 
         // Store File & Get Path
+        $imagePath = $persona->image;
         if ($request->hasFile('image')) {
-            $imagePath = Storage::putFile('images', $request->file('image'));
+            $imagePath = storage_put('images', $request->file('image'));
             // Delet Old Image
-            Storage::delete($persona->image);
-        } else {
-            $imagePath = $persona->image;
+            storage_del($persona->image);
         }
 
         // Store and Update Slugs
@@ -406,13 +405,13 @@ class PoliticiansController extends Controller
     private function updateSlugs(Persona $persona, array $slugsInput)
     {
         $currentPersonaSlugs = $persona->getSlugs();
-        $toDisablePersonaSlugs = [];
+        $unusedPersonaSlugs = [];
         foreach ($currentPersonaSlugs as $currentSlug) {
-            $toDisablePersonaSlugs[$currentSlug->slug->id] = $currentSlug;
+            $unusedPersonaSlugs[$currentSlug->slug->id] = $currentSlug;
         }
 
         foreach ($slugsInput as $slugInput) {
-            unset($toDisablePersonaSlugs[$slugInput]);
+            unset($unusedPersonaSlugs[$slugInput]);
 
             $slug = $this->em->getRepository(Slug::class)->find($slugInput);
             if (!$slug) {
@@ -438,11 +437,11 @@ class PoliticiansController extends Controller
             $this->em->persist($personaSlug);
         }
 
-        foreach ($toDisablePersonaSlugs as $toDisablePersonaSlug) {
-            $toDisablePersonaSlug->isActive = (int) false;
-            $toDisablePersonaSlug->deletedAt = new \DateTime();
+        foreach ($unusedPersonaSlugs as $unusedPersonaSlug) {
+            $unusedPersonaSlug->isActive = (int) false;
+            $unusedPersonaSlug->deletedAt = new \DateTime();
 
-            $this->em->persist($toDisablePersonaSlug);
+            $this->em->persist($unusedPersonaSlug);
         }
     }
 
@@ -458,9 +457,8 @@ class PoliticiansController extends Controller
         $blog = $this->em->getRepository(Blog::class)->find($id);
 //        $blog = Blog::findOrFail($id);
 
-        if ($blog->isActive) {
-            $blog->isActive = (int) false;
-        } else {
+        $blog->isActive = (int) false;
+        if (!$blog->isActive) {
             $blog->isActive = (int) true;
         }
         $this->em->persist($blog);
@@ -513,15 +511,15 @@ class PoliticiansController extends Controller
     protected function bulkTrash(Request $request)
     {
         $arrId = explode(",", $request->ids);
-        $status = Blog::destroy($arrId);
+        $status = 1/*Blog::destroy($arrId)*/;
 
-        if ($status) {
-            // If success
-            return back()->with('custom_success', 'Bulk Trash action completed.');
-        } else {
+        if (!$status) {
             // If no success
             return back()->with('custom_errors', 'Bulk Trash action failed. Something went wrong.');
         }
+
+        // If success
+        return back()->with('custom_success', 'Bulk Trash action completed.');
     }
 
     /**
@@ -566,13 +564,12 @@ class PoliticiansController extends Controller
         $arrId = explode(",", $request->ids);
         $status = Blog::onlyTrashed()->restore($arrId);
 
-        if ($status) {
-            // If success
-            return back()->with('custom_success', 'Bulk Restore action completed.');
-        } else {
+        if (!$status) {
             // If no success
             return back()->with('custom_errors', 'Bulk Restore action failed. Something went wrong.');
         }
+        // If success
+        return back()->with('custom_success', 'Bulk Restore action completed.');
     }
 
     /**
@@ -590,18 +587,17 @@ class PoliticiansController extends Controller
         $blog->categories()->detach();
         $blog->comments()->delete();
         // Delete Image
-        Storage::delete($blog->image);
+        storage_del($blog->image);
 
         // Permanent Delet the blog
         $status = $blog->forceDelete();
 
-        if ($status) {
-            // If success
-            return back()->with('custom_success', 'Blog has been deleted permanently.');
-        } else {
+        if (!$status) {
             // If no success
             return back()->with('custom_errors', 'Blog was not able to deleted permanently. Something went wrong.');
         }
+        // If success
+        return back()->with('custom_success', 'Blog has been deleted permanently.');
     }
 
     /**
@@ -613,15 +609,14 @@ class PoliticiansController extends Controller
     protected function emptyTrash()
     {
         // get all trashed blogs and permanent Delet the blogs
-        $blogs = Blog::onlyTrashed()->get();
+        $blogs = []/*Blog::onlyTrashed()->get()*/;
 
         foreach ($blogs as $blog) {
             // Delete Related Items First
             $blog->categories()->detach();
             $blog->comments()->delete();
             // Delete Image
-            Storage::delete($blog->image);
-            Auth::user();
+            storage_del($blog->image);
             // Delete Blog
             $blog->forceDelete();
         }
