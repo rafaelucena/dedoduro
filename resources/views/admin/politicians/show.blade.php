@@ -47,6 +47,10 @@
                     {{ $blog->isActive == 1 ? 'Yes' : 'No' }}
                 </div>
                 <div class="form-group">
+                    <label for="test"><b>Test:</b></label>
+                    {{ $persona->image }}
+                </div>
+                <div class="form-group">
                     <label for="allow_comments"><b>Allow Comments:</b></label>
                     {{ $blog->allowComments == 1 ? 'Yes' : 'No' }}
                 </div>

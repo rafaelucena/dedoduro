@@ -298,9 +298,13 @@ class PoliticiansController extends Controller
      */
     protected function show($id)
     {
+        $politician = $this->em->getRepository(Politician::class)->find($id);
+
+        $persona = $politician->persona;
+
         $blog = $this->em->getRepository(Blog::class)->find($id);
 //        $blog = Blog::findOrFail($id);
-        return view('admin/blogs/show', ['blog' => $blog]);
+        return view('admin/politicians/show', ['politician' => $politician, 'persona' => $persona, 'blog' => $blog]);
     }
 
     /**
