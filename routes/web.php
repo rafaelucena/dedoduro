@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 // Guest Area
 Route::get('/', 'Guest\HomeController@index');
+Route::get('test', 'Guest\TestController@index')->name('test');
 Route::get('post', function () {
     return redirect('/');
 });

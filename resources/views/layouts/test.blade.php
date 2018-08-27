@@ -107,12 +107,7 @@
                     </div>
                 </div>
                 <div class="row justify-content-center">
-                    <div class="col-md-8">
-                        @yield('content')
-                    </div>
-                    <div class="col-md-4">
-                        @include('includes.sidebar')
-                    </div>
+                    @yield('content')
                 </div>
             </div>
         </main>

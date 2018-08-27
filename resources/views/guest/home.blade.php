@@ -6,7 +6,7 @@
 
     <div class="card-body">
 
-        @include('guest.partials.blogs-loop-box')
+        @include('guest/partials/blogs-loop-box')
 
         <div class="row">
             <div class="col-md-12">
