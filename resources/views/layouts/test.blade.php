@@ -1,126 +1,316 @@
 <!DOCTYPE html>
-<html lang="{{ app()->getLocale() }}">
+<html lang="en" class="crt crt-side-box-on crt-nav-on crt-nav-type2 crt-main-nav-on crt-sidebar-on crt-layers-1">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>Certy</title>
+    <meta name="description" content="">
 
-    <!-- Update your html tag to include the itemscope and itemtype attributes. -->
-    <html itemscope itemtype="http://schema.org/Article">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="shortcut icon" href="favicon_certy.ico">
 
-    <!-- SEO Title -->
-    <title>@yield('pageTitle', app('global_settings')[0]->settingValue . ' - ' . app('global_settings')[1]->settingValue)</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Quicksand:400,700" rel="stylesheet">
 
-    <!-- SEO Meta Descrition -->
-    <meta name="description" content="@yield('pageDescription', app('global_settings')[1]->settingValue)">
-    
-    <!-- Social Meta Tags -->
-
-    <!-- Schema.org markup for Google+ -->
-    <meta itemprop="name" content="@yield('pageTitle', app('global_settings')[0]->settingValue.' - '.app('global_settings')[1]->settingValue)">
-    <meta itemprop="description" content="@yield('pageDescription', app('global_settings')[1]->settingValue)">
-    <meta itemprop="image" content="http://www.example.com/image.jpg">
-
-    <!-- Twitter Card data -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="@yield('pageTitle', app('global_settings')[0]->settingValue.' - '.app('global_settings')[1]->settingValue)">
-    <meta name="twitter:description" content="@yield('pageDescription', app('global_settings')[1]->settingValue)">
-    <!-- Twitter summary card with large image must be at least 280x150px -->
-    <meta name="twitter:image:src" content="http://www.example.com/image.jpg">
-
-    <!-- Open Graph data -->
-    <meta property="og:title" content="@yield('pageTitle', app('global_settings')[0]->settingValue.' - '.app('global_settings')[1]->settingValue)" />
-    <meta property="og:type" content="article" />
-    <meta property="og:url" content="{{ url()->full() }}" />
-    <meta property="og:image" content="@yield('pageImage', 'http://placehold.it/700x700')" />
-    <meta property="og:description" content="@yield('pageDescription', app('global_settings')[1]->settingValue)" />
-    <meta property="og:site_name" content="{{ app('global_settings')[0]->settingValue }}" />
+    <!-- Icon Fonts -->
+    <link href="assets/fonts/icomoon/style.css" rel="stylesheet">
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="assets/css/plugins.min.css" rel="stylesheet">
+    <link href="assets/css/style.min.css" rel="stylesheet">
 
-    <!-- FontAwesome -->
-    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+    <!-- Modernizer -->
+    <script type="text/javascript" src="assets/js/vendor/modernizr-3.3.1.min.js"></script>
 
-    @yield('custom_css')
-     <script>
-        var base_url = "{{ url('') }}";
+    <!-- Google Analytics -->
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-92973565-1', 'auto');
+        ga('send', 'pageview');
     </script>
 </head>
-<body>
-    <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ app('global_settings')[0]->settingValue }} - <small>{{ app('global_settings')[1]->settingValue }}</small>
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
+<body class="">
+<div class="crt-wrapper">
+    <header id="crt-header">
+        <div class="crt-head-inner crt-container">
+            <div class="crt-container-sm">
+                <div class="crt-head-row">
+                    <div id="crt-head-col1" class="crt-head-col text-left">
+                        <a id="crt-logo" class="crt-logo" href="index.php">
+                            <img src="assets/images/uploads/brand/logo.svg" alt="certy resume"><span>.Certy</span>
+                        </a>
+                    </div>
 
-                    </ul>
+                    <div id="crt-head-col2" class="crt-head-col text-right">
+                        <div class="crt-nav-container crt-container hidden-sm hidden-xs">
+                            <nav id="crt-main-nav">
 
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            <li><a class="nav-link" href="{{ route('login') }}">Login</a></li>
-                            <li><a class="nav-link" href="{{ route('register') }}">Register</a></li>
-                            <li><a class="nav-link" href="{{ route('test') }}">Test</a></li>
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('dashboard') }}">Dashboard</a>
-                                    <a class="dropdown-item" href="{{ route('blogs.index') }}">Manage blogs</a>
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        Logout
-                                    </a>
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
-            </div>
-        </nav>
+                                <ul class="clear-list">
+                                    <li><a href="index.php">home</a></li>
+                                    <li><a href="portfolio.php">portfolio</a>
+                                    <li class="has-sub-menu"><a href="#">pages</a>
+                                        <ul class="sub-menu">
+                                            <li><a href="typography.php">typography</a></li>
+                                            <li><a href="components.php">components</a></li>
+                                            <li><a href="search.php">search</a></li>
+                                            <li><a href="404.php">404</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="has-sub-menu"><a href="category.php">blog</a>
+                                        <ul class="sub-menu">
+                                            <li><a href="single.php">single</a></li>
+                                            <li><a href="single-image.php">single image</a></li>
+                                            <li><a href="single-slider.php">single slider</a></li>
+                                            <li><a href="single-youtube.php">single youtube</a></li>
+                                            <li><a href="single-vimeo.php">single vimeo</a></li>
+                                            <li><a href="single-dailymotion.php">single dailymotion</a></li>
+                                            <li><a href="single-soundcloud.php">single soundcloud</a></li>
+                                            <li><a href="single-video.php">single video</a></li>
+                                            <li><a href="single-audio.php">single audio</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="contact.php">contact</a></li>
+                                </ul>                                 </nav>
+                        </div>
+                    </div>
 
-        <main class="py-4">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        @include('includes.errors')
-                        @include('includes.success')
+                    <div id="crt-head-col3" class="crt-head-col text-right">
+                        <button id="crt-sidebar-btn" class="btn btn-icon btn-shade">
+                            <span class="crt-icon crt-icon-side-bar-icon"></span>
+                        </button>
                     </div>
                 </div>
-                <div class="row justify-content-center">
-                    @yield('content')
+            </div><!-- .crt-head-inner -->
+        </div>
+
+        <nav id="crt-nav-sm" class="crt-nav hidden-lg hidden-md">
+            <ul class="clear-list">
+                <li>
+                    <a href="index.php#about" data-tooltip="Home"><img class="avatar avatar-42" src="assets/images/uploads/avatar/avatar-42x42.png" srcset="assets/images/uploads/avatar/avatar-84x84-2x.png 2x" alt=""></a>
+                </li>
+                <li>
+                    <a href="index.php#experience" data-tooltip="Experience"><span class="crt-icon crt-icon-experience"></span></a>
+                </li>
+                <li>
+                    <a href="index.php#portfolio" data-tooltip="Portfolio"><span class="crt-icon crt-icon-portfolio"></span></a>
+                </li>
+                <li>
+                    <a href="index.php#references" data-tooltip="References"><span class="crt-icon crt-icon-references"></span></a>
+                </li>
+                <li>
+                    <a href="index.php#contact" data-tooltip="Contact"><span class="crt-icon crt-icon-contact"></span></a>
+                </li>
+                <li>
+                    <a href="category.php" data-tooltip="Blog"><span class="crt-icon crt-icon-blog"></span></a>
+                </li>
+            </ul>
+        </nav><!-- #crt-nav-sm -->
+    </header><!-- #crt-header -->
+
+    <div id="crt-container" class="crt-container">
+        @yield('content')
+    </div>
+    <!-- .crt-container -->
+
+    <div id="crt-sidebar">
+        <button id="crt-sidebar-close" class="btn btn-icon btn-light btn-shade">
+            <span class="crt-icon crt-icon-close"></span>
+        </button>
+
+        <div id="crt-sidebar-inner">
+            <nav id="crt-main-nav-sm" class="visible-xs text-center">
+
+                <ul class="clear-list">
+                    <li><a href="index.php">home</a></li>
+                    <li><a href="portfolio.php">portfolio</a>
+                    <li class="has-sub-menu"><a href="#">pages</a>
+                        <ul class="sub-menu">
+                            <li><a href="typography.php">typography</a></li>
+                            <li><a href="components.php">components</a></li>
+                            <li><a href="search.php">search</a></li>
+                            <li><a href="404.php">404</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-sub-menu"><a href="category.php">blog</a>
+                        <ul class="sub-menu">
+                            <li><a href="single.php">single</a></li>
+                            <li><a href="single-image.php">single image</a></li>
+                            <li><a href="single-slider.php">single slider</a></li>
+                            <li><a href="single-youtube.php">single youtube</a></li>
+                            <li><a href="single-vimeo.php">single vimeo</a></li>
+                            <li><a href="single-dailymotion.php">single dailymotion</a></li>
+                            <li><a href="single-soundcloud.php">single soundcloud</a></li>
+                            <li><a href="single-video.php">single video</a></li>
+                            <li><a href="single-audio.php">single audio</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="contact.php">contact</a></li>
+                </ul>        </nav>
+
+
+            <div class="crt-card bg-primary text-center">
+                <div class="crt-card-avatar">
+                    <img class="avatar avatar-195" src="assets/images/uploads/avatar/avatar-195x195.png"
+                         srcset="assets/images/uploads/avatar/avatar-390x390-2x.png 2x" width="195" height="195" alt="">
+                </div>
+                <div class="crt-card-info">
+                    <h2 class="text-upper">Ola Lowe</h2>
+
+                    <p class="text-muted">Florist | Decorator</p>
+                    <ul class="crt-social clear-list">
+                        <li><a><span class="crt-icon crt-icon-facebook"></span></a></li>
+                        <li><a><span class="crt-icon crt-icon-twitter"></span></a></li>
+                        <li><a><span class="crt-icon crt-icon-google-plus"></span></a></li>
+                        <li><a><span class="crt-icon crt-icon-instagram"></span></a></li>
+                        <li><a><span class="crt-icon crt-icon-pinterest"></span></a></li>
+                    </ul>
                 </div>
             </div>
-        </main>
+            <aside class="widget-area">
+                <section class="widget widget_search">
+                    <form role="search" method="get" class="search-form" action="#">
+                        <label>
+                            <span class="screen-reader-text">Search for:</span>
+                            <input type="search" class="search-field" placeholder="Search" value="" name="s">
+                        </label>
+                        <button type="submit" class="search-submit">
+                            <span class="screen-reader-text">Search</span>
+                            <span class="crt-icon crt-icon-search"></span>
+                        </button>
+                    </form>
+                </section>
 
-        <footer>
-            @include('includes.footer')
-        </footer>
-    </div>
+                <section class="widget widget_posts_entries">
+                    <h2 class="widget-title">popular posts</h2>
+                    <ul>
+                        <li>
+                            <a class="post-image" href="">
+                                <img src="assets/images/uploads/blog/img-70x70-01.png" alt="">
+                            </a>
+                            <div class="post-content">
+                                <h3>
+                                    <a href="">contextual advertising</a>
+                                </h3>
+                            </div>
+                            <div class="post-category-comment">
+                                <a href="" class="post-category">Work</a>
+                                <a href="" class="post-comments">256 comments</a>
+                            </div>
+                        </li>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
+                        <li>
+                            <a class="post-image" href="">
+                                <img src="assets/images/uploads/blog/img-70x70-02.jpg" alt="">
+                            </a>
+                            <div class="post-content">
+                                <h3>
+                                    <a href="">grilling tips for the dog days of summer</a>
+                                </h3>
+                            </div>
+                            <div class="post-category-comment">
+                                <a href="" class="post-category">Work</a>
+                                <a href="" class="post-comments">256 comments</a>
+                            </div>
+                        </li>
 
-    @yield('custom_js')
+                        <li>
+                            <a class="post-image" href="">
+                                <img src="assets/images/uploads/blog/img-70x70-03.png" alt="">
+                            </a>
+                            <div class="post-content">
+                                <h3><a href=""></a>branding do you know who are</h3>
+                            </div>
+                            <div class="post-category-comment">
+                                <a href="" class="post-category">Work</a>
+                                <a href="" class="post-comments">256 comments</a>
+                            </div>
+                        </li>
+                    </ul>
+                </section>
 
+                <section id="tag_cloud-2" class="widget widget_tag_cloud">
+                    <h2 class="widget-title">Tags</h2>
+                    <div class="tagcloud">
+                        <a href="" class="tag-link-5 tag-link-position-1" title="1 topic" style="font-size: 1em;">Audios</a>
+                        <a href="" class="tag-link-7 tag-link-position-2" title="1 topic" style="font-size: 1em;">Freelance</a></div>
+                </section>
+
+                <section id="recent-posts-3" class="widget widget_recent_entries">
+                    <h4 class="widget-title">Recent Posts</h4>
+                    <ul>
+                        <li>
+                            <a href="">Global Travel And Vacations  Luxury Travel On A Tight  Budget</a>
+                            <div class="post-category-comment">
+                                <a href="" class="post-category">Photography</a>
+                                <a href="" class="post-comments">256 comments</a>
+                            </div>
+                        </li>
+                        <li>
+                            <a href="">cooking for one</a>
+                            <div class="post-category-comment">
+                                <a href="" class="post-category">Work</a>
+                                <a href="" class="post-comments">256 comments</a>
+                            </div>
+                        </li>
+                        <li>
+                            <a href="">An Ugly Myspace Profile Will  Sure Ruin Your Reputation</a>
+                            <div class="post-category-comment">
+                                <a href="" class="post-category">Photography</a>
+                                <a href="" class="post-comments">256 comments</a>
+                            </div>
+                        </li>
+                    </ul>
+                </section>
+
+                <section class="widget widget_categories">
+                    <h4 class="widget-title">post categories</h4>
+                    <ul>
+                        <li class="cat-item"><a href="">Audios</a>5</li>
+                        <li class="cat-item"><a href="">Daili Inspiration</a>2</li>
+                        <li class="cat-item"><a href="">Freelance</a>27</li>
+                        <li class="cat-item"><a href="">Links</a>5</li>
+                        <li class="cat-item"><a href="">Mobile</a>2</li>
+                        <li class="cat-item"><a href="">Phography</a>27</li>
+                    </ul>
+                </section>
+            </aside>
+
+        </div><!-- #crt-sidebar-inner -->
+    </div><!-- #crt-sidebar -->
+    <footer id="crt-footer" class="crt-container-lg">
+        <div class="crt-container">
+            <div class="crt-container-sm clear-mrg text-center">
+                <p>Ola Resume @ All Rights Reserved 2016</p>
+            </div>
+        </div>
+        <!-- .crt-container -->
+    </footer>
+    <!-- #crt-footer -->
+
+    <svg id="crt-bg-shape-1" class="hidden-sm hidden-xs" height="519" width="758">
+        <polygon class="pol" points="0,455,693,352,173,0,92,0,0,71"/>
+    </svg>
+
+    <svg id="crt-bg-shape-2" class="hidden-sm hidden-xs" height="536" width="633">
+        <polygon points="0,0,633,0,633,536"/>
+    </svg>
+</div>
+<!-- .crt-wrapper -->
+
+<!-- Scripts -->
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="assets/js/vendor/jquery-1.12.4.min.js"><\/script>')</script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDiwY_5J2Bkv2UgSeJa4NOKl6WUezSS9XA"></script>
+
+<script type="text/javascript" src="assets/js/plugins.min.js"></script>
+<script type="text/javascript" src="assets/js/theme.min.js"></script>
 </body>
 </html>
