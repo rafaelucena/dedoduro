@@ -9,7 +9,7 @@
     <meta name="description" content="">
 
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
-    <link rel="shortcut icon" href="favicon_certy.ico">
+    <link rel="shortcut icon" href="favicon.ico">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
@@ -19,8 +19,8 @@
     <link href="assets/fonts/icomoon/style.css" rel="stylesheet">
 
     <!-- Styles -->
-    <link href="assets/css/plugins.min.css" rel="stylesheet">
-    <link href="assets/css/style.min.css" rel="stylesheet">
+    <link href="assets/css/front.plugins.css" rel="stylesheet">
+    <link href="assets/css/front.style.css" rel="stylesheet">
 
     <!-- Modernizer -->
     <script type="text/javascript" src="assets/js/vendor/modernizr-3.3.1.min.js"></script>
