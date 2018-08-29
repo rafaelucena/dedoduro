@@ -8,13 +8,14 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\Mapping AS ORM;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
+use LaravelDoctrine\ORM\Contracts\UrlRoutable;
 
 /**
  * @ORM\Entity()
  * @ORM\Table(name="slug")
  * @ORM\HasLifecycleCallbacks()
  */
-class Slug
+class Slug implements UrlRoutable
 {
     /**
      * @ORM\Id()
@@ -103,5 +104,14 @@ class Slug
         if (!empty($eventArgs->getEntityChangeSet())) {
             $this->updatedAt = new DateTime();
         }
+    }
+
+    /**
+     *
+     * @return string
+     */
+    public static function getRouteKeyName(): string
+    {
+        return 'slug';
     }
 }
