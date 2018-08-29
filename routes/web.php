@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 // Guest Area
 Route::get('/', 'Guest\HomeController@index');
-Route::get('politician/{slug}', 'Guest\PoliticiansController@show');
+Route::get('politico/{slug}', 'Guest\PoliticiansController@show');
 Route::get('test', 'Guest\PoliticiansController@index')->name('test');
 Route::get('post', function () {
     return redirect('/');

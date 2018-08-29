@@ -64,7 +64,7 @@ class PersonaSlug
      * @var Persona
      * @ORM\ManyToOne(targetEntity="Persona", inversedBy="personaSlugs")
      */
-    public $persona;
+    protected $persona;
 
     /**
      * @var Slug
@@ -96,5 +96,23 @@ class PersonaSlug
         if (!empty($eventArgs->getEntityChangeSet())) {
             $this->updatedAt = new DateTime();
         }
+    }
+
+    /**
+     * @return Persona
+     */
+    public function getPersona(): Persona
+    {
+        return $this->persona;
+    }
+
+    /**
+     * @param Persona $persona
+     * @return PersonaSlug
+     */
+    public function setPersona(Persona $persona): PersonaSlug
+    {
+        $this->persona = $persona;
+        return $this;
     }
 }

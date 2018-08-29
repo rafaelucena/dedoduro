@@ -12,7 +12,7 @@
                              srcset="{{ asset('assets/images/uploads/avatar/avatar-390x390-2x.png') }} 2x" width="195" height="195" alt="">
                     </div>
                     <div class="crt-card-info">
-                        <h2 class="text-upper">Ola Lowe</h2>
+                        <h2 class="text-upper">{{ $persona->shortName }}</h2>
 
                         <p class="text-muted">Florist | Decorator</p>
                     </div>
@@ -1101,7 +1101,7 @@
                                     </blockquote>
                                 </div>
                             </div><!-- .ref-box -->
-
+'
                             <div class="ref-box brd-btm hreview">
                                 <div class="ref-avatar">
                                     <img alt="" src="{{ asset('assets/images/uploads/avatar/avatar-58x58-default.png') }}" srcset="{{ asset('assets/images/uploads/avatar/avatar-116x116-default-2x.jpg') }} 2x" class="avatar avatar-54 photo" height="54" width="54">

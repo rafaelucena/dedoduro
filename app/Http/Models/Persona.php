@@ -116,9 +116,13 @@ class Persona implements UrlRoutable
      */
     public $personaSlugs;
 
+    /**
+     * Persona constructor.
+     */
     public function __construct()
     {
-        //@TODO
+        $this->personaSlugs = new ArrayCollection();
+        $this->politicians = new ArrayCollection();
     }
 
     /**

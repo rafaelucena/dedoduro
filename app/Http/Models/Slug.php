@@ -79,9 +79,12 @@ class Slug implements UrlRoutable
      */
     public $personasSlug;
 
+    /**
+     * Slug constructor.
+     */
     public function __construct()
     {
-        //@TODO
+        $this->personasSlug = new ArrayCollection();
     }
 
     /**
@@ -113,5 +116,15 @@ class Slug implements UrlRoutable
     public static function getRouteKeyName(): string
     {
         return 'slug';
+    }
+
+    public function getPersona()
+    {
+        $criteria = Criteria::create();
+        $criteria->where(Criteria::expr()->eq('isActive', true));
+
+        return $this->personasSlug->matching($criteria)->first()
+            ? $this->personasSlug->matching($criteria)->first()->getPersona()
+            : false;
     }
 }

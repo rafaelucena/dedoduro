@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Guest;
 
 use App\Http\Controllers\Controller;
 use App\Http\Models\Blog;
+use App\Http\Models\Persona;
 use App\Http\Models\Slug;
 use App\Http\Models\Subscriber;
 use App\Jobs\SendSubscriptionVerificationEmail;
@@ -76,8 +77,15 @@ class PoliticiansController extends Controller
 ////        }
 //    }
 
+    /**
+     * @param Slug $slug
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function show(Slug $slug)
     {
-        die((string)__line__);
+        /* @var Persona $persona */
+        $persona = $slug->getPersona();
+
+        return view('guest/politicians/show', ['persona' => $persona]);
     }
 }
