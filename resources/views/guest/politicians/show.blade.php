@@ -1,4 +1,4 @@
-@extends('layouts/test')
+@extends('layouts/front')
 
 @section('content')
     <div id="crt-side-box-wrap" class="crt-sticky">
@@ -8,8 +8,8 @@
 
                 <div class="crt-card bg-primary text-center">
                     <div class="crt-card-avatar">
-                        <img class="avatar avatar-195" src="assets/images/uploads/avatar/avatar-195x195.png"
-                             srcset="assets/images/uploads/avatar/avatar-390x390-2x.png 2x" width="195" height="195" alt="">
+                        <img class="avatar avatar-195" src="{{ asset('assets/images/uploads/avatar/avatar-195x195.png') }}"
+                             srcset="{{ asset('assets/images/uploads/avatar/avatar-390x390-2x.png') }} 2x" width="195" height="195" alt="">
                     </div>
                     <div class="crt-card-info">
                         <h2 class="text-upper">Ola Lowe</h2>
@@ -31,7 +31,7 @@
                     <nav id="crt-nav" class="crt-nav">
                         <ul class="clear-list">
                             <li>
-                                <a href="index.php#about" data-tooltip="Home"><img class="avatar avatar-42" src="assets/images/uploads/avatar/avatar-42x42.png" srcset="assets/images/uploads/avatar/avatar-84x84-2x.png 2x" alt=""></a>
+                                <a href="index.php#about" data-tooltip="Home"><img class="avatar avatar-42" src="{{ asset('assets/images/uploads/avatar/avatar-42x42.png') }}" srcset="{{ asset('assets/images/uploads/avatar/avatar-84x84-2x.png') }} 2x" alt=""></a>
                             </li>
                             <li>
                                 <a href="index.php#experience" data-tooltip="Experience"><span class="crt-icon crt-icon-experience"></span></a>
@@ -97,7 +97,7 @@
                                 <!-- .crt-share -->
                             </div>
                             <div class="col-sm-3 text-right">
-                                <img src="assets/images/uploads/signature.svg" alt="signature">
+                                <img src="{{ asset('assets/images/uploads/signature.svg') }}" alt="signature">
                             </div>
                         </div>
                         <!-- .row -->
@@ -217,7 +217,7 @@
                                 </time>
                                 <h3>Full Stack Developer</h3>
                                 <div class="education-logo">
-                                    <img src="assets/images/uploads/experience/logo-audio-jungle.png" alt="">
+                                    <img src="{{ asset('assets/images/uploads/experience/logo-audio-jungle.png') }}" alt="">
                                 </div>
                                 <span class="education-company">IBBA Group</span>
                                 <p>Your brand is the core of your marketing,
@@ -233,7 +233,7 @@
                                 </time>
                                 <h3>Systems Analyst / Web Developer</h3>
                                 <div class="education-logo">
-                                    <img src="assets/images/uploads/experience/logo-themeforest.png" alt="">
+                                    <img src="{{ asset('assets/images/uploads/experience/logo-themeforest.png') }}" alt="">
                                 </div>
                                 <span class="education-company">Loft Studio</span>
                                 <p>
@@ -248,7 +248,7 @@
                                 </time>
                                 <h3>Full Stack Developer</h3>
                                 <div class="education-logo">
-                                    <img src="assets/images/uploads/experience/logo-envato.png" alt="">
+                                    <img src="{{ asset('assets/images/uploads/experience/logo-envato.png') }}" alt="">
                                 </div>
                                 <span class="education-company">Stu Unger Rise</span>
                                 <p>Your brand is the core of your marketing, the central theme around your products and services.</p>
@@ -287,7 +287,7 @@
                                 <div class="pf-grid-item photography">
                                     <a class="pf-project" href="#pf-popup-1">
                                         <figure class="pf-figure">
-                                            <img src="assets/images/uploads/portfolio/prj-01.jpg" alt="">
+                                            <img src="{{ asset('assets/images/uploads/portfolio/prj-01.jpg') }}" alt="">
                                         </figure>
 
                                         <div class="pf-caption text-center">
@@ -309,15 +309,15 @@
                                         <div class="pf-popup-col1">
                                             <div class="pf-popup-media cr-slider" data-init="none">
                                                 <div class="pf-popup-embed">
-                                                    <img src="assets/images/uploads/portfolio/prj-01.jpg" alt="">
+                                                    <img src="{{ asset('assets/images/uploads/portfolio/prj-01.jpg') }}" alt="">
                                                 </div>
 
                                                 <div class="pf-popup-embed">
-                                                    <img src="assets/images/uploads/portfolio/prj-01.jpg" alt="">
+                                                    <img src="{{ asset('assets/images/uploads/portfolio/prj-01.jpg') }}" alt="">
                                                 </div>
 
                                                 <div class="pf-popup-embed">
-                                                    <img src="assets/images/uploads/portfolio/prj-01.jpg" alt="">
+                                                    <img src="{{ asset('assets/images/uploads/portfolio/prj-01.jpg') }}" alt="">
                                                 </div>
                                             </div>
                                         </div><!-- .pf-popup-col1 -->
@@ -349,42 +349,42 @@
 
                                                 <div class="pf-rel-list cr-carousel" data-init="none">
                                                     <div class="pf-rel-prj">
-                                                        <img src="assets/images/uploads/portfolio/prj-rel-01.jpg" alt="">
+                                                        <img src="{{ asset('assets/images/uploads/portfolio/prj-rel-01.jpg') }}" alt="">
                                                         <a class="pf-rel-cover" href="">
                                                             <button class="btn btn-primary btn-sm">View</button>
                                                         </a>
                                                     </div>
 
                                                     <div class="pf-rel-prj">
-                                                        <img src="assets/images/uploads/portfolio/prj-rel-01.jpg" alt="">
+                                                        <img src="{{ asset('assets/images/uploads/portfolio/prj-rel-01.jpg') }}" alt="">
                                                         <a class="pf-rel-cover" href="">
                                                             <button class="btn btn-primary btn-sm">View</button>
                                                         </a>
                                                     </div>
 
                                                     <div class="pf-rel-prj">
-                                                        <img src="assets/images/uploads/portfolio/prj-rel-01.jpg" alt="">
+                                                        <img src="{{ asset('assets/images/uploads/portfolio/prj-rel-01.jpg') }}" alt="">
                                                         <a class="pf-rel-cover">
                                                             <button class="btn btn-primary btn-sm">View</button>
                                                         </a>
                                                     </div>
 
                                                     <div class="pf-rel-prj">
-                                                        <img src="assets/images/uploads/portfolio/prj-rel-01.jpg" alt="">
+                                                        <img src="{{ asset('assets/images/uploads/portfolio/prj-rel-01.jpg') }}" alt="">
                                                         <a class="pf-rel-cover" href="">
                                                             <button class="btn btn-primary btn-sm">View</button>
                                                         </a>
                                                     </div>
 
                                                     <div class="pf-rel-prj">
-                                                        <img src="assets/images/uploads/portfolio/prj-rel-01.jpg" alt="">
+                                                        <img src="{{ asset('assets/images/uploads/portfolio/prj-rel-01.jpg') }}" alt="">
                                                         <a class="pf-rel-cover" href="">
                                                             <button class="btn btn-primary btn-sm">View</button>
                                                         </a>
                                                     </div>
 
                                                     <div class="pf-rel-prj">
-                                                        <img src="assets/images/uploads/portfolio/prj-rel-01.jpg" alt="">
+                                                        <img src="{{ asset('assets/images/uploads/portfolio/prj-rel-01.jpg') }}" alt="">
                                                         <a class="pf-rel-cover" href="">
                                                             <button class="btn btn-primary btn-sm">View</button>
                                                         </a>
@@ -398,7 +398,7 @@
                                 <div class="pf-grid-item design">
                                     <a class="pf-project" href="#pf-popup-2">
                                         <figure class="pf-figure">
-                                            <img src="assets/images/uploads/portfolio/prj-02.jpg" alt="">
+                                            <img src="{{ asset('assets/images/uploads/portfolio/prj-02.jpg') }}" alt="">
                                         </figure>
 
                                         <div class="pf-caption text-center">
@@ -420,7 +420,7 @@
                                         <div class="pf-popup-col1">
                                             <div class="pf-popup-media cr-slider" data-init="none">
                                                 <div class="pf-popup-embed">
-                                                    <img src="assets/images/uploads/portfolio/prj-02.jpg" alt="">
+                                                    <img src="{{ asset('assets/images/uploads/portfolio/prj-02.jpg') }}" alt="">
                                                 </div>
                                             </div>
                                         </div><!-- .pf-popup-col1 -->
@@ -452,42 +452,42 @@
 
                                                 <div class="pf-rel-list cr-carousel" data-init="none">
                                                     <div class="pf-rel-prj">
-                                                        <img src="assets/images/uploads/portfolio/prj-rel-01.jpg" alt="">
+                                                        <img src="{{ asset('assets/images/uploads/portfolio/prj-rel-01.jpg') }}" alt="">
                                                         <a class="pf-rel-cover" href="">
                                                             <button class="btn btn-primary btn-sm">View</button>
                                                         </a>
                                                     </div>
 
                                                     <div class="pf-rel-prj">
-                                                        <img src="assets/images/uploads/portfolio/prj-rel-01.jpg" alt="">
+                                                        <img src="{{ asset('assets/images/uploads/portfolio/prj-rel-01.jpg') }}" alt="">
                                                         <a class="pf-rel-cover" href="">
                                                             <button class="btn btn-primary btn-sm">View</button>
                                                         </a>
                                                     </div>
 
                                                     <div class="pf-rel-prj">
-                                                        <img src="assets/images/uploads/portfolio/prj-rel-01.jpg" alt="">
+                                                        <img src="{{ asset('assets/images/uploads/portfolio/prj-rel-01.jpg') }}" alt="">
                                                         <a class="pf-rel-cover">
                                                             <button class="btn btn-primary btn-sm">View</button>
                                                         </a>
                                                     </div>
 
                                                     <div class="pf-rel-prj">
-                                                        <img src="assets/images/uploads/portfolio/prj-rel-01.jpg" alt="">
+                                                        <img src="{{ asset('assets/images/uploads/portfolio/prj-rel-01.jpg') }}" alt="">
                                                         <a class="pf-rel-cover" href="">
                                                             <button class="btn btn-primary btn-sm">View</button>
                                                         </a>
                                                     </div>
 
                                                     <div class="pf-rel-prj">
-                                                        <img src="assets/images/uploads/portfolio/prj-rel-01.jpg" alt="">
+                                                        <img src="{{ asset('assets/images/uploads/portfolio/prj-rel-01.jpg') }}" alt="">
                                                         <a class="pf-rel-cover" href="">
                                                             <button class="btn btn-primary btn-sm">View</button>
                                                         </a>
                                                     </div>
 
                                                     <div class="pf-rel-prj">
-                                                        <img src="assets/images/uploads/portfolio/prj-rel-01.jpg" alt="">
+                                                        <img src="{{ asset('assets/images/uploads/portfolio/prj-rel-01.jpg') }}" alt="">
                                                         <a class="pf-rel-cover" href="">
                                                             <button class="btn btn-primary btn-sm">View</button>
                                                         </a>
@@ -501,7 +501,7 @@
                                 <div class="pf-grid-item photography">
                                     <a class="pf-project" href="#pf-popup-3">
                                         <figure class="pf-figure">
-                                            <img src="assets/images/uploads/portfolio/prj-03.jpg" alt="">
+                                            <img src="{{ asset('assets/images/uploads/portfolio/prj-03.jpg') }}" alt="">
                                         </figure>
 
                                         <div class="pf-caption text-center">
@@ -523,15 +523,15 @@
                                         <div class="pf-popup-col1">
                                             <div class="pf-popup-media cr-slider" data-init="none">
                                                 <div class="pf-popup-embed">
-                                                    <img src="assets/images/uploads/portfolio/prj-03.jpg" alt="">
+                                                    <img src="{{ asset('assets/images/uploads/portfolio/prj-03.jpg') }}" alt="">
                                                 </div>
 
                                                 <div class="pf-popup-embed">
-                                                    <img src="assets/images/uploads/portfolio/prj-03.jpg" alt="">
+                                                    <img src="{{ asset('assets/images/uploads/portfolio/prj-03.jpg') }}" alt="">
                                                 </div>
 
                                                 <div class="pf-popup-embed">
-                                                    <img src="assets/images/uploads/portfolio/prj-03.jpg" alt="">
+                                                    <img src="{{ asset('assets/images/uploads/portfolio/prj-03.jpg') }}" alt="">
                                                 </div>
                                             </div>
                                         </div><!-- .pf-popup-col1 -->
@@ -563,42 +563,42 @@
 
                                                 <div class="pf-rel-list cr-carousel" data-init="none">
                                                     <div class="pf-rel-prj">
-                                                        <img src="assets/images/uploads/portfolio/prj-rel-01.jpg" alt="">
+                                                        <img src="{{ asset('assets/images/uploads/portfolio/prj-rel-01.jpg') }}" alt="">
                                                         <a class="pf-rel-cover" href="">
                                                             <button class="btn btn-primary btn-sm">View</button>
                                                         </a>
                                                     </div>
 
                                                     <div class="pf-rel-prj">
-                                                        <img src="assets/images/uploads/portfolio/prj-rel-01.jpg" alt="">
+                                                        <img src="{{ asset('assets/images/uploads/portfolio/prj-rel-01.jpg') }}" alt="">
                                                         <a class="pf-rel-cover" href="">
                                                             <button class="btn btn-primary btn-sm">View</button>
                                                         </a>
                                                     </div>
 
                                                     <div class="pf-rel-prj">
-                                                        <img src="assets/images/uploads/portfolio/prj-rel-01.jpg" alt="">
+                                                        <img src="{{ asset('assets/images/uploads/portfolio/prj-rel-01.jpg') }}" alt="">
                                                         <a class="pf-rel-cover">
                                                             <button class="btn btn-primary btn-sm">View</button>
                                                         </a>
                                                     </div>
 
                                                     <div class="pf-rel-prj">
-                                                        <img src="assets/images/uploads/portfolio/prj-rel-01.jpg" alt="">
+                                                        <img src="{{ asset('assets/images/uploads/portfolio/prj-rel-01.jpg') }}" alt="">
                                                         <a class="pf-rel-cover" href="">
                                                             <button class="btn btn-primary btn-sm">View</button>
                                                         </a>
                                                     </div>
 
                                                     <div class="pf-rel-prj">
-                                                        <img src="assets/images/uploads/portfolio/prj-rel-01.jpg" alt="">
+                                                        <img src="{{ asset('assets/images/uploads/portfolio/prj-rel-01.jpg') }}" alt="">
                                                         <a class="pf-rel-cover" href="">
                                                             <button class="btn btn-primary btn-sm">View</button>
                                                         </a>
                                                     </div>
 
                                                     <div class="pf-rel-prj">
-                                                        <img src="assets/images/uploads/portfolio/prj-rel-01.jpg" alt="">
+                                                        <img src="{{ asset('assets/images/uploads/portfolio/prj-rel-01.jpg') }}" alt="">
                                                         <a class="pf-rel-cover" href="">
                                                             <button class="btn btn-primary btn-sm">View</button>
                                                         </a>
@@ -612,7 +612,7 @@
                                 <div class="pf-grid-item design">
                                     <a class="pf-project" href="#pf-popup-4">
                                         <figure class="pf-figure">
-                                            <img src="assets/images/uploads/portfolio/prj-04.jpg" alt="">
+                                            <img src="{{ asset('assets/images/uploads/portfolio/prj-04.jpg') }}" alt="">
                                         </figure>
 
                                         <div class="pf-caption text-center">
@@ -634,15 +634,15 @@
                                         <div class="pf-popup-col1">
                                             <div class="pf-popup-media cr-slider" data-init="none">
                                                 <div class="pf-popup-embed">
-                                                    <img src="assets/images/uploads/portfolio/prj-04.jpg" alt="">
+                                                    <img src="{{ asset('assets/images/uploads/portfolio/prj-04.jpg') }}" alt="">
                                                 </div>
 
                                                 <div class="pf-popup-embed">
-                                                    <img src="assets/images/uploads/portfolio/prj-04.jpg" alt="">
+                                                    <img src="{{ asset('assets/images/uploads/portfolio/prj-04.jpg') }}" alt="">
                                                 </div>
 
                                                 <div class="pf-popup-embed">
-                                                    <img src="assets/images/uploads/portfolio/prj-04.jpg" alt="">
+                                                    <img src="{{ asset('assets/images/uploads/portfolio/prj-04.jpg') }}" alt="">
                                                 </div>
                                             </div>
                                         </div><!-- .pf-popup-col1 -->
@@ -674,42 +674,42 @@
 
                                                 <div class="pf-rel-list cr-carousel" data-init="none">
                                                     <div class="pf-rel-prj">
-                                                        <img src="assets/images/uploads/portfolio/prj-rel-01.jpg" alt="">
+                                                        <img src="{{ asset('assets/images/uploads/portfolio/prj-rel-01.jpg') }}" alt="">
                                                         <a class="pf-rel-cover" href="">
                                                             <button class="btn btn-primary btn-sm">View</button>
                                                         </a>
                                                     </div>
 
                                                     <div class="pf-rel-prj">
-                                                        <img src="assets/images/uploads/portfolio/prj-rel-01.jpg" alt="">
+                                                        <img src="{{ asset('assets/images/uploads/portfolio/prj-rel-01.jpg') }}" alt="">
                                                         <a class="pf-rel-cover" href="">
                                                             <button class="btn btn-primary btn-sm">View</button>
                                                         </a>
                                                     </div>
 
                                                     <div class="pf-rel-prj">
-                                                        <img src="assets/images/uploads/portfolio/prj-rel-01.jpg" alt="">
+                                                        <img src="{{ asset('assets/images/uploads/portfolio/prj-rel-01.jpg') }}" alt="">
                                                         <a class="pf-rel-cover">
                                                             <button class="btn btn-primary btn-sm">View</button>
                                                         </a>
                                                     </div>
 
                                                     <div class="pf-rel-prj">
-                                                        <img src="assets/images/uploads/portfolio/prj-rel-01.jpg" alt="">
+                                                        <img src="{{ asset('assets/images/uploads/portfolio/prj-rel-01.jpg') }}" alt="">
                                                         <a class="pf-rel-cover" href="">
                                                             <button class="btn btn-primary btn-sm">View</button>
                                                         </a>
                                                     </div>
 
                                                     <div class="pf-rel-prj">
-                                                        <img src="assets/images/uploads/portfolio/prj-rel-01.jpg" alt="">
+                                                        <img src="{{ asset('assets/images/uploads/portfolio/prj-rel-01.jpg') }}" alt="">
                                                         <a class="pf-rel-cover" href="">
                                                             <button class="btn btn-primary btn-sm">View</button>
                                                         </a>
                                                     </div>
 
                                                     <div class="pf-rel-prj">
-                                                        <img src="assets/images/uploads/portfolio/prj-rel-01.jpg" alt="">
+                                                        <img src="{{ asset('assets/images/uploads/portfolio/prj-rel-01.jpg') }}" alt="">
                                                         <a class="pf-rel-cover" href="">
                                                             <button class="btn btn-primary btn-sm">View</button>
                                                         </a>
@@ -723,7 +723,7 @@
                                 <div class="pf-grid-item photography">
                                     <a class="pf-project" href="#pf-popup-5">
                                         <figure class="pf-figure">
-                                            <img src="assets/images/uploads/portfolio/prj-05.jpg" alt="">
+                                            <img src="{{ asset('assets/images/uploads/portfolio/prj-05.jpg') }}" alt="">
                                         </figure>
 
                                         <div class="pf-caption text-center">
@@ -745,15 +745,15 @@
                                         <div class="pf-popup-col1">
                                             <div class="pf-popup-media cr-slider" data-init="none">
                                                 <div class="pf-popup-embed">
-                                                    <img src="assets/images/uploads/portfolio/prj-05.jpg" alt="">
+                                                    <img src="{{ asset('assets/images/uploads/portfolio/prj-05.jpg') }}" alt="">
                                                 </div>
 
                                                 <div class="pf-popup-embed">
-                                                    <img src="assets/images/uploads/portfolio/prj-05.jpg" alt="">
+                                                    <img src="{{ asset('assets/images/uploads/portfolio/prj-05.jpg') }}" alt="">
                                                 </div>
 
                                                 <div class="pf-popup-embed">
-                                                    <img src="assets/images/uploads/portfolio/prj-05.jpg" alt="">
+                                                    <img src="{{ asset('assets/images/uploads/portfolio/prj-05.jpg') }}" alt="">
                                                 </div>
                                             </div>
                                         </div><!-- .pf-popup-col1 -->
@@ -785,42 +785,42 @@
 
                                                 <div class="pf-rel-list cr-carousel" data-init="none">
                                                     <div class="pf-rel-prj">
-                                                        <img src="assets/images/uploads/portfolio/prj-rel-01.jpg" alt="">
+                                                        <img src="{{ asset('assets/images/uploads/portfolio/prj-rel-01.jpg') }}" alt="">
                                                         <a class="pf-rel-cover" href="">
                                                             <button class="btn btn-primary btn-sm">View</button>
                                                         </a>
                                                     </div>
 
                                                     <div class="pf-rel-prj">
-                                                        <img src="assets/images/uploads/portfolio/prj-rel-01.jpg" alt="">
+                                                        <img src="{{ asset('assets/images/uploads/portfolio/prj-rel-01.jpg') }}" alt="">
                                                         <a class="pf-rel-cover" href="">
                                                             <button class="btn btn-primary btn-sm">View</button>
                                                         </a>
                                                     </div>
 
                                                     <div class="pf-rel-prj">
-                                                        <img src="assets/images/uploads/portfolio/prj-rel-01.jpg" alt="">
+                                                        <img src="{{ asset('assets/images/uploads/portfolio/prj-rel-01.jpg') }}" alt="">
                                                         <a class="pf-rel-cover">
                                                             <button class="btn btn-primary btn-sm">View</button>
                                                         </a>
                                                     </div>
 
                                                     <div class="pf-rel-prj">
-                                                        <img src="assets/images/uploads/portfolio/prj-rel-01.jpg" alt="">
+                                                        <img src="{{ asset('assets/images/uploads/portfolio/prj-rel-01.jpg') }}" alt="">
                                                         <a class="pf-rel-cover" href="">
                                                             <button class="btn btn-primary btn-sm">View</button>
                                                         </a>
                                                     </div>
 
                                                     <div class="pf-rel-prj">
-                                                        <img src="assets/images/uploads/portfolio/prj-rel-01.jpg" alt="">
+                                                        <img src="{{ asset('assets/images/uploads/portfolio/prj-rel-01.jpg') }}" alt="">
                                                         <a class="pf-rel-cover" href="">
                                                             <button class="btn btn-primary btn-sm">View</button>
                                                         </a>
                                                     </div>
 
                                                     <div class="pf-rel-prj">
-                                                        <img src="assets/images/uploads/portfolio/prj-rel-01.jpg" alt="">
+                                                        <img src="{{ asset('assets/images/uploads/portfolio/prj-rel-01.jpg') }}" alt="">
                                                         <a class="pf-rel-cover" href="">
                                                             <button class="btn btn-primary btn-sm">View</button>
                                                         </a>
@@ -834,7 +834,7 @@
                                 <div class="pf-grid-item design">
                                     <a class="pf-project" href="#pf-popup-6">
                                         <figure class="pf-figure">
-                                            <img src="assets/images/uploads/portfolio/prj-06.jpg" alt="">
+                                            <img src="{{ asset('assets/images/uploads/portfolio/prj-06.jpg') }}" alt="">
                                         </figure>
 
                                         <div class="pf-caption text-center">
@@ -856,15 +856,15 @@
                                         <div class="pf-popup-col1">
                                             <div class="pf-popup-media cr-slider" data-init="none">
                                                 <div class="pf-popup-embed">
-                                                    <img src="assets/images/uploads/portfolio/prj-06.jpg" alt="">
+                                                    <img src="{{ asset('assets/images/uploads/portfolio/prj-06.jpg') }}" alt="">
                                                 </div>
 
                                                 <div class="pf-popup-embed">
-                                                    <img src="assets/images/uploads/portfolio/prj-06.jpg" alt="">
+                                                    <img src="{{ asset('assets/images/uploads/portfolio/prj-06.jpg') }}" alt="">
                                                 </div>
 
                                                 <div class="pf-popup-embed">
-                                                    <img src="assets/images/uploads/portfolio/prj-06.jpg" alt="">
+                                                    <img src="{{ asset('assets/images/uploads/portfolio/prj-06.jpg') }}" alt="">
                                                 </div>
                                             </div>
                                         </div><!-- .pf-popup-col1 -->
@@ -896,42 +896,42 @@
 
                                                 <div class="pf-rel-list cr-carousel" data-init="none">
                                                     <div class="pf-rel-prj">
-                                                        <img src="assets/images/uploads/portfolio/prj-rel-01.jpg" alt="">
+                                                        <img src="{{ asset('assets/images/uploads/portfolio/prj-rel-01.jpg') }}" alt="">
                                                         <a class="pf-rel-cover" href="">
                                                             <button class="btn btn-primary btn-sm">View</button>
                                                         </a>
                                                     </div>
 
                                                     <div class="pf-rel-prj">
-                                                        <img src="assets/images/uploads/portfolio/prj-rel-01.jpg" alt="">
+                                                        <img src="{{ asset('assets/images/uploads/portfolio/prj-rel-01.jpg') }}" alt="">
                                                         <a class="pf-rel-cover" href="">
                                                             <button class="btn btn-primary btn-sm">View</button>
                                                         </a>
                                                     </div>
 
                                                     <div class="pf-rel-prj">
-                                                        <img src="assets/images/uploads/portfolio/prj-rel-01.jpg" alt="">
+                                                        <img src="{{ asset('assets/images/uploads/portfolio/prj-rel-01.jpg') }}" alt="">
                                                         <a class="pf-rel-cover">
                                                             <button class="btn btn-primary btn-sm">View</button>
                                                         </a>
                                                     </div>
 
                                                     <div class="pf-rel-prj">
-                                                        <img src="assets/images/uploads/portfolio/prj-rel-01.jpg" alt="">
+                                                        <img src="{{ asset('assets/images/uploads/portfolio/prj-rel-01.jpg') }}" alt="">
                                                         <a class="pf-rel-cover" href="">
                                                             <button class="btn btn-primary btn-sm">View</button>
                                                         </a>
                                                     </div>
 
                                                     <div class="pf-rel-prj">
-                                                        <img src="assets/images/uploads/portfolio/prj-rel-01.jpg" alt="">
+                                                        <img src="{{ asset('assets/images/uploads/portfolio/prj-rel-01.jpg') }}" alt="">
                                                         <a class="pf-rel-cover" href="">
                                                             <button class="btn btn-primary btn-sm">View</button>
                                                         </a>
                                                     </div>
 
                                                     <div class="pf-rel-prj">
-                                                        <img src="assets/images/uploads/portfolio/prj-rel-01.jpg" alt="">
+                                                        <img src="{{ asset('assets/images/uploads/portfolio/prj-rel-01.jpg') }}" alt="">
                                                         <a class="pf-rel-cover" href="">
                                                             <button class="btn btn-primary btn-sm">View</button>
                                                         </a>
@@ -945,7 +945,7 @@
                                 <div class="pf-grid-item photography">
                                     <a class="pf-project" href="#pf-popup-7">
                                         <figure class="pf-figure">
-                                            <img src="assets/images/uploads/portfolio/prj-01.jpg" alt="">
+                                            <img src="{{ asset('assets/images/uploads/portfolio/prj-01.jpg') }}" alt="">
                                         </figure>
 
                                         <div class="pf-caption text-center">
@@ -967,7 +967,7 @@
                                         <div class="pf-popup-col1">
                                             <div class="pf-popup-media cr-slider" data-init="none">
                                                 <div class="pf-popup-embed">
-                                                    <img src="assets/images/uploads/portfolio/prj-01.jpg" alt="">
+                                                    <img src="{{ asset('assets/images/uploads/portfolio/prj-01.jpg') }}" alt="">
                                                 </div>
                                             </div>
                                         </div><!-- .pf-popup-col1 -->
@@ -999,42 +999,42 @@
 
                                                 <div class="pf-rel-list cr-carousel" data-init="none">
                                                     <div class="pf-rel-prj">
-                                                        <img src="assets/images/uploads/portfolio/prj-rel-01.jpg" alt="">
+                                                        <img src="{{ asset('assets/images/uploads/portfolio/prj-rel-01.jpg') }}" alt="">
                                                         <a class="pf-rel-cover" href="">
                                                             <button class="btn btn-primary btn-sm">View</button>
                                                         </a>
                                                     </div>
 
                                                     <div class="pf-rel-prj">
-                                                        <img src="assets/images/uploads/portfolio/prj-rel-01.jpg" alt="">
+                                                        <img src="{{ asset('assets/images/uploads/portfolio/prj-rel-01.jpg') }}" alt="">
                                                         <a class="pf-rel-cover" href="">
                                                             <button class="btn btn-primary btn-sm">View</button>
                                                         </a>
                                                     </div>
 
                                                     <div class="pf-rel-prj">
-                                                        <img src="assets/images/uploads/portfolio/prj-rel-01.jpg" alt="">
+                                                        <img src="{{ asset('assets/images/uploads/portfolio/prj-rel-01.jpg') }}" alt="">
                                                         <a class="pf-rel-cover">
                                                             <button class="btn btn-primary btn-sm">View</button>
                                                         </a>
                                                     </div>
 
                                                     <div class="pf-rel-prj">
-                                                        <img src="assets/images/uploads/portfolio/prj-rel-01.jpg" alt="">
+                                                        <img src="{{ asset('assets/images/uploads/portfolio/prj-rel-01.jpg') }}" alt="">
                                                         <a class="pf-rel-cover" href="">
                                                             <button class="btn btn-primary btn-sm">View</button>
                                                         </a>
                                                     </div>
 
                                                     <div class="pf-rel-prj">
-                                                        <img src="assets/images/uploads/portfolio/prj-rel-01.jpg" alt="">
+                                                        <img src="{{ asset('assets/images/uploads/portfolio/prj-rel-01.jpg') }}" alt="">
                                                         <a class="pf-rel-cover" href="">
                                                             <button class="btn btn-primary btn-sm">View</button>
                                                         </a>
                                                     </div>
 
                                                     <div class="pf-rel-prj">
-                                                        <img src="assets/images/uploads/portfolio/prj-rel-01.jpg" alt="">
+                                                        <img src="{{ asset('assets/images/uploads/portfolio/prj-rel-01.jpg') }}" alt="">
                                                         <a class="pf-rel-cover" href="">
                                                             <button class="btn btn-primary btn-sm">View</button>
                                                         </a>
@@ -1066,7 +1066,7 @@
                         <div class="padd-box-sm clear-mrg">
                             <div class="ref-box brd-btm hreview">
                                 <div class="ref-avatar">
-                                    <img alt="" src="assets/images/uploads/avatar/avatar-54x54-01.png" srcset="assets/images/uploads/avatar/avatar-108x108-01-2x.png 2x" class="avatar avatar-54 photo" height="54" width="54">
+                                    <img alt="" src="{{ asset('assets/images/uploads/avatar/avatar-54x54-01.png') }}" srcset="{{ asset('assets/images/uploads/avatar/avatar-108x108-01-2x.png') }} 2x" class="avatar avatar-54 photo" height="54" width="54">
                                 </div>
 
                                 <div class="ref-info">
@@ -1085,7 +1085,7 @@
 
                             <div class="ref-box brd-btm hreview">
                                 <div class="ref-avatar">
-                                    <img alt="" src="assets/images/uploads/avatar/avatar-54x54-02.png" srcset="assets/images/uploads/avatar/avatar-108x108-02-2x.png 2x" class="avatar avatar-54 photo" height="54" width="54">
+                                    <img alt="" src="{{ asset('assets/images/uploads/avatar/avatar-54x54-02.png') }}" srcset="{{ asset('assets/images/uploads/avatar/avatar-108x108-02-2x.png') }} 2x" class="avatar avatar-54 photo" height="54" width="54">
                                 </div>
 
                                 <div class="ref-info">
@@ -1104,7 +1104,7 @@
 
                             <div class="ref-box brd-btm hreview">
                                 <div class="ref-avatar">
-                                    <img alt="" src="assets/images/uploads/avatar/avatar-58x58-default.png" srcset="assets/images/uploads/avatar/avatar-116x116-default-2x.jpg 2x" class="avatar avatar-54 photo" height="54" width="54">
+                                    <img alt="" src="{{ asset('assets/images/uploads/avatar/avatar-58x58-default.png') }}" srcset="{{ asset('assets/images/uploads/avatar/avatar-116x116-default-2x.jpg') }} 2x" class="avatar avatar-54 photo" height="54" width="54">
                                 </div>
 
                                 <div class="ref-info">
@@ -1129,12 +1129,12 @@
                         <h2 class="title-lg text-upper">Clients</h2>
                         <div class="padd-box-sm">
                             <ul class="clients">
-                                <li><a href=""><img src="assets/images/uploads/clients/logo-wordpress.png" srcset="assets/images/uploads/clients/logo-wordpress-2x.png 2x" alt="WordPress"></a></li><li>
-                                    <a href=""><img src="assets/images/uploads/clients/logo-compass.png" srcset="assets/images/uploads/clients/logo-compass-2x.png 2x" alt="Compass"></a></li><li>
-                                    <a href=""><img src="assets/images/uploads/clients/logo-jquery.png" srcset="assets/images/uploads/clients/logo-jquery-2x.png 2x" alt="jQuery"></a></li><li>
-                                    <a href=""><img src="assets/images/uploads/clients/logo-teaspoon.png" srcset="assets/images/uploads/clients/logo-teaspoon-2x.png 2x" alt="teaspoon"></a></li><li>
-                                    <a href=""><img src="assets/images/uploads/clients/logo-evernote.png" srcset="assets/images/uploads/clients/logo-evernote-2x.png 2x" alt="evernote"></a></li><li>
-                                    <a href=""><img src="assets/images/uploads/clients/logo-bootstrap.png" srcset="assets/images/uploads/clients/logo-bootstrap-2x.png 2x" alt="Bootstrap"></a></li>
+                                <li><a href=""><img src="{{ asset('assets/images/uploads/clients/logo-wordpress.png') }}" srcset="{{ asset('assets/images/uploads/clients/logo-wordpress-2x.png') }} 2x" alt="WordPress"></a></li><li>
+                                    <a href=""><img src="{{ asset('assets/images/uploads/clients/logo-compass.png') }}" srcset="{{ asset('assets/images/uploads/clients/logo-compass-2x.png') }} 2x" alt="Compass"></a></li><li>
+                                    <a href=""><img src="{{ asset('assets/images/uploads/clients/logo-jquery.png') }}" srcset="{{ asset('assets/images/uploads/clients/logo-jquery-2x.png') }} 2x" alt="jQuery"></a></li><li>
+                                    <a href=""><img src="{{ asset('assets/images/uploads/clients/logo-teaspoon.png') }}" srcset="{{ asset('assets/images/uploads/clients/logo-teaspoon-2x.png') }} 2x" alt="teaspoon"></a></li><li>
+                                    <a href=""><img src="{{ asset('assets/images/uploads/clients/logo-evernote.png') }}" srcset="{{ asset('assets/images/uploads/clients/logo-evernote-2x.png') }} 2x" alt="evernote"></a></li><li>
+                                    <a href=""><img src="{{ asset('assets/images/uploads/clients/logo-bootstrap.png') }}" srcset="{{ asset('assets/images/uploads/clients/logo-bootstrap-2x.png') }} 2x" alt="Bootstrap"></a></li>
                             </ul>
                         </div><!-- .padd-box-sm -->
                     </section><!-- .section -->

@@ -16,14 +16,14 @@
     <link href="https://fonts.googleapis.com/css?family=Quicksand:400,700" rel="stylesheet">
 
     <!-- Icon Fonts -->
-    <link href="assets/fonts/icomoon/style.css" rel="stylesheet">
+    <link href="{{ asset('assets/fonts/icomoon/style.css') }}" rel="stylesheet">
 
     <!-- Styles -->
-    <link href="assets/css/front.plugins.css" rel="stylesheet">
-    <link href="assets/css/front.style.css" rel="stylesheet">
+    <link href="{{ asset('assets/css/front.plugins.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/front.style.css') }}" rel="stylesheet">
 
     <!-- Modernizer -->
-    <script type="text/javascript" src="assets/js/vendor/modernizr-3.3.1.min.js"></script>
+    <script type="text/javascript" src="{{ asset('assets/js/vendor/modernizr-3.3.1.min.js') }}"></script>
 
     <!-- Google Analytics -->
     <script>
@@ -45,7 +45,7 @@
                 <div class="crt-head-row">
                     <div id="crt-head-col1" class="crt-head-col text-left">
                         <a id="crt-logo" class="crt-logo" href="index.php">
-                            <img src="assets/images/uploads/brand/logo.svg" alt="certy resume"><span>.Certy</span>
+                            <img src="{{ asset('assets/images/uploads/brand/logo.svg') }}" alt="certy resume"><span>.Certy</span>
                         </a>
                     </div>
 
@@ -94,7 +94,7 @@
         <nav id="crt-nav-sm" class="crt-nav hidden-lg hidden-md">
             <ul class="clear-list">
                 <li>
-                    <a href="index.php#about" data-tooltip="Home"><img class="avatar avatar-42" src="assets/images/uploads/avatar/avatar-42x42.png" srcset="assets/images/uploads/avatar/avatar-84x84-2x.png 2x" alt=""></a>
+                    <a href="index.php#about" data-tooltip="Home"><img class="avatar avatar-42" src="{{ asset('assets/images/uploads/avatar/avatar-42x42.png') }}" srcset="{{ asset('assets/images/uploads/avatar/avatar-84x84-2x.png') }} 2x" alt=""></a>
                 </li>
                 <li>
                     <a href="index.php#experience" data-tooltip="Experience"><span class="crt-icon crt-icon-experience"></span></a>
@@ -158,8 +158,8 @@
 
             <div class="crt-card bg-primary text-center">
                 <div class="crt-card-avatar">
-                    <img class="avatar avatar-195" src="assets/images/uploads/avatar/avatar-195x195.png"
-                         srcset="assets/images/uploads/avatar/avatar-390x390-2x.png 2x" width="195" height="195" alt="">
+                    <img class="avatar avatar-195" src="{{ asset('assets/images/uploads/avatar/avatar-195x195.png') }}"
+                         srcset="{{ asset('assets/images/uploads/avatar/avatar-390x390-2x.png') }} 2x" width="195" height="195" alt="">
                 </div>
                 <div class="crt-card-info">
                     <h2 class="text-upper">Ola Lowe</h2>
@@ -193,7 +193,7 @@
                     <ul>
                         <li>
                             <a class="post-image" href="">
-                                <img src="assets/images/uploads/blog/img-70x70-01.png" alt="">
+                                <img src="{{ asset('assets/images/uploads/blog/img-70x70-01.png') }}" alt="">
                             </a>
                             <div class="post-content">
                                 <h3>
@@ -208,7 +208,7 @@
 
                         <li>
                             <a class="post-image" href="">
-                                <img src="assets/images/uploads/blog/img-70x70-02.jpg" alt="">
+                                <img src="{{ asset('assets/images/uploads/blog/img-70x70-02.jpg') }}" alt="">
                             </a>
                             <div class="post-content">
                                 <h3>
@@ -223,7 +223,7 @@
 
                         <li>
                             <a class="post-image" href="">
-                                <img src="assets/images/uploads/blog/img-70x70-03.png" alt="">
+                                <img src="{{ asset('assets/images/uploads/blog/img-70x70-03.png') }}" alt="">
                             </a>
                             <div class="post-content">
                                 <h3><a href=""></a>branding do you know who are</h3>
@@ -307,10 +307,10 @@
 
 <!-- Scripts -->
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script src="assets/js/vendor/jquery-1.12.4.min.js"><\/script>')</script>
+<script>window.jQuery || document.write('<script src="{{ asset("assets/js/vendor/jquery-1.12.4.min.js") }}"><\/script>')</script>
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDiwY_5J2Bkv2UgSeJa4NOKl6WUezSS9XA"></script>
 
-<script type="text/javascript" src="assets/js/plugins.min.js"></script>
-<script type="text/javascript" src="assets/js/theme.min.js"></script>
+<script type="text/javascript" src="{{ asset('assets/js/plugins.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/js/theme.min.js') }}"></script>
 </body>
 </html>
