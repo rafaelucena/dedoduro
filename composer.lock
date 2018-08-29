@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ae48732de6b22aef147816879339ddec",
-    "content-hash": "d8a4ef40495d5664e1f65a07c933dae9",
+    "hash": "71bff6a31060ce6d259ebfa1da846c56",
+    "content-hash": "1372289e5234f8044af80be2f4bd76c9",
     "packages": [
         {
             "name": "cocur/slugify",
@@ -1454,16 +1454,16 @@
         },
         {
             "name": "laravel-doctrine/orm",
-            "version": "1.4.7",
+            "version": "dev-1.4-fix",
             "source": {
                 "type": "git",
-                "url": "https://github.com/laravel-doctrine/orm.git",
-                "reference": "c3afbd2ddf426ef26e6f244e55e1865becfef3bc"
+                "url": "https://github.com/rafaelucena/laravel-doctrine.orm.git",
+                "reference": "1532afe1682861c368be9e8f1bc087901c62832a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel-doctrine/orm/zipball/c3afbd2ddf426ef26e6f244e55e1865becfef3bc",
-                "reference": "c3afbd2ddf426ef26e6f244e55e1865becfef3bc",
+                "url": "https://api.github.com/repos/rafaelucena/laravel-doctrine.orm/zipball/1532afe1682861c368be9e8f1bc087901c62832a",
+                "reference": "1532afe1682861c368be9e8f1bc087901c62832a",
                 "shasum": ""
             },
             "require": {
@@ -1518,7 +1518,11 @@
                     "src/helpers.php"
                 ]
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "autoload-dev": {
+                "classmap": [
+                    "tests"
+                ]
+            },
             "license": [
                 "MIT"
             ],
@@ -1536,7 +1540,10 @@
                 "laravel",
                 "orm"
             ],
-            "time": "2018-05-28 08:50:46"
+            "support": {
+                "source": "https://github.com/rafaelucena/laravel-doctrine.orm/tree/rafaelucena-patch-1"
+            },
+            "time": "2018-08-29 07:46:22"
         },
         {
             "name": "laravel/framework",
@@ -6847,7 +6854,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "laravel-doctrine/orm": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
