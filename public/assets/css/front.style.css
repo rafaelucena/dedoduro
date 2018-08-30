@@ -3434,6 +3434,7 @@ textarea.form-item{
     }
     .crt-side-box-desc{
         padding:20px;
+        padding-top: 13px;
         padding-bottom:10px
     }
     .crt-side-box-desc p{
@@ -3829,10 +3830,10 @@ textarea.form-item{
     display:none
 }
 .crt-card{
-    padding:30px 20px 20px
+    padding:30px 20px 10px
 }
 .crt-card-info{
-    margin-top:33px
+    margin-top:20px
 }
 .crt-card-info h2{
     font-size:1.625em;
@@ -4709,21 +4710,26 @@ body,h1,h2,h3,h4,h5,h6{
     color:#c0e3e7
 }
 #crt-main-nav .sub-menu .current>a,#crt-main-nav .sub-menu li>a:hover,#crt-main-nav-sm .sub-menu:before,.accordion-header:before,.bg-primary,.bg-primary.text-dropcup-sq,.btn-primary,.education-date,.education:before,.progress-bullets .bullet.fill,.raiting-circle .fill,.tabs .tabs-menu li a:hover,.tabs .tabs-menu li.active a,.togglebox-header:before,mark{
-    background-color:#c0e3e7
+    /*background-color:#c0e3e7*/
+    background-color:#f8f8f8
 }
 #crt-nav-sm li.current a,.brd-primary,.btn-share,.education-date:after,.education-date:before,.progress-bullets .bullet{
-    border-color:#c0e3e7
+    /*border-color:#c0e3e7*/
+    border-color:#f8f8f8
 }
 ::-moz-selection{
-    background-color:#c0e3e7;
+    /*background-color:#c0e3e7;*/
+    background-color:#f8f8f8;
     color:#010101
 }
 ::selection{
-    background-color:#c0e3e7;
+    /*background-color:#c0e3e7;*/
+    background-color:#f8f8f8;
     color:#010101
 }
 #crt-bg-shape-2 polygon{
-    fill:#c0e3e7
+    /*fill:#c0e3e7*/
+    fill:#f8f8f8
 }
 #crt-main-nav .sub-menu a,#crt-main-nav-sm li.current a,#crt-main-nav-sm li>a:hover,#crt-main-nav>ul>li.current>a,#crt-main-nav>ul>li>a:hover,.btn-primary,.crt-logo,.crt-nav a,.crt-tooltip,.form-item,.page-numbers.current,.page-numbers:hover,.pf-filter button,.search-title span,.tabs .tabs-menu a,.widget_posts_entries a,.widget_posts_entries li h3,.widget_recent_entries li>a .widget_categories li a,.widget_tag_cloud .tagcloud a,blockquote.quote-side:before,blockquote.quote-top:before,body,h1,h2,h3,h4,h5,h6{
     color:#010101
