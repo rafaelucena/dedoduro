@@ -14,7 +14,7 @@
                     <div class="crt-card-info">
                         <h2 class="text-upper">{{ $persona->shortName }}</h2>
 
-                        <p class="text-muted">Florist | Decorator</p>
+                        <p class="text-muted">{{ $role->name }}</p>
                     </div>
                 </div>
                 <div class="crt-side-box-btn">

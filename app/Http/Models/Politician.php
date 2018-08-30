@@ -76,7 +76,7 @@ class Politician
      * @var PoliticianRole
      * @ORM\ManyToOne(targetEntity="PoliticianRole", inversedBy="politicians")
      */
-    public $role;
+    protected $role;
 
     public function __construct()
     {
@@ -102,5 +102,25 @@ class Politician
         if (!empty($eventArgs->getEntityChangeSet())) {
             $this->updatedAt = new DateTime();
         }
+    }
+
+    /**
+     * @return PoliticianRole
+     */
+    public function getRole(): PoliticianRole
+    {
+        return $this->role;
+    }
+
+    /**
+     * @param PoliticianRole $role
+     *
+     * @return Politician
+     */
+    public function setRole(PoliticianRole $role): Politician
+    {
+        $this->role = $role;
+
+        return $this;
     }
 }

@@ -108,7 +108,7 @@ class Persona implements UrlRoutable
      * @var ArrayCollection|Politician[]
      * @ORM\OneToMany(targetEntity="Politician", mappedBy="persona")
      */
-    public $politicians;
+    protected $politicians;
 
     /**
      * @var ArrayCollection|PersonaSlug[]
@@ -154,9 +154,9 @@ class Persona implements UrlRoutable
      */
     public function getSlugs(bool $all = false)
     {
-        $criteria = Criteria::create();
+        $criteria = custom_criteria();
         if ($all !== true) {
-            $criteria->where(Criteria::expr()->eq('isActive', true));
+            $criteria = custom_criteria(['isActive' => true, 'isDeleted' => false]);
         }
         return $this->personaSlugs->matching($criteria);
     }
@@ -168,5 +168,23 @@ class Persona implements UrlRoutable
     public static function getRouteKeyName(): string
     {
         return 'slug';
+    }
+
+    /**
+     * @return Politician[]|ArrayCollection
+     */
+    public function getPoliticians()
+    {
+        return $this->politicians;
+    }
+
+    /**
+     * @return Politician | bool
+     */
+    public function getPolitician()
+    {
+        $criteria = custom_criteria(['isActive' => true, 'isDeleted' => false]);
+
+        return $this->politicians->matching($criteria)->first() ? : false;
     }
 }

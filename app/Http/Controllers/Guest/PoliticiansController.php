@@ -85,7 +85,10 @@ class PoliticiansController extends Controller
     {
         /* @var Persona $persona */
         $persona = $slug->getPersona();
+        $politician = $persona->getPolitician();
 
-        return view('guest/politicians/show', ['persona' => $persona]);
+        $role = $politician->getRole();
+
+        return view('guest/politicians/show', ['persona' => $persona, 'role' => $role]);
     }
 }
