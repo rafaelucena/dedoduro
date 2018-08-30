@@ -55,7 +55,7 @@ if (! function_exists('custom_criteria')) {
         }
 
         foreach ($params as $param => $value) {
-            $criteria->where(Criteria::expr()->eq($param, $value));
+            $criteria->andWhere(Criteria::expr()->eq($param, $value));
         }
 
         return $criteria;
