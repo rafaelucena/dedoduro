@@ -1,4 +1,7 @@
 <?php
+
+use Doctrine\Common\Collections\Criteria;
+
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -35,5 +38,26 @@ if (! function_exists('storage_del')) {
         // ...
 
         return Storage::delete($string);
+    }
+}
+
+if (! function_exists('custom_criteria')) {
+    /**
+     * @param array $params
+     *
+     * @return Criteria
+     */
+    function custom_criteria(array $params = []) {
+        $criteria = Criteria::create();
+
+        if (empty($params)) {
+            return $criteria;
+        }
+
+        foreach ($params as $param => $value) {
+            $criteria->where(Criteria::expr()->eq($param, $value));
+        }
+
+        return $criteria;
     }
 }
