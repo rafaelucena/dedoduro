@@ -13,12 +13,18 @@
                     </div>
                     <div class="crt-card-info">
                         <h2 class="text-upper">{{ $persona->shortName }}</h2>
-
                         <p class="text-muted">{{ $role->name }}</p>
                     </div>
                 </div>
-                <div class="crt-side-box-btn">
-                    <a class="btn btn-default btn-lg btn-block btn-thin btn-upper" href="#">Download Resume</a>
+                <div class="crt-side-box-desc">
+                    <p>
+                        <small><strong>Nome</strong></small><br>
+                        {{ $persona->firstName }}
+                    </p>
+                    <p>
+                        <small><strong>Sobrenome</strong></small><br>
+                        {{ $persona->lastName }}
+                    </p>
                 </div>
             </div><!-- .crt-side-box-item -->
 
@@ -1203,7 +1209,7 @@
                         </div>
                     </div><!-- .padd-box -->
 
-                    <div id="map" data-latitude="50.84592" data-longitude="4.366859999999974"></div>
+                    {{--<div id="map" data-latitude="50.84592" data-longitude="4.366859999999974"></div>--}}
                 </div>
                 <!-- .crt-paper-cont -->
             </div>
