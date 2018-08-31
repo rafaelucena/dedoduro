@@ -3568,10 +3568,10 @@ textarea.form-item{
     padding-right:15px
 }
 #crt-main-nav .has-sub-menu>a:after{
+    font-family: "Font Awesome 5 Free";
     content:"\f0d7";
     color:inherit;
     font-size:.8em;
-    font-family:icomoon;
     position:absolute;
     top:50%;
     right:0;
@@ -4711,7 +4711,8 @@ body,h1,h2,h3,h4,h5,h6{
 }
 #crt-main-nav .sub-menu .current>a,#crt-main-nav .sub-menu li>a:hover,#crt-main-nav-sm .sub-menu:before,.accordion-header:before,.bg-primary,.bg-primary.text-dropcup-sq,.btn-primary,.education-date,.education:before,.progress-bullets .bullet.fill,.raiting-circle .fill,.tabs .tabs-menu li a:hover,.tabs .tabs-menu li.active a,.togglebox-header:before,mark{
     /*background-color:#c0e3e7*/
-    border-radius:15px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
     background-color:#f8f8f8
 }
 #crt-nav-sm li.current a,.brd-primary,.btn-share,.education-date:after,.education-date:before,.progress-bullets .bullet{

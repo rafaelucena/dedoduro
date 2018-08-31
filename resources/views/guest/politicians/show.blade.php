@@ -37,19 +37,29 @@
                     <nav id="crt-nav" class="crt-nav">
                         <ul class="clear-list">
                             <li>
-                                <a href="index.php#about" data-tooltip="Home"><img class="avatar avatar-42" src="{{ asset('assets/images/uploads/avatar/avatar-42x42.png') }}" srcset="{{ asset('assets/images/uploads/avatar/avatar-84x84-2x.png') }} 2x" alt=""></a>
+                                <a href="index.php#about" data-tooltip="Home">
+                                    <img class="avatar avatar-42" src="{{ asset('assets/images/uploads/avatar/avatar-42x42.png') }}" srcset="{{ asset('assets/images/uploads/avatar/avatar-84x84-2x.png') }} 2x" alt="">
+                                </a>
                             </li>
                             <li>
-                                <a href="index.php#experience" data-tooltip="Experience"><span class="crt-icon crt-icon-experience"></span></a>
+                                <a href="index.php#experience" data-tooltip="Experience">
+                                    <i class="fas fa-briefcase fa-2x"></i>
+                                </a>
                             </li>
                             <li>
-                                <a href="index.php#portfolio" data-tooltip="Portfolio"><span class="crt-icon crt-icon-portfolio"></span></a>
+                                <a href="index.php#portfolio" data-tooltip="Portfolio">
+                                    <i class="fas fa-pen-fancy fa-2x"></i>
+                                </a>
                             </li>
                             <li>
-                                <a href="index.php#references" data-tooltip="References"><span class="crt-icon crt-icon-references"></span></a>
+                                <a href="index.php#references" data-tooltip="References">
+                                    <i class="fas fa-quote-right fa-2x"></i>
+                                </a>
                             </li>
                             <li>
-                                <a href="index.php#contact" data-tooltip="Contact"><span class="crt-icon crt-icon-contact"></span></a>
+                                <a href="index.php#contact" data-tooltip="Contact">
+                                    <i class="far fa-envelope fa-2x"></i>
+                                </a>
                             </li>
                             <li>
                                 <a href="category.php" data-tooltip="Blog"><span class="crt-icon crt-icon-blog"></span></a>
