@@ -84,13 +84,13 @@
 
         @include('guest/politicians/show/show-about')
 
-        @include('guest/politicians/show/show-experience')
+{{--        @include('guest/politicians/show/show-experience')--}}
 
-        @include('guest/politicians/show/show-portfolio')
+{{--        @include('guest/politicians/show/show-portfolio')--}}
 
-        @include('guest/politicians/show/show-references')
+{{--        @include('guest/politicians/show/show-references')--}}
 
-        @include('guest/politicians/show/show-contact')
+{{--        @include('guest/politicians/show/show-contact')--}}
 
     </div>
     <!-- .crt-container-sm -->
@@ -103,12 +103,24 @@
                 language: {
                     search: "Filtro:",
                     // searchPlaceholder: "Filtro...",
-                    info: "Exibindo _END_ de _TOTAL_ not&iacute;cias",
+                    info: "Exibindo de _START_ a _END_ de _TOTAL_ not&iacute;cias",
+                    oPaginate: {
+                        // sFirst: '<i class="fas fa-step-backward"></i> First',
+                        sPrevious: 'Anterior',
+                        sNext: 'Próxima',
+                        // sLast: 'Last <i class="fas fa-step-forward"></i>'
+                    },
                 },
                 searching: false,
-                bPaginate: false,
+                bLengthChange: false,
+                pageLength: 5,
+                drawCallback: function () {
+                    $('.dataTables_info').addClass('crt-table-info');
+                    $('.dataTables_paginate').addClass('crt-table-paginator');
+                    $('.dataTables_paginate > .paginate_button').addClass('btn-pagination btn-pagination-numbers');
+                    $('.dataTables_paginate > span > .paginate_button').addClass('btn-pagination btn-pagination-numbers');
+                }
             });
-            // $(".dataTables_filter input").addClass("form-item");
         });
     </script>
 @endsection
