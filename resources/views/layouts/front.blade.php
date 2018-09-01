@@ -313,5 +313,11 @@
 
 <script type="text/javascript" src="{{ asset('assets/js/plugins.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/js/theme.min.js') }}"></script>
+
+<script src="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
+@yield('custom_js')
+
 </body>
 </html>
