@@ -79,7 +79,10 @@
             <div class="crt-nav-btm"></div>
         </div>
     </div><!-- .crt-nav-wrap -->
-    <div class="crt-container-sm">        <div id="about" class="crt-paper-layers crt-animate">
+    <div class="crt-container-sm">
+        @include('guest/politicians/show/show-news')
+
+        <div id="about" class="crt-paper-layers crt-animate">
             <div class="crt-paper clearfix">
                 <div class="crt-paper-cont paper-padd clear-mrg">
 
@@ -1228,4 +1231,21 @@
         <!-- .crt-paper-layers -->
     </div>
     <!-- .crt-container-sm -->
+@endsection
+
+@section('custom_js')
+    <script>
+        $(document).ready(function() {
+            $('#recent-news').DataTable({
+                language: {
+                    search: "Filtro:",
+                    // searchPlaceholder: "Filtro...",
+                    info: "Exibindo _END_ de _TOTAL_ not&iacute;cias",
+                },
+                searching: false,
+                bPaginate: false,
+            });
+            // $(".dataTables_filter input").addClass("form-item");
+        });
+    </script>
 @endsection
