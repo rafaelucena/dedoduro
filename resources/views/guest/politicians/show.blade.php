@@ -82,7 +82,7 @@
     <div class="crt-container-sm">
         @include('guest/politicians/show/show-news')
 
-        @include('guest/politicians/show/about')
+        @include('guest/politicians/show/show-about')
 
         <div id="experience" class="crt-paper-layers crt-animate">
             <div class="crt-paper clearfix">
