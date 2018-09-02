@@ -70,7 +70,7 @@ class Politician
      * @var Party
      * @ORM\ManyToOne(targetEntity="Party", inversedBy="politicians")
      */
-    public $party;
+    protected $party;
 
     /**
      * @var PoliticianRole
@@ -121,6 +121,24 @@ class Politician
     {
         $this->role = $role;
 
+        return $this;
+    }
+
+    /**
+     * @return Party
+     */
+    public function getParty(): Party
+    {
+        return $this->party;
+    }
+
+    /**
+     * @param Party $party
+     * @return Politician
+     */
+    public function setParty(Party $party): Politician
+    {
+        $this->party = $party;
         return $this;
     }
 }
