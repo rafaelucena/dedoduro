@@ -3598,6 +3598,23 @@ textarea.form-item{
     right:0;
     margin-top:-.5em
 }
+table.dataTable > thead > tr > .sorting:after{
+    font-family: "Font Awesome 5 Free";
+    position:absolute;
+    content:"\00a0\f0dc";
+}
+table.dataTable > thead > tr > .sorting_asc:after{
+    font-family: "Font Awesome 5 Free";
+    position:absolute;
+    /*content:"\00a0\f0d7";*/
+    content:"\00a0\f15d";
+}
+table.dataTable > thead > tr > .sorting_desc:after{
+    font-family: "Font Awesome 5 Free";
+    position:absolute;
+    /*content:"\00a0\f0d8";*/
+    content:"\00a0\f15e";
+}
 .crt-nav-type1 .crt-nav-btm,.crt-nav-type1 .crt-nav-btm:after,.crt-tooltip:after,.crt-tooltip:before{
     content:''
 }
