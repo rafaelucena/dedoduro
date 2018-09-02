@@ -3603,6 +3603,9 @@ table.dataTable > thead > tr > .sorting:after{
     position:absolute;
     content:"\00a0\f0dc";
 }
+table.dataTable > thead > tr > .sorting_asc, table.dataTable > thead > tr > .sorting_desc{
+    color:#000;
+}
 table.dataTable > thead > tr > .sorting_asc:after{
     font-family: "Font Awesome 5 Free";
     position:absolute;
@@ -3614,6 +3617,18 @@ table.dataTable > thead > tr > .sorting_desc:after{
     position:absolute;
     /*content:"\00a0\f0d8";*/
     content:"\00a0\f15e";
+}
+table.dataTable > thead > tr > .sorting_asc.datetime:after{
+    font-family: "Font Awesome 5 Free";
+    position:absolute;
+    /*content:"\00a0\f0d7";*/
+    content:"\00a0\f162";
+}
+table.dataTable > thead > tr > .sorting_desc.datetime:after{
+    font-family: "Font Awesome 5 Free";
+    position:absolute;
+    /*content:"\00a0\f0d8";*/
+    content:"\00a0\f163";
 }
 .crt-nav-type1 .crt-nav-btm,.crt-nav-type1 .crt-nav-btm:after,.crt-tooltip:after,.crt-tooltip:before{
     content:''

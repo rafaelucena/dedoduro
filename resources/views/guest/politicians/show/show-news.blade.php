@@ -6,9 +6,9 @@
                 <table id="recent-news" class="mdl-data-table">
                     <thead>
                     <tr>
-                        <th>Fonte</th>
-                        <th>Resumo</th>
-                        <th>Publicação</th>
+                        <th class="url">Fonte</th>
+                        <th class="string">Resumo</th>
+                        <th class="datetime">Publicação</th>
                     </tr>
                     </thead>
                     <tbody>
