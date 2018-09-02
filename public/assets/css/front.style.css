@@ -1372,6 +1372,27 @@ textarea.form-item{
     box-shadow:transparent 0 0 0;
     transition:all .5s cubic-bezier(.23,1,.32,1) 0s
 }
+.crt-table-info{
+    float:left;
+}
+.crt-table-paginator{
+    float:right;
+}
+.btn-pagination{
+    font-family:inherit;
+    font-size:15px;
+    font-weight:700;
+    line-height:1.2;
+    letter-spacing:.05em;
+    vertical-align:middle;
+    padding:5px 10px;
+    border-radius:35px;
+    border:0;
+    cursor:pointer;
+    -webkit-appearance:none;
+    box-shadow:transparent 0 0 0;
+    transition:all .5s cubic-bezier(.23,1,.32,1) 0s
+}
 .cr-slider .slick-next:before,.cr-slider .slick-prev:before,.slick-next:before,.slick-prev:before{
     font-family:icomoon;
     -webkit-font-smoothing:antialiased;
@@ -4789,6 +4810,14 @@ body,h1,h2,h3,h4,h5,h6{
     border-right-color:#fff
 }
 .btn-default{
+    color:#fff;
+    background-color:#000
+}
+.btn-pagination-numbers{
+    color:#010101;
+    background-color:#f8f8f8
+}
+.btn-pagination-numbers.current{
     color:#fff;
     background-color:#000
 }
