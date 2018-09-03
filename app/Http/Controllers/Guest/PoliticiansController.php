@@ -96,9 +96,12 @@ class PoliticiansController extends Controller
         $party = $politician->getParty();
 
         $ninja = new \stdClass();
-        $ninja->shortName = $persona->shortName;
-        $ninja->roleName = $role->name;
-        $ninja->partyName = $party->shortName;
+        $ninja->info = [
+            'shortName' => $persona->shortName,
+            'longDesc' => $persona->description,
+            'roleName' => $role->name,
+            'partyName' => $party->shortName,
+        ];
         $ninja->details = [
             'Nome' => $persona->firstName,
             'Sobrenome' => $persona->lastName,

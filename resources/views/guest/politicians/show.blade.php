@@ -12,17 +12,17 @@
                              srcset="{{ asset('assets/images/uploads/avatar/avatar-390x390-2x.png') }} 2x" width="195" height="195" alt="">
                     </div>
                     <div class="crt-card-info">
-                        <h2 class="text-upper">{{ $ninja->shortName }}</h2>
-                        <p class="text-muted">{{ $ninja->roleName }} ({{ $ninja->partyName }})</p>
+                        <h2 class="text-upper">{{ $ninja->info['shortName'] }}</h2>
+                        <p class="text-muted">{{ $ninja->info['roleName'] }} ({{ $ninja->info['partyName'] }})</p>
                     </div>
                 </div>
                 <div class="crt-side-box-desc">
-                    <?php foreach ($ninja->details as $label => $value): ?>
+                    @foreach($ninja->details as $label => $value)
                         <p>
                             <small><strong>{{ $label }}</strong></small><br>
                             {{ $value }}
                         </p>
-                    <?php endforeach ?>
+                    @endforeach()
                 </div>
             </div><!-- .crt-side-box-item -->
 

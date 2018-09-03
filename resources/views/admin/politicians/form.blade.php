@@ -68,7 +68,7 @@
                         <label for="party_id">Party <span class="required">*</span></label>
                         <select class="form-control" id="party_id" name="party_id" required>
                             @foreach($parties as $party)
-                                <option value="{{ $party->id }}" @if(old('party_id', $politician->party ? $politician->party->id : '') == $party->id) selected @endif>{{ $party->shortName }}</option>
+                                <option value="{{ $party->id }}" @if(old('party_id', $politician->getParty() ? $politician->getParty()->id : '') == $party->id) selected @endif>{{ $party->shortName }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -76,7 +76,7 @@
                         <label for="role_id">Role <span class="required">*</span></label>
                         <select class="form-control" id="role_id" name="role_id" required>
                             @foreach($roles as $role)
-                                <option value="{{ $role->id }}" @if(old('role_id', $politician->role ? $politician->role->id : '') == $role->id) selected @endif>{{ $role->name }}</option>
+                                <option value="{{ $role->id }}" @if(old('role_id', $politician->getRole() ? $politician->getRole()->id : '') == $role->id) selected @endif>{{ $role->name }}</option>
                             @endforeach
                         </select>
                     </div>

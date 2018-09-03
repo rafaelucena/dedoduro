@@ -362,6 +362,7 @@ class PoliticiansController extends Controller
         // Update the item
 
         // Get the item to update
+        /* @var Politician $politician */
         $politician = $this->em->getRepository(Politician::class)->find($id);
         /** $persona Persona **/
         $persona = $politician->persona;
@@ -388,8 +389,8 @@ class PoliticiansController extends Controller
         $this->em->persist($persona);
 
         // Step 2 - Save Politician
-        $politician->party = $this->em->getRepository(Party::class)->find($request->party_id);
-        $politician->role = $this->em->getRepository(PoliticianRole::class)->find($request->role_id);
+        $politician->setParty($this->em->getRepository(Party::class)->find($request->party_id));
+        $politician->setRole($this->em->getRepository(PoliticianRole::class)->find($request->role_id));
         $this->em->persist($politician);
 
         $this->em->flush();

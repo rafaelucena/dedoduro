@@ -5,15 +5,16 @@
             <section class="section brd-btm padd-box">
                 <div class="row">
                     <div class="col-sm-12">
-                        <h2 class="title-lg text-upper">About Me</h2>
+                        <h2 class="title-lg text-upper">Perfil</h2>
 
                         <div class="text-box">
-                            <p><b>Helo, I’m Ola Lowe!</b><br>
-                                I am talanted florist and decorator. I have graduated from International and cultural university
-                                of design and arts. Since first year in high school I relized that nature is most powerfull and
-                                beautiful gift in the world. I was captivated by beauty and simplicity of flowers and trees.
-                                Since then I have started to create and mastering unique and nice bouquets. My 1st masterpiece
-                                was garden of ant Ula Lowe decorated by me</p>
+                            {!! $ninja->info['longDesc'] !!}
+                            {{--<p><b>Helo, I’m Ola Lowe!</b><br>--}}
+                                {{--I am talanted florist and decorator. I have graduated from International and cultural university--}}
+                                {{--of design and arts. Since first year in high school I relized that nature is most powerfull and--}}
+                                {{--beautiful gift in the world. I was captivated by beauty and simplicity of flowers and trees.--}}
+                                {{--Since then I have started to create and mastering unique and nice bouquets. My 1st masterpiece--}}
+                                {{--was garden of ant Ula Lowe decorated by me</p>--}}
                         </div>
                     </div>
                 </div>
