@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Guest;
 use App\Http\Controllers\Controller;
 use App\Http\Models\Blog;
 use App\Http\Models\Persona;
+use App\Http\Models\Party;
+use App\Http\Models\Politician;
+use App\Http\Models\PoliticianRole;
 use App\Http\Models\Slug;
 use App\Http\Models\Subscriber;
 use App\Jobs\SendSubscriptionVerificationEmail;
@@ -85,10 +88,27 @@ class PoliticiansController extends Controller
     {
         /* @var Persona $persona */
         $persona = $slug->getPersona();
+        /* @var Politician $politician */
         $politician = $persona->getPolitician();
-
+        /* @var PoliticianRole $role */
         $role = $politician->getRole();
+        /* @var Party $party */
+        $party = $politician->getParty();
 
-        return view('guest/politicians/show', ['persona' => $persona, 'role' => $role]);
+        $ninja = new \stdClass();
+        $ninja->shortName = $persona->shortName;
+        $ninja->roleName = $role->name;
+        $ninja->partyName = $party->shortName;
+        $ninja->details = [
+            'Nome' => $persona->firstName,
+            'Sobrenome' => $persona->lastName,
+            'Partido' => $party->fullName,
+        ];
+
+        return view('guest/politicians/show', [
+            'ninja' => $ninja,
+            'persona' => $persona,
+            'role' => $role,
+        ]);
     }
 }

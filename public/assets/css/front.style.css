@@ -1372,6 +1372,27 @@ textarea.form-item{
     box-shadow:transparent 0 0 0;
     transition:all .5s cubic-bezier(.23,1,.32,1) 0s
 }
+.crt-table-info{
+    float:left;
+}
+.crt-table-paginator{
+    float:right;
+}
+.btn-pagination{
+    font-family:inherit;
+    font-size:15px;
+    font-weight:700;
+    line-height:1.2;
+    letter-spacing:.05em;
+    vertical-align:middle;
+    padding:5px 10px;
+    border-radius:35px;
+    border:0;
+    cursor:pointer;
+    -webkit-appearance:none;
+    box-shadow:transparent 0 0 0;
+    transition:all .5s cubic-bezier(.23,1,.32,1) 0s
+}
 .cr-slider .slick-next:before,.cr-slider .slick-prev:before,.slick-next:before,.slick-prev:before{
     font-family:icomoon;
     -webkit-font-smoothing:antialiased;
@@ -3568,14 +3589,46 @@ textarea.form-item{
     padding-right:15px
 }
 #crt-main-nav .has-sub-menu>a:after{
+    font-family: "Font Awesome 5 Free";
     content:"\f0d7";
     color:inherit;
     font-size:.8em;
-    font-family:icomoon;
     position:absolute;
     top:50%;
     right:0;
     margin-top:-.5em
+}
+table.dataTable > thead > tr > .sorting:after{
+    font-family: "Font Awesome 5 Free";
+    position:absolute;
+    content:"\00a0\f0dc";
+}
+table.dataTable > thead > tr > .sorting_asc, table.dataTable > thead > tr > .sorting_desc{
+    color:#000;
+}
+table.dataTable > thead > tr > .sorting_asc:after{
+    font-family: "Font Awesome 5 Free";
+    position:absolute;
+    /*content:"\00a0\f0d7";*/
+    content:"\00a0\f15d";
+}
+table.dataTable > thead > tr > .sorting_desc:after{
+    font-family: "Font Awesome 5 Free";
+    position:absolute;
+    /*content:"\00a0\f0d8";*/
+    content:"\00a0\f15e";
+}
+table.dataTable > thead > tr > .sorting_asc.datetime:after{
+    font-family: "Font Awesome 5 Free";
+    position:absolute;
+    /*content:"\00a0\f0d7";*/
+    content:"\00a0\f162";
+}
+table.dataTable > thead > tr > .sorting_desc.datetime:after{
+    font-family: "Font Awesome 5 Free";
+    position:absolute;
+    /*content:"\00a0\f0d8";*/
+    content:"\00a0\f163";
 }
 .crt-nav-type1 .crt-nav-btm,.crt-nav-type1 .crt-nav-btm:after,.crt-tooltip:after,.crt-tooltip:before{
     content:''
@@ -4711,9 +4764,9 @@ body,h1,h2,h3,h4,h5,h6{
 }
 #crt-main-nav .sub-menu .current>a,#crt-main-nav .sub-menu li>a:hover,#crt-main-nav-sm .sub-menu:before,.accordion-header:before,.bg-primary,.bg-primary.text-dropcup-sq,.btn-primary,.education-date,.education:before,.progress-bullets .bullet.fill,.raiting-circle .fill,.tabs .tabs-menu li a:hover,.tabs .tabs-menu li.active a,.togglebox-header:before,mark{
     /*background-color:#c0e3e7*/
-    background-color:#f8f8f8;
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
+    background-color:#f8f8f8
 }
 #crt-nav-sm li.current a,.brd-primary,.btn-share,.education-date:after,.education-date:before,.progress-bullets .bullet{
     /*border-color:#c0e3e7*/
@@ -4789,6 +4842,14 @@ body,h1,h2,h3,h4,h5,h6{
     border-right-color:#fff
 }
 .btn-default{
+    color:#fff;
+    background-color:#000
+}
+.btn-pagination-numbers{
+    color:#010101;
+    background-color:#f8f8f8
+}
+.btn-pagination-numbers.current{
     color:#fff;
     background-color:#000
 }
