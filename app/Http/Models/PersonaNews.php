@@ -100,4 +100,26 @@ class PersonaNews
             $this->updatedAt = new DateTime();
         }
     }
+
+    /**
+     * @return News
+     */
+    public function getNews(): News
+    {
+        return $this->news;
+    }
+
+    /**
+     * @param News $news
+     *
+     * @return PersonaNews
+     */
+    public function setNews(News $news): PersonaNews
+    {
+        $this->news = $news;
+
+        return $this;
+    }
+
+
 }

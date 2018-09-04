@@ -121,7 +121,7 @@
                 },
                 searching: false,
                 bLengthChange: false,
-                pageLength: 5,
+                pageLength: 7,
                 order: [
                     [2, "desc"]
                 ],

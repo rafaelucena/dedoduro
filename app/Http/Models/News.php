@@ -119,4 +119,24 @@ class News
             $this->updatedAt = new DateTime();
         }
     }
+
+    /**
+     * @return Source
+     */
+    public function getSource(): Source
+    {
+        return $this->source;
+    }
+
+    /**
+     * @param Source $source
+     *
+     * @return News
+     */
+    public function setSource(Source $source): News
+    {
+        $this->source = $source;
+
+        return $this;
+    }
 }

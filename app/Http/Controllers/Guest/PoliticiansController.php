@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Guest;
 
 use App\Http\Controllers\Controller;
 use App\Http\Models\Blog;
+use App\Http\Models\News;
 use App\Http\Models\Persona;
 use App\Http\Models\Party;
 use App\Http\Models\Politician;
@@ -94,6 +95,8 @@ class PoliticiansController extends Controller
         $role = $politician->getRole();
         /* @var Party $party */
         $party = $politician->getParty();
+        /* @var News[] $news */
+        $news = $persona->getNews();
 
         $ninja = new \stdClass();
         $ninja->info = [
@@ -107,6 +110,15 @@ class PoliticiansController extends Controller
             'Sobrenome' => $persona->lastName,
             'Partido' => $party->fullName,
         ];
+        $ninja->news = [];
+        foreach ($news as $eachNews) {
+            $ninja->news[] = [
+                'Title' => $eachNews->title,
+                'Source' => $eachNews->getSource()->name,
+                'Url' => $eachNews->url,
+                'Published' => $eachNews->publishedAt,
+            ];
+        }
 
         return view('guest/politicians/show', [
             'ninja' => $ninja,

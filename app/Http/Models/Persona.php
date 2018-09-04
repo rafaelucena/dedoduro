@@ -117,6 +117,12 @@ class Persona implements UrlRoutable
     public $personaSlugs;
 
     /**
+     * @var ArrayCollection|PersonaNews[]
+     * @ORM\OneToMany(targetEntity="PersonaNews", mappedBy="persona")
+     */
+    protected $personaNews;
+
+    /**
      * Persona constructor.
      */
     public function __construct()
@@ -186,5 +192,27 @@ class Persona implements UrlRoutable
         $criteria = custom_criteria(['isActive' => true, 'isDeleted' => false]);
 
         return $this->politicians->matching($criteria)->first() ? : false;
+    }
+
+    /**
+     * @return PersonaNews[]|ArrayCollection
+     */
+    public function getPersonaNews()
+    {
+        $criteria = custom_criteria(['isActive' => true, 'isDeleted' => false]);
+
+        return $this->personaNews->matching($criteria);
+    }
+
+    public function getNews()
+    {
+        $activeRelations = $this->getPersonaNews();
+
+        $news = [];
+        foreach ($activeRelations as $activeRelation) {
+            $news[] = $activeRelation->getNews();
+        }
+
+        return $news;
     }
 }
