@@ -81,6 +81,14 @@ Route::prefix('admin')->group(function () {
     Route::put('users/roles/{id}', 'Admin\UsersController@updateRoles')->name('users.updateRoles');
     Route::resource('users', 'Admin\UsersController');
 
+    // News
+    Route::get('news/datatable', 'Admin\NewsController@getDatatable')->name('news.datatable');
+    Route::get('news/show/{id}', 'Admin\NewsController@show')->name('news.get');
+    Route::get('news/edit/{id}', 'Admin\NewsController@edit')->name('news.put');
+    Route::get('news/publish/status/{id}', 'Admin\NewsController@updateActiveStatus')->name('news.publishStatus');
+    Route::resource('news', 'Admin\NewsController');
+
+
     // Politicians
     Route::get('politicians/datatable', 'Admin\PoliticiansController@getDatatable')->name('politicians.datatable');
     Route::get('politicians/show/{id}', 'Admin\PoliticiansController@show')->name('politician.get');

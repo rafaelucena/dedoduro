@@ -55,31 +55,33 @@
                             <nav id="crt-main-nav">
 
                                 <ul class="clear-list">
-                                    <li><a href="index.php">home</a></li>
-                                    <li><a href="portfolio.php">portfolio</a>
-                                    <li class="has-sub-menu"><a href="#">pages</a>
-                                        <ul class="sub-menu">
-                                            <li><a href="typography.php">typography</a></li>
-                                            <li><a href="components.php">components</a></li>
-                                            <li><a href="search.php">search</a></li>
-                                            <li><a href="404.php">404</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="has-sub-menu"><a href="category.php">blog</a>
-                                        <ul class="sub-menu">
-                                            <li><a href="single.php">single</a></li>
-                                            <li><a href="single-image.php">single image</a></li>
-                                            <li><a href="single-slider.php">single slider</a></li>
-                                            <li><a href="single-youtube.php">single youtube</a></li>
-                                            <li><a href="single-vimeo.php">single vimeo</a></li>
-                                            <li><a href="single-dailymotion.php">single dailymotion</a></li>
-                                            <li><a href="single-soundcloud.php">single soundcloud</a></li>
-                                            <li><a href="single-video.php">single video</a></li>
-                                            <li><a href="single-audio.php">single audio</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="contact.php">contact</a></li>
-                                </ul>                                 </nav>
+                                    <li><a href="{{ url('login') }}">login</a></li>
+                                    {{--<li><a href="index.php">home</a></li>--}}
+                                    {{--<li><a href="portfolio.php">portfolio</a>--}}
+                                    {{--<li class="has-sub-menu"><a href="#">pages</a>--}}
+                                        {{--<ul class="sub-menu">--}}
+                                            {{--<li><a href="typography.php">typography</a></li>--}}
+                                            {{--<li><a href="components.php">components</a></li>--}}
+                                            {{--<li><a href="search.php">search</a></li>--}}
+                                            {{--<li><a href="404.php">404</a></li>--}}
+                                        {{--</ul>--}}
+                                    {{--</li>--}}
+                                    {{--<li class="has-sub-menu"><a href="category.php">blog</a>--}}
+                                        {{--<ul class="sub-menu">--}}
+                                            {{--<li><a href="single.php">single</a></li>--}}
+                                            {{--<li><a href="single-image.php">single image</a></li>--}}
+                                            {{--<li><a href="single-slider.php">single slider</a></li>--}}
+                                            {{--<li><a href="single-youtube.php">single youtube</a></li>--}}
+                                            {{--<li><a href="single-vimeo.php">single vimeo</a></li>--}}
+                                            {{--<li><a href="single-dailymotion.php">single dailymotion</a></li>--}}
+                                            {{--<li><a href="single-soundcloud.php">single soundcloud</a></li>--}}
+                                            {{--<li><a href="single-video.php">single video</a></li>--}}
+                                            {{--<li><a href="single-audio.php">single audio</a></li>--}}
+                                        {{--</ul>--}}
+                                    {{--</li>--}}
+                                    {{--<li><a href="contact.php">contact</a></li>--}}
+                                </ul>
+                            </nav>
                         </div>
                     </div>
 
@@ -314,8 +316,7 @@
 <script type="text/javascript" src="{{ asset('assets/js/plugins.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/js/theme.min.js') }}"></script>
 
-<script src="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"></script>
-<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
 
 @yield('custom_js')
 
