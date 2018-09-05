@@ -12,7 +12,8 @@ use App\Http\Models\Persona;
 use App\Http\Models\PoliticianRole;
 use App\Http\Models\Source;
 use App\Http\Requests\StorePolitician;
-use App\Http\Requests\UpdatePolitician;
+use App\Http\Requests\UpdateNews;
+use Datetime;
 use Doctrine\ORM\EntityManagerInterface;
 use Illuminate\Http\Request;
 use Yajra\Datatables\Datatables;
@@ -315,15 +316,9 @@ class NewsController extends Controller
         /* @var Source[] $sources */
         $sources = $this->em->getRepository(Source::class)->findAll();
 
-        $select2Helper = new \stdClass();
-        $select2Helper->placeholder = 'Update slugs...';
-        $select2Helper->ajaxUrl = route('slugs.ajaxSelect');
-        $select2Helper->allowDynamicOption = false;
-
         $formHelper = new \stdClass();
         $formHelper->title = 'News - Edit';
         $formHelper->action = route('news.update', $news->id);
-        $formHelper->select2Helper = $select2Helper;
         $formHelper->submit = 'Update';
 
         return view(
@@ -338,104 +333,82 @@ class NewsController extends Controller
         );
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  UpdatePolitician $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    protected function update(UpdatePolitician $request, $id)
+    protected function update(UpdateNews $request, $id)
     {
         // Pre Validations are done in UpdateBlogPost Request
         // Update the item
 
         // Get the item to update
-        /* @var Politician $politician */
-        $politician = $this->em->getRepository(Politician::class)->find($id);
-        /** $persona Persona **/
-        $persona = $politician->persona;
-//        $blog = Blog::findOrFail($id);
+        /* @var News $news */
+        $news = $this->em->getRepository(News::class)->find($id);
+        /* @var Source $source */
+        $source = $this->em->getRepository(Source::class)->find($request->source_id);
 
-        // Store File & Get Path
-        $imagePath = $persona->image;
-        if ($request->hasFile('image')) {
-            $imagePath = storage_put('images', $request->file('image'));
-            // Delet Old Image
-            storage_del($persona->image);
-        }
+        // Store and Update Personas
+        $this->updatePersonas($news, ['politicians' => $request->personas_politicians]);
 
-        // Store and Update Slugs
-        $this->updateSlugs($persona, $request->slugs);
+        // Step 1 - Set News
+        $news->url = $request->url;
+        $news->title = $request->title;
+        $news->description = $request->description;
+        $news->publishedAt = new Datetime($request->published_at);
+        $news->setSource($source);
 
-        // Step 1 - Set Persona
-        $persona->shortName = $request->short_name;
-        $persona->firstName = $request->first_name;
-        $persona->lastName = $request->last_name;
-        $persona->description = $request->description;
-        $persona->image = $imagePath;
-        $persona->isActive = $request->is_active;
-        $this->em->persist($persona);
-
-        // Step 2 - Save Politician
-        $politician->setParty($this->em->getRepository(Party::class)->find($request->party_id));
-        $politician->setRole($this->em->getRepository(PoliticianRole::class)->find($request->role_id));
-        $this->em->persist($politician);
-
+        $this->em->persist($news);
         $this->em->flush();
-//        $blog->save();
-
-        // Step 3 - Attach/Sync Related Items
-//        $blog->categories()->sync($categoryArr);
 
         // Back to index with success
-        return back()->with('custom_success', 'Blog has been updated successfully');
+        return back()->with('custom_success', 'News has been updated successfully');
     }
 
     /**
      * @param Persona $persona
      * @param array $slugsInput
      */
-    private function updateSlugs(Persona $persona, array $slugsInput)
+    private function updatePersonas(News $news, array $personaGroups)
     {
-        $currentPersonaSlugs = $persona->getSlugs();
-        $unusedPersonaSlugs = [];
-        foreach ($currentPersonaSlugs as $currentSlug) {
-            $unusedPersonaSlugs[$currentSlug->slug->id] = $currentSlug;
+        $currentPersonas = $news->getPersonaNews();
+        $unusedPersonas = [];
+        foreach ($currentPersonas as $currentPersona) {
+            $unusedPersonas[$currentPersona->getPersona()->id] = $currentPersona;
         }
 
-        foreach ($slugsInput as $slugInput) {
-            unset($unusedPersonaSlugs[$slugInput]);
+        foreach ($personaGroups as $personaGroup) {
+            foreach ($personaGroup as $personaInput) {
+                if (isset($unusedPersonas[$personaInput])) {
+                    unset($unusedPersonas[$personaInput]);
+                    continue;
+                }
 
-            $slug = $this->em->getRepository(Slug::class)->find($slugInput);
-            if (!$slug) {
-                $slug = new Slug();
-                $slug->name = $slugInput;
-                $slug->slug = strslug($slugInput);
-                $slug->createdBy = auth()->user();
-                $this->em->persist($slug);
-            }
+                /* @var Persona $persona */
+                $persona = $this->em->getRepository(Persona::class)->find($personaInput);
+                if (!$persona) {
+                    return false;
+                }
 
-            $personaSlug = $this->em->getRepository(PersonaSlug::class)->findOneBy([
-//                'persona' => $persona,
-                'slug' => $slug,
-                'isActive' => (int) true,
-            ]);
-            if (!$personaSlug) {
-                $personaSlug = new PersonaSlug();
-                $personaSlug->slug = $slug;
-                $personaSlug->persona = $persona;
+                $personaNews = $this->em->getRepository(PersonaNews::class)->findOneBy([
+                    'persona' => $persona,
+                    'news' => $news,
+                ]);
+                if (!$personaNews) {
+                    $personaNews = new PersonaNews();
+                    $personaNews->setNews($news);
+                    $personaNews->setPersona($persona);
+                }
+
+                $personaNews->isActive = (int) true;
+                $personaNews->isDeleted = (int) false;
+
+                $this->em->persist($personaNews);
             }
-            $personaSlug->isActive = (int) true;
-            $personaSlug->deletedAt = null;
-            $this->em->persist($personaSlug);
         }
 
-        foreach ($unusedPersonaSlugs as $unusedPersonaSlug) {
-            $unusedPersonaSlug->isActive = (int) false;
-            $unusedPersonaSlug->deletedAt = new \DateTime();
+        foreach ($unusedPersonas as $unusedPersona) {
+            $unusedPersona->isActive = (int) false;
+            $unusedPersona->isDeleted = (int) true;
+            $unusedPersona->deletedAt = new \DateTime();
 
-            $this->em->persist($unusedPersonaSlug);
+            $this->em->persist($unusedPersona);
         }
     }
 
