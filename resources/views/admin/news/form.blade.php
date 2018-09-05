@@ -37,28 +37,7 @@
                                value="{{ old('published_at', $news->publishedAt->format('Y-m-d H:i')) }}" placeholder="da Silva" maxlength="20" required>
                     </div>
                 </div>
-                {{--<div class="col-md-4">--}}
-                    {{--<div class="form-group">--}}
-                        {{--<label for="slugs">Slugs <span class="required">*</span></label>--}}
-                        {{--<select class="form-control select2-input" id="slugs" name="slugs[]" required multiple>--}}
-                            {{--@if (is_array(old('slugs')))--}}
-                                {{--@foreach (old('slugs') as $oldSlug)--}}
-                                    {{--<option value="{{ $oldSlug }}" selected="selected">--}}
-                                        {{--@if(is_numeric($oldSlug))--}}
-                                            {{--{{ app('em')->getRepository(App\Http\Models\Slug::class)->find($oldSlug)->name }}--}}
-                                        {{--@else--}}
-                                            {{--{{ $oldSlug }}--}}
-                                        {{--@endif--}}
-                                    {{--</option>--}}
-                                {{--@endforeach--}}
-                            {{--@else--}}
-                                {{--@foreach($persona->getSlugs() as $personaSlug)--}}
-                                    {{--<option value="{{ $personaSlug->slug->id }}" selected>{{ $personaSlug->slug->name }}</option>--}}
-                                {{--@endforeach--}}
-                            {{--@endif--}}
-                        {{--</select>--}}
-                    {{--</div>--}}
-                {{--</div>--}}
+
             </div>
             <div class="row">
                 <div class="col-md-8">
@@ -68,6 +47,26 @@
                     </div>
                 </div>
                 <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="personas_politicians">Politicians <span class="required">*</span></label>
+                        <select class="form-control select2-input" id="personas_politicians" name="personas_politicians[]" required multiple>
+                        @if (is_array(old('personas_politicians')))
+                            @foreach (old('personas_politicians') as $oldPersonaPolitician)
+                                <option value="{{ $oldPersonaPolitician }}" selected="selected">
+                                @if(is_numeric($oldPersonaPolitician))
+                                    {{ app('em')->getRepository(App\Http\Models\Persona::class)->find($oldPersonaPolitician)->firstName . ' ' . app('em')->getRepository(App\Http\Models\Persona::class)->find($oldPersonaPolitician)->lastName }}
+                                @else
+                                    {{ $oldPersonaPolitician }}
+                                @endif
+                                </option>
+                            @endforeach
+                        @else
+                            @foreach($news->getPersonas(\App\Http\Models\News::RELATED_POLITICIANS) as $personaPolitician)
+                                <option value="{{ $personaPolitician->id }}" selected>{{ $personaPolitician->firstName . ' ' . $personaPolitician->lastName }}</option>
+                            @endforeach
+                        @endif
+                        </select>
+                    </div>
                     {{--<div class="form-group">--}}
                         {{--<label for="party_id">Party <span class="required">*</span></label>--}}
                         {{--<select class="form-control" id="party_id" name="party_id" required>--}}

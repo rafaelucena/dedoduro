@@ -89,6 +89,9 @@ Route::prefix('admin')->group(function () {
     Route::resource('news', 'Admin\NewsController');
 
 
+    // Personas
+    Route::get('personas/ajax-select', 'Admin\PoliticiansController@personasAjaxSelect')->name('personas.ajaxSelect');
+
     // Politicians
     Route::get('politicians/datatable', 'Admin\PoliticiansController@getDatatable')->name('politicians.datatable');
     Route::get('politicians/show/{id}', 'Admin\PoliticiansController@show')->name('politician.get');

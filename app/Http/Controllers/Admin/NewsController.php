@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Models\News;
 use App\Http\Models\Party;
+use App\Http\Models\PersonaNews;
 use App\Http\Models\PersonaSlug;
 use App\Http\Models\Politician;
 use App\Http\Models\Persona;

@@ -16,6 +16,8 @@ use Doctrine\ORM\Event\PreUpdateEventArgs;
  */
 class News
 {
+    public const RELATED_POLITICIANS = 'politicians';
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -91,6 +93,12 @@ class News
     protected $source;
 
     /**
+     * @var ArrayCollection|PersonaNews[]
+     * @ORM\OneToMany(targetEntity="PersonaNews", mappedBy="news")
+     */
+    protected $personaNews;
+
+    /**
      * Slug constructor.
      */
     public function __construct()
@@ -138,5 +146,38 @@ class News
         $this->source = $source;
 
         return $this;
+    }
+
+    /**
+     * @return PersonaNews[]|ArrayCollection
+     */
+    public function getPersonaNews()
+    {
+        $criteria = custom_criteria(['isActive' => true, 'isDeleted' => false]);
+
+        return $this->personaNews->matching($criteria);
+    }
+
+    public function getPersonas(string $related = '')
+    {
+        $activeRelations = $this->getPersonaNews();
+
+        $personas = [];
+        foreach ($activeRelations as $activeRelation) {
+            $persona = $activeRelation->getPersona();
+
+            switch ($related) {
+                case self::RELATED_POLITICIANS:
+                    if ($persona->getPolitician() !== false) {
+                        $personas[] = $persona;
+                    }
+                    break;
+                default:
+                    $personas[] = $persona;
+                    break;
+            }
+        }
+
+        return $personas;
     }
 }

@@ -164,6 +164,47 @@ class PoliticiansController extends Controller
         return view('admin/blogs/trashed-index', ['trashed_items_count' => $trashed_items]);
     }
 
+    protected function personasAjaxSelect(Request $request)
+    {
+        //@TODO - Adapt this function for types, Politician, Lawman, etc.
+        if ($request->ajax()) {
+            $personas = $this->em->createQueryBuilder()
+                ->select([
+                    'pe.id',
+                    'pe.firstName',
+                    'pe.lastName',
+                    'pe.isActive AS personaActive',
+                ])
+                ->from(Persona::class, 'pe')
+                ->leftJoin(Politician::class, 'po', 'WITH', 'po.persona = pe')
+                ->where('pe.firstName LIKE :term OR pe.lastName LIKE :term OR pe.shortName LIKE :term')
+                ->orderBy('pe.firstName, pe.lastName')
+                ->setParameter('term', '%' . $request->term . '%')
+                ->getQuery()
+                ->getResult();
+
+            $resultSelect2 = [];
+            foreach ($personas as $persona) {
+                $disabled = false;
+
+                if (!$persona['personaActive']) {
+                    $disabled = true;
+                }
+
+                $resultSelect2[] = [
+                    'id' => $persona['id'],
+//                    'text' => '<del>' . $category->name . '</del>',
+                    'text' => $persona['firstName'] . ' ' . $persona['lastName'],
+                    'disabled' => $disabled,
+                ];
+            }
+
+            return response()->json([
+                'results' => $resultSelect2,
+            ]);
+        }
+    }
+
     /**
      * trashed blogs - Process datatables ajax request.
      *

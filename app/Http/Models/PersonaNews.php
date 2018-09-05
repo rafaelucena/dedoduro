@@ -70,7 +70,7 @@ class PersonaNews
 
     /**
      * @var News
-     * @ORM\ManyToOne(targetEntity="News", inversedBy="personasNews")
+     * @ORM\ManyToOne(targetEntity="News", inversedBy="personaNews")
      */
     protected $news;
 
@@ -121,5 +121,23 @@ class PersonaNews
         return $this;
     }
 
+    /**
+     * @return Persona
+     */
+    public function getPersona(): Persona
+    {
+        return $this->persona;
+    }
 
+    /**
+     * @param Persona $persona
+     *
+     * @return PersonaNews
+     */
+    public function setPersona(Persona $persona): PersonaNews
+    {
+        $this->persona = $persona;
+
+        return $this;
+    }
 }
