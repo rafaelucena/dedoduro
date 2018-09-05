@@ -340,7 +340,7 @@ class NewsController extends Controller
     {
         //@TODO - Adapt this function for types, Politician, Lawman, etc.
         if ($request->ajax()) {
-o            $news = $this->em->createQueryBuilder()
+            $news = $this->em->createQueryBuilder()
                 ->select([
                     'ne.id',
                     'ne.title',
@@ -348,12 +348,12 @@ o            $news = $this->em->createQueryBuilder()
                 ])
                 ->from(News::class, 'ne')
                 ->where('ne.title LIKE :term OR ne.url LIKE :term')
-                ->andWhere('ne.id != :news')
+//                ->andWhere('ne.id != :news')
                 ->orderBy('ne.title')
 //                ->setParameter('term', '%' . $request->term . '%')
 //                ->setParameter('news', $request->news)
                 ->setParameters([
-                    'news' => $request->news,
+//                    'news' => $request->news,
                     'term' => '%' . $request->term . '%',
                 ])
                 ->getQuery()
