@@ -13,7 +13,7 @@
             Trashed Items
             <span class="badge badge-light">{{ $trashed_items_count }}</span>
         </a>
-        <a href="{{ route('politicians.create') }}" class="btn btn-primary float-right btn-sm mr-2">
+        <a href="{{ route('news.create') }}" class="btn btn-primary float-right btn-sm mr-2">
             <i class="fas fa-plus"></i> Add
         </a>
     </div>

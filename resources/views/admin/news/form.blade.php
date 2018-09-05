@@ -1,24 +1,30 @@
 <div class="card">
-    <div class="card-header">{{ $formHelper->title }} <a href="{{ route('politicians.index') }}" class="btn btn-light float-right btn-sm "><i class="fas fa-chevron-left"></i> Go Back</a></div>
+    <div class="card-header">{{ $formHelper->title }} <a href="{{ route('news.index') }}" class="btn btn-light float-right btn-sm "><i class="fas fa-chevron-left"></i> Go Back</a></div>
 
     <div class="card-body">
         <form method="post" action="{{ $formHelper->action }}" enctype="multipart/form-data" novalidate>
             @csrf
-            {{ method_field('PUT') }}
+            {{ method_field($formHelper->method) }}
             <div class="row">
                 <div class="col-md-8">
                     <div class="form-group">
-                        <label for="title">Title <span class="required">*</span></label>
-                        <input type="text" class="form-control" id="title" name="title"
-                               value="{{ old('title', $news->title) }}" placeholder="Title of the news..." maxlength="127" required>
+                        <label for="title_s">Title <span class="required">*</span></label>
+                        <select class="form-control" id="title_s" name="title_s" required>
+                            @if ($news->title)
+                                <option value="{{ old('title', $news->title) }}" selected>{{ $news->title }}</option>
+                            @endif
+                        </select>
+                        {{--<label for="title">Title <span class="required">*</span></label>--}}
+                        {{--<input type="text" class="form-control" id="title" name="title"--}}
+{{--                               value="{{ old('title', $news->title) }}" placeholder="Title of the news..." maxlength="127" required>--}}
                     </div>
                 </div>
                 <div class="col-md-4">
                     <label for="role_id">Source <span class="required">*</span></label>
                     <select class="form-control" id="source_id" name="source_id" required>
-                        @foreach($sources as $source)
-                            <option value="{{ $source->id }}" @if(old('source_id', $news->getSource() ? $news->getSource()->id : '') == $source->id) selected @endif>{{ $source->name }}</option>
-                        @endforeach
+                    @foreach($sources as $source)
+                        <option value="{{ $source->id }}" @if(old('source_id', $news->id ? ($news->getSource() ? $news->getSource()->id : '') : '') == $source->id) selected @endif>{{ $source->name }}</option>
+                    @endforeach
                     </select>
                 </div>
             </div>
@@ -34,7 +40,7 @@
                     <div class="form-group">
                         <label for="published_at">Published at <span class="required">*</span></label>
                         <input type="text" class="form-control" id="published_at" name="published_at"
-                               value="{{ old('published_at', $news->publishedAt->format('Y-m-d H:i')) }}" placeholder="da Silva" maxlength="20" required>
+                               value="{{ old('published_at', $news->publishedAt ? $news->publishedAt->format('Y-m-d H:i') : '') }}" placeholder="da Silva" maxlength="20" required>
                     </div>
                 </div>
 

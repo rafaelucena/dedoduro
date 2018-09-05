@@ -155,7 +155,7 @@ class News
     {
         $criteria = custom_criteria(['isActive' => true, 'isDeleted' => false]);
 
-        return $this->personaNews->matching($criteria);
+        return $this->personaNews ? $this->personaNews->matching($criteria) : [];
     }
 
     public function getPersonas(string $related = '')

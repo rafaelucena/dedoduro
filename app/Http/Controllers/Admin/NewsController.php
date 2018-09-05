@@ -216,36 +216,25 @@ class NewsController extends Controller
      */
     protected function create()
     {
-        // Politician Details
-        $politician = new Politician();
-        // Persona Details
-        $persona = new Persona();
-        // Party list
-        $parties = $this->em->getRepository(Party::class)->findAll();
-        // Roles List
-        $roles = $this->em->getRepository(PoliticianRole::class)->findAll();
-
-        $select2Helper = new \stdClass();
-        $select2Helper->placeholder = 'Create slugs...';
-        $select2Helper->ajaxUrl = route('slugs.ajaxSelect');
-        $select2Helper->allowDynamicOption = true;
+        /*/* @var News $news */
+        $news = new News();
+        /* @var Source[] $sources */
+        $sources = $this->em->getRepository(Source::class)->findAll();
 
         $formHelper = new \stdClass();
-        $formHelper->title = 'Politicians - New';
-        $formHelper->action = route('politicians.store');
-        $formHelper->select2Helper = $select2Helper;
+        $formHelper->title = 'News - Insert';
+        $formHelper->method = 'POST';
+        $formHelper->action = route('news.store');
         $formHelper->submit = 'Create';
 
         return view(
-            'admin/politicians/create',
+            'admin/news/create',
             [
-                // Helper
+                // Helpers
                 'formHelper' => $formHelper,
                 // Objects
-                'parties' => $parties,
-                'persona' => $persona,
-                'politician' => $politician,
-                'roles' => $roles,
+                'news' => $news,
+                'sources' => $sources,
             ]
         );
     }
@@ -256,34 +245,40 @@ class NewsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    protected function store(StorePolitician $request)
+    protected function store(UpdateNews $request)
     {
-        // Pre Validations are done in StoreBlogPost Request
-        // Store File & Get Path
-        $imagePath = storage_put('images', $request->file('image'));
-
-        // Step 1 - Set Persona
-        $persona = new Persona();
-        $persona->shortName = $request->short_name;
-        $persona->firstName = $request->first_name;
-        $persona->lastName = $request->last_name;
-        $persona->description = $request->description;
-        $persona->image = $imagePath;
-        $persona->isActive = $request->is_active;
-        $this->em->persist($persona);
-
-        // Step 2 - Save Politician
-        $politician = new Politician();
-        $politician->persona = $persona;
-        $politician->party = $this->em->getRepository(Party::class)->find($request->party_id);
-        $politician->role = $this->em->getRepository(PoliticianRole::class)->find($request->role_id);
-        $this->em->persist($politician);
-
-        // Step 3 - Flush everything
-        $this->em->flush();
-
+        $this->save($request);
         // Back to index with success
-        return redirect()->route('politicians.index')->with('custom_success', 'Politician has been created successfully');
+        return redirect()->route('news.index')->with('custom_success', 'Politician has been created successfully');
+    }
+
+    /**
+     * @param UpdateNews $request
+     * @param int|null $id
+     */
+    private function save(UpdateNews $request, $id = null)
+    {
+        // Get the item to update
+        $news = new News();
+        if ($id) {
+            /* @var News $news */
+            $news = $this->em->getRepository(News::class)->find($id);
+        }
+        /* @var Source $source */
+        $source = $this->em->getRepository(Source::class)->find($request->source_id);
+
+        // Store and Update Personas
+        $this->updatePersonas($news, ['politicians' => $request->personas_politicians]);
+
+        // Step 1 - Set News
+        $news->url = $request->url;
+        $news->title = $request->title;
+        $news->description = $request->description;
+        $news->publishedAt = new Datetime($request->published_at);
+        $news->setSource($source);
+
+        $this->em->persist($news);
+        $this->em->flush();
     }
 
     /**
@@ -318,6 +313,7 @@ class NewsController extends Controller
 
         $formHelper = new \stdClass();
         $formHelper->title = 'News - Edit';
+        $formHelper->method = 'PUT';
         $formHelper->action = route('news.update', $news->id);
         $formHelper->submit = 'Update';
 
@@ -335,30 +331,48 @@ class NewsController extends Controller
 
     protected function update(UpdateNews $request, $id)
     {
-        // Pre Validations are done in UpdateBlogPost Request
-        // Update the item
-
-        // Get the item to update
-        /* @var News $news */
-        $news = $this->em->getRepository(News::class)->find($id);
-        /* @var Source $source */
-        $source = $this->em->getRepository(Source::class)->find($request->source_id);
-
-        // Store and Update Personas
-        $this->updatePersonas($news, ['politicians' => $request->personas_politicians]);
-
-        // Step 1 - Set News
-        $news->url = $request->url;
-        $news->title = $request->title;
-        $news->description = $request->description;
-        $news->publishedAt = new Datetime($request->published_at);
-        $news->setSource($source);
-
-        $this->em->persist($news);
-        $this->em->flush();
-
+        $this->save($request, $id);
         // Back to index with success
         return back()->with('custom_success', 'News has been updated successfully');
+    }
+
+    protected function newsTitlesAjaxSelect(Request $request)
+    {
+        //@TODO - Adapt this function for types, Politician, Lawman, etc.
+        if ($request->ajax()) {
+o            $news = $this->em->createQueryBuilder()
+                ->select([
+                    'ne.id',
+                    'ne.title',
+                    'ne.url',
+                ])
+                ->from(News::class, 'ne')
+                ->where('ne.title LIKE :term OR ne.url LIKE :term')
+                ->andWhere('ne.id != :news')
+                ->orderBy('ne.title')
+//                ->setParameter('term', '%' . $request->term . '%')
+//                ->setParameter('news', $request->news)
+                ->setParameters([
+                    'news' => $request->news,
+                    'term' => '%' . $request->term . '%',
+                ])
+                ->getQuery()
+                ->getResult();
+
+            $resultSelect2 = [];
+            foreach ($news as $singleNews) {
+                $resultSelect2[] = [
+                    'id' => $singleNews['id'],
+//                    'text' => '<del>' . $category->name . '</del>',
+                    'text' => $singleNews['title'],
+                    'disabled' => true,
+                ];
+            }
+
+            return response()->json([
+                'results' => $resultSelect2,
+            ]);
+        }
     }
 
     /**

@@ -310,6 +310,7 @@
 
 <!-- Scripts -->
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 <script>window.jQuery || document.write('<script src="{{ asset("assets/js/vendor/jquery-1.12.4.min.js") }}"><\/script>')</script>
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDiwY_5J2Bkv2UgSeJa4NOKl6WUezSS9XA"></script>
 

@@ -6,7 +6,7 @@
 @endsection
 
 @section('content')
-    @include('admin/politicians/form')
+    @include('admin/news/form')
 @endsection
 
 @section('custom_js')
@@ -48,7 +48,38 @@ var editor_config = {
 tinymce.init(editor_config);
 
 $(document).ready(function() {
-    @include('includes/partials/select2-input')
+
+
+    $('#source_id').select2({
+        theme: "bootstrap",
+        placeholder: 'Select a source...',
+        minimumInputLength: 0,
+        tokenSeparators: [',','.'],
+    });
+    $('#source_id').trigger('change');
+
+    $('#personas_politicians').select2({
+        theme: "bootstrap",
+        placeholder: 'Select at least one politician...',
+        minimumInputLength: 3,
+        // maximumSelectionLength: 3,
+        // delay : 100,
+        tokenSeparators: [',','.'],
+        ajax: {
+            url: '{{ route('personas.ajaxSelect') }}',
+            dataType: 'json',
+            cache: true,
+            data: function(params) {
+                return {
+                    term: params.term || '',
+                    page: params.page || 1
+                };
+            },
+        },
+        // templateResult: formatItem,
+        // templateSelection: formatItem
+    });
+    $('#personas_politicians').trigger('change');
 });
 
 // Count Char Helper
