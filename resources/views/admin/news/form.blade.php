@@ -11,7 +11,7 @@
                         <label for="title">Title <span class="required">*</span></label>
                         <select class="form-control" id="title" name="title" required>
                             @if ($news->title)
-                                <option value="{{ old('title', $news->id) }}" selected>{{ $news->title }}</option>
+                                <option value="{{ old('title', $news->title) }}" selected>{{ $news->title }}</option>
                             @endif
                         </select>
                         {{--<label for="title">Title <span class="required">*</span></label>--}}
@@ -37,7 +37,7 @@
                         <label for="url">Title <span class="required">*</span></label>
                         <select class="form-control" id="url" name="url" required>
                             @if ($news->url)
-                                <option value="{{ old('url', $news->id) }}" selected>{{ $news->url }}</option>
+                                <option value="{{ old('url', $news->url) }}" selected>{{ $news->url }}</option>
                             @endif
                         </select>
                     </div>

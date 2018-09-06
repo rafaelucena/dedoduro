@@ -8,7 +8,7 @@
 
                 <div class="crt-card bg-primary text-center">
                     <div class="crt-card-avatar">
-                        <img class="avatar avatar-195" src="{{ asset('assets/images/uploads/avatar/avatar-195x195.png') }}"
+                        <img class="avatar avatar-195" src="{{ asset($ninja->info['image']) }}"
                              srcset="{{ asset('assets/images/uploads/avatar/avatar-390x390-2x.png') }} 2x" width="195" height="195" alt="">
                     </div>
                     <div class="crt-card-info">

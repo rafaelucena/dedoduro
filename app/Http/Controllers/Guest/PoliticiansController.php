@@ -100,6 +100,8 @@ class PoliticiansController extends Controller
 
         $ninja = new \stdClass();
         $ninja->info = [
+            'image' => 'storage/'. $persona->image,
+//            'image' => 'assets/images/uploads/avatar/avatar-195x195.png',
             'shortName' => $persona->shortName,
             'longDesc' => $persona->description,
             'roleName' => $role->name,

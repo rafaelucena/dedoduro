@@ -64,11 +64,6 @@ class NewsController extends Controller
                 'nw.isActive',
                 'nw.publishedAt',
                 'so.name AS sourceName',
-//                'pe.shortName as personaShortName',
-//                'pa.shortName as partyShortName',
-//                'po.isActive',
-//                'po.createdAt',
-//                'pr.name as politicianRoleName',
             ])
             ->from(News::class, 'nw')
             ->innerJoin( Source::class, 'so', 'WITH', 'so = nw.source')
