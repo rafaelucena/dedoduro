@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Guest;
 use App\Http\Controllers\Controller;
 use App\Http\Models\Blog;
 use App\Http\Models\Subscriber;
+use App\Http\Models\Persona;
 use App\Jobs\SendSubscriptionVerificationEmail;
 use App\Listeners\EmailSubscribedListener;
 use Illuminate\Http\Request;
@@ -19,13 +20,53 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $blogs = $this->em->getRepository(Blog::class)->findBy(
-            ['isActive' => true],
-            ['createdAt' => 'DESC']
-        );
+        /* @var Persona $persona */
+        $persona = $this->em->getRepository(Persona::class)->find(2);
+        /* @var Politician $politician */
+        $politician = $persona->getPolitician();
+        /* @var PoliticianRole $role */
+        $role = $politician->getRole();
+        /* @var Party $party */
+        $party = $politician->getParty();
+        /* @var News[] $news */
+        $news = $persona->getNews();
+
+        $ninja = new \stdClass();
+        $ninja->info = [
+            'image' => 'storage/'. $persona->image,
+//            'image' => 'assets/images/uploads/avatar/avatar-195x195.png',
+            'shortName' => $persona->shortName,
+            'longDesc' => $persona->description,
+            'roleName' => $role->name,
+            'partyName' => $party->shortName,
+        ];
+        $ninja->details = [
+            'Nome' => $persona->firstName,
+            'Sobrenome' => $persona->lastName,
+            'Partido' => $party->fullName,
+        ];
+        $ninja->news = [];
+        foreach ($news as $eachNews) {
+            $ninja->news[] = [
+                'Title' => $eachNews->title,
+                'Source' => $eachNews->getSource()->name,
+                'Url' => $eachNews->url,
+                'Published' => $eachNews->publishedAt,
+            ];
+        }
+
+        return view('guest/home', [
+            'ninja' => $ninja,
+            'persona' => $persona,
+            'role' => $role,
+        ]);
+//        $blogs = $this->em->getRepository(Blog::class)->findBy(
+//            ['isActive' => true],
+//            ['createdAt' => 'DESC']
+//        );
 //        $blogs = Blog::active()->orderBy('created_at', 'desc')
 //                            ->simplePaginate(app('global_settings')[2]->settingValue);
-        return view('guest/home', ['blogs' => $blogs]);
+//        return view('guest/home', ['blogs' => $blogs]);
     }
     /**
      * Show the Blogs Homepage.

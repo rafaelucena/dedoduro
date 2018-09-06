@@ -55,7 +55,11 @@
                             <nav id="crt-main-nav">
 
                                 <ul class="clear-list">
-                                    <li><a href="{{ url('login') }}">login</a></li>
+                                    <li><a href="{{ url('/') }}">Home</a></li>
+                                    <li><a href="{{ url('login') }}">Sobre</a></li>
+                                    <li><a href="{{ url('login') }}">Busca</a></li>
+                                    <li><a href="{{ url('login') }}">Comunicados</a></li>
+                                    <li><a href="{{ url('login') }}">Contato</a></li>
                                     {{--<li><a href="index.php">home</a></li>--}}
                                     {{--<li><a href="portfolio.php">portfolio</a>--}}
                                     {{--<li class="has-sub-menu"><a href="#">pages</a>--}}
@@ -291,7 +295,7 @@
     <footer id="crt-footer" class="crt-container-lg">
         <div class="crt-container">
             <div class="crt-container-sm clear-mrg text-center">
-                <p>Ola Resume @ All Rights Reserved 2016</p>
+                <p>Criado por puro ódio @ Todos os direitos reservados 2018</p>
             </div>
         </div>
         <!-- .crt-container -->
