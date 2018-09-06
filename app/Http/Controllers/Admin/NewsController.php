@@ -336,7 +336,7 @@ class NewsController extends Controller
         return back()->with('custom_success', 'News has been updated successfully');
     }
 
-    protected function newsTitlesAjaxSelect(Request $request)
+    protected function newsAjaxSelect(Request $request)
     {
         //@TODO - Adapt this function for types, Politician, Lawman, etc.
         if ($request->ajax()) {
@@ -348,10 +348,8 @@ class NewsController extends Controller
                 ])
                 ->from(News::class, 'ne')
                 ->where('ne.title LIKE :term OR ne.url LIKE :term')
-//                ->andWhere('ne.id != :news')
+//                ->andWhere('ne.id NOT IN (:news)')
                 ->orderBy('ne.title')
-//                ->setParameter('term', '%' . $request->term . '%')
-//                ->setParameter('news', $request->news)
                 ->setParameters([
 //                    'news' => $request->news,
                     'term' => '%' . $request->term . '%',
@@ -364,8 +362,8 @@ class NewsController extends Controller
                 $resultSelect2[] = [
                     'id' => $singleNews['id'],
 //                    'text' => '<del>' . $category->name . '</del>',
-                    'text' => $singleNews['title'],
-                    'disabled' => true,
+                    'text' => $request->type === 'title' ? $singleNews['title'] : $singleNews['url'],
+                    'disabled' => $singleNews['id'] == $request->id ? false : true,
                 ];
             }
 

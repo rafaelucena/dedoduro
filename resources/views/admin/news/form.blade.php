@@ -8,10 +8,10 @@
             <div class="row">
                 <div class="col-md-8">
                     <div class="form-group">
-                        <label for="title_s">Title <span class="required">*</span></label>
-                        <select class="form-control" id="title_s" name="title_s" required>
+                        <label for="title">Title <span class="required">*</span></label>
+                        <select class="form-control" id="title" name="title" required>
                             @if ($news->title)
-                                <option value="{{ old('title', $news->title) }}" selected>{{ $news->title }}</option>
+                                <option value="{{ old('title', $news->id) }}" selected>{{ $news->title }}</option>
                             @endif
                         </select>
                         {{--<label for="title">Title <span class="required">*</span></label>--}}

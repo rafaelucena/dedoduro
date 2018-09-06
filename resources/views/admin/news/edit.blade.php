@@ -47,28 +47,27 @@ var editor_config = {
 // Init TinyMCE
 tinymce.init(editor_config);
     $(document).ready(function() {
-        $('#title_s').select2({
+        $('#title').select2({
             theme: "bootstrap",
             placeholder: 'Write a title...',
             tags: true,
             minimumInputLength: 5,
-            // maximumSelectionLength: 3,
-            // delay : 100,
             ajax: {
-                url: '{{ route('newsTitles.ajaxSelect') }}',
+                url: '{{ route('news.ajaxSelect') }}',
                 dataType: 'json',
+                delay: 250,
                 cache: true,
                 data: function(params) {
                     return {
+                        id: '{{ $news->id }}',
                         term: params.term || '',
-                        news: '{{ $news->id }}'
+                        type: 'title',
                     };
                 },
             },
-            // templateResult: formatItem,
-            // templateSelection: formatItem
         });
-        $('#title_s').trigger('change');
+        $('#title').trigger('change');
+        $('span[role="presentation"]').hide();
 
         $('#source_id').select2({
             theme: "bootstrap",
