@@ -340,6 +340,7 @@ class NewsController extends Controller
     {
         //@TODO - Adapt this function for types, Politician, Lawman, etc.
         if ($request->ajax()) {
+            $showMax = 3;
             $news = $this->em->createQueryBuilder()
                 ->select([
                     'ne.id',
@@ -354,16 +355,30 @@ class NewsController extends Controller
 //                    'news' => $request->news,
                     'term' => '%' . $request->term . '%',
                 ])
+                ->setMaxResults($showMax + 1)
                 ->getQuery()
                 ->getResult();
 
             $resultSelect2 = [];
+            $count = 0;
             foreach ($news as $singleNews) {
                 $resultSelect2[] = [
                     'id' => $singleNews['id'],
 //                    'text' => '<del>' . $category->name . '</del>',
                     'text' => $request->type === 'title' ? $singleNews['title'] : $singleNews['url'],
                     'disabled' => $singleNews['id'] == $request->id ? false : true,
+                ];
+
+                $count++;
+                if ($count >= $showMax) {
+                    break;
+                }
+            }
+            if (count($news) > $showMax) {
+                $resultSelect2[] = [
+                    'id' => '0',
+                    'text' => 'Too many options, be more specific',
+                    'disabled' => true,
                 ];
             }
 

@@ -67,6 +67,28 @@ tinymce.init(editor_config);
             },
         });
         $('#title').trigger('change');
+        // $('span[role="presentation"]').hide();
+
+        $('#url').select2({
+            theme: "bootstrap",
+            placeholder: 'Write an url (including http/https)...',
+            tags: true,
+            minimumInputLength: 5,
+            ajax: {
+                url: '{{ route('news.ajaxSelect') }}',
+                dataType: 'json',
+                delay: 250,
+                cache: true,
+                data: function(params) {
+                    return {
+                        id: '{{ $news->id }}',
+                        term: params.term || '',
+                        type: 'url',
+                    };
+                },
+            },
+        });
+        $('#url').trigger('change');
         $('span[role="presentation"]').hide();
 
         $('#source_id').select2({

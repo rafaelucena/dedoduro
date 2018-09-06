@@ -31,9 +31,15 @@
             <div class="row">
                 <div class="col-md-8">
                     <div class="form-group">
-                        <label for="url">Url <span class="required">*</span></label>
-                        <input type="text" class="form-control" id="url" name="url"
-                               value="{{ old('url', $news->url) }}" placeholder="https://www.etc.com/oh-well" maxlength="511" required>
+                        {{--<label for="url">Url <span class="required">*</span></label>--}}
+                        {{--<input type="text" class="form-control" id="url" name="url"--}}
+{{--                               value="{{ old('url', $news->url) }}" placeholder="https://www.etc.com/oh-well" maxlength="511" required>--}}
+                        <label for="url">Title <span class="required">*</span></label>
+                        <select class="form-control" id="url" name="url" required>
+                            @if ($news->url)
+                                <option value="{{ old('url', $news->id) }}" selected>{{ $news->url }}</option>
+                            @endif
+                        </select>
                     </div>
                 </div>
                 <div class="col-md-4">
