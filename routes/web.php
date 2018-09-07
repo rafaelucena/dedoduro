@@ -20,7 +20,8 @@ Route::get('contato', 'Guest\HomeController@contact');
 Route::post('contato/enviar', 'Guest\HomeController@contactStore')->name('contact.store');
 
 Route::get('politico/{slug}', 'Guest\PoliticiansController@show');
-//Route::get('test', 'Guest\PoliticiansController@index')->name('test');
+
+Route::get('test', 'Guest\PoliticiansController@index')->name('test');
 //Route::get('post', function () {
 //    return redirect('/');
 //});
@@ -30,16 +31,16 @@ Route::get('politico/{slug}', 'Guest\PoliticiansController@show');
 //Route::get('category/{category}', 'Guest\BlogsController@category');
 //Route::post('post/comment', 'Guest\BlogsController@comment');
 //
-Route::post('subscribe', 'Guest\HomeController@subscribe');
+//Route::post('subscribe', 'Guest\HomeController@subscribe');
 //Route::get('subscribe/verify/{token}', 'Guest\HomeController@subscribeVerify');
 //
 //Route::get('feed', 'FeedsController@index');
 
 Route::get('sobre', function () {
-    return view('status/status204_no-content');
+    abort(501);
 });
 Route::get('comunicados', function () {
-    return view('status/status204_no-content');
+    abort(501);
 });
 // User Area
 Auth::routes();
