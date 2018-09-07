@@ -62,7 +62,7 @@
                                         <a href="{{ url('sobre') }}">Sobre</a>
                                     </li>
                                     <li>
-                                        <a href="{{ url('login') }}">Busca</a>
+                                        <a href="{{ url('busca') }}">Busca</a>
                                     </li>
                                     <li class="in-progress">
                                         <a href="{{ url('comunicados') }}">Comunicados</a>

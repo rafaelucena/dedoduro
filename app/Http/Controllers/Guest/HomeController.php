@@ -71,7 +71,13 @@ class HomeController extends Controller
 //        return view('guest/home', ['blogs' => $blogs]);
     }
 
-    public function contact()
+    protected function search()
+    {
+        return view('guest/search', [
+        ]);
+    }
+
+    protected function contact()
     {
         $contactTypes = $this->em->getRepository(ContactType::class)->findBy([
             'isActive' => (int) true,

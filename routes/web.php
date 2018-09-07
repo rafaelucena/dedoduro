@@ -19,6 +19,8 @@ Route::get('/', 'Guest\HomeController@index');
 Route::get('contato', 'Guest\HomeController@contact');
 Route::post('contato/enviar', 'Guest\HomeController@contactStore')->name('contact.store');
 
+Route::get('busca', 'Guest\HomeController@search');
+
 Route::get('politico/{slug}', 'Guest\PoliticiansController@show');
 
 Route::get('test', 'Guest\PoliticiansController@index')->name('test');
