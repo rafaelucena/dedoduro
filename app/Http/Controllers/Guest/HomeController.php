@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Guest;
 
 use App\Http\Controllers\Controller;
 use App\Http\Models\Blog;
+use App\Http\Models\Contact;
+use App\Http\Models\ContactType;
 use App\Http\Models\Subscriber;
 use App\Http\Models\Persona;
 use App\Jobs\SendSubscriptionVerificationEmail;
@@ -71,13 +73,21 @@ class HomeController extends Controller
 
     public function contact()
     {
+        $contactTypes = $this->em->getRepository(ContactType::class)->findBy([
+            'isActive' => (int) true,
+            'isDeleted' => (int) false,
+        ]);
+
         $ninja = new \stdClass();
         $ninja->method = 'POST';
         $ninja->action = route('contact.store');
         $ninja->info = [
-            'title' => 'Escreva pra gente!',
-            'subtitle' => 'Quer dizer alguma coisa?',
+            'title' => 'Quer dizer alguma coisa?',
+            'subtitle' => 'Escreva pra gente!',
             'list' => 'Duvidas, sugestoes, reclamacoes, conteudo, informacoes, anuncios...',
+        ];
+        $ninja->form = [
+            'type' => $contactTypes,
         ];
 
         return view('guest/contact', [
@@ -95,12 +105,13 @@ class HomeController extends Controller
             'message' => 'required|max:600',
         ]);
 
-        if ($validatedData && false) {
+        if ($validatedData) {
             $contact = new Contact();
-            $contact->author = $request->author;
-            $contact->email = $request->email;
+            $contact->author = ucwords(strtolower($request->author));
+            $contact->email = strtolower($request->email);
             $contact->subject = $request->subject;
             $contact->message = $request->message;
+            $contact->contactType = $this->em->getRepository(ContactType::class)->find($request->type);
 
             $this->em->persist($contact);
             $this->em->flush();
@@ -108,7 +119,7 @@ class HomeController extends Controller
             return back()->with('custom_success', 'Your comment added successfully');
         }
 
-        return redirect('contato')->with('custom_success', 'Unable to add comment.');
+        return back()->with('custom_success', 'Unable to add comment.');
     }
 
     /**
