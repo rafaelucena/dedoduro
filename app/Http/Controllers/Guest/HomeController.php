@@ -68,6 +68,49 @@ class HomeController extends Controller
 //                            ->simplePaginate(app('global_settings')[2]->settingValue);
 //        return view('guest/home', ['blogs' => $blogs]);
     }
+
+    public function contact()
+    {
+        $ninja = new \stdClass();
+        $ninja->method = 'POST';
+        $ninja->action = route('contact.store');
+        $ninja->info = [
+            'title' => 'Escreva pra gente!',
+            'subtitle' => 'Quer dizer alguma coisa?',
+            'list' => 'Duvidas, sugestoes, reclamacoes, conteudo, informacoes, anuncios...',
+        ];
+
+        return view('guest/contact', [
+            'ninja' => $ninja,
+//            'persona' => $persona,
+//            'role' => $role,
+        ]);
+    }
+
+    public function contactStore(Request $request)
+    {
+        $validatedData = $request->validate([
+            'author' => 'bail|required|max:150',
+            'email' => 'required|email',
+            'message' => 'required|max:600',
+        ]);
+
+        if ($validatedData && false) {
+            $contact = new Contact();
+            $contact->author = $request->author;
+            $contact->email = $request->email;
+            $contact->subject = $request->subject;
+            $contact->message = $request->message;
+
+            $this->em->persist($contact);
+            $this->em->flush();
+
+            return back()->with('custom_success', 'Your comment added successfully');
+        }
+
+        return redirect('contato')->with('custom_success', 'Unable to add comment.');
+    }
+
     /**
      * Show the Blogs Homepage.
      *

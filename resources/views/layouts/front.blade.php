@@ -55,11 +55,21 @@
                             <nav id="crt-main-nav">
 
                                 <ul class="clear-list">
-                                    <li><a href="{{ url('/') }}">Home</a></li>
-                                    <li><a href="{{ url('login') }}">Sobre</a></li>
-                                    <li><a href="{{ url('login') }}">Busca</a></li>
-                                    <li><a href="{{ url('login') }}">Comunicados</a></li>
-                                    <li><a href="{{ url('login') }}">Contato</a></li>
+                                    <li>
+                                        <a href="{{ url('/') }}">Home</a>
+                                    </li>
+                                    <li class="in-progress">
+                                        <a href="{{ url('sobre') }}">Sobre</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ url('login') }}">Busca</a>
+                                    </li>
+                                    <li class="in-progress">
+                                        <a href="{{ url('comunicados') }}">Comunicados</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ url('contato') }}">Contato</a>
+                                    </li>
                                     {{--<li><a href="index.php">home</a></li>--}}
                                     {{--<li><a href="portfolio.php">portfolio</a>--}}
                                     {{--<li class="has-sub-menu"><a href="#">pages</a>--}}

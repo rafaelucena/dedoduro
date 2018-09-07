@@ -16,22 +16,31 @@ use Illuminate\Support\Facades\Route;
 
 // Guest Area
 Route::get('/', 'Guest\HomeController@index');
+Route::get('contato', 'Guest\HomeController@contact');
+Route::post('contato/enviar', 'Guest\HomeController@contactStore')->name('contact.store');
+
 Route::get('politico/{slug}', 'Guest\PoliticiansController@show');
-Route::get('test', 'Guest\PoliticiansController@index')->name('test');
-Route::get('post', function () {
-    return redirect('/');
-});
+//Route::get('test', 'Guest\PoliticiansController@index')->name('test');
+//Route::get('post', function () {
+//    return redirect('/');
+//});
 
-Route::get('search', 'Guest\BlogsController@search');
-Route::get('post/{blog}', 'Guest\BlogsController@single');
-Route::get('category/{category}', 'Guest\BlogsController@category');
-Route::post('post/comment', 'Guest\BlogsController@comment');
-
+//Route::get('search', 'Guest\BlogsController@search');
+//Route::get('post/{blog}', 'Guest\BlogsController@single');
+//Route::get('category/{category}', 'Guest\BlogsController@category');
+//Route::post('post/comment', 'Guest\BlogsController@comment');
+//
 Route::post('subscribe', 'Guest\HomeController@subscribe');
-Route::get('subscribe/verify/{token}', 'Guest\HomeController@subscribeVerify');
+//Route::get('subscribe/verify/{token}', 'Guest\HomeController@subscribeVerify');
+//
+//Route::get('feed', 'FeedsController@index');
 
-Route::get('feed', 'FeedsController@index');
-
+Route::get('sobre', function () {
+    return view('status/status204_no-content');
+});
+Route::get('comunicados', function () {
+    return view('status/status204_no-content');
+});
 // User Area
 Auth::routes();
 Route::get('auth/verify/{token}', 'Auth\RegisterController@verify');

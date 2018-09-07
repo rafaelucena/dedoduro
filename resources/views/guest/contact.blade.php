@@ -60,25 +60,71 @@
         </div>
     </div><!-- .crt-nav-wrap -->
     <div class="crt-container-sm">
-        <div class="crt-paper-layers">
+        <div id="contact" class="crt-paper-layers crt-animate">
             <div class="crt-paper clearfix">
                 <div class="crt-paper-cont paper-padd clear-mrg">
+                    <div class="padd-box">
+                        <h2 class="title-lg text-upper">{!! $ninja->info['title'] !!}</h2>
 
-                    <div class="padd-box-sm">
-                        <div class="text-center">
-                            <strong class="title-404 text-upper">204</strong>
-                            <span class="info-404">Esta pagina ficou retida no centro de distribuicao de Curitiba.<br>
-                                <br>
-                                Favor aguardar a liberacao.</span>
-                            <a class="btn btn-primary" href="/">Clique para <strike>chorar</strike> voltar</a>
+                        <div class="padd-box-xs">
+                            <header class="contact-head">
+                                <ul class="crt-social clear-list text-primary">
+                                    <li><a href="http://google.com"><i class="fab fa-facebook-square fa-2x"></i></a></li>
+                                    <li><a href="http://google.com"><i class="fab fa-twitter-square fa-2x"></i></a></li>
+                                    <li><a><i class="fab fa-google-plus-square fa-2x"></i></a></li>
+                                    <li><a><i class="fab fa-slack fa-2x"></i></a></li>
+                                    <li><a><i class="fab fa-linkedin fa-2x"></i></a></li>
+                                </ul>
+                                <h3 class="title">{!! $ninja->info['subtitle'] !!}</h3>
+                            </header>
                         </div>
-                    </div>
 
+                        <div class="padd-box-sm">
+                            <form action="{{ $ninja->action }}" method="post" class="contact-form" enctype="multipart/form-data">
+                                @csrf
+                                {{ method_field('POST') }}
+
+                                <div class="form-group">
+                                    <label class="form-label" for="author">Nome</label>
+                                    <div class="form-item-wrap">
+                                        <input id="author" name="author" class="form-item" type="text" required="required"/>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label" for="email">E-mail</label>
+                                    <div class="form-item-wrap">
+                                        <input id="email" name="email" class="form-item" type="email" required="required"/>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label" for="subject">Assunto</label>
+                                    <div class="form-item-wrap">
+                                        <input id="subject" name="subject" class="form-item" type="text"/>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label" for="message">Mensagem</label>
+                                    <div class="form-item-wrap">
+                                        <textarea id="message" name="message" class="form-item" required="required"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="form-submit form-item-wrap">
+                                    <input class="btn btn-primary btn-lg" type="submit" value="Envie sua mensagem">
+                                </div>
+                            </form>
+                        </div>
+                    </div><!-- .padd-box -->
                 </div>
                 <!-- .crt-paper-cont -->
             </div>
             <!-- .crt-paper -->
         </div>
+        <!-- .crt-paper-layers -->
+
         {{--@include('guest/politicians/show/show-about')--}}
 
         {{--@include('guest/politicians/show/show-news')--}}
@@ -92,30 +138,7 @@
 @section('custom_js')
     <script>
         $(document).ready(function() {
-            $('#recent-news').DataTable({
-                language: {
-                    search: "Filtro:",
-                    // searchPlaceholder: "Filtro...",
-                    info: "Exibindo de _START_ a _END_ de _TOTAL_ not&iacute;cias",
-                    oPaginate: {
-                        // sFirst: '<i class="fas fa-step-backward"></i> First',
-                        sPrevious: 'Anterior',
-                        sNext: 'Próxima',
-                        // sLast: 'Last <i class="fas fa-step-forward"></i>'
-                    },
-                },
-                searching: false,
-                bLengthChange: false,
-                pageLength: 7,
-                order: [
-                    [2, "desc"]
-                ],
-                drawCallback: function () {
-                    $('.dataTables_info').addClass('crt-table-info');
-                    $('.dataTables_paginate').addClass('crt-table-paginator');
-                    $('.paginate_button').addClass('btn-pagination btn-pagination-numbers');
-                }
-            });
+
         });
     </script>
 @endsection

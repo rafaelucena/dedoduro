@@ -67,9 +67,10 @@
                     <div class="padd-box-sm">
                         <div class="text-center">
                             <strong class="title-404 text-upper">204</strong>
-                            <span class="info-404">Esta pagina ficou retida no centro de distribuicao de Curitiba.<br>
+                            <span class="info-404">Esta página ficou retida no <br>centro de distribuição de curitiba.<br>
                                 <br>
-                                Favor aguardar a liberacao.</span>
+                                <br>
+                                Favor aguardar a liberação.</span>
                             <a class="btn btn-primary" href="/">Clique para <strike>chorar</strike> voltar</a>
                         </div>
                     </div>
