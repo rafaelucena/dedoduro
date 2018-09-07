@@ -222,6 +222,9 @@ ins,u{
 #crt-main-nav a,#crt-main-nav-sm a,.alert a,.btn,.crt-logo,.crt-nav a,.crt-social a,.pagination .page-numbers,.post-category-comment a,.post-footer-info a,.post-header-info a,.tabs .tabs-menu a,.widget_categories li a,.widget_recent_entries li>a{
     text-decoration:none
 }
+.crt-social i{
+    color: #7e7e7e
+}
 sub,sup{
     font-size:75%;
     line-height:0;
