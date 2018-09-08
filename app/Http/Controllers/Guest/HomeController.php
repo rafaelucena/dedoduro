@@ -22,13 +22,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('guest/home', [
+        return view('guest/home/home', [
         ]);
     }
 
     protected function search()
     {
-        return view('guest/search', [
+        return view('guest/home/search', [
         ]);
     }
 
@@ -51,7 +51,7 @@ class HomeController extends Controller
             'type' => $contactTypes,
         ];
 
-        return view('guest/contact', [
+        return view('guest/home/contact', [
             'ninja' => $ninja,
 //            'persona' => $persona,
 //            'role' => $role,
