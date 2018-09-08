@@ -1,4 +1,4 @@
-@extends('layouts/front')
+@extends('layouts.front')
 
 @section('content')
     <div class="crt-container-sm">
@@ -28,12 +28,12 @@
                 </div>
             </div>
         </div>
-        <div id="references" class="crt-paper-layers crt-animate">
+        <div id="politicians" class="crt-paper-layers crt-animate">
             <div class="crt-paper clearfix">
                 <div class="crt-paper-cont paper-padd clear-mrg">
 
                     <section class="section padd-box">
-                        <h2 class="title-lg text-upper">References</h2>
+                        <h2 class="title-lg text-upper">Políticos</h2>
 
                         <div class="padd-box-sm clear-mrg">
                             <div class="ref-box brd-btm hreview">

@@ -1,4 +1,4 @@
-@extends('layouts/front')
+@extends('layouts.front')
 
 @section('content')
     {{--<div id="crt-side-box-wrap" class="crt-sticky">--}}
@@ -57,8 +57,8 @@
                                     <label class="form-label" for="type">Tipo</label>
                                     <div class="form-item-wrap">
                                         <select id="type" name="type" class="form-item" required="required">
-                                        @foreach ($ninja->form['type'] as $key => $option)
-                                            <option value="{{ $key }}">{{ $option->name  }}</option>
+                                        @foreach ($ninja->form['type'] as $option)
+                                            <option value="{{ $option->id }}">{{ $option->name }}</option>
                                         @endforeach
                                         </select>
                                     </div>
@@ -67,14 +67,14 @@
                                 <div class="form-group">
                                     <label class="form-label" for="author">Nome</label>
                                     <div class="form-item-wrap">
-                                        <input id="author" name="author" class="form-item" type="text" required="required"/>
+                                        <input id="author" name="author" class="form-item" type="text" required="required" autocomplete="name"/>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="form-label" for="email">E-mail</label>
                                     <div class="form-item-wrap">
-                                        <input id="email" name="email" class="form-item" type="email" required="required"/>
+                                        <input id="email" name="email" class="form-item" type="email" required="required" autocomplete="email"/>
                                     </div>
                                 </div>
 
