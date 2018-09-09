@@ -219,7 +219,7 @@ del,s,strike{
 ins,u{
     text-decoration:underline
 }
-#crt-main-nav a,#crt-main-nav-sm a,.alert a,.btn,.crt-logo,.crt-nav a,.crt-social a,.pagination .page-numbers,.post-category-comment a,.post-footer-info a,.post-header-info a,.tabs .tabs-menu a,.widget_categories li a,.widget_recent_entries li>a{
+#crt-main-nav a,#crt-main-nav-sm a,.alert a,.btn,.crt-logo,.crt-nav a,.crt-social a,.pagination .page-numbers,.ref-footer a,.post-category-comment a,.post-footer-info a,.post-header-info a,.tabs .tabs-menu a,.widget_categories li a,.widget_recent_entries li>a{
     text-decoration:none
 }
 .crt-social i{
@@ -402,7 +402,7 @@ dd{
         clear:left
     }
 }
-#crt-footer,.clearfix:after,.pf-grid:after,.post-category-comment,.row:after,.slick-track:after,.widget{
+#crt-footer,.clearfix:after,.pf-grid:after,.ref-footer,.post-category-comment,.row:after,.slick-track:after,.widget{
     clear:both
 }
 table{
@@ -1871,10 +1871,10 @@ textarea.form-item{
     display:block;
     font-weight:600
 }
-.post-category-comment{
+.ref-footer, .post-category-comment{
     padding-top:18px
 }
-.post-category-comment a{
+.ref-footer, .post-category-comment a{
     display:inline-block;
     font-size:13px;
     font-weight:500;
@@ -1883,7 +1883,7 @@ textarea.form-item{
     margin-right:10px;
     border-right:1px solid transparent
 }
-.post-category-comment a:last-child{
+.ref-footer a:last-child, .post-category-comment a:last-child{
     border-right:0
 }
 .widget_tag_cloud .tagcloud{
@@ -4410,7 +4410,10 @@ table.dataTable > thead > tr > .sorting_desc.datetime:after{
 }
 .ref-author{
     padding-top:10px;
-    padding-bottom:5px
+    padding-bottom:5px;
+}
+.ref-info > a:link{
+    text-decoration: none
 }
 .clients,.ref-cont{
     padding:0;
@@ -4427,6 +4430,9 @@ table.dataTable > thead > tr > .sorting_desc.datetime:after{
 .ref-info p{
     font-size:.875em;
     letter-spacing:1px
+}
+.ref-footer {
+    color:#757575;
 }
 .ref-cont{
     font-size:1em;
@@ -4824,13 +4830,13 @@ body,h1,h2,h3,h4,h5,h6{
 .education-box:before,.styled-ul li:before,.text-dropcup-sq{
     background-color:#010101
 }
-#crt-main-nav-sm a,#crt-main-nav>ul>li>a,.cr-carousel .slick-next:before,.cr-carousel .slick-prev:before,.education-company,.page-numbers,.post-category-comment a,.post-content,.ref-author span,.styled-ul>li>ul ul,.text-muted,.widget_categories li,table>thead>tr>th{
+#crt-main-nav-sm a,#crt-main-nav>ul>li>a,.cr-carousel .slick-next:before,.cr-carousel .slick-prev:before,.education-company,.page-numbers,.ref-footer a,.post-category-comment a,.post-content,.ref-author span,.styled-ul>li>ul ul,.text-muted,.widget_categories li,table>thead>tr>th{
     color:#757575
 }
 .styled-ul>li>ul ul li:before{
     background-color:#f3f3f3
 }
-#comments .comment-body,#comments .comment-list,.brd-btm,.crt-head-inner,.crt-nav-type1 .crt-nav-cont,.crt-paper,.crt-paper-layers:after,.crt-paper-layers:before,.page-category .post-footer,.post-category-comment a,.post-tags a,.reference-box,.search-for,.tabs .tabs-menu,.tabs-vertical:before,.widget ol li,.widget ul li,.widget_tag_cloud .tagcloud a,blockquote,hr,td,th{
+#comments .comment-body,#comments .comment-list,.brd-btm,.crt-head-inner,.crt-nav-type1 .crt-nav-cont,.crt-paper,.crt-paper-layers:after,.crt-paper-layers:before,.page-category .post-footer,.ref-footer a,.post-category-comment a,.post-tags a,.reference-box,.search-for,.tabs .tabs-menu,.tabs-vertical:before,.widget ol li,.widget ul li,.widget_tag_cloud .tagcloud a,blockquote,hr,td,th{
     border-color:#e1e1e1
 }
 .crt-nav-btm:after{

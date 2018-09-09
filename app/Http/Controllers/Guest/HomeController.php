@@ -6,10 +6,17 @@ use App\Http\Controllers\Controller;
 use App\Http\Models\Blog;
 use App\Http\Models\Contact;
 use App\Http\Models\ContactType;
+use App\Http\Models\News;
+use App\Http\Models\PersonaNews;
+use App\Http\Models\Politician;
+use App\Http\Models\PoliticianRole;
+use App\Http\Models\Source;
 use App\Http\Models\Subscriber;
 use App\Http\Models\Persona;
+use App\Http\Models\Party;
 use App\Jobs\SendSubscriptionVerificationEmail;
 use App\Listeners\EmailSubscribedListener;
+use app\models\Person;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -22,7 +29,47 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $maxPublishedDates = $this->em->createQueryBuilder()
+            ->select([
+                'CONCAT(identity(pn.persona),\'-\',max(ne.publishedAt)) as publishedAt',
+            ])
+            ->from(News::class, 'ne')
+            ->innerJoin(PersonaNews::class, 'pn', 'WITH', 'pn.news = ne')
+            ->groupBy('pn.persona')
+            ->getQuery()
+            ->getResult();
+
+        $recentNewsPoliticians = $this->em->createQueryBuilder()
+            ->select([
+                'pe.firstName AS personFirst',
+                'pe.lastName AS personLast',
+                'pe.shortName AS personShort',
+                'pe.image AS personImage',
+                'pr.name AS roleName',
+                'pa.shortName AS partyShort',
+                'ne.publishedAt AS newsPublishedAt',
+                'ne.title AS newsTitle',
+                'ne.url as newsUrl',
+                'so.name AS sourceName',
+            ])
+            ->from(Persona::class, 'pe')
+            ->innerJoin(Politician::class, 'po', 'WITH', 'po.persona = pe')
+            ->innerJoin(PoliticianRole::class, 'pr', 'WITH', 'pr = po.role')
+            ->innerJoin(Party::class, 'pa', 'WITH', 'pa = po.party')
+            ->innerJoin(PersonaNews::class, 'pn', 'WITH', 'pn.persona = pe')
+            ->innerJoin(News::class, 'ne', 'WITH', 'ne = pn.news')
+            ->innerJoin(Source::class, 'so', 'WITH', 'so = ne.source')
+            ->where("CONCAT(pe.id,'-',ne.publishedAt) IN (:publishedDates)")
+            ->setParameters([
+                'publishedDates' => $maxPublishedDates,
+            ])
+            ->getQuery()
+            ->getResult();
+
+        $ninja = new \stdClass();
+
         return view('guest/home/home', [
+            'recentNewsPoliticians' => $recentNewsPoliticians,
         ]);
     }
 
