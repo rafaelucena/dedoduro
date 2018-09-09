@@ -38,11 +38,11 @@
                         <div class="padd-box-xs">
                             <header class="contact-head">
                                 <ul class="crt-social clear-list text-primary">
-                                    <li><a href="http://google.com"><i class="fab fa-facebook-square fa-2x"></i></a></li>
-                                    <li><a href="http://google.com"><i class="fab fa-twitter-square fa-2x"></i></a></li>
-                                    <li><a><i class="fab fa-google-plus-square fa-2x"></i></a></li>
-                                    <li><a><i class="fab fa-slack fa-2x"></i></a></li>
-                                    <li><a><i class="fab fa-linkedin fa-2x"></i></a></li>
+                                    <li><a href="#"><i class="fab fa-facebook-square fa-2x"></i></a></li>
+                                    <li><a href="#"><i class="fab fa-twitter-square fa-2x"></i></a></li>
+                                    <li><a href="#"><i class="fab fa-google-plus-square fa-2x"></i></a></li>
+                                    <li><a href="https://dedoduro.slack.com"><i class="fab fa-slack fa-2x"></i></a></li>
+                                    <li><a href="#"><i class="fab fa-linkedin fa-2x"></i></a></li>
                                 </ul>
                                 <h3 class="title">{!! $ninja->info['subtitle'] !!}</h3>
                             </header>
