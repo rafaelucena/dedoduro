@@ -4739,7 +4739,7 @@ table.dataTable > thead > tr > .sorting_desc.datetime:after{
     }
     .search-title:before{
         content:"\f002";
-        font-family:icomoon;
+        font-family: "Font Awesome 5 Free";
         display:inline-block;
         position:absolute;
         left:0;
