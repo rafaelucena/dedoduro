@@ -73,9 +73,68 @@ class HomeController extends Controller
         ]);
     }
 
-    protected function search()
+    protected function search($query = null)
     {
+        $visible = false;
+        $countResults = 0;
+
+        if ($query !== null) {
+            $visible = true;
+
+            $maxPublishedDates = $this->em->createQueryBuilder()
+                ->select([
+                    'CONCAT(identity(pn.persona),\'-\',max(ne.publishedAt)) as publishedAt',
+                ])
+                ->from(News::class, 'ne')
+                ->innerJoin(PersonaNews::class, 'pn', 'WITH', 'pn.news = ne')
+                ->groupBy('pn.persona')
+                ->getQuery()
+                ->getResult();
+
+            $recentNewsPoliticians = $this->em->createQueryBuilder()
+                ->select([
+                    'pe.firstName AS personFirst',
+                    'pe.lastName AS personLast',
+                    'pe.shortName AS personShort',
+                    'pe.image AS personImage',
+                    'pr.name AS roleName',
+                    'pa.shortName AS partyShort',
+                    'ne.publishedAt AS newsPublishedAt',
+                    'ne.title AS newsTitle',
+                    'ne.url as newsUrl',
+                    'so.name AS sourceName',
+                ])
+                ->from(Persona::class, 'pe')
+                ->innerJoin(Politician::class, 'po', 'WITH', 'po.persona = pe')
+                ->innerJoin(PoliticianRole::class, 'pr', 'WITH', 'pr = po.role')
+                ->innerJoin(Party::class, 'pa', 'WITH', 'pa = po.party')
+                ->innerJoin(PersonaNews::class, 'pn', 'WITH', 'pn.persona = pe')
+                ->innerJoin(News::class, 'ne', 'WITH', 'ne = pn.news')
+                ->innerJoin(Source::class, 'so', 'WITH', 'so = ne.source')
+                ->where("CONCAT(pe.id,'-',ne.publishedAt) IN (:publishedDates)")
+                ->andWhere('pe.firstName LIKE :query OR pe.lastName LIKE :query OR CONCAT(pe.firstName,\' \',pe.lastName) LIKE :query')
+                ->setParameters([
+                    'publishedDates' => $maxPublishedDates,
+                    'query' => '%' . $query . '%',
+                ])
+                ->getQuery()
+                ->getResult();
+
+            $countResults = count($recentNewsPoliticians);
+        }
+
+        $ninja = new \stdClass();
+        $ninja->action = route('search.redirect');
+        $ninja->searchBy = [
+            'visible' => $visible,
+            'query' => $query,
+        ];
+        $ninja->results = [
+            'count' => $countResults,
+        ];
+
         return view('guest/home/search', [
+            'ninja' => $ninja,
         ]);
     }
 

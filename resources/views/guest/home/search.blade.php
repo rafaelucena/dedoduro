@@ -7,16 +7,22 @@
                 <div class="crt-paper-cont paper-padd clear-mrg">
 
                     <div class="padd-box-sm">
-                        <header class="search-for">
-                            <h1 class="search-title text-muted">procurando por:
-                                <span>Lorem ipsum</span></h1>
-                        </header>
+                        @if ($ninja->searchBy['visible'])
+                            <header class="search-for">
+                                <h1 class="search-title text-muted">procurando por:
+                                    <span>{{ $ninja->searchBy['query'] }}</span></h1>
+                            </header>
+                        @endif
                         <div class="search-result">
-                            <strong class="title-lg text-upper">vish... deu ruim...</strong>
-                            <strong class="title-lg text-muted">ENCONTRAMOS UM TOTAL DE:<br><br>0 resultados</strong>
-                            <form class="search-again">
+                            @if ($ninja->results['count'] === 0)
+                                <strong class="title-lg text-upper">vish... deu ruim...</strong>
+                            @endif
+                            <strong class="title-lg text-muted">ENCONTRAMOS UM TOTAL DE:<br><br>{{ $ninja->results['count'] }} resultados</strong>
+                            <form action="{{ $ninja->action }}" method="post" class="search-again" enctype="multipart/form-data">
+                                @csrf
+                                {{ method_field('GET') }}
                                 <div class="form-item-wrap">
-                                    <input class="form-item" id="searchInput" name="searchInput" type="search"
+                                    <input class="form-item" id="query" name="query" type="search"
                                            placeholder="Busque por nome ou por título da notícia" value="" size="30" maxlength="80" required="required">
                                 </div>
                                 <div class="form-submit form-item-wrap">

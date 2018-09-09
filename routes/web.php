@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,7 +20,10 @@ Route::get('/', 'Guest\HomeController@index');
 Route::get('contato', 'Guest\HomeController@contact');
 Route::post('contato/enviar', 'Guest\HomeController@contactStore')->name('contact.store');
 
-Route::get('busca', 'Guest\HomeController@search');
+Route::get('busca/redirect-ninja', function(Request $request) {
+    return redirect()->route('search.query', ['query' => $request->request->get('query')]);
+})->name('search.redirect');
+Route::get('busca/{query?}', 'Guest\HomeController@search')->name('search.query');
 
 Route::get('politico/{slug}', 'Guest\PoliticiansController@show');
 
