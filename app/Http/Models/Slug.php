@@ -91,6 +91,7 @@ class Slug implements UrlRoutable
     public function __construct()
     {
         $this->personasSlug = new ArrayCollection();
+        $this->isCanonical = (int) false;
     }
 
     /**

@@ -27,7 +27,6 @@
                     </tr>
                     </thead>
                     <tbody>
-                    {{--@for($i=0; $i<5; $i++)--}}
                     @foreach($ninja->sideList as $item)
                         <tr>
                             <td class="cst-side-list">
@@ -93,11 +92,9 @@
                         <h2 class="title-lg text-upper">Políticos</h2>
 
                         <div class="padd-box-sm clear-mrg">
-                            @for ($i = 0; $i < 10; $i++)
                             @foreach($ninja->results['list'] as $recentNewsPolitician)
                                 @include('guest/home/partials/home/home-recent-politicians')
                             @endforeach
-                            @endfor
                         </div><!-- .padd-box-sm -->
                     </section>
 

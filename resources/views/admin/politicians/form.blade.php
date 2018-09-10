@@ -4,7 +4,7 @@
     <div class="card-body">
         <form method="post" action="{{ $formHelper->action }}" enctype="multipart/form-data" novalidate>
             @csrf
-            {{ method_field('PUT') }}
+            {{ method_field($formHelper->method) }}
             <div class="row">
                 <div class="col-md-8">
                     <div class="form-group">

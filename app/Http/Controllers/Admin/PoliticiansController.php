@@ -278,6 +278,7 @@ class PoliticiansController extends Controller
         $formHelper = new \stdClass();
         $formHelper->title = 'Politicians - New';
         $formHelper->action = route('politicians.store');
+        $formHelper->method = 'POST';
         $formHelper->select2Helper = $select2Helper;
         $formHelper->submit = 'Create';
 
@@ -317,11 +318,14 @@ class PoliticiansController extends Controller
         $persona->isActive = $request->is_active;
         $this->em->persist($persona);
 
+        // Store and Update Slugs
+        $this->updateSlugs($persona, $request->slugs);
+
         // Step 2 - Save Politician
         $politician = new Politician();
         $politician->persona = $persona;
-        $politician->party = $this->em->getRepository(Party::class)->find($request->party_id);
-        $politician->role = $this->em->getRepository(PoliticianRole::class)->find($request->role_id);
+        $politician->setParty($this->em->getRepository(Party::class)->find($request->party_id));
+        $politician->setRole($this->em->getRepository(PoliticianRole::class)->find($request->role_id));
         $this->em->persist($politician);
 
         // Step 3 - Flush everything
@@ -373,6 +377,7 @@ class PoliticiansController extends Controller
         $formHelper = new \stdClass();
         $formHelper->title = 'Politicians - Edit';
         $formHelper->action = route('politicians.update', $politician->id);
+        $formHelper->method = 'PUT';
         $formHelper->select2Helper = $select2Helper;
         $formHelper->submit = 'Update';
 
@@ -456,6 +461,7 @@ class PoliticiansController extends Controller
             $unusedPersonaSlugs[$currentSlug->slug->id] = $currentSlug;
         }
 
+        $count = 0;
         foreach ($slugsInput as $slugInput) {
             unset($unusedPersonaSlugs[$slugInput]);
 
@@ -465,8 +471,9 @@ class PoliticiansController extends Controller
                 $slug->name = $slugInput;
                 $slug->slug = strslug($slugInput);
                 $slug->createdBy = auth()->user();
-                $this->em->persist($slug);
             }
+            $slug->isCanonical = $count === 0 ? (int) true : (int) false;
+            $this->em->persist($slug);
 
             $personaSlug = $this->em->getRepository(PersonaSlug::class)->findOneBy([
 //                'persona' => $persona,
@@ -476,11 +483,12 @@ class PoliticiansController extends Controller
             if (!$personaSlug) {
                 $personaSlug = new PersonaSlug();
                 $personaSlug->slug = $slug;
-                $personaSlug->persona = $persona;
+                $personaSlug->setPersona($persona);
             }
             $personaSlug->isActive = (int) true;
             $personaSlug->deletedAt = null;
             $this->em->persist($personaSlug);
+            $count++;
         }
 
         foreach ($unusedPersonaSlugs as $unusedPersonaSlug) {
