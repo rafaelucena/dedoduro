@@ -44,11 +44,11 @@
         <div class="crt-head-inner crt-container">
             <div class="crt-container-sm">
                 <div class="crt-head-row">
-                    <div id="crt-head-col1" class="crt-head-col text-left">
-                        <a id="crt-logo" class="crt-logo" href="index.php">
-                            <img src="{{ asset('assets/images/uploads/brand/logo.svg') }}" alt="certy resume"><span>.Certy</span>
-                        </a>
-                    </div>
+                    {{--<div id="crt-head-col1" class="crt-head-col text-left">--}}
+                        {{--<a id="crt-logo" class="crt-logo" href="index.php">--}}
+                            {{--<img src="{{ asset('assets/images/uploads/brand/logo.svg') }}" alt="certy resume"><span>.Certy</span>--}}
+                        {{--</a>--}}
+                    {{--</div>--}}
 
                     <div id="crt-head-col2" class="crt-head-col text-right">
                         <div class="crt-nav-container crt-container hidden-sm hidden-xs">
@@ -99,11 +99,11 @@
                         </div>
                     </div>
 
-                    <div id="crt-head-col3" class="crt-head-col text-right">
-                        <button id="crt-sidebar-btn" class="btn btn-icon btn-shade">
-                            <span class="crt-icon crt-icon-side-bar-icon"></span>
-                        </button>
-                    </div>
+                    {{--<div id="crt-head-col3" class="crt-head-col text-right">--}}
+                        {{--<button id="crt-sidebar-btn" class="btn btn-icon btn-shade">--}}
+                            {{--<span class="crt-icon crt-icon-side-bar-icon"></span>--}}
+                        {{--</button>--}}
+                    {{--</div>--}}
                 </div>
             </div><!-- .crt-head-inner -->
         </div>
