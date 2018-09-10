@@ -76,7 +76,7 @@ class HomeController extends Controller
     protected function search($query = null)
     {
         $visible = false;
-        $countResults = 0;
+        $results = [];
 
         if ($query !== null) {
             $visible = true;
@@ -91,7 +91,7 @@ class HomeController extends Controller
                 ->getQuery()
                 ->getResult();
 
-            $recentNewsPoliticians = $this->em->createQueryBuilder()
+            $results = $this->em->createQueryBuilder()
                 ->select([
                     'pe.firstName AS personFirst',
                     'pe.lastName AS personLast',
@@ -119,9 +119,8 @@ class HomeController extends Controller
                 ])
                 ->getQuery()
                 ->getResult();
-
-            $countResults = count($recentNewsPoliticians);
         }
+        $countResults = count($results);
 
         $ninja = new \stdClass();
         $ninja->action = route('search.redirect');
@@ -131,6 +130,7 @@ class HomeController extends Controller
         ];
         $ninja->results = [
             'count' => $countResults,
+            'list' => $results,
         ];
 
         return view('guest/home/search', [

@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="crt-container-sm">
-        <div class="crt-paper-layers">
+        <div id="search" class="crt-paper-layers">
             <div class="crt-paper clearfix">
                 <div class="crt-paper-cont paper-padd clear-mrg">
 
@@ -14,10 +14,12 @@
                             </header>
                         @endif
                         <div class="search-result">
-                            @if ($ninja->results['count'] === 0)
-                                <strong class="title-lg text-upper">vish... deu ruim...</strong>
+                            @if ($ninja->searchBy['visible'])
+                                @if ($ninja->results['count'] === 0)
+                                    <strong class="title-lg text-upper">vish... deu ruim...</strong>
+                                @endif
+                                <strong class="title-lg text-muted">ENCONTRAMOS UM TOTAL DE:<br><br>{{ $ninja->results['count'] }} resultados</strong>
                             @endif
-                            <strong class="title-lg text-muted">ENCONTRAMOS UM TOTAL DE:<br><br>{{ $ninja->results['count'] }} resultados</strong>
                             <form action="{{ $ninja->action }}" method="post" class="search-again" enctype="multipart/form-data">
                                 @csrf
                                 {{ method_field('GET') }}
@@ -26,7 +28,7 @@
                                            placeholder="Busque por nome ou por título da notícia" value="" size="30" maxlength="80" required="required">
                                 </div>
                                 <div class="form-submit form-item-wrap">
-                                    <input class="btn btn-default" name="submit" type="submit" id="submit" value="Agora vai!">
+                                    <input class="btn btn-default" name="submit" type="submit" id="submit" value="@if ($ninja->searchBy['visible'] && $ninja->results['count'] === 0) Agora vai! @elseif ($ninja->searchBy['visible']) Outra vez! @else Buscar! @endif">
                                 </div>
                             </form>
                         </div>
@@ -38,6 +40,27 @@
         <!-- .crt-paper -->
         </div>
         <!-- .crt-paper-layers -->
+        @if ($ninja->results['count'] > 0)
+        <div id="politicians" class="crt-paper-layers">
+            <div class="crt-paper clearfix">
+                <div class="crt-paper-cont paper-padd clear-mrg">
+
+                    <section class="section padd-box">
+                        <h2 class="title-lg text-upper">Políticos</h2>
+
+                        <div class="padd-box-sm clear-mrg">
+                            @foreach($ninja->results['list'] as $recentNewsPolitician)
+                                @include('guest/home/partials/home/home-recent-politicians')
+                            @endforeach
+                        </div><!-- .padd-box-sm -->
+                    </section>
+
+                </div>
+                <!-- .crt-paper-cont -->
+            </div>
+            <!-- .crt-paper -->
+        </div>
+        @endif
 
     </div>
 @endsection
