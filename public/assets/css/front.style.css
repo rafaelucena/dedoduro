@@ -405,6 +405,9 @@ dd{
 #crt-footer,.clearfix:after,.pf-grid:after,.ref-footer,.post-category-comment,.row:after,.slick-track:after,.widget{
     clear:both
 }
+/*table #side-list {*/
+    /*margin-top:7px*/
+/*}*/
 table{
     width:100%;
     border-spacing:0;
@@ -417,6 +420,11 @@ caption,td,th{
 td,th{
     padding:20px 8px;
     vertical-align:top;
+    border-bottom:1px solid transparent
+}
+td.cst-side-list,th.cst-side-list {
+    padding:5px 8px;
+    vertical-align:middle;
     border-bottom:1px solid transparent
 }
 table>thead>tr>th{
@@ -1380,6 +1388,11 @@ textarea.form-item{
 }
 .crt-table-paginator{
     float:right;
+}
+.crt-list-paginator{
+    text-align: center;
+    padding-bottom: 11px;
+    margin-top: -15px;
 }
 .btn-pagination{
     font-family:inherit;

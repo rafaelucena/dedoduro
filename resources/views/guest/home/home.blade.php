@@ -9,17 +9,28 @@
                     <section class="section brd-btm padd-box">
                         <div class="row">
                             <div class="col-sm-12">
-                                <h2 class="title-lg text-upper">Perfil</h2>
+                                <h2 class="title-lg text-upper">Não repara na bagunça... viu?</h2>
 
                                 <div class="text-box">
 {{--                                    {!! $ninja->info['longDesc'] !!}--}}
                                     <p>
-                                        <b>Olá, essa é a página Dedoduro!</b><br>
+                                        <b>Bem vindo à página Dedoduro!</b><br>
                                     </p>
                                     <p>
-                                        Eu decidi criar essa página pra ajudar a mapear notícias de diversas personalidades
-                                        no mundo político e/ou próximo dele.
-                                    <br>A idéia é não perder de vista notícias de alguns candidatos nunca mais.
+                                        Aqui você vai, inicialmente, encontrar várias notícias mapeadas sobre os mais diversos
+                                        políticos da atualidade.<br>
+                                        <br>
+                                        O principal objetivo desse sistema é que as notícias não caiam mais no esquecimento.
+                                        Como vem acontecendo. Mas isso é um processo natural da internet. Então é isso.<br>
+                                        <br>
+                                        Ah! Essa é a fase beta do sistema, vai ter mais, muito mais, então não vai ainda não, tá cedo!
+                                        Se tiver alguma idéia, dúvida, ou reclamação (por direitos autorais inclusive), entre em contato
+                                        por aqui ou pelas redes disponíveis. :)<br>
+                                        <br>
+                                        <strong>PS. Todos os políticos disponíveis podem ser encontrados na aba "<a href="/busca">Busca!</a>"</strong><br>
+                                        <br>
+                                        Até logo!<br>
+                                        Rafael.
                                     </p>
                                 </div>
                             </div>
@@ -28,12 +39,12 @@
                 </div>
             </div>
         </div>
-        <div id="politicians" class="crt-paper-layers crt-animate">
+        <div id="politicians" class="crt-paper-layers">
             <div class="crt-paper clearfix">
                 <div class="crt-paper-cont paper-padd clear-mrg">
 
                     <section class="section padd-box">
-                        <h2 class="title-lg text-upper">Políticos</h2>
+                        <h2 class="title-lg text-upper">Políticos recentes</h2>
 
                         <div class="padd-box-sm clear-mrg">
                             @foreach($recentNewsPoliticians as $recentNewsPolitician)

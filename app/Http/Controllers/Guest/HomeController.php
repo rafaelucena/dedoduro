@@ -132,6 +132,21 @@ class HomeController extends Controller
         }
         $countResults = count($results);
 
+        $sideList = $this->em->createQueryBuilder()
+            ->select([
+                "CONCAT(pe.firstName, ' ', pe.lastName) AS personName",
+                'pe.image AS personImage',
+                'sl.slug AS personUrn',
+            ])
+            ->from(Persona::class, 'pe')
+            ->innerJoin(PersonaSlug::class, 'ps', 'WITH', 'ps.persona = pe')
+            ->innerJoin(Slug::class, 'sl', 'WITH', 'sl = ps.slug')
+            ->innerJoin(Politician::class, 'po', 'WITH', 'po.persona = pe')
+            ->where('sl.isCanonical = 1')
+            ->orderBy('pe.firstName, pe.lastName')
+            ->getQuery()
+            ->getResult();
+
         $ninja = new \stdClass();
         $ninja->action = route('search.redirect');
         $ninja->searchBy = [
@@ -142,6 +157,7 @@ class HomeController extends Controller
             'count' => $countResults,
             'list' => $results,
         ];
+        $ninja->sideList = $sideList;
 
         return view('guest/home/search', [
             'ninja' => $ninja,
