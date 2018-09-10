@@ -8,8 +8,10 @@ use App\Http\Models\Contact;
 use App\Http\Models\ContactType;
 use App\Http\Models\News;
 use App\Http\Models\PersonaNews;
+use App\Http\Models\PersonaSlug;
 use App\Http\Models\Politician;
 use App\Http\Models\PoliticianRole;
+use App\Http\Models\Slug;
 use App\Http\Models\Source;
 use App\Http\Models\Subscriber;
 use App\Http\Models\Persona;
@@ -44,6 +46,7 @@ class HomeController extends Controller
                 'pe.firstName AS personFirst',
                 'pe.lastName AS personLast',
                 'pe.shortName AS personShort',
+                'sl.slug AS personUrn',
                 'pe.image AS personImage',
                 'pr.name AS roleName',
                 'pa.shortName AS partyShort',
@@ -53,6 +56,8 @@ class HomeController extends Controller
                 'so.name AS sourceName',
             ])
             ->from(Persona::class, 'pe')
+            ->innerJoin(PersonaSlug::class, 'ps', 'WITH', 'ps.persona = pe')
+            ->innerJoin(Slug::class, 'sl', 'WITH', 'sl = ps.slug')
             ->innerJoin(Politician::class, 'po', 'WITH', 'po.persona = pe')
             ->innerJoin(PoliticianRole::class, 'pr', 'WITH', 'pr = po.role')
             ->innerJoin(Party::class, 'pa', 'WITH', 'pa = po.party')
@@ -60,6 +65,7 @@ class HomeController extends Controller
             ->innerJoin(News::class, 'ne', 'WITH', 'ne = pn.news')
             ->innerJoin(Source::class, 'so', 'WITH', 'so = ne.source')
             ->where("CONCAT(pe.id,'-',ne.publishedAt) IN (:publishedDates)")
+            ->andWhere('sl.isCanonical = 1')
             ->setParameters([
                 'publishedDates' => $maxPublishedDates,
             ])
@@ -96,6 +102,7 @@ class HomeController extends Controller
                     'pe.firstName AS personFirst',
                     'pe.lastName AS personLast',
                     'pe.shortName AS personShort',
+                    'sl.slug AS personUrn',
                     'pe.image AS personImage',
                     'pr.name AS roleName',
                     'pa.shortName AS partyShort',
@@ -105,6 +112,8 @@ class HomeController extends Controller
                     'so.name AS sourceName',
                 ])
                 ->from(Persona::class, 'pe')
+                ->innerJoin(PersonaSlug::class, 'ps', 'WITH', 'ps.persona = pe')
+                ->innerJoin(Slug::class, 'sl', 'WITH', 'sl = ps.slug')
                 ->innerJoin(Politician::class, 'po', 'WITH', 'po.persona = pe')
                 ->innerJoin(PoliticianRole::class, 'pr', 'WITH', 'pr = po.role')
                 ->innerJoin(Party::class, 'pa', 'WITH', 'pa = po.party')
@@ -112,6 +121,7 @@ class HomeController extends Controller
                 ->innerJoin(News::class, 'ne', 'WITH', 'ne = pn.news')
                 ->innerJoin(Source::class, 'so', 'WITH', 'so = ne.source')
                 ->where("CONCAT(pe.id,'-',ne.publishedAt) IN (:publishedDates)")
+                ->andWhere('sl.isCanonical = 1')
                 ->andWhere('pe.firstName LIKE :query OR pe.lastName LIKE :query OR CONCAT(pe.firstName,\' \',pe.lastName) LIKE :query')
                 ->setParameters([
                     'publishedDates' => $maxPublishedDates,

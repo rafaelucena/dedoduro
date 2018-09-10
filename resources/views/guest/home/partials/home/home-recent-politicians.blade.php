@@ -1,6 +1,6 @@
 <div class="ref-box brd-btm hreview">
     <div class="ref-avatar">
-        <a href="{{ $recentNewsPolitician['newsUrl'] }}" class="ref-link">
+        <a href="{{ route('politician.show', ['slug' => $recentNewsPolitician['personUrn']]) }}" class="ref-link">
             <img alt=""
                  src="{{ asset('storage/' . $recentNewsPolitician['personImage']) }}"
                  class="avatar avatar-54 photo" height="54" width="54">
@@ -8,7 +8,7 @@
     </div>
 
     <div class="ref-info">
-        <a href="{{ $recentNewsPolitician['newsUrl'] }}" class="ref-link">
+        <a href="{{ route('politician.show', ['slug' => $recentNewsPolitician['personUrn']]) }}" class="ref-link">
             <div class="ref-author">
                 <strong>{{ $recentNewsPolitician['personShort'] }}</strong>
                 <span>{{ $recentNewsPolitician['roleName'] }} ({{ $recentNewsPolitician['partyShort'] }})</span>

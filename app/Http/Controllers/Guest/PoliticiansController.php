@@ -95,7 +95,6 @@ class PoliticiansController extends Controller
             ->from(Slug::class, 'sl')
             ->innerJoin(PersonaSlug::class, 'ps', 'WITH', 'ps.slug = sl')
             ->innerJoin(PersonaSlug::class, 'ps2',' WITH', 'ps2.persona = ps.persona')
-//                ->innerJoin(Slug::class, 'sl2', 'WITH', 'sl2 = ps2.slug')
             ->where('ps2.slug = :slug')
             ->andWhere('sl.isCanonical = 1')
             ->setParameters([
