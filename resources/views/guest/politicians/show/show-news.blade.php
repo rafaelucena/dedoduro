@@ -1,4 +1,4 @@
-<div id="news" class="crt-paper-layers crt-animate">
+<div id="news" class="crt-paper-layers">
     <div class="crt-paper clearfix">
         <div class="crt-paper-cont paper-padd clear-mrg">
             <section class="section padd-box">
