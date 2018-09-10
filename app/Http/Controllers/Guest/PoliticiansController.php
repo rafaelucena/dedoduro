@@ -7,6 +7,7 @@ use App\Http\Models\Blog;
 use App\Http\Models\News;
 use App\Http\Models\Persona;
 use App\Http\Models\Party;
+use App\Http\Models\PersonaSlug;
 use App\Http\Models\Politician;
 use App\Http\Models\PoliticianRole;
 use App\Http\Models\Slug;
@@ -81,11 +82,36 @@ class PoliticiansController extends Controller
 ////        }
 //    }
 
+    protected function inspect(Slug $slug)
+    {
+        if ($slug->isCanonical) {
+            return $this->show($slug);
+        }
+
+        $canonicalSlug = $this->em->createQueryBuilder()
+            ->select([
+                'sl'
+            ])
+            ->from(Slug::class, 'sl')
+            ->innerJoin(PersonaSlug::class, 'ps', 'WITH', 'ps.slug = sl')
+            ->innerJoin(PersonaSlug::class, 'ps2',' WITH', 'ps2.persona = ps.persona')
+//                ->innerJoin(Slug::class, 'sl2', 'WITH', 'sl2 = ps2.slug')
+            ->where('ps2.slug = :slug')
+            ->andWhere('sl.isCanonical = 1')
+            ->setParameters([
+                'slug' => $slug
+            ])
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        return redirect()->route('politician.show', ['slug' => $canonicalSlug->slug]);
+    }
+
     /**
      * @param Slug $slug
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function show(Slug $slug)
+    protected function show(Slug $slug)
     {
         /* @var Persona $persona */
         $persona = $slug->getPersona();

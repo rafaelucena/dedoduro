@@ -25,7 +25,7 @@ Route::get('busca/redirect-ninja', function(Request $request) {
 })->name('search.redirect');
 Route::get('busca/{query?}', 'Guest\HomeController@search')->name('search.query');
 
-Route::get('politico/{slug}', 'Guest\PoliticiansController@show');
+Route::get('politico/{slug}', 'Guest\PoliticiansController@inspect')->name('politician.show');
 
 Route::get('test', 'Guest\PoliticiansController@index')->name('test');
 //Route::get('post', function () {

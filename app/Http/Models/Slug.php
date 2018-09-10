@@ -40,6 +40,12 @@ class Slug implements UrlRoutable
      * @var integer
      * @ORM\Column(type="integer", nullable=false)
      */
+    public $isCanonical;
+
+    /**
+     * @var integer
+     * @ORM\Column(type="integer", nullable=false)
+     */
     public $isActive;
 
     /**
