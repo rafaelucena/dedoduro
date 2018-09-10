@@ -109,7 +109,7 @@ class Politician
      */
     public function getRole(): PoliticianRole
     {
-        return $this->role;
+        return $this->role ? : new PoliticianRole();
     }
 
     /**
@@ -129,7 +129,7 @@ class Politician
      */
     public function getParty(): Party
     {
-        return $this->party;
+        return $this->party ? : new Party();
     }
 
     /**
