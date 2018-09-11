@@ -11,7 +11,7 @@
         <a href="{{ route('politician.show', ['slug' => $recentNewsPolitician['personUrn']]) }}" class="ref-link">
             <div class="ref-author">
                 <strong>{{ $recentNewsPolitician['personShort'] }}</strong>
-                <span>{{ $recentNewsPolitician['roleName'] }} ({{ $recentNewsPolitician['partyShort'] }})</span>
+                <span>{{ ($recentNewsPolitician['isRoleStill'] ? '' : 'Ex-') . $recentNewsPolitician['roleName'] }} ({{ $recentNewsPolitician['partyShort'] }})</span>
             </div>
         </a>
 

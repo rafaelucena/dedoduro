@@ -49,6 +49,7 @@ class HomeController extends Controller
                 'sl.slug AS personUrn',
                 'pe.image AS personImage',
                 'pr.name AS roleName',
+                'po.isRoleStill AS isRoleStill',
                 'pa.shortName AS partyShort',
                 'ne.publishedAt AS newsPublishedAt',
                 'ne.title AS newsTitle',
@@ -70,7 +71,7 @@ class HomeController extends Controller
                 'publishedDates' => $maxPublishedDates,
             ])
             ->getQuery()
-            ->getResult();
+            ->getMaxResults(5);
 
         $ninja = new \stdClass();
 
@@ -105,6 +106,7 @@ class HomeController extends Controller
                     'sl.slug AS personUrn',
                     'pe.image AS personImage',
                     'pr.name AS roleName',
+                    'po.isRoleStill AS isRoleStill',
                     'pa.shortName AS partyShort',
                     'ne.publishedAt AS newsPublishedAt',
                     'ne.title AS newsTitle',
