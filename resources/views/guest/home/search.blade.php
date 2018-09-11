@@ -32,7 +32,7 @@
                             <td class="cst-side-list">
                                 <a href="{{ route('politician.show', ['slug' => $item['personUrn']]) }}"><img alt="" src="{{ asset('storage/' . $item['personImage']) }}" class="avatar avatar-54 photo" width="40" height="40"></a>
                             </td>
-                            <td class="cst-side-list"><small><strong><a href="{{ route('politician.show', ['slug' => $item['personUrn']]) }}">{{ $item['personName'] }}</a></strong></small></td>
+                            <td class="cst-side-list"><small><strong><a href="{{ route('politician.show', ['slug' => $item['personUrn']]) }}">{{ $item['personShort'] }}</a></strong></small></td>
                         </tr>
                     @endforeach()
                     </tbody>

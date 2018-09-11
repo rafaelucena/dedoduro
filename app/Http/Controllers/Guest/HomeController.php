@@ -135,6 +135,7 @@ class HomeController extends Controller
         $sideList = $this->em->createQueryBuilder()
             ->select([
                 'CONCAT(pe.firstName, \' \', pe.lastName) AS personName',
+                'pe.shortName AS personShort',
                 'pe.image AS personImage',
                 'sl.slug AS personUrn',
             ])
