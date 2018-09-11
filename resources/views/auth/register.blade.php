@@ -7,6 +7,19 @@
     <div class="card-body">
         <form method="POST" action="{{ route('register') }}">
             @csrf
+            <div class="form-group row">
+                <label for="invitation" class="col-md-4 col-form-label text-md-right">Invitation token</label>
+
+                <div class="col-md-6">
+                    <input id="invitation" type="text" class="form-control{{ $errors->has('invitation') ? ' is-invalid' : '' }}" name="invitation" value="{{ old('invitation') }}" required autofocus>
+
+                    @if ($errors->has('invitation'))
+                        <span class="invalid-feedback">
+                            <strong>{{ $errors->first('invitation') }}</strong>
+                        </span>
+                    @endif
+                </div>
+            </div>
 
             <div class="form-group row">
                 <label for="name" class="col-md-4 col-form-label text-md-right">Name</label>

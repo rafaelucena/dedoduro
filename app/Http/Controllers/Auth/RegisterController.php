@@ -59,6 +59,7 @@ class RegisterController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:150|unique:App\Http\Models\User',
             'password' => 'required|string|min:6|confirmed',
+            'invitation' => 'required|string',
         ]);
     }
 
@@ -98,20 +99,25 @@ class RegisterController extends Controller
     public function register(Request $request)
     {
         $this->validator($request->all())->validate();
-        event(new Registered($user = $this->create($request->all())));
-        dispatch(new SendUserVerificationEmail($user));
 
-        // Count Users
-        if ($user->id == 1) {
-            // attach roles to first user
-            $this->attachRoles($user);
-            // Activate first user
-            $this->activateFirst($user);
-            // return view('auth/login');
-            return redirect('/login')->with('custom_success', 'You have got all the super admin roles, login now.');
+        if (md5(env('APP_INVITATION_SALT') . '.' . $request->email) === $request->invitation){
+            event(new Registered($user = $this->create($request->all())));
+            dispatch(new SendUserVerificationEmail($user));
+
+            // Count Users
+            if ($user->id == 1) {
+                // attach roles to first user
+                $this->attachRoles($user);
+                // Activate first user
+                $this->activateFirst($user);
+
+                // return view('auth/login');
+                return redirect('/login')->with('custom_success', 'You have got all the super admin roles, login now.');
+            }
+            return view('auth/verification-msg');
         }
-
-        return view('auth/verification-msg');
+        // return view('auth/login');
+        return redirect('/register')->with('custom_errors', 'Something is not right.');
     }
 
     /**
