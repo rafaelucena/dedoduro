@@ -129,6 +129,12 @@ Route::prefix('admin')->group(function () {
     Route::get('settings', 'Admin\SettingsController@index')->name('settings.index');
     Route::put('settings/update', 'Admin\SettingsController@update')->name('settings.update');
 
+    // Sources
+    Route::get('sources/bulk/delete', 'Admin\SourcesController@bulkDelete')->name('sources.bulkDelete');
+    Route::get('sources/ajax-select', 'Admin\SourcesController@sourcesAjaxSelectData')->name('sources.ajaxSelectData');
+    Route::get('sourcesData', 'Admin\SourcesController@sourcesData')->name('sources.ajaxData');
+    Route::resource('sources', 'Admin\SourcesController');
+
     // Slugs
     Route::get('slugs/ajax-select', 'Admin\SlugsController@slugsAjaxSelect')->name('slugs.ajaxSelect');
 
