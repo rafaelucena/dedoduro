@@ -35,6 +35,66 @@
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
+                        <label for="party_id">Party <span class="required">*</span></label>
+                        <select class="form-control" id="party_id" name="party_id" required>
+                            @foreach($parties as $party)
+                                <option value="{{ $party->id }}" @if(old('party_id', $politician->getParty() ? $politician->getParty()->id : '') == $party->id) selected @endif>{{ $party->shortName }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="role_id">Wannabe</label>
+                        <select class="form-control" id="role_wish_id" name="role_wish_id">
+                            <option value=""></option>
+                            @foreach($roles as $role)
+                                <option value="{{ $role->id }}" @if(old('role_wish_id', $politician->getRoleWish() ? $politician->getRoleWish()->id : '') == $role->id) selected @endif>{{ $role->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="role_id">Current (or Last) Role <span class="required">*</span></label>
+                        <select class="form-control" id="role_id" name="role_id" required>
+                            @foreach($roles as $role)
+                                <option value="{{ $role->id }}" @if(old('role_id', $politician->getRole() ? $politician->getRole()->id : '') == $role->id) selected @endif>{{ $role->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="is_role_still">Still? <span class="required">*</span></label>
+                        <select class="form-control" id="is_role_still" name="is_role_still" required>
+                            <option value="1" @if(old('is_role_still', $politician->isRoleStill) == 1) selected @endif>Yes</option>
+                            <option value="0" @if(old('is_role_still', $politician->isRoleStill) == 0) selected @endif>No</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="is_active">Publish <span class="required">*</span></label>
+                        <select class="form-control" id="is_active" name="is_active" required>
+                            <option value="1" @if(old('is_active', $politician->isActive) == 1) selected @endif>Yes</option>
+                            <option value="0" @if(old('is_active', $politician->isActive) == 0) selected @endif>No</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="form-group">
+                        <label for="description">Description <span class="required">*</span></label>
+                        <textarea name="description" id="description" class="form-control" rows="6" required>{!! old('description', $persona->description) !!}</textarea>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
                         <label for="slugs">Slugs <span class="required">*</span></label>
                         <select class="form-control select2-input" id="slugs" name="slugs[]" required multiple>
                             @if (is_array(old('slugs')))
@@ -52,39 +112,6 @@
                                     <option value="{{ $personaSlug->slug->id }}" selected>{{ $personaSlug->slug->name }}</option>
                                 @endforeach
                             @endif
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-8">
-                    <div class="form-group">
-                        <label for="description">Description <span class="required">*</span></label>
-                        <textarea name="description" id="description" class="form-control" rows="6" required>{!! old('description', $persona->description) !!}</textarea>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="party_id">Party <span class="required">*</span></label>
-                        <select class="form-control" id="party_id" name="party_id" required>
-                            @foreach($parties as $party)
-                                <option value="{{ $party->id }}" @if(old('party_id', $politician->getParty() ? $politician->getParty()->id : '') == $party->id) selected @endif>{{ $party->shortName }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="role_id">Role <span class="required">*</span></label>
-                        <select class="form-control" id="role_id" name="role_id" required>
-                            @foreach($roles as $role)
-                                <option value="{{ $role->id }}" @if(old('role_id', $politician->getRole() ? $politician->getRole()->id : '') == $role->id) selected @endif>{{ $role->name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="is_active">Publish <span class="required">*</span></label>
-                        <select class="form-control" id="is_active" name="is_active" required>
-                            <option value="1" @if(old('is_active', $politician->isActive) == 1) selected @endif>Yes</option>
-                            <option value="0" @if(old('is_active', $politician->isActive) == 0) selected @endif>No</option>
                         </select>
                     </div>
                     <div class="form-group text-right">

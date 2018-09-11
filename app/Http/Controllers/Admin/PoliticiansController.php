@@ -324,8 +324,13 @@ class PoliticiansController extends Controller
         // Step 2 - Save Politician
         $politician = new Politician();
         $politician->persona = $persona;
+        $politician->isRoleStill = (int) $request->is_role_still;
         $politician->setParty($this->em->getRepository(Party::class)->find($request->party_id));
         $politician->setRole($this->em->getRepository(PoliticianRole::class)->find($request->role_id));
+
+        if ($request->role_wish_id){
+            $politician->setRoleWish($this->em->getRepository(PoliticianRole::class)->find($request->role_wish_id));
+        }
         $this->em->persist($politician);
 
         // Step 3 - Flush everything
@@ -435,8 +440,14 @@ class PoliticiansController extends Controller
         $this->em->persist($persona);
 
         // Step 2 - Save Politician
+        $politician->isRoleStill = (int) $request->is_role_still;
         $politician->setParty($this->em->getRepository(Party::class)->find($request->party_id));
         $politician->setRole($this->em->getRepository(PoliticianRole::class)->find($request->role_id));
+
+        if ($request->role_wish_id){
+            $politician->setRoleWish($this->em->getRepository(PoliticianRole::class)->find($request->role_wish_id));
+        }
+
         $this->em->persist($politician);
 
         $this->em->flush();

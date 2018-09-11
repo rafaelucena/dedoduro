@@ -129,7 +129,7 @@ class PoliticiansController extends Controller
 //            'image' => 'assets/images/uploads/avatar/avatar-195x195.png',
             'shortName' => $persona->shortName,
             'longDesc' => $persona->description,
-            'roleName' => $role->name,
+            'roleName' => ($politician->isRoleStill ? '' : 'Ex-') . $role->name,
             'partyName' => $party->shortName,
         ];
         $ninja->details = [

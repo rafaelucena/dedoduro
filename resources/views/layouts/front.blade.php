@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html lang="en" class="crt crt-side-box-on crt-nav-on crt-nav-type2 crt-main-nav-on crt-sidebar-on crt-layers-1">
+<html lang="pt" class="crt crt-side-box-on crt-nav-on crt-nav-type2 crt-main-nav-on crt-sidebar-on crt-layers-1">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    {{--<meta charset="utf-8">--}}
+    {{--<meta http-equiv="X-UA-Compatible" content="IE=edge">--}}
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Dedoduro</title>
-    <meta name="description" content="">
+    <meta name="description" content="O mapeamento de noticias mais atualizado que existe!">
 
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <link rel="shortcut icon" href="favicon.ico">
@@ -26,16 +27,27 @@
     <!-- Modernizer -->
     <script type="text/javascript" src="{{ asset('assets/js/vendor/modernizr-3.3.1.min.js') }}"></script>
 
+    @if (env('APP_ENV') === 'production')
+        {{--<!-- Global site tag (gtag.js) - Google Analytics -->--}}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-125557212-1"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'UA-125557212-1');
+        </script>
+    @endif
+
     <!-- Google Analytics -->
     {{--<script>--}}
         {{--(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){--}}
             {{--(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),--}}
             {{--m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)--}}
         {{--})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');--}}
-
-        {{--ga('create', 'UA-92973565-1', 'auto');--}}
+{{----}}
+        {{--ga('create', 'UA-125557212-1', 'auto');--}}
         {{--ga('send', 'pageview');--}}
-    {{--</script>--}}
+    {{--// </script>--}}
 </head>
 
 <body class="">

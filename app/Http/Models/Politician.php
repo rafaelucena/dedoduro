@@ -25,15 +25,21 @@ class Politician
 
     /**
      * @var integer
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer", nullable=false)
      */
     public $isActive;
 
     /**
      * @var integer
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer", nullable=false)
      */
     public $isDeleted;
+
+    /**
+     * @var integer
+     * @ORM\Column(type="integer", nullable=false)
+     */
+    public $isRoleStill;
 
     /**
      * @var \DateTime
@@ -78,6 +84,12 @@ class Politician
      */
     protected $role;
 
+    /**
+     * @var PoliticianRole
+     * @ORM\ManyToOne(targetEntity="PoliticianRole", inversedBy="politiciansWish")
+     */
+    protected $roleWish;
+
     public function __construct()
     {
         //@TODO
@@ -91,6 +103,7 @@ class Politician
         $this->createdAt = new DateTime();
         $this->createdBy = auth()->user();
         $this->isDeleted = (int) false;
+        $this->isRoleStill = (int) false;
     }
 
     /**
@@ -120,6 +133,26 @@ class Politician
     public function setRole(PoliticianRole $role): Politician
     {
         $this->role = $role;
+
+        return $this;
+    }
+
+    /**
+     * @return PoliticianRole
+     */
+    public function getRoleWish(): PoliticianRole
+    {
+        return $this->roleWish ? : new PoliticianRole();
+    }
+
+    /**
+     * @param PoliticianRole $roleWish
+     *
+     * @return Politician
+     */
+    public function setRoleWish(PoliticianRole $roleWish): Politician
+    {
+        $this->roleWish = $roleWish;
 
         return $this;
     }
