@@ -70,14 +70,17 @@
                                     <li>
                                         <a href="{{ url('/') }}">Home</a>
                                     </li>
-                                    <li class="in-progress">
+                                    <li class="in-progress coming-soon">
                                         <a href="{{ url('sobre') }}">Sobre</a>
                                     </li>
                                     <li>
                                         <a href="{{ url('busca') }}">Busca</a>
                                     </li>
-                                    <li class="in-progress">
+                                    <li class="in-progress coming-soon">
                                         <a href="{{ url('comunicados') }}">Comunicados</a>
+                                    </li>
+                                    <li class="in-progress coming-soon">
+                                        <a href="{{ url('contribuir') }}">Contribua</a>
                                     </li>
                                     <li>
                                         <a href="{{ url('contato') }}">Contato</a>

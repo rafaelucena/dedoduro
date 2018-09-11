@@ -64,7 +64,7 @@ class HomeController extends Controller
             ->innerJoin(PersonaNews::class, 'pn', 'WITH', 'pn.persona = pe')
             ->innerJoin(News::class, 'ne', 'WITH', 'ne = pn.news')
             ->innerJoin(Source::class, 'so', 'WITH', 'so = ne.source')
-            ->where("CONCAT(pe.id,'-',ne.publishedAt) IN (:publishedDates)")
+            ->where('CONCAT(pe.id,\'-\',ne.publishedAt) IN (:publishedDates)')
             ->andWhere('sl.isCanonical = 1')
             ->setParameters([
                 'publishedDates' => $maxPublishedDates,
@@ -120,7 +120,7 @@ class HomeController extends Controller
                 ->innerJoin(PersonaNews::class, 'pn', 'WITH', 'pn.persona = pe')
                 ->innerJoin(News::class, 'ne', 'WITH', 'ne = pn.news')
                 ->innerJoin(Source::class, 'so', 'WITH', 'so = ne.source')
-                ->where("CONCAT(pe.id,'-',ne.publishedAt) IN (:publishedDates)")
+                ->where('CONCAT(pe.id,\'-\',ne.publishedAt) IN (:publishedDates)')
                 ->andWhere('sl.isCanonical = 1')
                 ->andWhere('pe.firstName LIKE :query OR pe.lastName LIKE :query OR CONCAT(pe.firstName,\' \',pe.lastName) LIKE :query')
                 ->setParameters([
@@ -134,7 +134,7 @@ class HomeController extends Controller
 
         $sideList = $this->em->createQueryBuilder()
             ->select([
-                "CONCAT(pe.firstName, ' ', pe.lastName) AS personName",
+                'CONCAT(pe.firstName, \' \', pe.lastName) AS personName',
                 'pe.image AS personImage',
                 'sl.slug AS personUrn',
             ])

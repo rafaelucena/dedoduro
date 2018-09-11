@@ -27,7 +27,7 @@ Route::get('busca/{query?}', 'Guest\HomeController@search')->name('search.query'
 
 Route::get('politico/{slug}', 'Guest\PoliticiansController@inspect')->name('politician.show');
 
-Route::get('test', 'Guest\PoliticiansController@index')->name('test');
+//Route::get('test', 'Guest\PoliticiansController@index')->name('test');
 //Route::get('post', function () {
 //    return redirect('/');
 //});
@@ -46,6 +46,9 @@ Route::get('sobre', function () {
     abort(501);
 });
 Route::get('comunicados', function () {
+    abort(501);
+});
+Route::get('contribuir', function () {
     abort(501);
 });
 // User Area
