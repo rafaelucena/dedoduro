@@ -56,7 +56,7 @@ class SourcesController extends Controller
                 'us.name as userName',
             ])
             ->from(Source::class, 'so')
-            ->innerJoin(User::class, 'us')
+            ->innerJoin(User::class, 'us', 'WITH', 'us = so.createdBy')
             ->getQuery()
             ->getResult();
 //        $categories = Category::join('users', 'categories.user_id', '=', 'users.id')
