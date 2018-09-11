@@ -70,8 +70,9 @@ class HomeController extends Controller
             ->setParameters([
                 'publishedDates' => $maxPublishedDates,
             ])
+            ->setMaxResults(5)
             ->getQuery()
-            ->getMaxResults(5);
+            ->getResult();
 
         $ninja = new \stdClass();
 
@@ -129,6 +130,7 @@ class HomeController extends Controller
                     'publishedDates' => $maxPublishedDates,
                     'query' => '%' . $query . '%',
                 ])
+                ->setMaxResults(5)
                 ->getQuery()
                 ->getResult();
         }
