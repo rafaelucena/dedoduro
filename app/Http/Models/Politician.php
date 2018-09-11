@@ -92,7 +92,8 @@ class Politician
 
     public function __construct()
     {
-        //@TODO
+        $this->isActive = (int) true;
+        $this->isDeleted = (int) false;
     }
 
     /**

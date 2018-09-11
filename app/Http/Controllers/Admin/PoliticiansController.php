@@ -306,7 +306,10 @@ class PoliticiansController extends Controller
     {
         // Pre Validations are done in StoreBlogPost Request
         // Store File & Get Path
-        $imagePath = storage_put('images', $request->file('image'));
+        $imagePath = 'images/default-male-square_195-195.png';
+        if ($request->file('image')) {
+            $imagePath = storage_put('images', $request->file('image'));
+        }
 
         // Step 1 - Set Persona
         $persona = new Persona();
