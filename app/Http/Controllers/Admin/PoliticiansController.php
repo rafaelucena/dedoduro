@@ -318,7 +318,6 @@ class PoliticiansController extends Controller
         $persona->lastName = $request->last_name;
         $persona->description = $request->description;
         $persona->image = $imagePath;
-        $persona->isActive = $request->is_active;
         $this->em->persist($persona);
 
         // Store and Update Slugs
@@ -328,6 +327,7 @@ class PoliticiansController extends Controller
         $politician = new Politician();
         $politician->persona = $persona;
         $politician->isRoleStill = (int) $request->is_role_still;
+        $politician->isActive = $request->is_active;
         $politician->setParty($this->em->getRepository(Party::class)->find($request->party_id));
         $politician->setRole($this->em->getRepository(PoliticianRole::class)->find($request->role_id));
 
@@ -439,11 +439,11 @@ class PoliticiansController extends Controller
         $persona->lastName = $request->last_name;
         $persona->description = $request->description;
         $persona->image = $imagePath;
-        $persona->isActive = $request->is_active;
         $this->em->persist($persona);
 
         // Step 2 - Save Politician
         $politician->isRoleStill = (int) $request->is_role_still;
+        $politician->isActive = $request->is_active;
         $politician->setParty($this->em->getRepository(Party::class)->find($request->party_id));
         $politician->setRole($this->em->getRepository(PoliticianRole::class)->find($request->role_id));
 
@@ -460,7 +460,7 @@ class PoliticiansController extends Controller
 //        $blog->categories()->sync($categoryArr);
 
         // Back to index with success
-        return back()->with('custom_success', 'Blog has been updated successfully');
+        return redirect()->route('politicians.index')->with('custom_success', 'Politician has been edited successfully');
     }
 
     /**
