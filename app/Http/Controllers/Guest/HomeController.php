@@ -67,6 +67,7 @@ class HomeController extends Controller
             ->innerJoin(Source::class, 'so', 'WITH', 'so = ne.source')
             ->where('CONCAT(pe.id,\'-\',ne.publishedAt) IN (:publishedDates)')
             ->andWhere('sl.isCanonical = 1')
+            ->andWhere('po.isActive = 1 AND po.isDeleted = 0')
             ->setParameters([
                 'publishedDates' => $maxPublishedDates,
             ])
@@ -125,6 +126,7 @@ class HomeController extends Controller
                 ->innerJoin(Source::class, 'so', 'WITH', 'so = ne.source')
                 ->where('CONCAT(pe.id,\'-\',ne.publishedAt) IN (:publishedDates)')
                 ->andWhere('sl.isCanonical = 1')
+                ->andWhere('po.isActive = 1 AND po.isDeleted = 0')
                 ->andWhere('pe.firstName LIKE :query OR pe.lastName LIKE :query OR CONCAT(pe.firstName,\' \',pe.lastName) LIKE :query')
                 ->setParameters([
                     'publishedDates' => $maxPublishedDates,
@@ -148,6 +150,7 @@ class HomeController extends Controller
             ->innerJoin(Slug::class, 'sl', 'WITH', 'sl = ps.slug')
             ->innerJoin(Politician::class, 'po', 'WITH', 'po.persona = pe')
             ->where('sl.isCanonical = 1')
+            ->andWhere('po.isActive = 1 AND po.isDeleted = 0')
             ->orderBy('pe.firstName, pe.lastName')
             ->getQuery()
             ->getResult();
