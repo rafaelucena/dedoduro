@@ -137,6 +137,11 @@ class PoliticiansController extends Controller
             'Sobrenome' => $persona->lastName,
             'Partido' => $party->fullName,
         ];
+
+        if ($politician->getRoleWish()->id !== null) {
+            $ninja->details = array_merge($ninja->details, ['Candidato a...' => $politician->getRoleWish()->name]);
+        }
+
         $ninja->news = [];
         foreach ($news as $eachNews) {
             $ninja->news[] = [

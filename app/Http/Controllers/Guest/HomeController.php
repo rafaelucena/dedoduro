@@ -49,6 +49,7 @@ class HomeController extends Controller
                 'sl.slug AS personUrn',
                 'pe.image AS personImage',
                 'pr.name AS roleName',
+                'po.isRoleStill AS isRoleStill',
                 'pa.shortName AS partyShort',
                 'ne.publishedAt AS newsPublishedAt',
                 'ne.title AS newsTitle',
@@ -69,6 +70,7 @@ class HomeController extends Controller
             ->setParameters([
                 'publishedDates' => $maxPublishedDates,
             ])
+            ->setMaxResults(5)
             ->getQuery()
             ->getResult();
 
@@ -105,6 +107,7 @@ class HomeController extends Controller
                     'sl.slug AS personUrn',
                     'pe.image AS personImage',
                     'pr.name AS roleName',
+                    'po.isRoleStill AS isRoleStill',
                     'pa.shortName AS partyShort',
                     'ne.publishedAt AS newsPublishedAt',
                     'ne.title AS newsTitle',
@@ -127,6 +130,7 @@ class HomeController extends Controller
                     'publishedDates' => $maxPublishedDates,
                     'query' => '%' . $query . '%',
                 ])
+                ->setMaxResults(5)
                 ->getQuery()
                 ->getResult();
         }
@@ -135,6 +139,7 @@ class HomeController extends Controller
         $sideList = $this->em->createQueryBuilder()
             ->select([
                 'CONCAT(pe.firstName, \' \', pe.lastName) AS personName',
+                'pe.shortName AS personShort',
                 'pe.image AS personImage',
                 'sl.slug AS personUrn',
             ])
