@@ -125,23 +125,41 @@
 
         <nav id="crt-nav-sm" class="crt-nav hidden-lg hidden-md">
             <ul class="clear-list">
+                {{--<li>--}}
+                    {{--<a href="{{ url('/') }}">Home</a>--}}
+                {{--</li>--}}
+                {{--<li class="in-progress coming-soon">--}}
+                    {{--<a href="{{ url('sobre') }}">Sobre</a>--}}
+                {{--</li>--}}
+                {{--<li>--}}
+                    {{--<a href="{{ url('busca') }}">Busca</a>--}}
+                {{--</li>--}}
+                {{--<li class="in-progress coming-soon">--}}
+                    {{--<a href="{{ url('comunicados') }}">Comunicados</a>--}}
+                {{--</li>--}}
+                {{--<li class="in-progress coming-soon">--}}
+                    {{--<a href="{{ url('contribuir') }}">Contribua</a>--}}
+                {{--</li>--}}
+                {{--<li>--}}
+                    {{--<a href="{{ url('contato') }}">Contato</a>--}}
+                {{--</li>--}}
                 <li>
-                    <a href="index.php#about" data-tooltip="Home"><img class="avatar avatar-42" src="{{ asset('assets/images/uploads/avatar/avatar-42x42.png') }}" srcset="{{ asset('assets/images/uploads/avatar/avatar-84x84-2x.png') }} 2x" alt=""></a>
+                    <a href="{{ url('/') }}" data-tooltip="Home"><i class="fas fa-home fa-lg"></i></a>
                 </li>
                 <li>
-                    <a href="index.php#experience" data-tooltip="Experience"><span class="crt-icon crt-icon-experience"></span></a>
+                    <a href="{{ url('sobre') }}" data-tooltip="Sobre"><i class="fas fa-hashtag fa-lg"></i></a>
                 </li>
                 <li>
-                    <a href="index.php#portfolio" data-tooltip="Portfolio"><span class="crt-icon crt-icon-portfolio"></span></a>
+                    <a href="{{ url('busca') }}" data-tooltip="Busca"><i class="fas fa-search fa-lg"></i></a>
                 </li>
                 <li>
-                    <a href="index.php#references" data-tooltip="References"><span class="crt-icon crt-icon-references"></span></a>
+                    <a href="{{ url('comunicados') }}" data-tooltip="Comunicados"><i class="fas fa-bullhorn fa-lg"></i></a>
                 </li>
+                {{--<li>--}}
+                    {{--<a href="{{ url('contribuir') }}" data-tooltip="Contribuir"><i class="fas fa-hands-helping fa-lg"></i></a>--}}
+                {{--</li>--}}
                 <li>
-                    <a href="index.php#contact" data-tooltip="Contact"><span class="crt-icon crt-icon-contact"></span></a>
-                </li>
-                <li>
-                    <a href="category.php" data-tooltip="Blog"><span class="crt-icon crt-icon-blog"></span></a>
+                    <a href="{{ url('contato') }}" data-tooltip="Contato"><i class="far fa-envelope fa-lg"></i></a>
                 </li>
             </ul>
         </nav><!-- #crt-nav-sm -->
