@@ -207,10 +207,10 @@
 
 
             <div class="crt-card bg-primary text-center">
-                <div class="crt-card-avatar">
-                    <img class="avatar avatar-195" src="{{ asset('assets/images/uploads/avatar/avatar-195x195.png') }}"
-                         srcset="{{ asset('assets/images/uploads/avatar/avatar-390x390-2x.png') }} 2x" width="195" height="195" alt="">
-                </div>
+                {{--<div class="crt-card-avatar">--}}
+                    {{--<img class="avatar avatar-195" src="{{ asset('assets/images/uploads/avatar/avatar-195x195.png') }}"--}}
+                         {{--srcset="{{ asset('assets/images/uploads/avatar/avatar-390x390-2x.png') }} 2x" width="195" height="195" alt="">--}}
+                {{--</div>--}}
                 <div class="crt-card-info">
                     <h2 class="text-upper">Ola Lowe</h2>
 
@@ -242,9 +242,9 @@
                     <h2 class="widget-title">popular posts</h2>
                     <ul>
                         <li>
-                            <a class="post-image" href="">
-                                <img src="{{ asset('assets/images/uploads/blog/img-70x70-01.png') }}" alt="">
-                            </a>
+                            {{--<a class="post-image" href="">--}}
+                                {{--<img src="{{ asset('assets/images/uploads/blog/img-70x70-01.png') }}" alt="">--}}
+                            {{--</a>--}}
                             <div class="post-content">
                                 <h3>
                                     <a href="">contextual advertising</a>
@@ -257,9 +257,9 @@
                         </li>
 
                         <li>
-                            <a class="post-image" href="">
-                                <img src="{{ asset('assets/images/uploads/blog/img-70x70-02.jpg') }}" alt="">
-                            </a>
+                            {{--<a class="post-image" href="">--}}
+{{--                                <img src="{{ asset('assets/images/uploads/blog/img-70x70-02.jpg') }}" alt="">--}}
+                            {{--</a>--}}
                             <div class="post-content">
                                 <h3>
                                     <a href="">grilling tips for the dog days of summer</a>
@@ -272,9 +272,9 @@
                         </li>
 
                         <li>
-                            <a class="post-image" href="">
-                                <img src="{{ asset('assets/images/uploads/blog/img-70x70-03.png') }}" alt="">
-                            </a>
+                            {{--<a class="post-image" href="">--}}
+                                {{--<img src="{{ asset('assets/images/uploads/blog/img-70x70-03.png') }}" alt="">--}}
+                            {{--</a>--}}
                             <div class="post-content">
                                 <h3><a href=""></a>branding do you know who are</h3>
                             </div>
