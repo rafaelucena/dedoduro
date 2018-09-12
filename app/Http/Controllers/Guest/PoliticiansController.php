@@ -112,6 +112,8 @@ class PoliticiansController extends Controller
      */
     protected function show(Slug $slug)
     {
+        $this->continueOrAbort($slug);
+
         /* @var Persona $persona */
         $persona = $slug->getPersona();
         /* @var Politician $politician */
@@ -157,5 +159,27 @@ class PoliticiansController extends Controller
             'persona' => $persona,
             'role' => $role,
         ]);
+    }
+
+    /**
+     * @param Slug $slug
+     * @return bool
+     */
+    private function continueOrAbort(Slug $slug)
+    {
+        /* @var Persona $persona */
+        $persona = $slug->getPersona();
+        if ($persona->isActive === (int) false) {
+            abort(501);
+        }
+
+        /* @var Politician $politician */
+        $politician = $persona->getPolitician();
+        if ($politician->isActive === (int) false)
+        {
+            abort(501);
+        }
+
+        return true;
     }
 }
