@@ -3455,6 +3455,11 @@ textarea.form-item{
 .crt-side-box-btn{
     padding:20px
 }
+.crt-side-box-desc{
+    padding-top: 15px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
 .crt-side-box-btn .btn{
     max-width:320px;
     margin:0 auto
@@ -3473,10 +3478,10 @@ textarea.form-item{
     .crt-side-box-desc{
         padding:20px;
         padding-top: 13px;
-        padding-bottom:10px
+        padding-bottom:10px;
     }
     .crt-side-box-desc p{
-        margin:0 0 10px
+        margin:0 0 10px;
     }
     .crt-side-box-btn{
         padding:40px 35px
