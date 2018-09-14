@@ -3460,9 +3460,187 @@ textarea.form-item{
     padding-left: 20px;
     padding-right: 20px;
 }
+/* @TODO VERTICAL TIMELINE */
+.container ul {
+    margin: 0;
+    margin-top: 100px;
+    list-style: none;
+    position: relative;
+    padding: 1px 100px;
+    color: #000;
+    font-size: 13px;
+}
+.container ul:before {
+    content: "";
+    width: 1px;
+    height: 100%;
+    position: absolute;
+    border-left: 2px dashed #000;
+}
+.container ul li {
+    position: relative;
+    margin-left: 30px;
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 14px;
+    border-radius: 6px;
+    width: 250px;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.12), 0 2px 2px rgba(0, 0, 0, 0.08);
+}
+.container ul li:not(:first-child) {
+    margin-top: 60px;
+}
+.container ul li.single > span {
+    width: 0px;
+    height: 100%;
+    background: #000;
+    left: -30px;
+    top: 0;
+    position: absolute;
+}
+.container ul li > span {
+    width: 2px;
+    height: 100%;
+    background: #000;
+    left: -30px;
+    top: 0;
+    position: absolute;
+}
+.container ul li.single > span:before, .container ul li.single > span:after {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: 2px solid #000;
+    position: absolute;
+    background: #fff;
+    left: -3px;
+    top: 50%;
+}
+.container ul li > span:before, .container ul li > span:after {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: 2px solid #000;
+    position: absolute;
+    background: #fff;
+    left: -3px;
+    top: 0;
+}
+.container ul li span:after {
+    top: 96%;
+}
+.container ul li > div {
+    margin-left: 10px;
+}
+.container div .title, .container div .type {
+    font-weight: 600;
+    font-size: 12px;
+}
+.container div .info {
+    font-weight: 300;
+}
+.container div > div {
+    margin-top: 5px;
+}
+.container span.number {
+    height: 100%;
+}
+.container span.number span {
+    position: absolute;
+    font-size: 10px;
+    left: -40px;
+    font-weight: bold;
+}
+.container span.number span:first-child {
+    top: -5%;
+}
+.container li.single span.number span:last-child {
+    top: 50%;
+}
+.container span.number span:last-child {
+    top: 90%;
+}
 .crt-side-box-btn .btn{
     max-width:320px;
     margin:0 auto
+}
+
+.container-right ul {
+    margin: 0;
+    margin-top: 100px;
+    list-style: none;
+    position: relative;
+    padding: 1px 100px;
+    color: #000;
+    font-size: 13px;
+}
+.container-right ul:before {
+    content: "";
+    width: 1px;
+    height: 100%;
+    position: absolute;
+    /*border-right: 2px dashed #000;*/
+}
+.container-right ul li {
+    position: relative;
+    margin-right: 30px;
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 14px;
+    border-radius: 6px;
+    width: 250px;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.12), 0 2px 2px rgba(0, 0, 0, 0.08);
+}
+.container-right ul li:not(:first-child) {
+    margin-top: 60px;
+}
+.container-right ul li > span {
+    /*width: 2px;*/
+    height: 100%;
+    background: #000;
+    right: -30px;
+    top: 50%;
+    /*top: 0;*/
+    position: absolute;
+}
+.container-right ul li > span:before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: 2px solid #000;
+    position: absolute;
+    background: #fff;
+    right: -3px;
+    top: 0;
+}
+.container-right ul li span:after {
+    top: 100%;
+}
+.container-right ul li > div {
+    margin-right: 10px;
+}
+.container-right div .title, .container-right div .type {
+    font-weight: 600;
+    font-size: 12px;
+}
+.container-right div .info {
+    font-weight: 300;
+}
+.container-right div > div {
+    margin-top: 5px;
+}
+.container-right span.number {
+    height: 100%;
+}
+.container-right span.number span {
+    position: absolute;
+    font-size: 10px;
+    right: -35px;
+    font-weight: bold;
+}
+.container-right span.number span:first-child {
+    top: 0;
 }
 @media (min-width:992px){
     #crt-side-box-wrap{

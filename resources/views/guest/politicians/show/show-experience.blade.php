@@ -4,6 +4,65 @@
 
             <section class="section padd-box">
                 <h2 class="title-lg text-upper">work experience</h2>
+                <div class="container-right">
+                    <ul>
+                        <li><span></span>
+                            <div>
+                                <div class="title">Codify</div>
+                                <div class="info">Let&apos;s make coolest things in css</div>
+                                <div class="type">Presentation</div>
+                            </div> <span class="number"><span>10:00</span></span>
+                        </li>
+                        <li>
+                            <div><span></span>
+                                <div class="title">Presidente do Brasil</div>
+                                <div class="info">Reeleito</div>
+                                <div class="type">Presentation</div>
+                            </div> <span class="number"><span>2011</span></span>
+                        </li>
+                        <li>
+                            <div><span></span>
+                                <div class="title">Deputado Federal (SP)</div>
+                                <div class="info">Let&apos;s make coolest things in css</div>
+                                <div class="type">Review</div>
+                            </div> <span class="number"><span>1991</span></span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="container">
+                    <ul>
+                        <li>
+                            <div>
+                                <span></span>
+                                <div class="title">Codify</div>
+                                <div class="info">Let&apos;s make coolest things in css</div>
+                                <div class="type">Presentation</div>
+                            </div> <span class="number"><span>10:00</span> <span>12:00</span></span>
+                        </li>
+                        <li class="single">
+                            <div>
+                                <span></span>
+                                <div class="title">Single</div>
+                                <div class="info">Let&apos;s make coolest things in css</div>
+                                <div class="type">Presentation</div>
+                            </div> <span class="number"><span>10:00</span></span>
+                        </li>
+                        <li>
+                            <div><span></span>
+                                <div class="title">Presidente do Brasil</div>
+                                <div class="info">Reeleito</div>
+                                <div class="type">Presentation</div>
+                            </div> <span class="number"><span>2011</span> <span>2003</span></span>
+                        </li>
+                        <li>
+                            <div><span></span>
+                                <div class="title">Deputado Federal (SP)</div>
+                                <div class="info">Let&apos;s make coolest things in css</div>
+                                <div class="type">Review</div>
+                            </div> <span class="number"><span>1991</span> <span>1987</span></span>
+                        </li>
+                    </ul>
+                </div>
                 <div class="education">
 
                     <div class="education-box">
