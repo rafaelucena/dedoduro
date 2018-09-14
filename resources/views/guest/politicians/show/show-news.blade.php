@@ -14,7 +14,7 @@
                     <tbody>
                     @forelse ($ninja->news as $news)
                         <tr>
-                            <th data-title="Fonte"><a href="{{ $news['Url'] }}">{!! wordwrap($news['Source'], 15, "<br>\n") !!}</a></th>
+                            <th data-title="Fonte"><a target="_blank" href="{{ $news['Url'] }}">{!! wordwrap($news['Source'], 15, "<br>\n") !!}</a></th>
                             <td data-title="Titulo">{{ $news['Title'] }}</td>
                             <td data-title="Publicação">{{ $news['Published']->format('Y-m-d') }}</td>
                         </tr>
