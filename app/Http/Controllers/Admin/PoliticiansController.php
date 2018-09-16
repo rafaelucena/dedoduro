@@ -283,7 +283,8 @@ class PoliticiansController extends Controller
         $formHelper->submit = 'Create';
 
         return view(
-            'admin/politicians/create',
+//            'admin/politicians/create',
+            'admin/politicians/save',
             [
                 // Helper
                 'formHelper' => $formHelper,
@@ -390,7 +391,8 @@ class PoliticiansController extends Controller
         $formHelper->submit = 'Update';
 
         return view(
-            'admin/politicians/edit',
+            'admin/politicians/save',
+//            'admin/politicians/edit',
             [
                 // Helpers
                 'formHelper' => $formHelper,
