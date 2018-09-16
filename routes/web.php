@@ -60,6 +60,13 @@ Route::get('unauthorized', function () {
     return view('unauthorized');
 });
 
+/** Components **/
+// --Back
+Route::get('backend/form', function () {
+    return view('components/backend/form');
+});
+// --Front
+
 // Admin Routes
 Route::prefix('admin')->group(function () {
     // Dashboard
