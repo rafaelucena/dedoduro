@@ -62,8 +62,8 @@ Route::get('unauthorized', function () {
 
 /** Components **/
 // --Back
-Route::get('backend/form', function () {
-    return view('components/backend/form');
+Route::get('backend/form/general', function () {
+    return view('components/backend/form-general');
 });
 // --Front
 

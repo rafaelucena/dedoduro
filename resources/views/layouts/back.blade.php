@@ -1,297 +1,729 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html>
 <head>
-    <!--Let browser know website is optimized for mobile-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link href="{{ asset('backend/plugins/ionicons/css/ionicons.min.css') }}" rel="stylesheet">
-    <title>Ultima</title>
-    <!--Import Google Icon Font-->
-    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!--Import materialize.css-->
-    <link type="text/css" rel="stylesheet" href="{{ asset('backend/plugins/materialize/css/materialize.style.css') }}"  media="screen"/>
-    <!--vector map css-->
-    <link href="{{ asset('backend/plugins/vectormap/jquery-jvectormap-2.0.2.css') }}" rel="stylesheet" />
-    <!--Template style-->
-    <link href="{{ asset('backend/css/style.css') }}" rel="stylesheet">
-    <link href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" rel="stylesheet" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>AdminLTE 2 | General Form Elements</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.7 -->
+    <link rel="stylesheet" href="{{ asset('backend/bower_components/bootstrap/dist/css/bootstrap.min.css') }}">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="{{ asset('backend/bower_components/font-awesome/css/font-awesome.min.css') }}">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="{{ asset('backend/bower_components/Ionicons/css/ionicons.min.css') }}">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="{{ asset('backend/dist/css/AdminLTE.min.css') }}">
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+         folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" href="{{ asset('backend/dist/css/skins/_all-skins.min.css') }}">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-theme/0.1.0-beta.10/select2-bootstrap.css" rel="stylesheet" />
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
     <script>
         var base_url = "<?php echo e(url('')); ?>";
     </script>
+
+    <!-- Google Font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
-<body>
-<div id="preloader">
-    <div class="preloader-wrapper big active">
-        <div class="spinner-layer spinner-blue">
-            <div class="circle-clipper left">
-                <div class="circle"></div>
-            </div><div class="gap-patch">
-                <div class="circle"></div>
-            </div><div class="circle-clipper right">
-                <div class="circle"></div>
-            </div>
-        </div>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
 
-        <div class="spinner-layer spinner-red">
-            <div class="circle-clipper left">
-                <div class="circle"></div>
-            </div><div class="gap-patch">
-                <div class="circle"></div>
-            </div><div class="circle-clipper right">
-                <div class="circle"></div>
-            </div>
-        </div>
+    <header class="main-header">
+        <!-- Logo -->
+        <a href="https://adminlte.io/themes/AdminLTE/index2.html" class="logo">
+            <!-- mini logo for sidebar mini 50x50 pixels -->
+            <span class="logo-mini"><b>A</b>LT</span>
+            <!-- logo for regular state and mobile devices -->
+            <span class="logo-lg"><b>Admin</b>LTE</span>
+        </a>
+        <!-- Header Navbar: style can be found in header.less -->
+        <nav class="navbar navbar-static-top">
+            <!-- Sidebar toggle button-->
+            <a href="general.html#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
 
-        <div class="spinner-layer spinner-yellow">
-            <div class="circle-clipper left">
-                <div class="circle"></div>
-            </div><div class="gap-patch">
-                <div class="circle"></div>
-            </div><div class="circle-clipper right">
-                <div class="circle"></div>
-            </div>
-        </div>
+            <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav">
+                    <!-- Messages: style can be found in dropdown.less-->
+                    <li class="dropdown messages-menu">
+                        <a href="general.html#" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="fa fa-envelope-o"></i>
+                            <span class="label label-success">4</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="header">You have 4 messages</li>
+                            <li>
+                                <!-- inner menu: contains the actual data -->
+                                <ul class="menu">
+                                    <li><!-- start message -->
+                                        <a href="general.html#">
+                                            <div class="pull-left">
+                                                <img src="{{ asset('backend/dist/img/user2-160x160.jpg') }}" class="img-circle" alt="User Image">
+                                            </div>
+                                            <h4>
+                                                Support Team
+                                                <small><i class="fa fa-clock-o"></i> 5 mins</small>
+                                            </h4>
+                                            <p>Why not buy a new awesome theme?</p>
+                                        </a>
+                                    </li>
+                                    <!-- end message -->
+                                    <li>
+                                        <a href="general.html#">
+                                            <div class="pull-left">
+                                                <img src="{{ asset('backend/dist/img/user3-128x128.jpg') }}" class="img-circle" alt="User Image">
+                                            </div>
+                                            <h4>
+                                                AdminLTE Design Team
+                                                <small><i class="fa fa-clock-o"></i> 2 hours</small>
+                                            </h4>
+                                            <p>Why not buy a new awesome theme?</p>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="general.html#">
+                                            <div class="pull-left">
+                                                <img src="{{ asset('backend/dist/img/user4-128x128.jpg') }}" class="img-circle" alt="User Image">
+                                            </div>
+                                            <h4>
+                                                Developers
+                                                <small><i class="fa fa-clock-o"></i> Today</small>
+                                            </h4>
+                                            <p>Why not buy a new awesome theme?</p>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="general.html#">
+                                            <div class="pull-left">
+                                                <img src="{{ asset('backend/dist/img/user3-128x128.jpg') }}" class="img-circle" alt="User Image">
+                                            </div>
+                                            <h4>
+                                                Sales Department
+                                                <small><i class="fa fa-clock-o"></i> Yesterday</small>
+                                            </h4>
+                                            <p>Why not buy a new awesome theme?</p>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="general.html#">
+                                            <div class="pull-left">
+                                                <img src="{{ asset('backend/dist/img/user4-128x128.jpg') }}" class="img-circle" alt="User Image">
+                                            </div>
+                                            <h4>
+                                                Reviewers
+                                                <small><i class="fa fa-clock-o"></i> 2 days</small>
+                                            </h4>
+                                            <p>Why not buy a new awesome theme?</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="footer"><a href="general.html#">See All Messages</a></li>
+                        </ul>
+                    </li>
+                    <!-- Notifications: style can be found in dropdown.less -->
+                    <li class="dropdown notifications-menu">
+                        <a href="general.html#" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="fa fa-bell-o"></i>
+                            <span class="label label-warning">10</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="header">You have 10 notifications</li>
+                            <li>
+                                <!-- inner menu: contains the actual data -->
+                                <ul class="menu">
+                                    <li>
+                                        <a href="general.html#">
+                                            <i class="fa fa-users text-aqua"></i> 5 new members joined today
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="general.html#">
+                                            <i class="fa fa-warning text-yellow"></i> Very long description here that may not fit into the
+                                            page and may cause design problems
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="general.html#">
+                                            <i class="fa fa-users text-red"></i> 5 new members joined
+                                        </a>
+                                    </li>
 
-        <div class="spinner-layer spinner-green">
-            <div class="circle-clipper left">
-                <div class="circle"></div>
-            </div><div class="gap-patch">
-                <div class="circle"></div>
-            </div><div class="circle-clipper right">
-                <div class="circle"></div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- end preloader-->
-<!--\\\\\\\\\\\\\\\\\\\\\\\\\\\\Start top bar header\\\\\\\\\\\\\\\\\\\\\\\-->
-<header id="header" class="top-bar">
-    <div class="navbar-fixed">
-        <nav class="teal">
-            <div class="nav-wrapper">
-                <ul class="left">
-                    <li><h1 class="logo-wrapper center-align"><a href="http://bootstraplovers.com/themeforest-html/ultima-v1.2/index.html" class="brand-logo">ultima</a></h1></li>
-                </ul>
+                                    <li>
+                                        <a href="general.html#">
+                                            <i class="fa fa-shopping-cart text-green"></i> 25 sales made
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="general.html#">
+                                            <i class="fa fa-user text-red"></i> You changed your username
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="footer"><a href="general.html#">View all</a></li>
+                        </ul>
+                    </li>
+                    <!-- Tasks: style can be found in dropdown.less -->
+                    <li class="dropdown tasks-menu">
+                        <a href="general.html#" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="fa fa-flag-o"></i>
+                            <span class="label label-danger">9</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="header">You have 9 tasks</li>
+                            <li>
+                                <!-- inner menu: contains the actual data -->
+                                <ul class="menu">
+                                    <li><!-- Task item -->
+                                        <a href="general.html#">
+                                            <h3>
+                                                Design some buttons
+                                                <small class="pull-right">20%</small>
+                                            </h3>
+                                            <div class="progress xs">
+                                                <div class="progress-bar progress-bar-aqua" style="width: 20%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                                                    <span class="sr-only">20% Complete</span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <!-- end task item -->
+                                    <li><!-- Task item -->
+                                        <a href="general.html#">
+                                            <h3>
+                                                Create a nice theme
+                                                <small class="pull-right">40%</small>
+                                            </h3>
+                                            <div class="progress xs">
+                                                <div class="progress-bar progress-bar-green" style="width: 40%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                                                    <span class="sr-only">40% Complete</span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <!-- end task item -->
+                                    <li><!-- Task item -->
+                                        <a href="general.html#">
+                                            <h3>
+                                                Some task I need to do
+                                                <small class="pull-right">60%</small>
+                                            </h3>
+                                            <div class="progress xs">
+                                                <div class="progress-bar progress-bar-red" style="width: 60%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                                                    <span class="sr-only">60% Complete</span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <!-- end task item -->
+                                    <li><!-- Task item -->
+                                        <a href="general.html#">
+                                            <h3>
+                                                Make beautiful transitions
+                                                <small class="pull-right">80%</small>
+                                            </h3>
+                                            <div class="progress xs">
+                                                <div class="progress-bar progress-bar-yellow" style="width: 80%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                                                    <span class="sr-only">80% Complete</span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <!-- end task item -->
+                                </ul>
+                            </li>
+                            <li class="footer">
+                                <a href="general.html#">View all tasks</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- User Account: style can be found in dropdown.less -->
+                    <li class="dropdown user user-menu">
+                        <a href="general.html#" class="dropdown-toggle" data-toggle="dropdown">
+                            <img src="{{ asset('backend/dist/img/user2-160x160.jpg') }}" class="user-image" alt="User Image">
+                            <span class="hidden-xs">Alexander Pierce</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <!-- User image -->
+                            <li class="user-header">
+                                <img src="{{ asset('backend/dist/img/user2-160x160.jpg') }}" class="img-circle" alt="User Image">
 
-                <ul class="right col s9 m3 nav-right-menu">
-                    <li class="hide-on-med-and-down"><a href="javascript:void(0)" data-activates="dropdown2" class="dropdown-button dropdown-right show-on-large"><i class="material-icons">notifications_none</i><span class="badge red">3</span></a></li>
-                    <li class="hide-on-med-and-down"><a href="javascript:void(0)" data-activates="dropdown1" class="dropdown-button dropdown-right show-on-large"><i class="material-icons">email</i><span class="badge blue">4</span></a></li>
-                    <li><a class='dropdown-button  dropdown-right' href='form-basic.html#' data-activates='dropdown'><img src='images/avatar-03.png' alt="" width="40"></a></li>
-                    <li><a href="javascript:void(0)" data-activates="right-sidebar" class="right-sidebar-button waves-effect waves-light"><i class="material-icons">chat</i></a></li>
-
-                </ul>
-                <!-- Dropdown Structure -->
-                <ul id='dropdown' class='dropdown-content profile-dropdown'>
-                    <li><a href="form-basic.html#!">Profile</a></li>
-                    <li><a href="form-basic.html#!">Settings</a></li>
-                    <li class="divider"></li>
-                    <li><a href="form-basic.html#!">Logout</a></li>
-                </ul>
-                <ul id='dropdown1' class='dropdown-content notifications-dropdown'>
-                    <li class="notification-header">
-                        4 New Messages
-                    </li>
-                    <li>
-                        <a href="form-basic.html#">
-                            <img src="images/avatar-01.png" alt="" width="40" class="left">
-                            <div class="notify-content">
-                                <span class="notify-title">John Started Following You</span>
                                 <p>
-                                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+                                    Alexander Pierce - Web Developer
+                                    <small>Member since Nov. 2012</small>
                                 </p>
-                            </div>
-                        </a>
+                            </li>
+                            <!-- Menu Body -->
+                            <li class="user-body">
+                                <div class="row">
+                                    <div class="col-xs-4 text-center">
+                                        <a href="general.html#">Followers</a>
+                                    </div>
+                                    <div class="col-xs-4 text-center">
+                                        <a href="general.html#">Sales</a>
+                                    </div>
+                                    <div class="col-xs-4 text-center">
+                                        <a href="general.html#">Friends</a>
+                                    </div>
+                                </div>
+                                <!-- /.row -->
+                            </li>
+                            <!-- Menu Footer-->
+                            <li class="user-footer">
+                                <div class="pull-left">
+                                    <a href="general.html#" class="btn btn-default btn-flat">Profile</a>
+                                </div>
+                                <div class="pull-right">
+                                    <a href="general.html#" class="btn btn-default btn-flat">Sign out</a>
+                                </div>
+                            </li>
+                        </ul>
                     </li>
+                    <!-- Control Sidebar Toggle Button -->
                     <li>
-                        <a href="form-basic.html#">
-                            <img src="images/avatar-04.png" alt="" width="40" class="left">
-                            <div class="notify-content">
-                                <span class="notify-title">Adam sent you a request</span>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-                                </p>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="form-basic.html#">
-                            <img src="images/avatar-05.png" alt="" width="40" class="left">
-                            <div class="notify-content">
-                                <span class="notify-title">Deny Sent a private Message</span>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-                                </p>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="form-basic.html#">
-                            <img src="images/avatar-08.png" alt="" width="40" class="left">
-                            <div class="notify-content">
-                                <span class="notify-title">Kalia assign a task</span>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-                                </p>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="form-basic.html#" class="center-align">View All</a>
+                        <a href="general.html#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
                     </li>
                 </ul>
-                <ul id='dropdown2' class='dropdown-content notifications-dropdown'>
-                    <li class="notification-header">
-                        3 New Alerts
-                    </li>
-                    <li>
-                        <a href="form-basic.html#">
-                            <i class="material-icons left red-text">warning</i>
-                            <div class="notify-content">
-                                <span class="notify-title red-text">Disc storage is low</span>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-                                </p>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="form-basic.html#">
-                            <i class="material-icons left green-text">cloud_download</i>
-                            <div class="notify-content">
-                                <span class="notify-title green-text">File download is complete</span>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-                                </p>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="form-basic.html#">
-                            <i class="material-icons red-text left">email</i>
-                            <div class="notify-content">
-                                <span class="notify-title red-text">Email Send Failed</span>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-                                </p>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="form-basic.html#" class="center-align">View All</a>
-                    </li>
-                </ul>
-                <form class="right search col s6 hide-on-med-and-down">
-                    <div class="input-field">
-                        <input id="search" type="search" placeholder="Search" autocomplete="off">
-                        <label for="search" class="active"><i class="material-icons search-icon">search</i></label>
-                    </div>
-                </form>
             </div>
         </nav>
+    </header>
+    <!-- Left side column. contains the logo and sidebar -->
+    <aside class="main-sidebar">
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+            <!-- Sidebar user panel -->
+            <div class="user-panel">
+                <div class="pull-left image">
+                    <img src="{{ asset('backend/dist/img/user2-160x160.jpg') }}" class="img-circle" alt="User Image">
+                </div>
+                <div class="pull-left info">
+                    <p>Alexander Pierce</p>
+                    <a href="general.html#"><i class="fa fa-circle text-success"></i> Online</a>
+                </div>
+            </div>
+            <!-- search form -->
+            <form action="general.html#" method="get" class="sidebar-form">
+                <div class="input-group">
+                    <input type="text" name="q" class="form-control" placeholder="Search...">
+                    <span class="input-group-btn">
+                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+                </button>
+              </span>
+                </div>
+            </form>
+            <!-- /.search form -->
+            <!-- sidebar menu: : style can be found in sidebar.less -->
+            <ul class="sidebar-menu" data-widget="tree">
+                <li class="header">MAIN NAVIGATION</li>
+                <li class="treeview">
+                    <a href="general.html#">
+                        <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+                        <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="https://adminlte.io/themes/AdminLTE/index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
+                        <li><a href="https://adminlte.io/themes/AdminLTE/index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
+                    </ul>
+                </li>
+                <li class="treeview">
+                    <a href="general.html#">
+                        <i class="fa fa-files-o"></i>
+                        <span>Layout Options</span>
+                        <span class="pull-right-container">
+              <span class="label label-primary pull-right">4</span>
+            </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="https://adminlte.io/themes/AdminLTE/pages/layout/top-nav.html"><i class="fa fa-circle-o"></i> Top Navigation</a></li>
+                        <li><a href="https://adminlte.io/themes/AdminLTE/pages/layout/boxed.html"><i class="fa fa-circle-o"></i> Boxed</a></li>
+                        <li><a href="https://adminlte.io/themes/AdminLTE/pages/layout/fixed.html"><i class="fa fa-circle-o"></i> Fixed</a></li>
+                        <li><a href="https://adminlte.io/themes/AdminLTE/pages/layout/collapsed-sidebar.html"><i class="fa fa-circle-o"></i> Collapsed Sidebar</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="https://adminlte.io/themes/AdminLTE/pages/widgets.html">
+                        <i class="fa fa-th"></i> <span>Widgets</span>
+                        <span class="pull-right-container">
+              <small class="label pull-right bg-green">new</small>
+            </span>
+                    </a>
+                </li>
+                <li class="treeview">
+                    <a href="general.html#">
+                        <i class="fa fa-pie-chart"></i>
+                        <span>Charts</span>
+                        <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="https://adminlte.io/themes/AdminLTE/pages/charts/chartjs.html"><i class="fa fa-circle-o"></i> ChartJS</a></li>
+                        <li><a href="https://adminlte.io/themes/AdminLTE/pages/charts/morris.html"><i class="fa fa-circle-o"></i> Morris</a></li>
+                        <li><a href="https://adminlte.io/themes/AdminLTE/pages/charts/flot.html"><i class="fa fa-circle-o"></i> Flot</a></li>
+                        <li><a href="https://adminlte.io/themes/AdminLTE/pages/charts/inline.html"><i class="fa fa-circle-o"></i> Inline charts</a></li>
+                    </ul>
+                </li>
+                <li class="treeview">
+                    <a href="general.html#">
+                        <i class="fa fa-laptop"></i>
+                        <span>UI Elements</span>
+                        <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="https://adminlte.io/themes/AdminLTE/pages/UI/general.html"><i class="fa fa-circle-o"></i> General</a></li>
+                        <li><a href="https://adminlte.io/themes/AdminLTE/pages/UI/icons.html"><i class="fa fa-circle-o"></i> Icons</a></li>
+                        <li><a href="https://adminlte.io/themes/AdminLTE/pages/UI/buttons.html"><i class="fa fa-circle-o"></i> Buttons</a></li>
+                        <li><a href="https://adminlte.io/themes/AdminLTE/pages/UI/sliders.html"><i class="fa fa-circle-o"></i> Sliders</a></li>
+                        <li><a href="https://adminlte.io/themes/AdminLTE/pages/UI/timeline.html"><i class="fa fa-circle-o"></i> Timeline</a></li>
+                        <li><a href="https://adminlte.io/themes/AdminLTE/pages/UI/modals.html"><i class="fa fa-circle-o"></i> Modals</a></li>
+                    </ul>
+                </li>
+                <li class="treeview active">
+                    <a href="general.html#">
+                        <i class="fa fa-edit"></i> <span>Políticos</span>
+                        <span class="pull-right-container">
+                          <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li class="active"><a href="general.html"><i class="fa fa-circle-o"></i> Novo</a></li>
+                        <li><a href="https://adminlte.io/themes/AdminLTE/pages/forms/advanced.html"><i class="fa fa-circle-o"></i> Advanced Elements</a></li>
+                        <li><a href="https://adminlte.io/themes/AdminLTE/pages/forms/editors.html"><i class="fa fa-circle-o"></i> Editors</a></li>
+                    </ul>
+                </li>
+                <li class="treeview">
+                    <a href="general.html#">
+                        <i class="fa fa-table"></i> <span>Tables</span>
+                        <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="https://adminlte.io/themes/AdminLTE/pages/tables/simple.html"><i class="fa fa-circle-o"></i> Simple tables</a></li>
+                        <li><a href="https://adminlte.io/themes/AdminLTE/pages/tables/data.html"><i class="fa fa-circle-o"></i> Data tables</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="https://adminlte.io/themes/AdminLTE/pages/calendar.html">
+                        <i class="fa fa-calendar"></i> <span>Calendar</span>
+                        <span class="pull-right-container">
+              <small class="label pull-right bg-red">3</small>
+              <small class="label pull-right bg-blue">17</small>
+            </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://adminlte.io/themes/AdminLTE/pages/mailbox/mailbox.html">
+                        <i class="fa fa-envelope"></i> <span>Mailbox</span>
+                        <span class="pull-right-container">
+              <small class="label pull-right bg-yellow">12</small>
+              <small class="label pull-right bg-green">16</small>
+              <small class="label pull-right bg-red">5</small>
+            </span>
+                    </a>
+                </li>
+                <li class="treeview">
+                    <a href="general.html#">
+                        <i class="fa fa-folder"></i> <span>Examples</span>
+                        <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="https://adminlte.io/themes/AdminLTE/pages/examples/invoice.html"><i class="fa fa-circle-o"></i> Invoice</a></li>
+                        <li><a href="https://adminlte.io/themes/AdminLTE/pages/examples/profile.html"><i class="fa fa-circle-o"></i> Profile</a></li>
+                        <li><a href="https://adminlte.io/themes/AdminLTE/pages/examples/login.html"><i class="fa fa-circle-o"></i> Login</a></li>
+                        <li><a href="https://adminlte.io/themes/AdminLTE/pages/examples/register.html"><i class="fa fa-circle-o"></i> Register</a></li>
+                        <li><a href="https://adminlte.io/themes/AdminLTE/pages/examples/lockscreen.html"><i class="fa fa-circle-o"></i> Lockscreen</a></li>
+                        <li><a href="https://adminlte.io/themes/AdminLTE/pages/examples/404.html"><i class="fa fa-circle-o"></i> 404 Error</a></li>
+                        <li><a href="https://adminlte.io/themes/AdminLTE/pages/examples/500.html"><i class="fa fa-circle-o"></i> 500 Error</a></li>
+                        <li><a href="https://adminlte.io/themes/AdminLTE/pages/examples/blank.html"><i class="fa fa-circle-o"></i> Blank Page</a></li>
+                        <li><a href="https://adminlte.io/themes/AdminLTE/pages/examples/pace.html"><i class="fa fa-circle-o"></i> Pace Page</a></li>
+                    </ul>
+                </li>
+                <li class="treeview">
+                    <a href="general.html#">
+                        <i class="fa fa-share"></i> <span>Multilevel</span>
+                        <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="general.html#"><i class="fa fa-circle-o"></i> Level One</a></li>
+                        <li class="treeview">
+                            <a href="general.html#"><i class="fa fa-circle-o"></i> Level One
+                                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a href="general.html#"><i class="fa fa-circle-o"></i> Level Two</a></li>
+                                <li class="treeview">
+                                    <a href="general.html#"><i class="fa fa-circle-o"></i> Level Two
+                                        <span class="pull-right-container">
+                      <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                                    </a>
+                                    <ul class="treeview-menu">
+                                        <li><a href="general.html#"><i class="fa fa-circle-o"></i> Level Three</a></li>
+                                        <li><a href="general.html#"><i class="fa fa-circle-o"></i> Level Three</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><a href="general.html#"><i class="fa fa-circle-o"></i> Level One</a></li>
+                    </ul>
+                </li>
+                <li><a href="https://adminlte.io/docs"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
+                <li class="header">LABELS</li>
+                <li><a href="general.html#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
+                <li><a href="general.html#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
+                <li><a href="general.html#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>
+            </ul>
+        </section>
+        <!-- /.sidebar -->
+    </aside>
 
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        @yield('content')
     </div>
-</header>
-<!--\\\\\\\\\\\\\\\\\\\\\\\\\\\\End top bar header\\\\\\\\\\\\\\\\\\\\\\\-->
-
-
-
-<!--\\\\\\\\\\\\\\\\\\\ Start left side nav\\\\\\\\\\\\\\\\\\\\\\\\\\\\-->
-@include ('includes/partials/backend/sidebar-navigation')
-<a href="form-basic.html#" data-activates="slide-out" class="button-collapse hide-on-large-only"><i class="material-icons">menu</i></a>
-<!--//////////////////End left side nav/////////////////-->
-
-
-
-<!--\\\\\\\\\\\\\\\\\\\\\\\\\\\\Right sidebar Start\\\\\\\\\\\\\\\\\\\\\\\-->
-<aside id="right-sidebar" class="side-nav  white right-sidebar-panel">
-    <div class="side-nav-wrapper">
-        <ul class="chat-list">
-            <li class="chat-item clearfix">
-                <a href="form-basic.html#">
-                    <img src="images/avatar-01.png" alt="" width="40" class="left">
-                    <div class="overflow-hidden">
-                        <h5>John Doe</h5>
-                        <span class="green-text">Online</span>
-                    </div>
-                </a>
-            </li><!--end chat item-->
-            <li class="chat-item clearfix">
-                <a href="form-basic.html#">
-                    <img src="images/avatar-02.png" alt="" width="40" class="left">
-                    <div class="overflow-hidden">
-                        <h5>David villa</h5>
-                        <span class="red-text">Offline</span>
-                    </div>
-                </a>
-            </li><!--end chat item-->
-            <li class="chat-item clearfix">
-                <a href="form-basic.html#">
-                    <img src="images/avatar-03.png" alt="" width="40" class="left">
-                    <div class="overflow-hidden">
-                        <h5>John Abraham</h5>
-                        <span class="grey-text">Active 3h ago</span>
-                    </div>
-                </a>
-            </li><!--end chat item-->
-            <li class="chat-item clearfix">
-                <a href="form-basic.html#">
-                    <img src="images/avatar-04.png" alt="" width="40" class="left">
-                    <div class="overflow-hidden">
-                        <h5>Johnny Liver</h5>
-                        <span class="green-text">Online</span>
-                    </div>
-                </a>
-            </li><!--end chat item-->
-            <li class="chat-item clearfix">
-                <a href="form-basic.html#">
-                    <img src="images/avatar-05.png" alt="" width="40" class="left">
-                    <div class="overflow-hidden">
-                        <h5>Mark Wough</h5>
-                        <span class="green-text">Online</span>
-                    </div>
-                </a>
-            </li><!--end chat item-->
-            <li class="chat-item clearfix">
-                <a href="form-basic.html#">
-                    <img src="images/avatar-06.png" alt="" width="40" class="left">
-                    <div class="overflow-hidden">
-                        <h5>Adam Smith</h5>
-                        <span class="red-text">Offline</span>
-                    </div>
-                </a>
-            </li><!--end chat item-->
-            <li class="chat-item clearfix">
-                <a href="form-basic.html#">
-                    <img src="images/avatar-07.png" alt="" width="40" class="left">
-                    <div class="overflow-hidden">
-                        <h5>Rakesh sharma</h5>
-                        <span class="grey-text">Active 3h ago</span>
-                    </div>
-                </a>
-            </li><!--end chat item-->
-        </ul><!--end chat list-->
-        <div class="center-align">
-            <a href="form-basic.html#" class="btn waves-effect waves-light teal">Load More...</a>
+    <!-- /.content-wrapper -->
+    <footer class="main-footer">
+        <div class="pull-right hidden-xs">
+            <b>Version</b> 2.4.0
         </div>
-    </div>
-</aside>
-<!--\\\\\\\\\\\\\\\\\\\\\\\\\\\\Right sidebar End\\\\\\\\\\\\\\\\\\\\\\\-->
+        <strong>Copyright &copy; 2014-2016 <a href="https://adminlte.io">Almsaeed Studio</a>.</strong> All rights
+        reserved.
+    </footer>
 
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Create the tabs -->
+        <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
+            <li><a href="general.html#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
+            <li><a href="general.html#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
+        </ul>
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <!-- Home tab content -->
+            <div class="tab-pane" id="control-sidebar-home-tab">
+                <h3 class="control-sidebar-heading">Recent Activity</h3>
+                <ul class="control-sidebar-menu">
+                    <li>
+                        <a href="javascript:void(0)">
+                            <i class="menu-icon fa fa-birthday-cake bg-red"></i>
 
-<!--\\\\\\\\\\\\\\\\\\\\\\\\\\\\Main content Start\\\\\\\\\\\\\\\\\\\\\\\-->
-<main class="main-content">
-    @yield('content')
-</main>
-<!--\\\\\\\\\\\\\\\\\\\\\\\\\\\\Main content end\\\\\\\\\\\\\\\\\\\\\\\-->
+                            <div class="menu-info">
+                                <h4 class="control-sidebar-subheading">Langdon's Birthday</h4>
 
+                                <p>Will be 23 on April 24th</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">
+                            <i class="menu-icon fa fa-user bg-yellow"></i>
 
-<!--Import jQuery before materialize.js-->
-<script type="text/javascript" src="{{ asset('backend/plugins/jquery/jquery.min.js') }}" ></script>
-<script type="text/javascript" src="{{ asset('backend/plugins/materialize/js/materialize.min.js') }}" ></script>
-<script type="text/javascript" src="{{ asset('backend/js/app.js')}}"></script>
+                            <div class="menu-info">
+                                <h4 class="control-sidebar-subheading">Frodo Updated His Profile</h4>
+
+                                <p>New phone +1(800)555-1234</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">
+                            <i class="menu-icon fa fa-envelope-o bg-light-blue"></i>
+
+                            <div class="menu-info">
+                                <h4 class="control-sidebar-subheading">Nora Joined Mailing List</h4>
+
+                                <p>nora@example.com</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">
+                            <i class="menu-icon fa fa-file-code-o bg-green"></i>
+
+                            <div class="menu-info">
+                                <h4 class="control-sidebar-subheading">Cron Job 254 Executed</h4>
+
+                                <p>Execution time 5 seconds</p>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+                <!-- /.control-sidebar-menu -->
+
+                <h3 class="control-sidebar-heading">Tasks Progress</h3>
+                <ul class="control-sidebar-menu">
+                    <li>
+                        <a href="javascript:void(0)">
+                            <h4 class="control-sidebar-subheading">
+                                Custom Template Design
+                                <span class="label label-danger pull-right">70%</span>
+                            </h4>
+
+                            <div class="progress progress-xxs">
+                                <div class="progress-bar progress-bar-danger" style="width: 70%"></div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">
+                            <h4 class="control-sidebar-subheading">
+                                Update Resume
+                                <span class="label label-success pull-right">95%</span>
+                            </h4>
+
+                            <div class="progress progress-xxs">
+                                <div class="progress-bar progress-bar-success" style="width: 95%"></div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">
+                            <h4 class="control-sidebar-subheading">
+                                Laravel Integration
+                                <span class="label label-warning pull-right">50%</span>
+                            </h4>
+
+                            <div class="progress progress-xxs">
+                                <div class="progress-bar progress-bar-warning" style="width: 50%"></div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">
+                            <h4 class="control-sidebar-subheading">
+                                Back End Framework
+                                <span class="label label-primary pull-right">68%</span>
+                            </h4>
+
+                            <div class="progress progress-xxs">
+                                <div class="progress-bar progress-bar-primary" style="width: 68%"></div>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+                <!-- /.control-sidebar-menu -->
+
+            </div>
+            <!-- /.tab-pane -->
+            <!-- Stats tab content -->
+            <div class="tab-pane" id="control-sidebar-stats-tab">Stats Tab Content</div>
+            <!-- /.tab-pane -->
+            <!-- Settings tab content -->
+            <div class="tab-pane" id="control-sidebar-settings-tab">
+                <form method="post">
+                    <h3 class="control-sidebar-heading">General Settings</h3>
+
+                    <div class="form-group">
+                        <label class="control-sidebar-subheading">
+                            Report panel usage
+                            <input type="checkbox" class="pull-right" checked>
+                        </label>
+
+                        <p>
+                            Some information about this general settings option
+                        </p>
+                    </div>
+                    <!-- /.form-group -->
+
+                    <div class="form-group">
+                        <label class="control-sidebar-subheading">
+                            Allow mail redirect
+                            <input type="checkbox" class="pull-right" checked>
+                        </label>
+
+                        <p>
+                            Other sets of options are available
+                        </p>
+                    </div>
+                    <!-- /.form-group -->
+
+                    <div class="form-group">
+                        <label class="control-sidebar-subheading">
+                            Expose author name in posts
+                            <input type="checkbox" class="pull-right" checked>
+                        </label>
+
+                        <p>
+                            Allow the user to show his name in blog posts
+                        </p>
+                    </div>
+                    <!-- /.form-group -->
+
+                    <h3 class="control-sidebar-heading">Chat Settings</h3>
+
+                    <div class="form-group">
+                        <label class="control-sidebar-subheading">
+                            Show me as online
+                            <input type="checkbox" class="pull-right" checked>
+                        </label>
+                    </div>
+                    <!-- /.form-group -->
+
+                    <div class="form-group">
+                        <label class="control-sidebar-subheading">
+                            Turn off notifications
+                            <input type="checkbox" class="pull-right">
+                        </label>
+                    </div>
+                    <!-- /.form-group -->
+
+                    <div class="form-group">
+                        <label class="control-sidebar-subheading">
+                            Delete chat history
+                            <a href="javascript:void(0)" class="text-red pull-right"><i class="fa fa-trash-o"></i></a>
+                        </label>
+                    </div>
+                    <!-- /.form-group -->
+                </form>
+            </div>
+            <!-- /.tab-pane -->
+        </div>
+    </aside>
+    <!-- /.control-sidebar -->
+    <!-- Add the sidebar's background. This div must be placed
+         immediately after the control sidebar -->
+    <div class="control-sidebar-bg"></div>
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery 3 -->
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!-- Bootstrap 3.3.7 -->
+<script src="{{ asset('backend/bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+<!-- FastClick -->
+<script src="{{ asset('backend/bower_components/fastclick/lib/fastclick.js') }}"></script>
+<!-- AdminLTE App -->
+<script src="{{ asset('backend/dist/js/adminlte.min.js') }}"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="{{ asset('backend/dist/js/demo.js') }}"></script>
 
 @yield('custom_js')
 
 </body>
 </html>
-
-<!--https://dribbble.com/shots/2280300-Free-Set-Of-Material-design-avatars-->

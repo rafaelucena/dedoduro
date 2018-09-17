@@ -1,95 +1,114 @@
 @extends('layouts/back')
 
 @section('content')
-    {{--@include('admin/politicians/form')--}}
-    <div class="page-content">
-        <div class="row margin-b-0">
-            <div class="col s12 m12 l12">
-                <div class="card no-shadow">
-                    <div class="card-content">
-                        <span class="card-title">Novo político</span>
-                        <p>
-                            Forms are the standard way to receive user inputted data. The transitions and smoothness of these elements are very important because of the inherent user interaction associated with forms.
-                        </p>
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            Criar novo político
+            <small>Inputs</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="general.html#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href="general.html#">Forms</a></li>
+            <li class="active">General Elements</li>
+        </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <form method="post" action="{{ $formHelper->action }}" enctype="multipart/form-data" novalidate class="row">
+            @csrf
+            {{ method_field($formHelper->method) }}
+            <!-- left column -->
+            <div class="col-md-6">
+                <!-- general form elements -->
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Dados pessoais</h3>
+                        <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
-                </div>
-            </div>
-        </div>
-        <div class="row margin-b-0">
-{{--            @include('admin/politicians/form')--}}
-            <form method="post" action="{{ $formHelper->action }}" enctype="multipart/form-data" novalidate>
-                @csrf
-                {{ method_field($formHelper->method) }}
-            <div class="col s12 m12 l6">
-                <div class="card">
-                    <div class="card-content">
-                        <span class="card-title">Dados pessoais</span>
-                        <div class="row margin-b-0">
-                            <fieldset class="no-styles col s12">
-                                <div class="row">
-                                    <div class="input-field col s8">
-                                        <input type="text" class="validate" id="short_name" name="short_name" data-error="wrong"
-                                               value="{{ old('short_name', $persona->shortName) }}" maxlength="60" required>
-                                        <label for="short_name" class="active">Nome associado</label>
-                                        {{--<input placeholder="Placeholder" id="first_name" type="text" class="validate">--}}
-                                        {{--<label for="first_name" class="active">First Name</label>--}}
-                                    </div>
-                                    <div class="input-field col s4">
-                                        <select id="is_active">
-                                            <option value="0">Não</option>
-                                            <option value="1">Sim</option>
-                                        </select>
-                                        <label id="is_active" name="is_active">Publicar</label>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="input-field col s6">
-                                        <input id="first_name" name="first_name" type="text" class="validate" data-error="wrong"
-                                               value="{{ old('first_name', $persona->firstName) }}" required>
-                                        <label for="first_name" class="">Nome</label>
-                                    </div>
-                                    <div class="input-field col s6">
-                                        <input id="last_name" name="last_name" type="text" class="validate" data-error="wrong"
-                                               value="{{ old('last_name', $persona->lastName) }}" required>
-                                        <label for="last_name" class="">Sobrenome</label>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="input-field col s6">
-                                        <input id="birthday" name="birthday" type="text" class="validate" data-error="wrong"
-                                               value="{{ old('birthday', ''/*$persona->birthday*/) }}" required disabled="disabled">
-                                        <label for="birthday" class="">Data de nascimento</label>
-                                    </div>
-                                    <div class="input-field col s6">
-                                        <input id="gender" type="text" class="validate" data-error="wrong"
-                                               value="{{ old('gender', ''/*$persona->gender*/) }}" required disabled="disabled">
-                                        <label for="gender" class="">Gênero</label>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="input-field col s12">
-                                        <textarea id="description" class="materialize-textarea" length="120"></textarea>
-                                        <label for="description">Descrição</label>
-                                    </div>
-                                </div>
-                                </fieldset>
-                            <button type="submit" class="btn teal rounded right-align">Criar</button>
+                    <!-- /.box-header -->
+                    <!-- form start -->
+                    <fieldset role="form">
+                        <div class="box-body">
+                            <div class="col-md-8 form-group">
+                                <label for="short_name">Nome associado <span class="required">*</span></label>
+                                <input type="text" class="form-control" id="short_name" name="short_name" value="{{ old('short_name', $persona->shortName) }}" placeholder="Nome como o político é reconhecido" maxlength="60" required>
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <label for="image">Imagem de perfil (recomendado)</label>
+                                <img class="img-fluid" src="{{ url( Storage::url($persona->image) ) }}" alt="{{ $persona->shortName }}">
+                                <input type="file" name="image" id="image" class="form-control">
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label for="first_name">Nome <span class="required">*</span></label>
+                                <input type="text" class="form-control" id="first_name" name="first_name" value="{{ old('first_name', $persona->firstName) }}" placeholder="Fulano" maxlength="60" required>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label for="last_name">Sobrenome <span class="required">*</span></label>
+                                <input type="text" class="form-control" id="last_name" name="last_name" value="{{ old('last_name', $persona->lastName) }}" placeholder="do Plano Redondo" maxlength="60" required>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label for="birthday">Data de nascimento <span class="required">*</span></label>
+                                <input type="text" class="form-control" id="birthday" name="birthday" value="" placeholder="" maxlength="60" disabled required>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label for="gender">Gênero <span class="required">*</span></label>
+                                <select id="gender" name="gender" class="form-control" disabled required>
+                                    <option value="1">Masculino</option>
+                                    <option value="2">Feminino</option>
+                                </select>
+                            </div>
+                            <div class="col-md-12 form-group">
+                                <label for="description">Descrição</label>
+                                <textarea id="description" class="form-control" rows="3" placeholder="Enter ..."></textarea>
+                            </div>
                         </div>
-                    </div>
+                        <!-- /.box-body -->
+
+                        <div class="box-footer">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </fieldset>
                 </div>
-
-
             </div>
-            <div class="col s12 m12 l6">
-                <div class="card">
-                    <div class="card-content">
-                        <span class="card-title">Rotas</span>
-                        <div class="row margin-b-0">
-                            <fieldset class="no-styles col s12">
-                                <div class="input-field col s12">
-                                    <select class="form-control select2-input" id="slugs" name="slugs[]" multiple required>
-                                        @if (is_array(old('slugs')))
-                                            @foreach (old('slugs') as $oldSlug)
+            <!--/.col (left) -->
+            <!-- right column -->
+            <div class="col-md-6">
+                <div class="box box-info">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Acesso</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <!-- form start -->
+                    <fieldset role="form">
+                        <div class="box-body">
+                            <div class="col-md-12 form-group">
+                                <label for="slugs">Rotas <span class="required">*</span></label>
+                                <select class="form-control select2 select2-input" id="slugs" name="slugs[]" required multiple>
+                                    @if (is_array(old('slugs')))
+                                        @foreach (old('slugs') as $oldSlug)
+                                            <option value="{{ $oldSlug }}" selected="selected">
+                                                @if(is_numeric($oldSlug))
+                                                    {{ app('em')->getRepository(App\Http\Models\Slug::class)->find($oldSlug)->name }}
+                                                @else
+                                                    {{ $oldSlug }}
+                                                @endif
+                                            </option>
+                                        @endforeach
+                                    @else
+                                        @foreach($persona->getSlugs() as $personaSlug)
+                                            <option value="{{ $personaSlug->slug->id }}" selected>{{ $personaSlug->slug->name }}</option>
+                                        @endforeach
+                                    @endif
+                                </select>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label for="main_slug">Rota principal <span class="required">*</span></label>
+                                <select class="form-control select2 select2-input" id="main_slug" name="main_slug" required disabled>
+                                    @if (is_array(old('slugs')))
+                                        @foreach (old('slugs') as $oldSlug)
+                                            @if ($loop->first)
                                                 <option value="{{ $oldSlug }}" selected="selected">
                                                     @if(is_numeric($oldSlug))
                                                         {{ app('em')->getRepository(App\Http\Models\Slug::class)->find($oldSlug)->name }}
@@ -97,115 +116,136 @@
                                                         {{ $oldSlug }}
                                                     @endif
                                                 </option>
-                                            @endforeach
-                                        @else
-                                            @foreach($persona->getSlugs() as $personaSlug)
+                                            @else
+                                                @break
+                                            @endif
+                                        @endforeach
+                                    @else
+                                        @foreach($persona->getSlugs() as $personaSlug)
+                                            @if ($loop->first)
                                                 <option value="{{ $personaSlug->slug->id }}" selected>{{ $personaSlug->slug->name }}</option>
-                                            @endforeach
-                                        @endif
-                                    </select>
-                                    <label for="slugs">Rotas</label>
-                                </div>
-                            </fieldset>
+                                            @else
+                                                @break
+                                            @endif
+                                        @endforeach
+                                    @endif
+                                </select>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label for="aux_slugs">Rotas auxiliares <span class="required">*</span></label>
+                                <select class="form-control select2 select2-input" id="aux_slugs" name="aux_slugs[]" required multiple disabled>
+                                    @if (is_array(old('slugs')))
+                                        @foreach (old('slugs') as $oldSlug)
+                                            @if ($loop->first)
+                                                @continue
+                                            @else
+                                                <option value="{{ $oldSlug }}" selected="selected">
+                                                    @if(is_numeric($oldSlug))
+                                                        {{ app('em')->getRepository(App\Http\Models\Slug::class)->find($oldSlug)->name }}
+                                                    @else
+                                                        {{ $oldSlug }}
+                                                    @endif
+                                                </option>
+                                            @endif
+                                        @endforeach
+                                    @else
+                                        @foreach($persona->getSlugs() as $personaSlug)
+                                            @if ($loop->first)
+                                                @continue
+                                            @else
+                                                <option value="{{ $personaSlug->slug->id }}" selected>{{ $personaSlug->slug->name }}</option>
+                                            @endif
+                                        @endforeach
+                                    @endif
+                                </select>
+                            </div>
                         </div>
-                    </div>
+                        <!-- /.box-body -->
+                    </fieldset>
                 </div>
-
-                <div class="card">
-                    <div class="card-content">
-                        <span class="card-title">Político</span>
-                        <div class="row margin-b-0">
-                            <fieldset class="no-styles col s12">
-                                <div class="row">
-                                    <div class="input-field col s6">
-                                        <input id="image" type="file" name="image" class="validate">
-                                        <label for="image">Image</label>
-                                    </div>
-                                    <div class="input-field col s6">
-                                        <select id="party_id" name="party_id" class="validate" required>
-                                            @foreach($parties as $party)
-                                                @if ($loop->first)
-                                                    <option value="">Selecione</option>
-                                                @endif
-                                                <option value="{{ $party->id }}" @if(old('party_id', $politician->getParty() ? $politician->getParty()->id : '') == $party->id) selected @endif>{{ $party->shortName }}</option>
-                                            @endforeach
-                                        </select>
-                                        <label for=party_id"">Partido atual</label>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="input-field col s6">
-                                        <select id="role_id" name="role_id" class="validate" required>
-                                            @foreach($roles as $role)
-                                                @if ($loop->first)
-                                                    <option value="">Selecione</option>
-                                                @endif
-                                                <option value="{{ $role->id }}" @if(old('role_id', $politician->getRole() ? $politician->getRole()->id : '') == $role->id) selected @endif>{{ $role->name }}</option>
-                                            @endforeach
-                                        </select>
-                                        <label for="role_id">Cargo recente</label>
-                                    </div>
-                                    <div class="input-field col s6">
-                                        <select id="role_wish_local_id" name="role_wish_local_id" class="validate" disabled="disabled" required>
-                                            <option value="">Selecione</option>
-                                            <option value="1">Nacional (Brasil)</option>
-                                            <option value="2">Regional (DF)</option>
-                                            <option value="3">Local (Goiânia)</option>
-                                        </select>
-                                        <label for="role_wish_local_id">Eleito por</label>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="input-field col s3">
-                                        <input id="number" name="number" type="text" class="validate" disabled="disabled" data-error="wrong"
-                                               value="" maxlength="60" required>
-                                        <label for="number">Número</label>
-                                    </div>
-                                    <div class="input-field col s3">
-                                        <select id="length_id" name="length_id" disabled>
-                                            <option value="1">2018-2022</option>
-                                            <option value="2">2018-2026</option>
-                                        </select>
-                                        <label for="length_id">Termo (duração)</label>
-                                    </div>
-                                    <div class="input-field col s6">
-                                        <select id="is_role_still" name="is_role_still">
-                                            <option value="1">Sim</option>
-                                            <option value="0">Não</option>
-                                        </select>
-                                        <label for="is_role_still">Ainda ocupa o cargo?</label>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="input-field col s6">
-                                        <select id="role_wish_id" name="role_wish_id" class="validate" required>
-                                            @foreach($roles as $role)
-                                                @if ($loop->first)
-                                                    <option value="">Selecione</option>
-                                                @endif
-                                                <option value="{{ $role->id }}" @if(old('role_wish_id', $politician->getRoleWish() ? $politician->getRoleWish()->id : '') == $role->id) selected @endif>{{ $role->name }}</option>
-                                            @endforeach
-                                        </select>
-                                        <label for="role_wish_id">Cargo desejado</label>
-                                    </div>
-                                    <div class="input-field col s6">
-                                        <select id="role_wish_local_id" name="role_wish_local_id" class="validate" disabled="disabled" required>
-                                            <option value="">Selecione</option>
-                                            <option value="1">Nacional (Brasil)</option>
-                                            <option value="2">Regional (DF)</option>
-                                            <option value="3">Local (Goiânia)</option>
-                                        </select>
-                                        <label for="role_wish_local_id">Elegível por</label>
-                                    </div>
-                                </div>
-                            </fieldset>
+                <!-- /.box -->
+                <div class="box box-info">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Político</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <!-- form start -->
+                    <fieldset role="form">
+                        <div class="box-body">
+                            <div class="col-md-4 form-group">
+                                <label for="party_id">Partido atual <span class="required">*</span></label>
+                                <select class="form-control" id="party_id" name="party_id" required>
+                                    @foreach($parties as $party)
+                                        <option value="{{ $party->id }}" @if(old('party_id', $politician->getParty() ? $politician->getParty()->id : '') == $party->id) selected @endif>{{ $party->shortName }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <label for="role_id">Cargo recente <span class="required">*</span></label>
+                                <select class="form-control" id="role_id" name="role_id" required>
+                                    @foreach($roles as $role)
+                                        <option value="{{ $role->id }}" @if(old('role_id', $politician->getRole() ? $politician->getRole()->id : '') == $role->id) selected @endif>{{ $role->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <label for="role_wish_local_id">Eleito por</label>
+                                <select id="role_wish_local_id" name="role_wish_local_id" class="form-control" disabled required>
+                                    <option value="">Selecione</option>
+                                    <option value="1">Nacional (Brasil)</option>
+                                    <option value="2">Regional (DF)</option>
+                                    <option value="3">Local (Goiânia)</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <label for="is_role_still">Ainda ocupa? <span class="required">*</span></label>
+                                <select class="form-control" id="is_role_still" name="is_role_still" required>
+                                    <option value="1" @if(old('is_role_still', $politician->isRoleStill) == 1) selected @endif>Sim</option>
+                                    <option value="0" @if(old('is_role_still', $politician->isRoleStill) == 0) selected @endif>Não</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <label for="role_id">Cargo desejado</label>
+                                <select class="form-control" id="role_wish_id" name="role_wish_id">
+                                    <option value=""></option>
+                                    @foreach($roles as $role)
+                                        <option value="{{ $role->id }}" @if(old('role_wish_id', $politician->getRoleWish() ? $politician->getRoleWish()->id : '') == $role->id) selected @endif>{{ $role->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <label for="role_wish_local_id">Elegível por</label>
+                                <select id="role_wish_local_id" name="role_wish_local_id" class="form-control" disabled required>
+                                    <option value="">Selecione</option>
+                                    <option value="1">Nacional (Brasil)</option>
+                                    <option value="2">Regional (DF)</option>
+                                    <option value="3">Local (Goiânia)</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <label for="length_id">Termo (duração)</label>
+                                <select id="length_id" name="length_id" class="form-control" disabled>
+                                    <option value="1">2018-2022</option>
+                                    <option value="2">2018-2026</option>
+                                </select>
+                            </div>
+                            <div class="col-md-8 form-group">
+                                <label for="is_active">Publicar <span class="required">*</span></label>
+                                <select class="form-control" id="is_active" name="is_active" required>
+                                    <option value="1" @if(old('is_active', $politician->isActive) == 1) selected @endif>Sim</option>
+                                    <option value="0" @if(old('is_active', $politician->isActive) == 0) selected @endif>Não</option>
+                                </select>
+                            </div>
                         </div>
-                    </div>
-                </div>
+                        <!-- /.box-body -->
+                    </fieldset>
                 </div>
             </div>
+            <!--/.col (right) -->
         </form>
-    </div>
+        <!-- /.row -->
+    </section>
+    <!-- /.content -->
 @endsection
 
 @section('custom_js')
@@ -214,37 +254,37 @@
     <script>
         // Integrate TinyMCE Editor
         // Make Config Settings
-        // var editor_config = {
-        //     path_absolute : base_url,
-        //     selector:'#description',
-        //     height: 100,
-        //     plugins: 'print preview fullpage searchreplace autolink directionality visualblocks visualchars fullscreen image link media codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount imagetools contextmenu colorpicker textpattern help',
-        //     toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent | removeformat',
-        //     image_advtab: true,
-        //     relative_urls: false,
-        //     file_browser_callback : function(field_name, url, type, win) {
-        //         var x = window.innerWidth || document.documentElement.clientWidth || document.getElementsByTagName('body')[0].clientWidth;
-        //         var y = window.innerHeight|| document.documentElement.clientHeight|| document.getElementsByTagName('body')[0].clientHeight;
-        //
-        //         var cmsURL = editor_config.path_absolute + '/tinymce/filemanager?field_name=' + field_name;
-        //         if (type == 'image') {
-        //             cmsURL = cmsURL + "&type=Images";
-        //         } else {
-        //             cmsURL = cmsURL + "&type=Files";
-        //         }
-        //
-        //         tinyMCE.activeEditor.windowManager.open({
-        //             file : cmsURL,
-        //             title : 'Filemanager',
-        //             width : x * 0.8,
-        //             height : y * 0.8,
-        //             resizable : "yes",
-        //             close_previous : "no"
-        //         });
-        //     }
-        // };
-        // // Init TinyMCE
-        // tinymce.init(editor_config);
+        var editor_config = {
+            path_absolute : base_url,
+            selector:'#description',
+            height: 100,
+            plugins: 'print preview fullpage searchreplace autolink directionality visualblocks visualchars fullscreen image link media codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount imagetools contextmenu colorpicker textpattern help',
+            toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent | removeformat',
+            image_advtab: true,
+            relative_urls: false,
+            file_browser_callback : function(field_name, url, type, win) {
+                var x = window.innerWidth || document.documentElement.clientWidth || document.getElementsByTagName('body')[0].clientWidth;
+                var y = window.innerHeight|| document.documentElement.clientHeight|| document.getElementsByTagName('body')[0].clientHeight;
+
+                var cmsURL = editor_config.path_absolute + '/tinymce/filemanager?field_name=' + field_name;
+                if (type == 'image') {
+                    cmsURL = cmsURL + "&type=Images";
+                } else {
+                    cmsURL = cmsURL + "&type=Files";
+                }
+
+                tinyMCE.activeEditor.windowManager.open({
+                    file : cmsURL,
+                    title : 'Filemanager',
+                    width : x * 0.8,
+                    height : y * 0.8,
+                    resizable : "yes",
+                    close_previous : "no"
+                });
+            }
+        };
+        // Init TinyMCE
+        tinymce.init(editor_config);
 
         $(document).ready(function() {
             function formatItem (item) {
@@ -255,9 +295,9 @@
             }
 
             $('.select2-input').select2({
-                theme: "material",
+                theme: "bootstrap",
                 tags: true,
-                placeholder: '{{ $formHelper->select2Helper->placeholder }}',
+                placeholder: 'Insira pelo menos uma rota...',
                 minimumInputLength: 2,
                 maximumSelectionLength: 3,
                 delay : 100,
