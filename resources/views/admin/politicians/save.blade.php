@@ -396,14 +396,14 @@
                 $("#trajectory-box").clone().prependTo("#trajectory")
             });
             $("#remove-trajectory").click(function() {
-                $('#trajectory-box').last().remove();
+                $('#trajectory-box:not(:first-child)').last().remove();
             });
 
             $("#add-new-vote").click(function() {
-                $("#vote-box").clone().prependTo("#trajectory")
+                $("#vote-box").clone().prependTo("#votes")
             });
             $("#remove-vote").click(function() {
-                $('#vote-box').last().remove();
+                $('#vote-box:not(:first-child)').last().remove();
             });
         });
     </script>
