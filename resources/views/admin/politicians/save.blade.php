@@ -71,6 +71,43 @@
                         </div>
                     </fieldset>
                 </div>
+                <!-- /.box -->
+                <div class="box box-success">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Trajetória</h3>
+                        <button id="add-new-trajectory" type="button" class="btn btn-success pull-right">Adicionar</button>
+                        <button id="remove-trajectory" type="button" class="btn btn-danger pull-right">Remover</button>
+                    </div>
+                    <!-- /.box-header -->
+                    <!-- form start -->
+                    <fieldset id="trajectory" role="form">
+                        <div id="trajectory-box" class="box-body">
+                            <div class="col-md-4 form-group">
+                                <label for="trajectory_title">Título <span class="required">*</span></label>
+                                <input type="text" class="form-control" id="trajectory_title" name="trajectory_title[]" maxlength="60" required>
+                            </div>
+                            <div class="col-md-8 form-group">
+                                <label for="trajectory_subtitle">Subtítulo <span class="required">*</span></label>
+                                <input type="text" class="form-control" id="trajectory_subtitle" name="trajectory_subtitle[]" maxlength="60" required>
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <label for="trajectory_since">Desde <span class="required">*</span></label>
+                                <input type="text" class="form-control" id="trajectory_since" name="trajectory_since[]" maxlength="60" required>
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <label for="trajectory_until">Até </label>
+                                <input type="text" class="form-control" id="trajectory_until" name="trajectory_until[]" maxlength="60">
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <label for="is_relevant">Relevante <span class="required">*</span></label>
+                                <select class="form-control" id="is_relevant" name="is_relevant[]" required>
+                                    <option value="1">Sim</option>
+                                    <option value="0">Não</option>
+                                </select>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
             </div>
             <!--/.col (left) -->
             <!-- right column -->
@@ -240,6 +277,43 @@
                         <!-- /.box-body -->
                     </fieldset>
                 </div>
+
+                <div class="box box-warning">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Votações</h3>
+                        <button id="add-new-vote" type="button" class="btn btn-warning pull-right">Adicionar</button>
+                        <button id="remove-vote" type="button" class="btn btn-danger pull-right">Remover</button>
+                    </div>
+                    <!-- /.box-header -->
+                    <!-- form start -->
+                    <fieldset id="votes" role="form">
+                        <div id="vote-box" class="box-body">
+                            <div class="col-md-4 form-group">
+                                <label for="trajectory_title">Título <span class="required">*</span></label>
+                                <input type="text" class="form-control" id="trajectory_title" name="trajectory_title[]" maxlength="60" required>
+                            </div>
+                            <div class="col-md-8 form-group">
+                                <label for="trajectory_subtitle">Subtítulo <span class="required">*</span></label>
+                                <input type="text" class="form-control" id="trajectory_subtitle" name="trajectory_subtitle[]" maxlength="60" required>
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <label for="trajectory_since">Desde <span class="required">*</span></label>
+                                <input type="text" class="form-control" id="trajectory_since" name="trajectory_since[]" maxlength="60" required>
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <label for="trajectory_until">Até </label>
+                                <input type="text" class="form-control" id="trajectory_until" name="trajectory_until[]" maxlength="60">
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <label for="is_relevant">Relevante <span class="required">*</span></label>
+                                <select class="form-control" id="is_relevant" name="is_relevant[]" required>
+                                    <option value="1">Sim</option>
+                                    <option value="0">Não</option>
+                                </select>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
             </div>
             <!--/.col (right) -->
         </form>
@@ -317,6 +391,20 @@
                 templateSelection: formatItem
             });
             $('.select2-input').trigger('change');
+
+            $("#add-new-trajectory").click(function() {
+                $("#trajectory-box").clone().prependTo("#trajectory")
+            });
+            $("#remove-trajectory").click(function() {
+                $('#trajectory-box').last().remove();
+            });
+
+            $("#add-new-vote").click(function() {
+                $("#vote-box").clone().prependTo("#trajectory")
+            });
+            $("#remove-vote").click(function() {
+                $('#vote-box').last().remove();
+            });
         });
     </script>
 @endsection
