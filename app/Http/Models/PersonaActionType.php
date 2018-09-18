@@ -2,6 +2,7 @@
 
 namespace App\Http\Models;
 
+use App\Http\Models\PersonaAction;
 use App\Http\Models\User;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -11,10 +12,10 @@ use Doctrine\ORM\Event\PreUpdateEventArgs;
 
 /**
  * @ORM\Entity()
- * @ORM\Table(name="action")
+ * @ORM\Table(name="persona_action_type")
  * @ORM\HasLifecycleCallbacks()
  */
-class Action
+class PersonaActionType
 {
     /**
      * @ORM\Id()
@@ -25,39 +26,9 @@ class Action
 
     /**
      * @var string
-     * @ORM\Column(type="string", length=127, nullable=false)
+     * @ORM\Column(type="string", length=127, nullable=false, unique=true)
      */
-    public $title;
-
-    /**
-     * @var string
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    public $subtitle;
-
-    /**
-     * @var \DateTime
-     * @ORM\Column(type="datetime", nullable=false)
-     */
-    public $happenedAt;
-
-    /**
-     * @var string
-     * @ORM\Column(type="string", length=511, nullable=true)
-     */
-    public $url;
-
-    /**
-     * @var integer
-     * @ORM\Column(type="integer", nullable=false)
-     */
-    public $isRelevant;
-
-    /**
-     * @var \DateTime
-     * @ORM\Column(type="datetime", nullable=true)
-     */
-    public $isRelevantUntil;
+    public $name;
 
     /**
      * @var integer
@@ -91,23 +62,23 @@ class Action
 
     /**
      * @var User
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="actions")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="contactTypes")
      * @ORM\JoinColumn(name="created_by", referencedColumnName="id", nullable=false)
      */
-    protected $createdBy;
+    public $createdBy;
 
     /**
      * @var ArrayCollection|PersonaAction[]
-     * @ORM\OneToMany(targetEntity="PersonaAction", mappedBy="action")
+     * @ORM\OneToMany(targetEntity="PersonaAction", mappedBy="personaActionType")
      */
-    protected $personaActions;
+    public $personaActions;
 
     /**
-     * Action constructor.
+     * Slug constructor.
      */
     public function __construct()
     {
-//        $this->news = new ArrayCollection();
+        $this->personaActions = new ArrayCollection();
     }
 
     /**

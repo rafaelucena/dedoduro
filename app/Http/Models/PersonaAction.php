@@ -2,8 +2,6 @@
 
 namespace App\Http\Models;
 
-use App\Http\Models\Persona;
-use App\Http\Models\User;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Criteria;
@@ -63,16 +61,25 @@ class PersonaAction
 
     /**
      * @var Persona
-     * @ORM\ManyToOne(targetEntity="Persona", inversedBy="personaNews")
+     * @ORM\ManyToOne(targetEntity="Persona", inversedBy="personaActions")
      */
     protected $persona;
 
     /**
-     * @var News
-     * @ORM\ManyToOne(targetEntity="News", inversedBy="personaNews")
+     * @var PersonaActionType
+     * @ORM\ManyToOne(targetEntity="PersonaActionType", inversedBy="personaActions")
+     */
+    protected $personaActionType;
+
+    /**
+     * @var Action
+     * @ORM\ManyToOne(targetEntity="Action", inversedBy="personaActions")
      */
     protected $action;
 
+    /**
+     * PersonaAction constructor.
+     */
     public function __construct()
     {
         //@TODO
@@ -101,21 +108,21 @@ class PersonaAction
     }
 
     /**
-     * @return News
+     * @return Action
      */
-    public function getNews(): News
+    public function getAction(): Action
     {
-        return $this->news;
+        return $this->action;
     }
 
     /**
-     * @param News $news
+     * @param Action $action
      *
-     * @return PersonaNews
+     * @return PersonaAction
      */
-    public function setNews(News $news): PersonaNews
+    public function setAction(Action $action): PersonaAction
     {
-        $this->news = $news;
+        $this->action = $action;
 
         return $this;
     }
@@ -131,12 +138,30 @@ class PersonaAction
     /**
      * @param Persona $persona
      *
-     * @return PersonaNews
+     * @return PersonaAction
      */
-    public function setPersona(Persona $persona): PersonaNews
+    public function setPersona(Persona $persona): PersonaAction
     {
         $this->persona = $persona;
 
+        return $this;
+    }
+
+    /**
+     * @return PersonaActionType
+     */
+    public function getPersonaActionType(): PersonaActionType
+    {
+        return $this->personaActionType;
+    }
+
+    /**
+     * @param PersonaActionType $personaActionType
+     * @return PersonaAction
+     */
+    public function setPersonaActionType(PersonaActionType $personaActionType): PersonaAction
+    {
+        $this->personaActionType = $personaActionType;
         return $this;
     }
 }

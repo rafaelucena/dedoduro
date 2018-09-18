@@ -25,7 +25,7 @@
                 <div class="box box-primary">
                     <div class="box-header with-border">
                         <h3 class="box-title">Dados pessoais</h3>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary pull-right">Submit</button>
                     </div>
                     <!-- /.box-header -->
                     <!-- form start -->
@@ -280,38 +280,64 @@
 
                 <div class="box box-warning">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Votações</h3>
-                        <button id="add-new-vote" type="button" class="btn btn-warning pull-right">Adicionar</button>
-                        <button id="remove-vote" type="button" class="btn btn-danger pull-right">Remover</button>
+                        <h3 class="box-title">Votações/Ações</h3>
+                        <button id="add-new-action" type="button" class="btn btn-warning pull-right">Adicionar</button>
+                        <button id="remove-action" type="button" class="btn btn-danger pull-right">Remover</button>
                     </div>
                     <!-- /.box-header -->
                     <!-- form start -->
-                    <fieldset id="votes" role="form">
-                        <div id="vote-box" class="box-body">
+                    <fieldset id="actions" role="form">
+                        <div id="action-box" class="box-body">
+                            <input type="hidden" id="action_id" name="action[id][]" value="1">
                             <div class="col-md-4 form-group">
-                                <label for="vote_title">Título <span class="required">*</span></label>
-                                <input id="vote_title" name="vote_title[]" type="text" class="form-control" maxlength="60" required>
+                                <label for="action_title">Título <span class="required">*</span></label>
+                                <input id="action_title" name="action[title][]" type="text" class="form-control" maxlength="127" required>
                             </div>
                             <div class="col-md-8 form-group">
-                                <label for="vote_subtitle">Subtítulo <span class="required">*</span></label>
-                                <input id="vote_subtitle" name="vote_subtitle[]" type="text" class="form-control" maxlength="60" required>
+                                <label for="action_subtitle">Subtítulo</label>
+                                <input id="action_subtitle" name="action[subtitle][]" type="text" class="form-control" maxlength="255" required>
                             </div>
                             <div class="col-md-4 form-group">
-                                <label for="vote_when">Quando <span class="required">*</span></label>
-                                <input id="vote_when" name="vote_when[]" type="text" class="form-control" maxlength="60" required>
+                                <label for="action_happened_at">Quando <span class="required">*</span></label>
+                                <input id="action_happened_at" name="action[happened_at][]" type="text" class="form-control" maxlength="60" required>
+                            </div>
+                            <div class="col-md-8 form-group">
+                                <label for="action_url">Url</label>
+                                <input id="action_url" name="action[url][]" type="text" class="form-control" maxlength="511" required>
                             </div>
                             <div class="col-md-4 form-group">
-                                <label for="vote_action_id">Posição/Voto <span class="required">*</span></label>
-                                <select id="vote_action_id" name="vote_action_id[]" class="form-control" required>
-                                    <option value="0">Não</option>
-                                    <option value="1">Sim</option>
-                                    <option value="2">Absteve</option>
-                                    <option value="3">Presidiu</option>
+                                <label for="action_type_id">Tema <span class="required">*</span></label>
+                                <select id="action_type_id" name="action[type_id][]" class="form-control" required>
+                                    <option value="1">Economia</option>
+                                    <option value="2">Política</option>
+                                    <option value="3">Criminal</option>
+                                    <option value="4">Saúde</option>
                                 </select>
                             </div>
-                            <div class="col-md-4 form-group">
-                                <label for="vote_is_relevant">Relevante <span class="required">*</span></label>
-                                <select id="vote_is_relevant" name="vote_is_relevant[]" class="form-control" required>
+                            {{--<input type="hidden">--}}
+                            <div class="col-md-2 form-group">
+                                <label for="action_person_id">Posição/Voto <span class="required">*</span></label>
+                                <select id="action_person_id" name="action[person_type_id][]" class="form-control" required>
+                                    <option value="1">Não</option>
+                                    <option value="2">Sim</option>
+                                    <option value="3">Absteve</option>
+                                    <option value="4">Presidiu</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2 form-group">
+                                <label for="action_is_relevant">Relevante <span class="required">*</span></label>
+                                <select id="action_is_relevant" name="action[is_relevant][]" class="form-control" required>
+                                    <option value="1">Sim</option>
+                                    <option value="0">Não</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2 form-group">
+                                <label for="action_is_relevant_until">Relevante até</label>
+                                <input id="action_is_relevant_until" name="action[is_relevant_until][]" type="text" class="form-control" maxlength="60" required>
+                            </div>
+                            <div class="col-md-2 form-group">
+                                <label for="action_is_active">Ativo <span class="required">*</span></label>
+                                <select id="action_is_active" name="action[is_active][]" class="form-control" required>
                                     <option value="1">Sim</option>
                                     <option value="0">Não</option>
                                 </select>
@@ -404,11 +430,12 @@
                 $('#trajectory-box:not(:first-child)').last().remove();
             });
 
-            $("#add-new-vote").click(function() {
-                $("#vote-box").clone().prependTo("#votes")
+            $("#add-new-action").click(function() {
+                $("#action-box").clone().prependTo("#actions")
+                $('#action-box:last-child').find('input:text').val('');
             });
-            $("#remove-vote").click(function() {
-                $('#vote-box:not(:first-child)').last().remove();
+            $("#remove-action").click(function() {
+                $('#action-box:not(:first-child)').last().remove();
             });
         });
     </script>

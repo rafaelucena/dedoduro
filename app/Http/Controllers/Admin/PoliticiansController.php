@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Models\Action;
 use App\Http\Models\Blog;
 use App\Http\Models\BlogCategory;
 use App\Http\Models\Category;
 use App\Http\Models\Party;
+use App\Http\Models\PersonaAction;
+use App\Http\Models\PersonaActionType;
 use App\Http\Models\PersonaSlug;
 use App\Http\Models\Politician;
 use App\Http\Models\Persona;
@@ -435,6 +438,9 @@ class PoliticiansController extends Controller
         // Store and Update Slugs
         $this->updateSlugs($persona, $request->slugs);
 
+        // Store and update actions
+        $this->updateActions($persona, $request->action);
+
         // Step 1 - Set Persona
         $persona->shortName = $request->short_name;
         $persona->firstName = $request->first_name;
@@ -512,6 +518,37 @@ class PoliticiansController extends Controller
             $unusedPersonaSlug->deletedAt = new \DateTime();
 
             $this->em->persist($unusedPersonaSlug);
+        }
+    }
+
+    private function updateActions(Persona $persona, $actionInput)
+    {
+        foreach ($actionInput['id'] as $key => $id) {
+            $action = new Action();
+            if ($id !== null) {
+                $action = $this->em->getRepository(Action::class)->find($id);
+            }
+            $action->title = $actionInput['title'][$key];
+            $action->subtitle = $actionInput['subtitle'][$key];
+            $action->url = $actionInput['url'][$key];
+            $action->isRelevant = $actionInput['is_relevant'][$key];
+            $action->isActive = $actionInput['is_active'][$key];
+            $action->happenedAt = new \DateTime($actionInput['happened_at'][$key]);
+            $this->em->persist($action);
+
+            $personaAction = false;
+            if ($id !== null) {
+                $personaAction = $persona->getPersonaAction($action);
+            }
+            if (!$personaAction) {
+                $personaAction = new PersonaAction();
+                $personaAction->setPersona($persona);
+                $personaAction->setAction($action);
+            }
+            /* @var PersonaActionType $personaActionType */
+            $personaActionType = $this->em->getRepository(PersonaActionType::class)->find($actionInput['person_type_id'][$key]);
+            $personaAction->setPersonaActionType($personaActionType);
+            $this->em->persist($personaAction);
         }
     }
 
