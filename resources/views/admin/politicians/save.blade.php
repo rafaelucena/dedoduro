@@ -84,23 +84,23 @@
                         <div id="trajectory-box" class="box-body">
                             <div class="col-md-4 form-group">
                                 <label for="trajectory_title">Título <span class="required">*</span></label>
-                                <input type="text" class="form-control" id="trajectory_title" name="trajectory_title[]" maxlength="60" required>
+                                <input id="trajectory_title" name="trajectory_title[]" type="text" class="form-control" maxlength="60" required>
                             </div>
                             <div class="col-md-8 form-group">
                                 <label for="trajectory_subtitle">Subtítulo <span class="required">*</span></label>
-                                <input type="text" class="form-control" id="trajectory_subtitle" name="trajectory_subtitle[]" maxlength="60" required>
+                                <input id="trajectory_subtitle" name="trajectory_subtitle[]" type="text" class="form-control" maxlength="60" required>
                             </div>
                             <div class="col-md-4 form-group">
                                 <label for="trajectory_since">Desde <span class="required">*</span></label>
-                                <input type="text" class="form-control" id="trajectory_since" name="trajectory_since[]" maxlength="60" required>
+                                <input id="trajectory_since" name="trajectory_since[]" type="text" class="form-control" maxlength="60" required>
                             </div>
                             <div class="col-md-4 form-group">
                                 <label for="trajectory_until">Até </label>
-                                <input type="text" class="form-control" id="trajectory_until" name="trajectory_until[]" maxlength="60">
+                                <input id="trajectory_until" name="trajectory_until[]" type="text" class="form-control" maxlength="60">
                             </div>
                             <div class="col-md-4 form-group">
-                                <label for="is_relevant">Relevante <span class="required">*</span></label>
-                                <select class="form-control" id="is_relevant" name="is_relevant[]" required>
+                                <label for="trajectory_is_relevant">Relevante <span class="required">*</span></label>
+                                <select id="trajectory_is_relevant" name="trajectory_is_relevant[]" class="form-control" required>
                                     <option value="1">Sim</option>
                                     <option value="0">Não</option>
                                 </select>
@@ -289,24 +289,29 @@
                     <fieldset id="votes" role="form">
                         <div id="vote-box" class="box-body">
                             <div class="col-md-4 form-group">
-                                <label for="trajectory_title">Título <span class="required">*</span></label>
-                                <input type="text" class="form-control" id="trajectory_title" name="trajectory_title[]" maxlength="60" required>
+                                <label for="vote_title">Título <span class="required">*</span></label>
+                                <input id="vote_title" name="vote_title[]" type="text" class="form-control" maxlength="60" required>
                             </div>
                             <div class="col-md-8 form-group">
-                                <label for="trajectory_subtitle">Subtítulo <span class="required">*</span></label>
-                                <input type="text" class="form-control" id="trajectory_subtitle" name="trajectory_subtitle[]" maxlength="60" required>
+                                <label for="vote_subtitle">Subtítulo <span class="required">*</span></label>
+                                <input id="vote_subtitle" name="vote_subtitle[]" type="text" class="form-control" maxlength="60" required>
                             </div>
                             <div class="col-md-4 form-group">
-                                <label for="trajectory_since">Desde <span class="required">*</span></label>
-                                <input type="text" class="form-control" id="trajectory_since" name="trajectory_since[]" maxlength="60" required>
+                                <label for="vote_when">Quando <span class="required">*</span></label>
+                                <input id="vote_when" name="vote_when[]" type="text" class="form-control" maxlength="60" required>
                             </div>
                             <div class="col-md-4 form-group">
-                                <label for="trajectory_until">Até </label>
-                                <input type="text" class="form-control" id="trajectory_until" name="trajectory_until[]" maxlength="60">
+                                <label for="vote_action_id">Posição/Voto <span class="required">*</span></label>
+                                <select id="vote_action_id" name="vote_action_id[]" class="form-control" required>
+                                    <option value="0">Não</option>
+                                    <option value="1">Sim</option>
+                                    <option value="2">Absteve</option>
+                                    <option value="3">Presidiu</option>
+                                </select>
                             </div>
                             <div class="col-md-4 form-group">
-                                <label for="is_relevant">Relevante <span class="required">*</span></label>
-                                <select class="form-control" id="is_relevant" name="is_relevant[]" required>
+                                <label for="vote_is_relevant">Relevante <span class="required">*</span></label>
+                                <select id="vote_is_relevant" name="vote_is_relevant[]" class="form-control" required>
                                     <option value="1">Sim</option>
                                     <option value="0">Não</option>
                                 </select>
