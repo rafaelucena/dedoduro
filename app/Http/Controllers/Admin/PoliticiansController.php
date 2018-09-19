@@ -374,12 +374,14 @@ class PoliticiansController extends Controller
     {
         // Politician Details
         $politician = $this->em->getRepository(Politician::class)->find($id);
-        // Persona Details
+        /** @var Persona $persona **/
         $persona = $politician->persona;
         // Party list
         $parties = $this->em->getRepository(Party::class)->findAll();
         // Roles List
         $roles = $this->em->getRepository(PoliticianRole::class)->findAll();
+
+        $personaActions = $persona->getPersonaActions();
 
         $select2Helper = new \stdClass();
         $select2Helper->placeholder = 'Update slugs...';
@@ -404,6 +406,7 @@ class PoliticiansController extends Controller
                 'persona' => $persona,
                 'politician' => $politician,
                 'roles' => $roles,
+                'personaActions' => $personaActions,
             ]
         );
     }
@@ -423,9 +426,8 @@ class PoliticiansController extends Controller
         // Get the item to update
         /* @var Politician $politician */
         $politician = $this->em->getRepository(Politician::class)->find($id);
-        /** $persona Persona **/
+        /** @var Persona $persona **/
         $persona = $politician->persona;
-//        $blog = Blog::findOrFail($id);
 
         // Store File & Get Path
         $imagePath = $persona->image;

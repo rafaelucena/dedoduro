@@ -142,7 +142,7 @@
                             </div>
                             <div class="col-md-6 form-group">
                                 <label for="main_slug">Rota principal <span class="required">*</span></label>
-                                <select class="form-control select2 select2-input" id="main_slug" name="main_slug" required disabled>
+                                <select class="form-control select2 select2-input" id="main_slug" name="main_slug" required>
                                     @if (is_array(old('slugs')))
                                         @foreach (old('slugs') as $oldSlug)
                                             @if ($loop->first)
@@ -287,62 +287,71 @@
                     <!-- /.box-header -->
                     <!-- form start -->
                     <fieldset id="actions" role="form">
-                        <div id="action-box" class="box-body">
-                            <input type="hidden" id="action_id" name="action[id][]" value="1">
-                            <div class="col-md-4 form-group">
-                                <label for="action_title">Título <span class="required">*</span></label>
-                                <input id="action_title" name="action[title][]" type="text" class="form-control" maxlength="127" required>
+                        @php ($personaActionsCount = count($personaActions)) @endphp
+                        @foreach ($personaActions as $key => $personaAction)
+                            @php ($action = $personaAction->getAction()) @endphp
+                            @php ($backKey = $personaActionsCount - 1 - $key) @endphp
+                            <div id="action-box" class="box-body">
+                                <input type="hidden" id="action_id" name="action[id][]" value="{{ $action->id }}">
+                                <div class="col-md-4 form-group">
+                                    <label for="action_title_{{ $backKey }}">Title <span class="required">*</span></label>
+                                    <select id="action_title_{{ $backKey }}" name="action[title][]" class="form-control select2 action_title_select2" required>
+                                        @if ($action->title)
+                                            <option value="{{ old('action[title][]', $action->title) }}" selected>{{ $action->title }}</option>
+                                        @endif
+                                    </select>
+                                </div>
+                                <div class="col-md-8 form-group">
+                                    <label for="action_subtitle">Subtítulo</label>
+                                    <input id="action_subtitle" name="action[subtitle][]" type="text" class="form-control" maxlength="255" required>
+                                </div>
+                                <div class="col-md-4 form-group">
+                                    <label for="action_happened_at">Quando <span class="required">*</span></label>
+                                    <input id="action_happened_at" name="action[happened_at][]" type="text" class="form-control" maxlength="60" required>
+                                </div>
+                                <div class="col-md-8 form-group">
+                                    <label for="action_url">Url</label>
+                                    <input id="action_url" name="action[url][]" type="text" class="form-control" maxlength="511" required>
+                                </div>
+                                <div class="col-md-4 form-group">
+                                    <label for="action_type_id">Tema <span class="required">*</span></label>
+                                    <select id="action_type_id" name="action[type_id][]" class="form-control" required>
+                                        <option value="1">Economia</option>
+                                        <option value="2">Política</option>
+                                        <option value="3">Criminal</option>
+                                        <option value="4">Saúde</option>
+                                    </select>
+                                </div>
+                                {{--<input type="hidden">--}}
+                                <div class="col-md-2 form-group">
+                                    <label for="action_person_id">Posição/Voto <span class="required">*</span></label>
+                                    <select id="action_person_id" name="action[person_type_id][]" class="form-control" required>
+                                        <option value="1">Não</option>
+                                        <option value="2">Sim</option>
+                                        <option value="3">Absteve</option>
+                                        <option value="4">Presidiu</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2 form-group">
+                                    <label for="action_is_relevant">Relevante <span class="required">*</span></label>
+                                    <select id="action_is_relevant" name="action[is_relevant][]" class="form-control" required>
+                                        <option value="1">Sim</option>
+                                        <option value="0">Não</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2 form-group">
+                                    <label for="action_is_relevant_until">Relevante até</label>
+                                    <input id="action_is_relevant_until" name="action[is_relevant_until][]" type="text" class="form-control" maxlength="60" required>
+                                </div>
+                                <div class="col-md-2 form-group">
+                                    <label for="action_is_active">Ativo <span class="required">*</span></label>
+                                    <select id="action_is_active" name="action[is_active][]" class="form-control" required>
+                                        <option value="1">Sim</option>
+                                        <option value="0">Não</option>
+                                    </select>
+                                </div>
                             </div>
-                            <div class="col-md-8 form-group">
-                                <label for="action_subtitle">Subtítulo</label>
-                                <input id="action_subtitle" name="action[subtitle][]" type="text" class="form-control" maxlength="255" required>
-                            </div>
-                            <div class="col-md-4 form-group">
-                                <label for="action_happened_at">Quando <span class="required">*</span></label>
-                                <input id="action_happened_at" name="action[happened_at][]" type="text" class="form-control" maxlength="60" required>
-                            </div>
-                            <div class="col-md-8 form-group">
-                                <label for="action_url">Url</label>
-                                <input id="action_url" name="action[url][]" type="text" class="form-control" maxlength="511" required>
-                            </div>
-                            <div class="col-md-4 form-group">
-                                <label for="action_type_id">Tema <span class="required">*</span></label>
-                                <select id="action_type_id" name="action[type_id][]" class="form-control" required>
-                                    <option value="1">Economia</option>
-                                    <option value="2">Política</option>
-                                    <option value="3">Criminal</option>
-                                    <option value="4">Saúde</option>
-                                </select>
-                            </div>
-                            {{--<input type="hidden">--}}
-                            <div class="col-md-2 form-group">
-                                <label for="action_person_id">Posição/Voto <span class="required">*</span></label>
-                                <select id="action_person_id" name="action[person_type_id][]" class="form-control" required>
-                                    <option value="1">Não</option>
-                                    <option value="2">Sim</option>
-                                    <option value="3">Absteve</option>
-                                    <option value="4">Presidiu</option>
-                                </select>
-                            </div>
-                            <div class="col-md-2 form-group">
-                                <label for="action_is_relevant">Relevante <span class="required">*</span></label>
-                                <select id="action_is_relevant" name="action[is_relevant][]" class="form-control" required>
-                                    <option value="1">Sim</option>
-                                    <option value="0">Não</option>
-                                </select>
-                            </div>
-                            <div class="col-md-2 form-group">
-                                <label for="action_is_relevant_until">Relevante até</label>
-                                <input id="action_is_relevant_until" name="action[is_relevant_until][]" type="text" class="form-control" maxlength="60" required>
-                            </div>
-                            <div class="col-md-2 form-group">
-                                <label for="action_is_active">Ativo <span class="required">*</span></label>
-                                <select id="action_is_active" name="action[is_active][]" class="form-control" required>
-                                    <option value="1">Sim</option>
-                                    <option value="0">Não</option>
-                                </select>
-                            </div>
-                        </div>
+                        @endforeach
                     </fieldset>
                 </div>
             </div>
@@ -359,7 +368,7 @@
     <script>
         // Integrate TinyMCE Editor
         // Make Config Settings
-        var editor_config = {
+        let editor_config = {
             path_absolute : base_url,
             selector:'#description',
             height: 100,
@@ -368,10 +377,10 @@
             image_advtab: true,
             relative_urls: false,
             file_browser_callback : function(field_name, url, type, win) {
-                var x = window.innerWidth || document.documentElement.clientWidth || document.getElementsByTagName('body')[0].clientWidth;
-                var y = window.innerHeight|| document.documentElement.clientHeight|| document.getElementsByTagName('body')[0].clientHeight;
+                let x = window.innerWidth || document.documentElement.clientWidth || document.getElementsByTagName('body')[0].clientWidth;
+                let y = window.innerHeight|| document.documentElement.clientHeight|| document.getElementsByTagName('body')[0].clientHeight;
 
-                var cmsURL = editor_config.path_absolute + '/tinymce/filemanager?field_name=' + field_name;
+                let cmsURL = editor_config.path_absolute + '/tinymce/filemanager?field_name=' + field_name;
                 if (type == 'image') {
                     cmsURL = cmsURL + "&type=Images";
                 } else {
@@ -423,6 +432,7 @@
             });
             $('.select2-input').trigger('change');
 
+            // Trajectory section
             $("#add-new-trajectory").click(function() {
                 $("#trajectory-box").clone().prependTo("#trajectory")
             });
@@ -430,13 +440,52 @@
                 $('#trajectory-box:not(:first-child)').last().remove();
             });
 
-            $("#add-new-action").click(function() {
-                $("#action-box").clone().prependTo("#actions")
-                $('#action-box:last-child').find('input:text').val('');
-            });
-            $("#remove-action").click(function() {
-                $('#action-box:not(:first-child)').last().remove();
-            });
+            // START - Action title select2
+                let actionTitleSelect2Obj = {
+                    theme: "bootstrap",
+                    tags: true,
+                    placeholder: 'Insira pelo menos uma rota...',
+                    minimumInputLength: 2,
+                    maximumSelectionLength: 3,
+                    delay : 100,
+                    tokenSeparators: [',','.'],
+                    ajax: {
+                        url: '{{ $formHelper->select2Helper->ajaxUrl }}',
+                        dataType: 'json',
+                        cache: true,
+                        data: function(params) {
+                            return {
+                                term: params.term || '',
+                                page: params.page || 1
+                            };
+                        },
+                    },
+                    templateResult: formatItem,
+                    templateSelection: formatItem
+                };
+                $('.action_title_select2').select2(actionTitleSelect2Obj);
+                $('.action_title_select2').trigger('change');
+
+                // Action section
+                $("#add-new-action").click(function() {
+                    // First we destroy the current select2
+                    $('.action_title_select2').select2('destroy');
+
+                    let cloneDiv = $('#action-box:first-child').clone();
+                    let cloneInputId = cloneDiv.find('.action_title_select2').attr('id');
+                    let iterator = cloneInputId.split('_').pop();
+                    cloneInputId = cloneInputId.replace(/\d+$/, (+iterator + +iterator));
+                    cloneDiv.find('.action_title_select2').attr('id', cloneInputId).attr('data-select2-id', cloneInputId);
+                    cloneDiv.find('input:text').val('');
+                    cloneDiv.prependTo("#actions");
+
+                    $('.action_title_select2').select2(actionTitleSelect2Obj);
+                    $('.action_title_select2').trigger('change');
+                });
+                $("#remove-action").click(function() {
+                    $('#action-box:not(:last-child)').first().remove();
+                });
+            // END - Action title select2
         });
     </script>
 @endsection
