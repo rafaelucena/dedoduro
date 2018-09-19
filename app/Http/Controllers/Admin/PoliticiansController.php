@@ -381,6 +381,9 @@ class PoliticiansController extends Controller
         // Roles List
         $roles = $this->em->getRepository(PoliticianRole::class)->findAll();
 
+        //
+        $personaActionTypes = $this->em->getRepository(PersonaActionType::class)->findAll();
+
         $personaActions = $persona->getPersonaActions();
 
         $select2Helper = new \stdClass();
@@ -406,7 +409,10 @@ class PoliticiansController extends Controller
                 'persona' => $persona,
                 'politician' => $politician,
                 'roles' => $roles,
+                'personaActionTypes' => $personaActionTypes,
+                // Data
                 'personaActions' => $personaActions,
+
             ]
         );
     }

@@ -292,7 +292,8 @@
                             @php ($action = $personaAction->getAction()) @endphp
                             @php ($backKey = $personaActionsCount - 1 - $key) @endphp
                             <div id="action-box" class="box-body">
-                                <input type="hidden" id="action_id" name="action[id][]" value="{{ $action->id }}">
+                                <input id="action_id_{{ $backKey }}" name="action[id][]" type="hidden"
+                                       value="{{ $action->id }}" class="form-control">
                                 <div class="col-md-4 form-group">
                                     <label for="action_title_{{ $backKey }}">Title <span class="required">*</span></label>
                                     <select id="action_title_{{ $backKey }}" name="action[title][]" class="form-control select2 action_title_select2" required>
@@ -302,20 +303,23 @@
                                     </select>
                                 </div>
                                 <div class="col-md-8 form-group">
-                                    <label for="action_subtitle">Subtítulo</label>
-                                    <input id="action_subtitle" name="action[subtitle][]" type="text" class="form-control" maxlength="255" required>
+                                    <label for="action_subtitle_{{ $backKey }}">Subtítulo</label>
+                                    <input id="action_subtitle_{{ $backKey }}" name="action[subtitle][]" type="text"
+                                           value="{{ $action->subtitle }}" class="form-control" maxlength="255" required>
                                 </div>
                                 <div class="col-md-4 form-group">
-                                    <label for="action_happened_at">Quando <span class="required">*</span></label>
-                                    <input id="action_happened_at" name="action[happened_at][]" type="text" class="form-control" maxlength="60" required>
+                                    <label for="action_happened_at_{{ $backKey }}">Quando <span class="required">*</span></label>
+                                    <input id="action_happened_at_{{ $backKey }}" name="action[happened_at][]" type="text"
+                                           value="{{ $action->happenedAt->format('d-m-Y H:i') }}" class="form-control" maxlength="60" required>
                                 </div>
                                 <div class="col-md-8 form-group">
-                                    <label for="action_url">Url</label>
-                                    <input id="action_url" name="action[url][]" type="text" class="form-control" maxlength="511" required>
+                                    <label for="action_url_{{ $backKey }}">Url</label>
+                                    <input id="action_url_{{ $backKey }}" name="action[url][]" type="text"
+                                           value="{{ $action->url }}" class="form-control" maxlength="511" required>
                                 </div>
                                 <div class="col-md-4 form-group">
-                                    <label for="action_type_id">Tema <span class="required">*</span></label>
-                                    <select id="action_type_id" name="action[type_id][]" class="form-control" required>
+                                    <label for="action_type_id_{{ $backKey }}">Tema <span class="required">*</span></label>
+                                    <select id="action_type_id_{{ $backKey }}" name="action[type_id][]" class="form-control" disabled required>
                                         <option value="1">Economia</option>
                                         <option value="2">Política</option>
                                         <option value="3">Criminal</option>
@@ -324,30 +328,29 @@
                                 </div>
                                 {{--<input type="hidden">--}}
                                 <div class="col-md-2 form-group">
-                                    <label for="action_person_id">Posição/Voto <span class="required">*</span></label>
-                                    <select id="action_person_id" name="action[person_type_id][]" class="form-control" required>
-                                        <option value="1">Não</option>
-                                        <option value="2">Sim</option>
-                                        <option value="3">Absteve</option>
-                                        <option value="4">Presidiu</option>
+                                    <label for="action_person_id_{{ $backKey }}">Posição/Voto <span class="required">*</span></label>
+                                    <select id="action_person_id_{{ $backKey }}" name="action[person_type_id][]" class="form-control" required>
+                                    @foreach($personaActionTypes as $personaActionType)
+                                        <option value="{{ $personaActionType->id }}" @if (($personaAction->getPersonaActionType() ? $personaAction->getPersonaActionType()->id : '') == $personaActionType->id) selected @endif>{{ $personaActionType->name }}</option>
+                                    @endforeach
                                     </select>
                                 </div>
                                 <div class="col-md-2 form-group">
-                                    <label for="action_is_relevant">Relevante <span class="required">*</span></label>
-                                    <select id="action_is_relevant" name="action[is_relevant][]" class="form-control" required>
-                                        <option value="1">Sim</option>
-                                        <option value="0">Não</option>
+                                    <label for="action_is_relevant_{{ $backKey }}">Relevante <span class="required">*</span></label>
+                                    <select id="action_is_relevant_{{ $backKey }}" name="action[is_relevant][]" class="form-control" required>
+                                        <option value="1" @if($action->isRelevant == 1) selected @endif>Sim</option>
+                                        <option value="0" @if($action->isRelevant == 0) selected @endif>Não</option>
                                     </select>
                                 </div>
                                 <div class="col-md-2 form-group">
-                                    <label for="action_is_relevant_until">Relevante até</label>
-                                    <input id="action_is_relevant_until" name="action[is_relevant_until][]" type="text" class="form-control" maxlength="60" required>
+                                    <label for="action_is_relevant_until_{{ $backKey }}">Relevante até</label>
+                                    <input id="action_is_relevant_until_{{ $backKey }}" name="action[is_relevant_until][]" type="text" class="form-control" maxlength="60" required>
                                 </div>
                                 <div class="col-md-2 form-group">
-                                    <label for="action_is_active">Ativo <span class="required">*</span></label>
-                                    <select id="action_is_active" name="action[is_active][]" class="form-control" required>
-                                        <option value="1">Sim</option>
-                                        <option value="0">Não</option>
+                                    <label for="action_is_active_{{ $backKey }}">Público <span class="required">*</span></label>
+                                    <select id="action_is_active_{{ $backKey }}" name="action[is_active][]" class="form-control" required>
+                                        <option value="1" @if($personaAction->isActive == 1) selected @endif>Sim</option>
+                                        <option value="0" @if($personaAction->isActive == 0) selected @endif>Não</option>
                                     </select>
                                 </div>
                             </div>
@@ -441,16 +444,16 @@
             });
 
             // START - Action title select2
-                let actionTitleSelect2Obj = {
+                let actionTitleSelect2 = {
                     theme: "bootstrap",
                     tags: true,
-                    placeholder: 'Insira pelo menos uma rota...',
-                    minimumInputLength: 2,
+                    placeholder: 'Busque aqui por votações já cadastradas...',
+                    minimumInputLength: 1,
                     maximumSelectionLength: 3,
-                    delay : 100,
                     tokenSeparators: [',','.'],
                     ajax: {
-                        url: '{{ $formHelper->select2Helper->ajaxUrl }}',
+                        url: '{{ route('actions.ajaxSelect') }}',
+                        delay : 100,
                         dataType: 'json',
                         cache: true,
                         data: function(params) {
@@ -463,7 +466,7 @@
                     templateResult: formatItem,
                     templateSelection: formatItem
                 };
-                $('.action_title_select2').select2(actionTitleSelect2Obj);
+                $('.action_title_select2').select2(actionTitleSelect2);
                 $('.action_title_select2').trigger('change');
 
                 // Action section
@@ -472,19 +475,56 @@
                     $('.action_title_select2').select2('destroy');
 
                     let cloneDiv = $('#action-box:first-child').clone();
-                    let cloneInputId = cloneDiv.find('.action_title_select2').attr('id');
-                    let iterator = cloneInputId.split('_').pop();
-                    cloneInputId = cloneInputId.replace(/\d+$/, (+iterator + +iterator));
-                    cloneDiv.find('.action_title_select2').attr('id', cloneInputId).attr('data-select2-id', cloneInputId);
-                    cloneDiv.find('input:text').val('');
+                    let cloneInputId = '';
+
+                    // Find each input with the class .form-control
+                    cloneDiv.find('.form-control').each(function() {
+                        // Get the 'id' of each of them
+                        cloneInputId = $(this).attr('id');
+                        // Replace only the number at the end of the string, with the current number plus one
+                        cloneInputId = cloneInputId.replace(/\d+$/, (+(cloneInputId.split('_').pop()) + 1));
+                        // Get then the element and set the new 'id'
+                        cloneDiv.find(this).attr('id', cloneInputId);
+
+                        // Check if it's also a select2 element by testing the native select2 attribute: data-select2-id
+                        if ($(this).attr('data-select2-id') !== undefined) {
+                            // If it exists, we also set this element for the incremented 'id'
+                            cloneDiv.find(this).attr('data-select2-id', cloneInputId);
+                        }
+                    });
+
+                    // Find each label
+                    cloneDiv.find('label').each(function() {
+                        // Get the 'for' of each of them
+                        cloneInputId = $(this).attr('for');
+                        // Replace only the number at the end of the string, with the current number plus one
+                        cloneInputId = cloneInputId.replace(/\d+$/, (+(cloneInputId.split('_').pop()) + 1));
+                        // Get then the element and set the new 'for'
+                        cloneDiv.find(this).attr('for', cloneInputId);
+                    });
+
+                    cloneDiv.find('input').val('');
+                    cloneDiv.find('select').val('');
                     cloneDiv.prependTo("#actions");
 
-                    $('.action_title_select2').select2(actionTitleSelect2Obj);
-                    $('.action_title_select2').trigger('change');
+                    $('.action_title_select2').select2(actionTitleSelect2);
+                    // $('.action_title_select2').trigger('change');
                 });
+
                 $("#remove-action").click(function() {
                     $('#action-box:not(:last-child)').first().remove();
                 });
+
+            $(document).on('change', '.action_title_select2', function() {
+                let actionSelected = $(this).select2('data');
+                let elementIdIterator = $(this).attr('id').split('_').pop();
+
+                $(('#action_id_' + elementIdIterator)).val(actionSelected[0].id);
+                $(('#action_url_' + elementIdIterator)).val(actionSelected[0].dataUrl);
+                $(('#action_subtitle_' + elementIdIterator)).val(actionSelected[0].dataSubtitle);
+                $(('#action_happened_at_' + elementIdIterator)).val(actionSelected[0].dataHappenedAt);
+                $(('#action_is_relevant_' + elementIdIterator)).val(actionSelected[0].dataIsRelevant);
+            });
             // END - Action title select2
         });
     </script>

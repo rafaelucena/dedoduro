@@ -72,6 +72,9 @@ Route::prefix('admin')->group(function () {
     // Dashboard
     Route::get('/dashboard', 'Admin\DashboardController@index')->name('dashboard')->middleware('role:dashboard');
 
+    // Actions
+    Route::get('actions/ajax-select', 'Admin\ActionsController@actionsAjaxSelect')->name('actions.ajaxSelect');
+
     // Blogs
     Route::get('blogsData', 'Admin\BlogsController@blogsData')->name('blogs.ajaxData');
     Route::get('blogs/bulk/trash', 'Admin\BlogsController@bulkTrash')->name('blogs.bulkTrash');
