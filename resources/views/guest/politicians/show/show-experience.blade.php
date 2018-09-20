@@ -4,6 +4,30 @@
 
             <section class="section padd-box">
                 <h2 class="title-lg text-upper">work experience</h2>
+                <div class="education">
+                @foreach ($ninja->actions as $action)
+                    <div class="education-box">
+                        {{--<time class="education-date" datetime="2014-01T2016-03">--}}
+                        <time class="education-date" datetime="{{ $action['happenedAt']->format('Y-m-d\TH:i') }}">
+                            <span>{!! $action['happenedAt']->format('j \of F Y') !!}</span>
+                            {{--<span>Jan <strong class="text-upper">2014</strong> - Mar <strong>2016</strong></span>--}}
+                        </time>
+                        <h3><a target="_blank" href="https://themeforest.net/user/px-lab?ref=PX-lab">{{ $action['title'] }}</a></h3>
+                        <div class="education-logo">
+                            <i class="far fa-check-circle fa-2x"></i>
+                            <i class="fas fa-times-circle fa-2x"></i>
+                            <i class="fas fa-gavel fa-2x"></i>
+                            <i class="fas fa-user-minus fa-2x"></i>
+                        </div>
+                        @if (!empty($action['subtitle']))
+                        <span class="education-company">{!! $action['subtitle'] !!}</span>
+                        @endif
+                        @if (!empty($action['description']))
+                            <p>{!! $action['description'] !!}</p>
+                        @endif
+                    </div>
+                @endforeach
+                </div>
                 <div class="container-right">
                     <ul>
                         <li><span></span>

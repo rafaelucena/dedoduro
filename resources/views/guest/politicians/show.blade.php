@@ -92,7 +92,7 @@
 
         @include('guest/politicians/show/show-news')
 
-{{--        @include('guest/politicians/show/show-experience')--}}
+        @include('guest/politicians/show/show-experience')
 
 {{--        @include('guest/politicians/show/show-portfolio')--}}
 
