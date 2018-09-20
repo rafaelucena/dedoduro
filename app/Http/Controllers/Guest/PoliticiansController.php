@@ -7,6 +7,7 @@ use App\Http\Models\Blog;
 use App\Http\Models\News;
 use App\Http\Models\Persona;
 use App\Http\Models\Party;
+use App\Http\Models\PersonaAction;
 use App\Http\Models\PersonaSlug;
 use App\Http\Models\Politician;
 use App\Http\Models\PoliticianRole;
@@ -124,6 +125,8 @@ class PoliticiansController extends Controller
         $party = $politician->getParty();
         /* @var News[] $news */
         $news = $persona->getNews();
+        /* @var PersonaAction[] $personaActions */
+        $personaActions = $persona->getPersonaActions();
 
         $ninja = new \stdClass();
         $ninja->info = [
@@ -151,6 +154,19 @@ class PoliticiansController extends Controller
                 'Source' => $eachNews->getSource()->name,
                 'Url' => $eachNews->url,
                 'Published' => $eachNews->publishedAt,
+            ];
+        }
+
+        $ninja->actions = [];
+        foreach ($personaActions as $personaAction) {
+            $action = $personaAction->getAction();
+            $ninja->actions[] = [
+                'url' => $action->url,
+                'title' => $action->title,
+                'subtitle' => $action->subtitle,
+                'happenedAt' => $action->happenedAt,
+                'description' => $action->description,
+                'personaActionType' => $personaAction->getPersonaActionType()
             ];
         }
 

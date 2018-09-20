@@ -36,6 +36,12 @@ class Action
     public $subtitle;
 
     /**
+     * @var string
+     */
+//    * @ORM\Column(type="text", nullable=true)
+    public $description;
+
+    /**
      * @var \DateTime
      * @ORM\Column(type="datetime", nullable=false)
      */
