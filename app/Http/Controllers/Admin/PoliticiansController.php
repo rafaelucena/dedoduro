@@ -385,6 +385,7 @@ class PoliticiansController extends Controller
         $personaActionTypes = $this->em->getRepository(PersonaActionType::class)->findAll();
 
         $personaActions = $persona->getPersonaActions();
+        $personaAction = new PersonaAction();
 
         $select2Helper = new \stdClass();
         $select2Helper->placeholder = 'Update slugs...';
@@ -410,9 +411,10 @@ class PoliticiansController extends Controller
                 'politician' => $politician,
                 'roles' => $roles,
                 'personaActionTypes' => $personaActionTypes,
+                // Shell
+                'personaAction' => $personaAction,
                 // Data
                 'personaActions' => $personaActions,
-
             ]
         );
     }
@@ -536,7 +538,9 @@ class PoliticiansController extends Controller
             if ($id !== null) {
                 $action = $this->em->getRepository(Action::class)->find($id);
             }
-            $action->title = $actionInput['title'][$key];
+            if ($id !== $actionInput['title'][$key]) {
+                $action->title = $actionInput['title'][$key];
+            }
             $action->subtitle = $actionInput['subtitle'][$key];
             $action->url = $actionInput['url'][$key];
             $action->isRelevant = $actionInput['is_relevant'][$key];
