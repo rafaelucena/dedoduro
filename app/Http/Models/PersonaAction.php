@@ -152,7 +152,7 @@ class PersonaAction
      */
     public function getPersonaActionType(): PersonaActionType
     {
-        return $this->personaActionType;
+        return $this->personaActionType ? : new PersonaActionType();
     }
 
     /**
