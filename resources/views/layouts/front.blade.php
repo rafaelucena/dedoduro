@@ -52,6 +52,9 @@
 
 <body class="">
 <div class="crt-wrapper">
+    <div class="progress-container">
+        <div class="progress-bar" id="reading-bar"></div>
+    </div>
     <header id="crt-header">
         <div class="crt-head-inner crt-container">
             <div class="crt-container-sm">
@@ -364,7 +367,17 @@
 <script type="text/javascript" src="{{ asset('assets/js/plugins.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/js/theme.min.js') }}"></script>
 
+<script>
+    /** Scrolling button **/
+    window.onscroll = function() {scrollFunction()};
 
+    function scrollFunction() {
+        let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        let scrolled = (winScroll / height) * 100;
+        document.getElementById("reading-bar").style.width = scrolled + "%";
+    }
+</script>
 
 @yield('custom_js')
 

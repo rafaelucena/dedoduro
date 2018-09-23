@@ -3663,6 +3663,21 @@ textarea.form-item{
         padding:40px 35px
     }
 }
+.progress-container {
+    position: fixed;
+    top: 0;
+    z-index: 1;
+    width: 100%;
+    height: 2px;
+    background: #fff;
+}
+
+/* The progress bar (scroll indicator) */
+.progress-bar {
+    height: 2px;
+    background: #000;
+    width: 0%;
+}
 #crt-header{
     position:relative
 }
