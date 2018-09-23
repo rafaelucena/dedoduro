@@ -348,6 +348,8 @@
     </footer>
     <!-- #crt-footer -->
 
+    <button id="crt-button-up" title="Voltar ao topo." onclick="topFunction()" class="btn btn-icon btn-primary" style="display: block;"> <i class="fas fa-angle-double-up"></i> </button>
+
     <svg id="crt-bg-shape-1" class="hidden-sm hidden-xs" height="519" width="758">
         <polygon class="pol" points="0,455,693,352,173,0,92,0,0,71"/>
     </svg>
@@ -372,10 +374,22 @@
     window.onscroll = function() {scrollFunction()};
 
     function scrollFunction() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            document.getElementById("crt-button-up").style.display = "block";
+        } else {
+            document.getElementById("crt-button-up").style.display = "none";
+        }
+
         let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
         let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
         let scrolled = (winScroll / height) * 100;
         document.getElementById("reading-bar").style.width = scrolled + "%";
+    }
+
+    // When the user clicks on the button, scroll to the top of the document
+    function topFunction() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
     }
 </script>
 
