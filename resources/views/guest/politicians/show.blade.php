@@ -34,11 +34,11 @@
                 <div id="crt-nav-scroll">
                     <nav id="crt-nav" class="crt-nav">
                         <ul class="clear-list">
-                            <li>
-                                <a href="#about" data-tooltip="Perfil">
-                                    <i class="far fa-address-card fa-2x"></i>
-                                </a>
-                            </li>
+                            {{--<li>--}}
+                                {{--<a href="#about" data-tooltip="Perfil">--}}
+                                    {{--<i class="far fa-address-card fa-2x"></i>--}}
+                                {{--</a>--}}
+                            {{--</li>--}}
                             <li>
                                 <a href="#news" data-tooltip="Notícias recentes">
                                     <i class="far fa-newspaper fa-2x"></i>
@@ -88,7 +88,7 @@
         </div>
     </div><!-- .crt-nav-wrap -->
     <div class="crt-container-sm">
-        @include('guest/politicians/show/show-about')
+        {{--@include('guest/politicians/show/show-about')--}}
 
         @include('guest/politicians/show/show-news')
 

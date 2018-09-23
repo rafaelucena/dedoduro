@@ -24,7 +24,7 @@ dt,th{
 .invisible,.tooltip:after{
     visibility:hidden
 }
-#crt-main-nav .sub-menu a,#crt-nav-sm,.btn,.crt-logo,.crt-tooltip,.education-date span,.tooltip:after{
+#crt-main-nav .sub-menu a,#crt-nav-sm,.btn,.crt-logo,.crt-tooltip,.action-date span,.tooltip:after{
     white-space:nowrap
 }
 #crt-main-nav ul,#crt-main-nav-sm ul,.accordion,.clear-list,.clients,.icon-list,.icon-list ol,.icon-list ul,.slick-dots,.styled-list,.styled-list ol,.styled-list ul,.styled-ol,.styled-ol ol,.styled-ul,.styled-ul ul,.togglebox,.widget ol,.widget ul{
@@ -4458,27 +4458,27 @@ table.dataTable > thead > tr > .sorting_desc.datetime:after{
         text-align:center
     }
 }
-.education,.post-video{
+.action,.post-video{
     position:relative
 }
-.education:before{
+.action:before{
     top:10px;
     left:0;
     bottom:0;
-    width:1px;
+    width:3px;
     content:'';
     opacity:.5;
     position:absolute
 }
-.education-box{
+.action-box{
     position:relative;
     padding-left:20px;
     margin-bottom:45px
 }
-.education-box p{
+.action-box p{
     font-size:.875em
 }
-.education-box:before{
+.action-box:before{
     content:"";
     top:9px;
     left:-1px;
@@ -4487,13 +4487,13 @@ table.dataTable > thead > tr > .sorting_desc.datetime:after{
     height:4px;
     border-radius:50%
 }
-.education-box h3{
+.action-box h3{
     letter-spacing:0;
     font-size:.938em;
     margin-top:15px;
     margin-bottom:10px
 }
-.education-box:last-child:after{
+.action-box:last-child:after{
     top:14px;
     left:0;
     bottom:0;
@@ -4501,10 +4501,10 @@ table.dataTable > thead > tr > .sorting_desc.datetime:after{
     content:'';
     position:absolute
 }
-.clients:after,.education-date:before{
+.clients:after,.action-date:before{
     content:""
 }
-.education-date{
+.action-date{
     left:-20px;
     width:117px;
     letter-spacing:0;
@@ -4515,12 +4515,12 @@ table.dataTable > thead > tr > .sorting_desc.datetime:after{
     position:relative;
     display:inline-block
 }
-.education-date span{
+.action-date span{
     overflow:hidden;
     position:relative;
     display:block
 }
-.education-date:before{
+.action-date:before{
     top:0;
     right:100%;
     width:0;
@@ -4531,27 +4531,27 @@ table.dataTable > thead > tr > .sorting_desc.datetime:after{
     border-left:0 solid transparent!important;
     border-right:7px solid transparent
 }
-.education-company{
+.action-company{
     line-height:1.1;
     letter-spacing:0;
     display:inline-block
 }
 @media (min-width:768px){
-    .education-box:before,.education:before{
+    .action-box:before,.action:before{
         top:10px
     }
-    .education{
+    .action{
         margin-left:210px
     }
-    .education-box{
+    .action-box{
         padding-right:90px
     }
-    .education-box h3{
+    .action-box h3{
         font-size:20px;
-        margin-bottom:22px;
+        /*margin-bottom:22px;*/
         margin-top:0
     }
-    .education-date{
+    .action-date{
         margin-left:0;
         margin-right:22px;
         padding:8px 6px;
@@ -4563,10 +4563,10 @@ table.dataTable > thead > tr > .sorting_desc.datetime:after{
         left:auto;
         top:-4px
     }
-    .education-date:before{
+    .action-date:before{
         display:none
     }
-    .education-date:after{
+    .action-date:after{
         content:"";
         top:0;
         left:100%;
@@ -4579,10 +4579,26 @@ table.dataTable > thead > tr > .sorting_desc.datetime:after{
         border-left:10px solid transparent
     }
 }
-.education-logo{
+.action-logo{
     margin-bottom:10px
 }
-.education-company{
+.fa-2x-realign{
+    position: relative;
+    top: 5px;
+}
+.logo-success{
+    color:#5cb85c;
+}
+.logo-danger{
+    color:#d9534f;
+}
+.logo-warning{
+    color:#f0ad4e;
+}
+.logo-info{
+    color:#5bc0de;
+}
+.action-company{
     font-size:1em;
     margin-bottom:15px
 }
@@ -4980,15 +4996,18 @@ body,h1,h2,h3,h4,h5,h6{
 .crt-nav-type1 .crt-nav li.current a,.icon-list .crt-icon,.post-title a:hover,.text-primary{
     color:#c0e3e7
 }
-#crt-main-nav .sub-menu .current>a,#crt-main-nav .sub-menu li>a:hover,#crt-main-nav-sm .sub-menu:before,.accordion-header:before,.bg-primary,.bg-primary.text-dropcup-sq,.btn-primary,.education-date,.education:before,.progress-bullets .bullet.fill,.raiting-circle .fill,.tabs .tabs-menu li a:hover,.tabs .tabs-menu li.active a,.togglebox-header:before,mark{
+#crt-main-nav .sub-menu .current>a,#crt-main-nav .sub-menu li>a:hover,#crt-main-nav-sm .sub-menu:before,.accordion-header:before,.bg-primary,.bg-primary.text-dropcup-sq,.btn-primary,.action-date,.progress-bullets .bullet.fill,.raiting-circle .fill,.tabs .tabs-menu li a:hover,.tabs .tabs-menu li.active a,.togglebox-header:before,mark{
     /*background-color:#c0e3e7*/
+    background-color:#f8f8f8
+}
+.action:before{
     background-color:#f8f8f8
 }
 .bg-primary {
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
 }
-#crt-nav-sm li.current a,.brd-primary,.btn-share,.education-date:after,.education-date:before,.progress-bullets .bullet{
+#crt-nav-sm li.current a,.brd-primary,.btn-share,.action-date:after,.action-date:before,.progress-bullets .bullet{
     /*border-color:#c0e3e7*/
     border-color:#f8f8f8
 }
@@ -5021,10 +5040,10 @@ body,h1,h2,h3,h4,h5,h6{
 :-moz-placeholder{
     color:#010101
 }
-.education-box:before,.styled-ul li:before,.text-dropcup-sq{
-    background-color:#010101
+.action-box:before,.styled-ul li:before,.text-dropcup-sq{
+    background-color:#010101;
 }
-#crt-main-nav-sm a,#crt-main-nav>ul>li>a,.cr-carousel .slick-next:before,.cr-carousel .slick-prev:before,.education-company,.page-numbers,.ref-footer a,.post-category-comment a,.post-content,.ref-author span,.styled-ul>li>ul ul,.text-muted,.widget_categories li,table>thead>tr>th{
+#crt-main-nav-sm a,#crt-main-nav>ul>li>a,.cr-carousel .slick-next:before,.cr-carousel .slick-prev:before,.action-company,.page-numbers,.ref-footer a,.post-category-comment a,.post-content,.ref-author span,.styled-ul>li>ul ul,.text-muted,.widget_categories li,table>thead>tr>th{
     color:#757575
 }
 .styled-ul>li>ul ul li:before{
@@ -5048,7 +5067,7 @@ body,h1,h2,h3,h4,h5,h6{
 .text-dropcup-sq{
     color:#fff
 }
-#crt-container,#crt-main-nav .sub-menu,#crt-sidebar,.cr-carousel .slick-next,.cr-carousel .slick-prev,.crt-card-footer,.crt-head-inner,.crt-nav-type1 .crt-nav-cont,.crt-paper,.crt-paper-layers:after,.crt-paper-layers:before,.crt-side-box-item,.crt-tooltip:after,.education-box:last-child:after,.pf-popup-content,.tooltip:after,blockquote.quote-side:before,blockquote.quote-top:before{
+#crt-container,#crt-main-nav .sub-menu,#crt-sidebar,.cr-carousel .slick-next,.cr-carousel .slick-prev,.crt-card-footer,.crt-head-inner,.crt-nav-type1 .crt-nav-cont,.crt-paper,.crt-paper-layers:after,.crt-paper-layers:before,.crt-side-box-item,.crt-tooltip:after,.action-box:last-child:after,.pf-popup-content,.tooltip:after,blockquote.quote-side:before,blockquote.quote-top:before{
     border-radius:15px;
     background-color:#fff
 }

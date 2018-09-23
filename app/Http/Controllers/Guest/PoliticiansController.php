@@ -160,13 +160,38 @@ class PoliticiansController extends Controller
         $ninja->actions = [];
         foreach ($personaActions as $personaAction) {
             $action = $personaAction->getAction();
+            $personaActionType = $personaAction->getPersonaActionType();
+
+            $performed = [];
+            switch ($personaActionType->id) {
+                case 1:
+                    $performed['logo'] = 'logo-danger';
+                    $performed['text'] = '<i class="far fa-times-circle fa-2x fa-2x-realign"></i> Votou <strong>CONTRA</strong>';
+                    break;
+                case 2:
+                    $performed['logo'] = 'logo-success';
+                    $performed['text'] = '<i class="far fa-check-circle fa-2x fa-2x-realign"></i> Votou <strong>A FAVOR</strong>';
+                    break;
+                case 3:
+                    $performed['logo'] = 'logo-warning';
+                    $performed['text'] = '<i class="fas fa-comment-slash fa-2x fa-2x-realign"></i> Se <strong>absteve</strong>';
+                    break;
+                case 4:
+                    $performed['logo'] = 'logo-info';
+                    $performed['text'] = '<i class="fas fa-gavel fa-2x fa-2x-realign"></i> <strong>Presidiu</strong>';
+                    break;
+                case 5:
+                    $performed['logo'] = 'logo-normal';
+                    $performed['text'] = '<!--<i class="fas fa-gavel fa-2x fa-2x-realign"></i> --><strong>Faltou</strong>';
+                    break;
+            }
             $ninja->actions[] = [
                 'url' => $action->url,
                 'title' => $action->title,
                 'subtitle' => $action->subtitle,
                 'happenedAt' => $action->happenedAt,
                 'description' => $action->description,
-                'personaActionType' => $personaAction->getPersonaActionType()
+                'personaAction' => $performed,
             ];
         }
 
