@@ -23,6 +23,8 @@ class CollectNews extends Command
 
     private $webContent;
 
+    protected $hidden = false;
+
     private $webSource = '';
 
     private $webContinueFrom = false;
