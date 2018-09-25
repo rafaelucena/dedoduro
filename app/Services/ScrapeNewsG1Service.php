@@ -9,17 +9,31 @@ class ScrapeNewsG1Service
 
     private $webContent;
 
-    private $webSource = '';
+    private $webUrls = [];
+
+    private $webSource;
 
     private $webContinueFrom = false;
 
+    /**
+     * ScrapeNewsG1Service constructor.
+     *
+     * @param string $name
+     * @param string $pages
+     */
     public function __construct(string $name, string $pages)
     {
-        $urls = $this->buildUrls($name, $pages);
+        $this->webUrls = $this->buildUrls($name, $pages);
 
-        $this->setContent($urls[0]);
+
     }
 
+    /**
+     * @param string $name
+     * @param string $pages
+     *
+     * @return array
+     */
     private function buildUrls(string $name, string $pages)
     {
         $name = $this->buildUrlName($name);
@@ -34,12 +48,16 @@ class ScrapeNewsG1Service
         return $result;
     }
 
+    /**
+     * @param string $name
+     *
+     * @return string
+     */
     private function buildUrlName(string $name)
     {
         $lowerName = strtolower($name);
-        $parsedName = preg_replace('/\s+/', '+', $lowerName);
 
-        return $parsedName;
+        return preg_replace('/\s+/', '+', $lowerName);
     }
 
     /*private function getBaseUrl()
@@ -89,13 +107,15 @@ class ScrapeNewsG1Service
         return $itemResult;
     }
 
-    public function run()
+    public function roll()
     {
+        $this->setContent($this->webUrls[0]);
+
         $this->setContentList();
 
         $contentItem = $this->getContentItem();
 
-        $result = [];
+        $results = [];
         $continue = true;
 
         $count = 0;
@@ -115,7 +135,7 @@ class ScrapeNewsG1Service
             preg_match('/<a href=".*?u=(.*?)&key.*?"/', $contentItem, $matches);
             $teste['url'] = urldecode($matches[1]);
 
-            $result[] = $teste;
+            $results[] = $teste;
             if ($count > 5) {
                 $continue = false;
             }
@@ -123,6 +143,6 @@ class ScrapeNewsG1Service
             $contentItem = $this->getContentItem($this->webContinueFrom);
         }
 
-        return $result;
+        return $results;
     }
 }

@@ -4,7 +4,7 @@ namespace App\Console\Commands;
 
 use App\Console\Commands\Command;
 use App\Http\Models\Persona;
-use App\Services\ScrapeNewsG1Service as ScrapeG1;
+use App\Services\ScrapeNewsService as Scrape;
 
 class CollectNews extends Command
 {
@@ -31,8 +31,8 @@ class CollectNews extends Command
      */
     public function handle()
     {
-        $scrapeObj = new ScrapeG1('Jair Bolsonaro', '1');
-        $result = $scrapeObj->run();
+        $scrapeObj = new Scrape('Geraldo Alckmin', '1');
+        $result = $scrapeObj->rock();
         // Input
 //        echo '<pre>';
 //        print_r($this->argument('slug'));
