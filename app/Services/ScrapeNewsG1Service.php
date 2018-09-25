@@ -24,8 +24,6 @@ class ScrapeNewsG1Service
     public function __construct(string $name, string $pages)
     {
         $this->webUrls = $this->buildUrls($name, $pages);
-
-
     }
 
     /**
@@ -107,6 +105,23 @@ class ScrapeNewsG1Service
         return $itemResult;
     }
 
+    private function getItemHappenedAt(string $contentItem)
+    {
+        // Get when
+        preg_match('/"widget--info__meta">(.*?)<\/div/', $contentItem, $matches);
+        $dateString = $matches[1];
+
+        if (preg_match('/^\d{2}\/\d{2}\/\d{4}\s+\d{2}h\d{2}$/', $dateString)) {
+            return \DateTime::createFromFormat('d/m/Y H\hi', $dateString);
+        } elseif (preg_match('/^há\s+(\d+)\s+dias?$/', $dateString, $matches)) {
+            return (new \DateTime(date('Y-m-d')))->modify("-{$matches[1]} days");
+        } elseif (preg_match('/^há\s+(\d+)\s+horas?$/', $dateString, $matches)) {
+            return (new \DateTime())->modify("-{$matches[1]} hours");
+        } else {
+            return false;
+        }
+    }
+
     public function roll()
     {
         $this->setContent($this->webUrls[0]);
@@ -128,15 +143,14 @@ class ScrapeNewsG1Service
             $teste['title'] = trim($matches[1]);
 
             // Get when
-            preg_match('/"widget--info__meta">(.*?)<\/div/', $contentItem, $matches);
-            $teste['happenedAt'] = $matches[1];
+            $teste['happenedAt'] = $this->getItemHappenedAt($contentItem);
 
             // Get url
             preg_match('/<a href=".*?u=(.*?)&key.*?"/', $contentItem, $matches);
             $teste['url'] = urldecode($matches[1]);
 
             $results[] = $teste;
-            if ($count > 5) {
+            if ($count > 3) {
                 $continue = false;
             }
 
