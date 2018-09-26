@@ -111,6 +111,7 @@ class ScrapeNewsG1Service
         preg_match('/"widget--info__meta">(.*?)<\/div/', $contentItem, $matches);
         $dateString = $matches[1];
 
+        // @TODO - Read about unicode regex
         if (preg_match('/^\d{2}\/\d{2}\/\d{4}\s+\d{2}h\d{2}$/', $dateString)) {
             return \DateTime::createFromFormat('d/m/Y H\hi', $dateString);
         } elseif (preg_match('/^há\s+(\d+)\s+dias?$/', $dateString, $matches)) {
@@ -120,6 +121,17 @@ class ScrapeNewsG1Service
         } else {
             return false;
         }
+    }
+
+    private function getItemUrl(string $contentItem)
+    {
+        preg_match('/<a href=".*?u=(.*?)&key.*?"/', $contentItem, $matches);
+        $urlDecoded = urldecode($matches[1]);
+
+        if (strpos($urlDecoded, 'fato-ou-fake') !== false) {
+            return false;
+        }
+        return $urlDecoded;
     }
 
     public function roll()
@@ -146,8 +158,7 @@ class ScrapeNewsG1Service
             $teste['happenedAt'] = $this->getItemHappenedAt($contentItem);
 
             // Get url
-            preg_match('/<a href=".*?u=(.*?)&key.*?"/', $contentItem, $matches);
-            $teste['url'] = urldecode($matches[1]);
+            $teste['url'] = $this->getItemUrl($contentItem);
 
             $results[] = $teste;
             if ($count > 3) {
