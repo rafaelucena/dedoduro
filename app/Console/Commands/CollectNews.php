@@ -31,8 +31,22 @@ class CollectNews extends Command
      */
     public function handle()
     {
-        $scrapeObj = new Scrape('Geraldo Alckmin', '1');
-        $result = $scrapeObj->rock();
+        $personas = $this->em->createQueryBuilder()
+            ->select([
+                'pe.id AS personaId',
+                'pe.shortName AS personaShortName',
+            ])
+            ->from(Persona::class, 'pe')
+            ->where('pe.id IN (:ids)')
+            ->setParameters(['ids' => ['1','2']])
+            ->getQuery()
+            ->getResult();
+
+        foreach ($personas as $persona) {
+            $short = $persona['personaShortName'];
+            $scrapeObj = new Scrape($short, '1');
+            $result[$short] = $scrapeObj->rock();
+        }
         // Input
 //        echo '<pre>';
 //        print_r($this->argument('slug'));

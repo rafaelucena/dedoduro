@@ -13,7 +13,7 @@ class ScrapeNewsG1Service
 
     private $webSource;
 
-    private $webContinueFrom = false;
+    private $webContentOffset = false;
 
     /**
      * ScrapeNewsG1Service constructor.
@@ -98,11 +98,18 @@ class ScrapeNewsG1Service
         $itemOpenTag = '<li class="widget widget--card widget--info" data-position="';
         $itemOpenTagPos = strpos($this->webContent, $itemOpenTag, $offset);
         $itemCloseTag = '</li>';
-        $this->webContinueFrom = $itemCloseTagPos = strpos($this->webContent, $itemCloseTag, $itemOpenTagPos);
+        $this->webContentOffset = $itemCloseTagPos = strpos($this->webContent, $itemCloseTag, $itemOpenTagPos);
         $itemResult = substr($this->webContent, ($itemOpenTagPos), ($itemCloseTagPos - $itemOpenTagPos));
         $itemResult = preg_replace('/\r|\n/', '', $itemResult);
 
         return $itemResult;
+    }
+
+    private function getItemTitle(string $contentItem)
+    {
+        preg_match('/info__title.*?">(.*?)<\/div/', $contentItem, $matches);
+
+        return trim($matches[1]);
     }
 
     private function getItemHappenedAt(string $contentItem)
@@ -118,9 +125,9 @@ class ScrapeNewsG1Service
             return (new \DateTime(date('Y-m-d')))->modify("-{$matches[1]} days");
         } elseif (preg_match('/^há\s+(\d+)\s+horas?$/', $dateString, $matches)) {
             return (new \DateTime())->modify("-{$matches[1]} hours");
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     private function getItemUrl(string $contentItem)
@@ -131,7 +138,30 @@ class ScrapeNewsG1Service
         if (strpos($urlDecoded, 'fato-ou-fake') !== false) {
             return false;
         }
+
         return $urlDecoded;
+    }
+
+    private function getItem(string $contentItem)
+    {
+        $result = [];
+
+        // Get title
+        if (($result['title'] = $this->getItemTitle($contentItem)) === false) {
+            return false;
+        }
+
+        // Get when
+        if (($result['happenedAt'] = $this->getItemHappenedAt($contentItem)) === false) {
+            return false;
+        }
+
+        // Get url
+        if (($result['url'] = $this->getItemUrl($contentItem)) === false) {
+            return false;
+        }
+
+        return $result;
     }
 
     public function roll()
@@ -146,26 +176,29 @@ class ScrapeNewsG1Service
         $continue = true;
 
         $count = 0;
-        while ($this->webContinueFrom !== false && $continue) {
-            $count++;
-            $teste = [];
+        $currentLoop = 0;
+        $maxLoop = 30;
+        while ($this->webContentOffset !== false && $continue) {
+            $currentLoop++;
+            $result = $this->getItem($contentItem);
+            $contentItem = $this->getContentItem($this->webContentOffset);
+            if ($result === false) {
+                continue;
+            }
+            if ($result === null) {
+                break;
+            }
 
-            // Get title
-            preg_match('/info__title.*?">(.*?)<\/div/', $contentItem, $matches);
-            $teste['title'] = trim($matches[1]);
-
-            // Get when
-            $teste['happenedAt'] = $this->getItemHappenedAt($contentItem);
-
-            // Get url
-            $teste['url'] = $this->getItemUrl($contentItem);
-
-            $results[] = $teste;
-            if ($count > 3) {
+            if ($currentLoop >= $maxLoop) {
                 $continue = false;
             }
 
-            $contentItem = $this->getContentItem($this->webContinueFrom);
+            $results[] = $result;
+
+            $count++;
+            if ($count > 1) {
+                break;
+            }
         }
 
         return $results;
