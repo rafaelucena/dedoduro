@@ -121,9 +121,9 @@ class ScrapeNewsG1Service
         // @TODO - Read about unicode regex
         if (preg_match('/^\d{2}\/\d{2}\/\d{4}\s+\d{2}h\d{2}$/', $dateString)) {
             return \DateTime::createFromFormat('d/m/Y H\hi', $dateString);
-        } elseif (preg_match('/^há\s+(\d+)\s+dias?$/', $dateString, $matches)) {
+        } elseif (preg_match('/^h\w\s+(\d+)\s+dias?$/u', $dateString, $matches)) {
             return (new \DateTime(date('Y-m-d')))->modify("-{$matches[1]} days");
-        } elseif (preg_match('/^há\s+(\d+)\s+horas?$/', $dateString, $matches)) {
+        } elseif (preg_match('/^h\w\s+(\d+)\s+horas?$/u', $dateString, $matches)) {
             return (new \DateTime())->modify("-{$matches[1]} hours");
         }
 
@@ -161,6 +161,8 @@ class ScrapeNewsG1Service
             return false;
         }
 
+        $result['hashMd5'] = md5($result['url']);
+
         return $result;
     }
 
@@ -180,17 +182,14 @@ class ScrapeNewsG1Service
         $maxLoop = 30;
         while ($this->webContentOffset !== false && $continue) {
             $currentLoop++;
+            if ($currentLoop >= $maxLoop) {
+                $continue = false;
+            }
+
             $result = $this->getItem($contentItem);
             $contentItem = $this->getContentItem($this->webContentOffset);
             if ($result === false) {
                 continue;
-            }
-            if ($result === null) {
-                break;
-            }
-
-            if ($currentLoop >= $maxLoop) {
-                $continue = false;
             }
 
             $results[] = $result;
