@@ -27,7 +27,7 @@ class News
 
     /**
      * @var string
-     * @ORM\Column(type="string", length=127, nullable=false)
+     * @ORM\Column(type="string", length=255, nullable=false)
      */
     public $title;
 
@@ -42,6 +42,12 @@ class News
      * @ORM\Column(type="string", length=511, nullable=false, unique=true)
      */
     public $url;
+
+    /**
+     * @var string
+     * @ORM\Column(type="string", length=32, nullable=false)
+     */
+    public $hashMd5;
 
     /**
      * @var integer
@@ -103,6 +109,9 @@ class News
      */
     public function __construct()
     {
+        $this->isActive = (int) true;
+        $this->isDeleted = (int) false;
+        $this->createdBy = auth()->user();
 //        $this->news = new ArrayCollection();
     }
 
@@ -112,9 +121,6 @@ class News
     public function onPrePersist()
     {
         $this->createdAt = new DateTime();
-        $this->createdBy = auth()->user();
-        $this->isActive = (int) true;
-        $this->isDeleted = (int) false;
     }
 
     /**
@@ -126,6 +132,26 @@ class News
         if (!empty($eventArgs->getEntityChangeSet())) {
             $this->updatedAt = new DateTime();
         }
+    }
+
+    /**
+     * @return User
+     */
+    public function getCreatedBy(): User
+    {
+        return $this->createdBy;
+    }
+
+    /**
+     * @param User $createdBy
+     *
+     * @return News
+     */
+    public function setCreatedBy(User $createdBy): News
+    {
+        $this->createdBy = $createdBy;
+
+        return $this;
     }
 
     /**
