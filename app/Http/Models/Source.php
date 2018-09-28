@@ -55,6 +55,12 @@ class Source
     public $isActive;
 
     /**
+     * @var string
+     * @ORM\Column(type="string", length=63, nullable=false, unique=true)
+     */
+    public $fingerprint;
+
+    /**
      * @var integer
      * @ORM\Column(type="integer", nullable=false)
      */
