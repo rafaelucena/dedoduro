@@ -192,7 +192,7 @@ class ScrapeNewsG1Service
                 continue;
             }
 
-            $results[] = $result;
+            $results[$result['hashMd5']] = $result;
 
             $count++;
             if ($count > 1) {

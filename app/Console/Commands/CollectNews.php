@@ -2,11 +2,11 @@
 
 namespace App\Console\Commands;
 
-use App\Console\Commands\Command;
+use App\Console\Commands\Command as BaseCommand;
 use App\Http\Models\Persona;
 use App\Services\ScrapeNewsService as Scrape;
 
-class CollectNews extends Command
+class CollectNews extends BaseCommand
 {
     /**
      * The name and signature of the console command.
@@ -37,14 +37,16 @@ class CollectNews extends Command
                 'pe.shortName AS personaShortName',
             ])
             ->from(Persona::class, 'pe')
-            ->where('pe.id IN (:ids)')
+            ->where('pe.isActive = 1 AND pe.isDeleted = 0')
+            ->andWhere('pe.id IN (:ids)')
             ->setParameters(['ids' => ['1','2']])
             ->getQuery()
             ->getResult();
 
         foreach ($personas as $persona) {
             $short = $persona['personaShortName'];
-            $scrapeObj = new Scrape($short, '1');
+            $scrapeObj = new Scrape($this->em);
+            $scrapeObj->mapResources($short, '1');
             $result[$short] = $scrapeObj->rock();
         }
         // Input
@@ -75,6 +77,6 @@ class CollectNews extends Command
 //    }
 
         echo '<pre>';
-        print_r($result);
+        dump($result);
     }
 }
