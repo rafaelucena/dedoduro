@@ -76,6 +76,8 @@ class PersonaNews
 
     public function __construct()
     {
+        $this->isActive = (int) true;
+        $this->createdBy = auth()->user();
         //@TODO
     }
 
@@ -85,9 +87,7 @@ class PersonaNews
     public function onPrePersist()
     {
         $this->createdAt = new DateTime();
-        $this->createdBy = auth()->user();
         $this->isDeleted = (int) false;
-        $this->isActive = (int) true;
     }
 
     /**
@@ -118,6 +118,24 @@ class PersonaNews
     {
         $this->news = $news;
 
+        return $this;
+    }
+
+    /**
+     * @return User
+     */
+    public function getCreatedBy(): User
+    {
+        return $this->createdBy;
+    }
+
+    /**
+     * @param User $createdBy
+     * @return PersonaNews
+     */
+    public function setCreatedBy(User $createdBy): PersonaNews
+    {
+        $this->createdBy = $createdBy;
         return $this;
     }
 

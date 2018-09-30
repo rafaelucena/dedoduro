@@ -31,23 +31,21 @@ class CollectNews extends BaseCommand
      */
     public function handle()
     {
-        $personas = $this->em->createQueryBuilder()
-            ->select([
-                'pe.id AS personaId',
-                'pe.shortName AS personaShortName',
-            ])
-            ->from(Persona::class, 'pe')
-            ->where('pe.isActive = 1 AND pe.isDeleted = 0')
-            ->andWhere('pe.id IN (:ids)')
-            ->setParameters(['ids' => ['1','2']])
-            ->getQuery()
-            ->getResult();
+        $personas = $this->em->getRepository(Persona::class)->findBy(['isActive' => 1, 'isDeleted' => 0]);
+//        $personas = $this->em->createQueryBuilder()
+//            ->select('pe')
+//            ->from(Persona::class, 'pe')
+//            ->where('pe.isActive = 1 AND pe.isDeleted = 0')
+//            ->andWhere('pe.id IN (:ids)')
+//            ->setParameters(['ids' => ['1','2']])
+//            ->getQuery()
+//            ->getResult();
 
+        /* @var Persona $persona */
         foreach ($personas as $persona) {
-            $short = $persona['personaShortName'];
             $scrapeObj = new Scrape($this->em);
-            $scrapeObj->mapResources($short, '1');
-            $result[$short] = $scrapeObj->rock();
+            $scrapeObj->mapResources($persona, '1');
+            $result[$persona->shortName] = $scrapeObj->rock();
         }
         // Input
 //        echo '<pre>';

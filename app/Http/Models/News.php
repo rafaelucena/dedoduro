@@ -3,6 +3,7 @@
 namespace App\Http\Models;
 
 use App\Http\Models\User;
+use App\Http\Models\NewsFlagModel as NewsFlag;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Criteria;
@@ -27,8 +28,9 @@ class News
 
     /**
      * @var string
-     * @ORM\Column(type="string", length=255, nullable=false)
+     * @ORM\Column(type="string", length=511, nullable=false)
      */
+//     * @ORM\Column(type="string", length=511, nullable=false, unique=true)
     public $title;
 
     /**
@@ -39,27 +41,16 @@ class News
 
     /**
      * @var string
-     * @ORM\Column(type="string", length=511, nullable=false, unique=true)
+     * @ORM\Column(type="string", length=511, nullable=false)
      */
+//     * @ORM\Column(type="string", length=511, nullable=false, unique=true)
     public $url;
 
     /**
      * @var string
-     * @ORM\Column(type="string", length=32, nullable=false)
+     * @ORM\Column(type="string", length=32, nullable=false, unique=true)
      */
     public $hashMd5;
-
-    /**
-     * @var integer
-     * @ORM\Column(type="integer", nullable=false)
-     */
-    public $isActive;
-
-    /**
-     * @var integer
-     * @ORM\Column(type="integer", nullable=false)
-     */
-    public $isDeleted;
 
     /**
      * @var \DateTime
@@ -93,6 +84,13 @@ class News
     protected $createdBy;
 
     /**
+     * @var NewsFlag
+     * @ORM\OneToOne(targetEntity="NewsFlagModel", inversedBy="news")
+     * @ORM\JoinColumn(name="flag_id", referencedColumnName="id", nullable=false)
+     */
+    protected $flags;
+
+    /**
      * @var Source
      * @ORM\ManyToOne(targetEntity="Source", inversedBy="news")
      */
@@ -109,8 +107,6 @@ class News
      */
     public function __construct()
     {
-        $this->isActive = (int) true;
-        $this->isDeleted = (int) false;
         $this->createdBy = auth()->user();
 //        $this->news = new ArrayCollection();
     }
@@ -151,6 +147,24 @@ class News
     {
         $this->createdBy = $createdBy;
 
+        return $this;
+    }
+
+    /**
+     * @return NewsFlagModel
+     */
+    public function getFlags(): NewsFlagModel
+    {
+        return $this->flags;
+    }
+
+    /**
+     * @param NewsFlagModel $flags
+     * @return News
+     */
+    public function setFlags(NewsFlagModel $flags): News
+    {
+        $this->flags = $flags;
         return $this;
     }
 
