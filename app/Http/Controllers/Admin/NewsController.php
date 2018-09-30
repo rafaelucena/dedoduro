@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Models\News;
+use App\Http\Models\NewsFlagModel as NewsFlag;
 use App\Http\Models\Party;
 use App\Http\Models\PersonaNews;
 use App\Http\Models\PersonaSlug;
@@ -41,10 +42,10 @@ class NewsController extends Controller
      */
     protected function index()
     {
-        $trashedItemsAmount = count($this->em->getRepository(News::class)->findBy([
+        $trashedItemsAmount = count([]/*$this->em->getRepository(News::class)->findBy([
             'isActive' => 0,
             'isDeleted' => 1,
-        ]));
+        ])*/);
 
         return view('admin/news/index', ['trashed_items_count' => $trashedItemsAmount]);
     }
@@ -61,13 +62,14 @@ class NewsController extends Controller
             ->select([
                 'nw.id',
                 'nw.title',
-                'nw.isActive',
+                'nf.isActive',
                 'nw.publishedAt',
                 'so.name AS sourceName',
             ])
             ->from(News::class, 'nw')
             ->innerJoin( Source::class, 'so', 'WITH', 'so = nw.source')
-            ->where('nw.isDeleted = :isDeleted')
+            ->innerJoin( NewsFlag::class, 'nf', 'WITH', 'nf = nw.flags')
+            ->where('nf.isDeleted = :isDeleted')
             ->setParameter('isDeleted', (int) false)
             ->getQuery()
             ->getResult();
