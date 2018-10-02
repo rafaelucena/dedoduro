@@ -31,12 +31,6 @@ class CommandHistoryModel
     public $signature;
 
     /**
-     * @var string
-     * @ORM\Column(type="json", nullable=false)
-     */
-    public $log;
-
-    /**
      * @var \DateTime
      * @ORM\Column(type="datetime", nullable=false)
      */
