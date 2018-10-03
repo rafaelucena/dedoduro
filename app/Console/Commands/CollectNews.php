@@ -13,7 +13,7 @@ class CollectNews extends BaseCommand
      *
      * @var string
      */
-    protected $signature = 'news:collect {slug*}';
+    protected $signature = 'news:collect {priority?}';
 
     /**
      * The console command description.
@@ -31,6 +31,8 @@ class CollectNews extends BaseCommand
      */
     public function handle()
     {
+        $this->startLog($this->input);
+
         $personas = $this->em->getRepository(Persona::class)->findBy(['isActive' => 1, 'isDeleted' => 0]);
 //        $personas = $this->em->createQueryBuilder()
 //            ->select('pe')
@@ -41,6 +43,9 @@ class CollectNews extends BaseCommand
 //            ->getQuery()
 //            ->getResult();
 
+        sleep(3);
+
+        $this->endLog(['info' => ['vish' => 'lascou']]);
         /* @var Persona $persona */
         foreach ($personas as $persona) {
             $scrapeObj = new Scrape($this->em);

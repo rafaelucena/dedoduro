@@ -4,9 +4,23 @@ namespace App\Console\Commands;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Illuminate\Console\Command as BaseCommand;
+use Symfony\Component\Console\Input\InputInterface as Input;
 
 class Command extends BaseCommand
 {
+    private $logType = [
+        'success',
+        'error',
+        'info',
+    ];
+
+    private $status = [
+        'pending',
+        'started',
+        'halted',
+        'finished',
+    ];
+
     /**
      * @var EntityManagerInterface
      */
@@ -15,6 +29,8 @@ class Command extends BaseCommand
     protected $signature = 'base_command';
 
     protected $hidden = true;
+
+    protected $log;
 
     /**
      * Command constructor.
@@ -25,5 +41,40 @@ class Command extends BaseCommand
         $this->em = $em;
 
         parent::__construct();
+    }
+
+    protected function startLog(Input $input)
+    {
+        $user = $this->em->getRepository(\App\Http\Models\User::class)->findOneBy([
+            'name' => 'robocop_x9',
+        ]);
+        $status = $this->em->getRepository(\App\Http\Models\CommandHistoryStatusModel::class)->findOneBy([
+            'name' => 'started',
+        ]);
+
+        $commandHistory = new \App\Http\Models\CommandHistoryModel();
+        $commandHistory->command = (string) $input;
+        $commandHistory->setCreatedBy($user);
+        $commandHistory->setStatus($status);
+
+        $this->em->persist($commandHistory);
+        $this->em->flush();
+
+        $this->log = $commandHistory;
+    }
+
+    protected function endLog(array $messages)
+    {
+        $status = $this->em->getRepository(\App\Http\Models\CommandHistoryStatusModel::class)->findOneBy([
+            'name' => 'finished',
+        ]);
+
+        $this->log->setStatus($status);
+        $this->log->finishedAt = new \DateTime();
+
+        $this->em->persist($this->log);
+        $this->em->flush();
+
+        die;
     }
 }

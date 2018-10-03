@@ -28,19 +28,25 @@ class CommandHistoryModel
      * @var string
      * @ORM\Column(type="string", nullable=false)
      */
-    public $signature;
+    public $command;
+
+    /**
+     * @var int
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    public $duration;
 
     /**
      * @var \DateTime
      * @ORM\Column(type="datetime", nullable=false)
      */
-    public $createdAt;
+    public $startedAt;
 
     /**
      * @var \DateTime
      * @ORM\Column(type="datetime", nullable=true)
      */
-    public $updatedAt;
+    public $finishedAt;
 
     /**
      * @var CommandHistoryStatus
@@ -61,7 +67,7 @@ class CommandHistoryModel
      */
     public function __construct()
     {
-        $this->createdAt = new DateTime();
+        $this->startedAt = new DateTime();
         $this->createdBy = auth()->user();
     }
 
@@ -79,7 +85,6 @@ class CommandHistoryModel
     public function onPreUpdate(PreUpdateEventArgs $eventArgs)
     {
         if (!empty($eventArgs->getEntityChangeSet())) {
-            $this->updatedAt = new DateTime();
         }
     }
 
