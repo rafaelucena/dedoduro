@@ -71,6 +71,10 @@ class Command extends BaseCommand
 
         $this->log->setStatus($status);
         $this->log->finishedAt = new \DateTime();
+        $this->log->duration = ($this->log->finishedAt->getTimestamp() - $this->log->startedAt->getTimestamp());
+        $this->log->usageCpu = memory_usage();
+        $this->log->usageMemory = cpu_usage();
+
 
         $this->em->persist($this->log);
         $this->em->flush();

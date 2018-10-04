@@ -37,6 +37,18 @@ class CommandHistoryModel
     public $duration;
 
     /**
+     * @var float
+     * @ORM\Column(type="float", nullable=true)
+     */
+    public $usageCpu;
+
+    /**
+     * @var
+     * @ORM\Column(type="float", nullable=true)
+     */
+    public $usageMemory;
+
+    /**
      * @var \DateTime
      * @ORM\Column(type="datetime", nullable=false)
      */
