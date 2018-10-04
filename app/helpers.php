@@ -61,3 +61,31 @@ if (! function_exists('custom_criteria')) {
         return $criteria;
     }
 }
+
+if (! function_exists('memory_usage')) {
+    /**
+     * @return float
+     */
+    function memory_usage() {
+        $free = shell_exec('free');
+        $free = (string) trim($free);
+        $free_arr = explode("\n", $free);
+        $mem = explode(' ', $free_arr[1]);
+        $mem = array_filter($mem);
+        $mem = array_merge($mem);
+
+        return $mem[2]/$mem[1]*100;
+    }
+}
+
+if (! function_exists('cpu_usage')) {
+    /**
+     * @return float
+     */
+    function cpu_usage()
+    {
+        $load = sys_getloadavg();
+
+        return $load[0];
+    }
+}
