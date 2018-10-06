@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Http\Models;
+namespace App\Http\Models\Commands;
 
 use App\Http\Models\User;
-use App\Http\Models\CommandHistoryStatusModel as CommandHistoryStatus;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Criteria;
@@ -12,10 +11,10 @@ use Doctrine\ORM\Event\PreUpdateEventArgs;
 
 /**
  * @ORM\Entity()
- * @ORM\Table(name="command_history")
+ * @ORM\Table(name="command_history_status")
  * @ORM\HasLifecycleCallbacks()
  */
-class CommandHistoryModel
+class CommandHistoryStatusModel
 {
     /**
      * @ORM\Id()
@@ -26,50 +25,31 @@ class CommandHistoryModel
 
     /**
      * @var string
-     * @ORM\Column(type="string", nullable=false)
+     * @ORM\Column(type="string", length=511, nullable=false)
      */
-    public $command;
-
-    /**
-     * @var int
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    public $duration;
-
-    /**
-     * @var float
-     * @ORM\Column(type="float", nullable=true)
-     */
-    public $usageCpu;
-
-    /**
-     * @var
-     * @ORM\Column(type="float", nullable=true)
-     */
-    public $usageMemory;
+    public $name;
 
     /**
      * @var \DateTime
      * @ORM\Column(type="datetime", nullable=false)
      */
-    public $startedAt;
+    public $createdAt;
 
     /**
      * @var \DateTime
      * @ORM\Column(type="datetime", nullable=true)
      */
-    public $finishedAt;
+    public $updatedAt;
 
     /**
-     * @var CommandHistoryStatus
-     * @ORM\ManyToOne(targetEntity="CommandHistoryStatusModel", inversedBy="commandHistory")
-     * @ORM\JoinColumn(name="command_history_status_id", referencedColumnName="id", nullable=false)
+     * @var CommandHistoryModel[]|ArrayCollection
+     * @ORM\OneToMany(targetEntity="CommandHistoryModel", mappedBy="status")
      */
-    protected $status;
+    protected $commandHistory;
 
     /**
      * @var User
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="commandHistory")
+     * @ORM\ManyToOne(targetEntity="App\Http\Models\User", inversedBy="CommandHistoryStatuses")
      * @ORM\JoinColumn(name="created_by", referencedColumnName="id", nullable=false)
      */
     protected $createdBy;
@@ -79,7 +59,7 @@ class CommandHistoryModel
      */
     public function __construct()
     {
-        $this->startedAt = new DateTime();
+        $this->createdAt = new DateTime();
         $this->createdBy = auth()->user();
     }
 
@@ -97,25 +77,8 @@ class CommandHistoryModel
     public function onPreUpdate(PreUpdateEventArgs $eventArgs)
     {
         if (!empty($eventArgs->getEntityChangeSet())) {
+            $this->updatedAt = new DateTime();
         }
-    }
-
-    /**
-     * @return CommandHistoryStatus
-     */
-    public function getStatus(): CommandHistoryStatus
-    {
-        return $this->status;
-    }
-
-    /**
-     * @param CommandHistoryStatus $status
-     * @return CommandHistoryModel
-     */
-    public function setStatus(CommandHistoryStatus $status): CommandHistoryModel
-    {
-        $this->status = $status;
-        return $this;
     }
 
     /**
@@ -129,9 +92,9 @@ class CommandHistoryModel
     /**
      * @param User $createdBy
      *
-     * @return CommandHistoryModel
+     * @return CommandHistoryStatusModel
      */
-    public function setCreatedBy(User $createdBy): CommandHistoryModel
+    public function setCreatedBy(User $createdBy): CommandHistoryStatusModel
     {
         $this->createdBy = $createdBy;
 

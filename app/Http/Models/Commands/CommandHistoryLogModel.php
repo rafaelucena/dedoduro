@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Models;
+namespace App\Http\Models\Commands;
 
 use App\Http\Models\User;
-use App\Http\Models\CommandHistoryLogTypeModel as CommandHistoryLogType;
-use App\Http\Models\CommandHistoryModel as CommandHistory;
+use App\Http\Models\Commands\CommandHistoryLogTypeModel as CommandHistoryLogType;
+use App\Http\Models\Commands\CommandHistoryModel as CommandHistory;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Criteria;

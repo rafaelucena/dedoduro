@@ -43,12 +43,12 @@ class CollectNews extends BaseCommand
 //            ->getQuery()
 //            ->getResult();
 
-        sleep(3);
+//        sleep(3);
 
-        $this->endLog(['info' => ['vish' => 'lascou']]);
         /* @var Persona $persona */
         foreach ($personas as $persona) {
             $scrapeObj = new Scrape($this->em);
+            $this->endLog(['info' => ['vish' => 'lascou']]);
             $scrapeObj->mapResources($persona, '1');
             $result[$persona->shortName] = $scrapeObj->rock();
         }
@@ -78,6 +78,8 @@ class CollectNews extends BaseCommand
 //        echo '<br />------------------<br /><br />';
 //        $count++;
 //    }
+
+        $this->endLog(['info' => ['vish' => 'lascou']]);
 
         echo '<pre>';
         dump($result);

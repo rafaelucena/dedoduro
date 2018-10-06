@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Models;
+namespace App\Http\Models\Commands;
 
 use App\Http\Models\User;
-use DateTime;
+use App\Http\Models\Commands\CommandHistoryLogModel as CommandHistoryLog;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\Mapping AS ORM;
@@ -11,10 +11,10 @@ use Doctrine\ORM\Event\PreUpdateEventArgs;
 
 /**
  * @ORM\Entity()
- * @ORM\Table(name="command_history_status")
+ * @ORM\Table(name="command_history_log_type")
  * @ORM\HasLifecycleCallbacks()
  */
-class CommandHistoryStatusModel
+class CommandHistoryLogTypeModel
 {
     /**
      * @ORM\Id()
@@ -25,7 +25,7 @@ class CommandHistoryStatusModel
 
     /**
      * @var string
-     * @ORM\Column(type="string", length=511, nullable=false)
+     * @ORM\Column(type="string", length=63, nullable=false)
      */
     public $name;
 
@@ -42,14 +42,14 @@ class CommandHistoryStatusModel
     public $updatedAt;
 
     /**
-     * @var CommandHistoryModel[]|ArrayCollection
-     * @ORM\OneToMany(targetEntity="CommandHistoryModel", mappedBy="status")
+     * @var CommandHistoryLog[]|ArrayCollection
+     * @ORM\OneToMany(targetEntity="CommandHistoryLogModel", mappedBy="commandHistoryLogType")
      */
-    protected $commandHistory;
+    protected $commandHistoryLogs;
 
     /**
      * @var User
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="CommandHistoryStatuses")
+     * @ORM\ManyToOne(targetEntity="User")
      * @ORM\JoinColumn(name="created_by", referencedColumnName="id", nullable=false)
      */
     protected $createdBy;
@@ -59,7 +59,7 @@ class CommandHistoryStatusModel
      */
     public function __construct()
     {
-        $this->createdAt = new DateTime();
+        $this->createdAt = new \DateTime();
         $this->createdBy = auth()->user();
     }
 
@@ -77,7 +77,7 @@ class CommandHistoryStatusModel
     public function onPreUpdate(PreUpdateEventArgs $eventArgs)
     {
         if (!empty($eventArgs->getEntityChangeSet())) {
-            $this->updatedAt = new DateTime();
+            $this->updatedAt = new \DateTime();
         }
     }
 
@@ -92,9 +92,9 @@ class CommandHistoryStatusModel
     /**
      * @param User $createdBy
      *
-     * @return CommandHistoryStatusModel
+     * @return CommandHistoryLogTypeModel
      */
-    public function setCreatedBy(User $createdBy): CommandHistoryStatusModel
+    public function setCreatedBy(User $createdBy): CommandHistoryLogTypeModel
     {
         $this->createdBy = $createdBy;
 

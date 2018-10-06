@@ -48,11 +48,11 @@ class Command extends BaseCommand
         $user = $this->em->getRepository(\App\Http\Models\User::class)->findOneBy([
             'name' => 'robocop_x9',
         ]);
-        $status = $this->em->getRepository(\App\Http\Models\CommandHistoryStatusModel::class)->findOneBy([
+        $status = $this->em->getRepository(\App\Http\Models\Commands\CommandHistoryStatusModel::class)->findOneBy([
             'name' => 'started',
         ]);
 
-        $commandHistory = new \App\Http\Models\CommandHistoryModel();
+        $commandHistory = new \App\Http\Models\Commands\CommandHistoryModel();
         $commandHistory->command = (string) $input;
         $commandHistory->setCreatedBy($user);
         $commandHistory->setStatus($status);
@@ -65,7 +65,7 @@ class Command extends BaseCommand
 
     protected function endLog(array $messages)
     {
-        $status = $this->em->getRepository(\App\Http\Models\CommandHistoryStatusModel::class)->findOneBy([
+        $status = $this->em->getRepository(\App\Http\Models\Commands\CommandHistoryStatusModel::class)->findOneBy([
             'name' => 'finished',
         ]);
 
