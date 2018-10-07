@@ -4,6 +4,7 @@ namespace App\Http\Models\Commands;
 
 use App\Http\Models\User;
 use App\Http\Models\Commands\CommandHistoryStatusModel as CommandHistoryStatus;
+use App\Http\Models\Commands\CommandModel as Command;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Criteria;
@@ -26,9 +27,9 @@ class CommandHistoryModel
 
     /**
      * @var string
-     * @ORM\Column(type="string", nullable=false)
+     * @ORM\Column(type="string", length=255,nullable=false)
      */
-    public $command;
+    public $executed;
 
     /**
      * @var int
@@ -66,6 +67,13 @@ class CommandHistoryModel
      * @ORM\JoinColumn(name="command_history_status_id", referencedColumnName="id", nullable=false)
      */
     protected $status;
+
+    /**
+     * @var Command
+     * @ORM\ManyToOne(targetEntity="CommandModel", inversedBy="commandHistory")
+     * @ORM\JoinColumn(name="command_id", referencedColumnName="id", nullable=false)
+     */
+    protected $command;
 
     /**
      * @var User
