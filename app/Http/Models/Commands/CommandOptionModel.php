@@ -27,9 +27,9 @@ class CommandOptionModel
 
     /**
      * @var string
-     * @ORM\Column(type="string", length="63", nullable=false)
+     * @ORM\Column(type="string", length=63, nullable=false)
      */
-    public $option;
+    public $name;
 
     /**
      * @var \DateTime
