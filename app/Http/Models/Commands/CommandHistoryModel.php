@@ -127,6 +127,22 @@ class CommandHistoryModel
     }
 
     /**
+     * @return CommandModel
+     */
+    public function getCommand(): CommandModel
+    {
+        return $this->command;
+    }
+
+    /**
+     * @param CommandModel $command
+     */
+    public function setCommand(CommandModel $command): void
+    {
+        $this->command = $command;
+    }
+
+    /**
      * @return User
      */
     public function getCreatedBy(): User

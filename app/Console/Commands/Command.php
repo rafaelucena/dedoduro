@@ -51,9 +51,11 @@ class Command extends BaseCommand
         $status = $this->em->getRepository(\App\Http\Models\Commands\CommandHistoryStatusModel::class)->findOneBy([
             'name' => 'started',
         ]);
+        $command = $this->em->getRepository(\App\Http\Models\Commands\CommandModel::class)->find(1);
 
         $commandHistory = new \App\Http\Models\Commands\CommandHistoryModel();
-        $commandHistory->command = (string) $input;
+        $commandHistory->executed = (string) $input;
+        $commandHistory->setCommand($command);
         $commandHistory->setCreatedBy($user);
         $commandHistory->setStatus($status);
 
