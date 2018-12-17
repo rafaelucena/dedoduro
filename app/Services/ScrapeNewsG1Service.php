@@ -15,6 +15,8 @@ class ScrapeNewsG1Service
 
     private $webContentOffset = false;
 
+    private $validItem;
+
     /**
      * ScrapeNewsG1Service constructor.
      *
@@ -127,7 +129,8 @@ class ScrapeNewsG1Service
             return (new \DateTime())->modify("-{$matches[1]} hours");
         }
 
-        return false;
+        $this->validItem = false;
+        return null;
     }
 
     private function getItemUrl(string $contentItem)
@@ -135,9 +138,9 @@ class ScrapeNewsG1Service
         preg_match('/<a href=".*?u=(.*?)&key.*?"/', $contentItem, $matches);
         $urlDecoded = urldecode($matches[1]);
 
-        if (strpos($urlDecoded, 'fato-ou-fake') !== false) {
-            return false;
-        }
+//        if (strpos($urlDecoded, 'fato-ou-fake') !== false) {
+//            return false;
+//        }
 
         return $urlDecoded;
     }
@@ -147,20 +150,18 @@ class ScrapeNewsG1Service
         $result = [];
 
         // Get title
-        if (($result['title'] = $this->getItemTitle($contentItem)) === false) {
-            return false;
-        }
+        $result['title'] = $this->getItemTitle($contentItem);
 
         // Get when
-        if (($result['happenedAt'] = $this->getItemHappenedAt($contentItem)) === false) {
-            return false;
-        }
+        $result['happenedAt'] = $this->getItemHappenedAt($contentItem);
 
         // Get url
-        if (($result['url'] = $this->getItemUrl($contentItem)) === false) {
-            return false;
-        }
+        $result['url'] = $this->getItemUrl($contentItem);
 
+        // Get valid
+        $result['valid'] = $this->validItem;
+
+        // Get hash
         $result['hashMd5'] = md5($result['url']);
 
         return $result;
@@ -182,20 +183,18 @@ class ScrapeNewsG1Service
         $maxLoop = 30;
         while ($this->webContentOffset !== false && $continue) {
             $currentLoop++;
+            $this->validItem = true;
             if ($currentLoop >= $maxLoop) {
                 $continue = false;
             }
 
             $result = $this->getItem($contentItem);
             $contentItem = $this->getContentItem($this->webContentOffset);
-            if ($result === false) {
-                continue;
-            }
 
             $results[$result['hashMd5']] = $result;
 
             $count++;
-            if ($count > 1) {
+            if ($count > 1) { //delete me when finished
                 break;
             }
         }
