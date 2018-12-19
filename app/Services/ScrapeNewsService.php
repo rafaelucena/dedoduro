@@ -10,6 +10,7 @@ use App\Http\Models\Source;
 use App\Http\Models\User;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Services\ScrapeNewsG1Service as ScrapeNewsG1;
+use App\Services\ScrapeNewsFilterService;
 
 class ScrapeNewsService
 {
@@ -27,6 +28,8 @@ class ScrapeNewsService
     ];
 
     private $sources = [];
+
+    private $info;
 
     /**
      * @var User
@@ -71,14 +74,19 @@ class ScrapeNewsService
 
     public function rock()
     {
+        //deleteme
+        $news = json_decode('{"c76b20dae4da97f9fda71d7e5c9ae1be":{"title":"Ap\u00f3s decis\u00e3o do STF, defesa de Lula pede \u00e0 Justi\u00e7a que solte o ex-presidente","happenedAt":null,"url":"https:\/\/g1.globo.com\/pr\/parana\/noticia\/2018\/12\/19\/apos-decisao-do-stf-defesa-de-lula-pede-a-justica-que-solte-o-ex-presidente.ghtml","valid":false,"hashMd5":"c76b20dae4da97f9fda71d7e5c9ae1be"},"735aa2a3c26181a44306cae92e05d824":{"title":"Presidente da OAB diz que STF precisa dar decis\u00e3o definitiva sobre pris\u00e3o ap\u00f3s 2\u00aa inst\u00e2ncia","happenedAt":null,"url":"https:\/\/g1.globo.com\/rr\/roraima\/noticia\/2018\/12\/19\/presidente-da-oab-diz-que-stf-precisa-dar-decisao-definitiva-sobre-prisao-apos-2a-instancia.ghtml","valid":false,"hashMd5":"735aa2a3c26181a44306cae92e05d824"}}', true);
+
         $this->results = [];
         foreach ($this->resources as $sourceFingerprint => $resource) {
-            $resource['news'] = $resource['service']->roll();
+//            $resource['news'] = $resource['service']->roll();
+            $resource['news'] = $news;
             unset($resource['service']);
             $this->results[$sourceFingerprint] = $resource;
         }
 
         foreach ($this->results as $resource) {
+            $filter = new ScrapeNewsFilterService($resource);
             $filteredNews = $this->filterNews($resource['news'], $resource['persona']);
 //            $filteredNews = $resource['news'];
 
