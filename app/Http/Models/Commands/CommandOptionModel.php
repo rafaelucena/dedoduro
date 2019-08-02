@@ -4,7 +4,7 @@ namespace App\Http\Models\Commands;
 
 use App\Http\Models\User;
 use App\Http\Models\Commands\CommandModel as Command;
-use App\Http\Models\Commands\CommandHistoryStatusModel as CommandHistoryStatus;
+use App\Http\Models\Commands\CommandLogStatusModel as CommandLogStatus;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Criteria;
@@ -51,7 +51,7 @@ class CommandOptionModel
 
     /**
      * @var User
-     * @ORM\ManyToOne(targetEntity="App\Http\Models\User", inversedBy="commandHistory")
+     * @ORM\ManyToOne(targetEntity="App\Http\Models\User", inversedBy="commandLog")
      * @ORM\JoinColumn(name="created_by", referencedColumnName="id", nullable=false)
      */
     protected $createdBy;

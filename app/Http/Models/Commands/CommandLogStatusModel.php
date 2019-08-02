@@ -3,7 +3,7 @@
 namespace App\Http\Models\Commands;
 
 use App\Http\Models\User;
-use App\Http\Models\Commands\CommandHistoryLogModel as CommandHistoryLog;
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\Mapping AS ORM;
@@ -11,10 +11,10 @@ use Doctrine\ORM\Event\PreUpdateEventArgs;
 
 /**
  * @ORM\Entity()
- * @ORM\Table(name="command_history_log_type")
+ * @ORM\Table(name="command_log_status")
  * @ORM\HasLifecycleCallbacks()
  */
-class CommandHistoryLogTypeModel
+class CommandLogStatusModel
 {
     /**
      * @ORM\Id()
@@ -25,7 +25,7 @@ class CommandHistoryLogTypeModel
 
     /**
      * @var string
-     * @ORM\Column(type="string", length=63, nullable=false)
+     * @ORM\Column(type="string", length=511, nullable=false)
      */
     public $name;
 
@@ -42,14 +42,14 @@ class CommandHistoryLogTypeModel
     public $updatedAt;
 
     /**
-     * @var CommandHistoryLog[]|ArrayCollection
-     * @ORM\OneToMany(targetEntity="CommandHistoryLogModel", mappedBy="commandHistoryLogType")
+     * @var CommandLogModel[]|ArrayCollection
+     * @ORM\OneToMany(targetEntity="CommandLogModel", mappedBy="status")
      */
-    protected $commandHistoryLogs;
+    protected $commandLog;
 
     /**
      * @var User
-     * @ORM\ManyToOne(targetEntity="App\Http\Models\User")
+     * @ORM\ManyToOne(targetEntity="App\Http\Models\User", inversedBy="CommandLogStatuses")
      * @ORM\JoinColumn(name="created_by", referencedColumnName="id", nullable=false)
      */
     protected $createdBy;
@@ -59,7 +59,7 @@ class CommandHistoryLogTypeModel
      */
     public function __construct()
     {
-        $this->createdAt = new \DateTime();
+        $this->createdAt = new DateTime();
         $this->createdBy = auth()->user();
     }
 
@@ -77,7 +77,7 @@ class CommandHistoryLogTypeModel
     public function onPreUpdate(PreUpdateEventArgs $eventArgs)
     {
         if (!empty($eventArgs->getEntityChangeSet())) {
-            $this->updatedAt = new \DateTime();
+            $this->updatedAt = new DateTime();
         }
     }
 
@@ -92,9 +92,9 @@ class CommandHistoryLogTypeModel
     /**
      * @param User $createdBy
      *
-     * @return CommandHistoryLogTypeModel
+     * @return CommandLogStatusModel
      */
-    public function setCreatedBy(User $createdBy): CommandHistoryLogTypeModel
+    public function setCreatedBy(User $createdBy): CommandLogStatusModel
     {
         $this->createdBy = $createdBy;
 

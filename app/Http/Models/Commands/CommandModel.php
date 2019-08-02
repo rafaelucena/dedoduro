@@ -57,7 +57,7 @@ class CommandModel
 
     /**
      * @var User
-     * @ORM\ManyToOne(targetEntity="App\Http\Models\User", inversedBy="commandHistory")
+     * @ORM\ManyToOne(targetEntity="App\Http\Models\User", inversedBy="commandLog")
      * @ORM\JoinColumn(name="created_by", referencedColumnName="id", nullable=false)
      */
     protected $createdBy;

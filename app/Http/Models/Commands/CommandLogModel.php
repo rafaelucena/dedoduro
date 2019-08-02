@@ -3,7 +3,7 @@
 namespace App\Http\Models\Commands;
 
 use App\Http\Models\User;
-use App\Http\Models\Commands\CommandHistoryStatusModel as CommandHistoryStatus;
+use App\Http\Models\Commands\CommandLogStatusModel as CommandLogStatus;
 use App\Http\Models\Commands\CommandModel as Command;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -13,10 +13,10 @@ use Doctrine\ORM\Event\PreUpdateEventArgs;
 
 /**
  * @ORM\Entity()
- * @ORM\Table(name="command_history")
+ * @ORM\Table(name="command_log")
  * @ORM\HasLifecycleCallbacks()
  */
-class CommandHistoryModel
+class CommandLogModel
 {
     /**
      * @ORM\Id()
@@ -62,22 +62,22 @@ class CommandHistoryModel
     public $finishedAt;
 
     /**
-     * @var CommandHistoryStatus
-     * @ORM\ManyToOne(targetEntity="CommandHistoryStatusModel", inversedBy="commandHistory")
-     * @ORM\JoinColumn(name="command_history_status_id", referencedColumnName="id", nullable=false)
+     * @var CommandLogStatus
+     * @ORM\ManyToOne(targetEntity="CommandLogStatusModel", inversedBy="commandLog")
+     * @ORM\JoinColumn(name="status_id", referencedColumnName="id", nullable=false)
      */
     protected $status;
 
     /**
      * @var Command
-     * @ORM\ManyToOne(targetEntity="CommandModel", inversedBy="commandHistory")
+     * @ORM\ManyToOne(targetEntity="CommandModel", inversedBy="commandLog")
      * @ORM\JoinColumn(name="command_id", referencedColumnName="id", nullable=false)
      */
     protected $command;
 
     /**
      * @var User
-     * @ORM\ManyToOne(targetEntity="App\Http\Models\User", inversedBy="commandHistory")
+     * @ORM\ManyToOne(targetEntity="App\Http\Models\User", inversedBy="commandLog")
      * @ORM\JoinColumn(name="created_by", referencedColumnName="id", nullable=false)
      */
     protected $createdBy;
@@ -109,18 +109,18 @@ class CommandHistoryModel
     }
 
     /**
-     * @return CommandHistoryStatus
+     * @return CommandLogStatus
      */
-    public function getStatus(): CommandHistoryStatus
+    public function getStatus(): CommandLogStatus
     {
         return $this->status;
     }
 
     /**
-     * @param CommandHistoryStatus $status
-     * @return CommandHistoryModel
+     * @param CommandLogStatus $status
+     * @return CommandLogModel
      */
-    public function setStatus(CommandHistoryStatus $status): CommandHistoryModel
+    public function setStatus(CommandLogStatus $status): CommandLogModel
     {
         $this->status = $status;
         return $this;
@@ -153,9 +153,9 @@ class CommandHistoryModel
     /**
      * @param User $createdBy
      *
-     * @return CommandHistoryModel
+     * @return CommandLogModel
      */
-    public function setCreatedBy(User $createdBy): CommandHistoryModel
+    public function setCreatedBy(User $createdBy): CommandLogModel
     {
         $this->createdBy = $createdBy;
 
