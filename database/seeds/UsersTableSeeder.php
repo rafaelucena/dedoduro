@@ -2,11 +2,17 @@
 
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Models\User;
+use Doctrine\ORM\EntityManagerInterface;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Seeder;
 
 class UsersTableSeeder extends Seeder
 {
+    public function __construct(EntityManagerInterface $em)
+    {
+        $this->em = $em;
+    }
+
     /**
      * Run the database seeds.
      *
@@ -14,14 +20,16 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        $adminUser = User::create([
-            'name' => 'Admin',
-            'email' => 'admin@admin.com',
-            'password' => Hash::make('admin'),
-            'is_active' => true,
-        ]);
+        $adminUser = new User();
+        $adminUser->name = 'Admin';
+        $adminUser->email = 'admin@admin.com';
+        $adminUser->password = Hash::make('admin');
+        $adminUser->isActive = (int) true;
+        $adminUser->confirmationToken = md5(uniqid($adminUser->email, true) . time());
 
-        $registerController = new RegisterController();
-        $registerController->attachRoles($adminUser);
+        $this->em->persist($adminUser);
+        $this->em->flush();
+//        $registerController = new RegisterController();
+//        $registerController->attachRoles($adminUser);
     }
 }

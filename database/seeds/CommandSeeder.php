@@ -11,9 +11,16 @@ class CommandSeeder extends Seeder
     /** EntityManagerInterface $em */
     protected $em;
 
+    /** @var array */
+    private $commandTypes = [];
+
+    /** @var User */
+    private $creator;
+
     public function __construct(EntityManagerInterface $em)
     {
         $this->em = $em;
+        $this->creator = $this->em->getRepository(User::class)->find(1);
     }
     /**
      * Run the database seeds.
@@ -29,23 +36,28 @@ class CommandSeeder extends Seeder
 
     private function setCommandTypes()
     {
-        $commandType = new CommandTypeModel();
-        $commandType->createdAt = new \DateTime();
-        $commandType->setCreatedBy($this->em->getRepository(User::class)->find(1));
-        $commandType->name = 'explorer';
-        
-        $this->em->persist($commandType);
-        $this->em->flush();
+        $commandTypeExplorer = new CommandTypeModel();
+        $commandTypeExplorer->createdAt = new \DateTime();
+        $commandTypeExplorer->setCreatedBy($this->creator);
+        $commandTypeExplorer->name = 'explorer';
+        $this->em->persist($commandTypeExplorer);
+        $this->commandTypes['explorer'] = $commandTypeExplorer;
     }
 
     private function setCommands()
     {
-        $command = new CommandModel();
-        $command->name = 'news:command';
-        $command->createdAt = new \DateTime();
-        $command->setType($this->em->getRepository(CommandTypeModel::class)->findBy(['name' => 'explorer']));
-        
-        $this->em->persist($command);
-        $this->em->flush($command);
+        $commandNewsCollect = new CommandModel();
+        $commandNewsCollect->name = 'news:collect';
+        $commandNewsCollect->createdAt = new \DateTime();
+        $commandNewsCollect->setType($this->commandTypes['explorer']);
+        $commandNewsCollect->setCreatedBy($this->creator);
+        $this->em->persist($commandNewsCollect);
+
+        $commandNewsCheck = new CommandModel();
+        $commandNewsCheck->name = 'news:check';
+        $commandNewsCollect->createdAt = new \DateTime();
+        $commandNewsCollect->setType($this->commandTypes['explorer']);
+        $commandNewsCollect->setCreatedBy($this->creator);
+        $this->em->persist($commandNewsCollect);
     }
 }
