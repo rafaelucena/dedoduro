@@ -26,7 +26,7 @@ class CommandModel
 
     /**
      * @var string
-     * @ORM\Column(type="string", length=63, nullable=false)
+     * @ORM\Column(type="string", length=63, nullable=false, unique=true)
      */
     public $name;
 
@@ -57,7 +57,7 @@ class CommandModel
 
     /**
      * @var User
-     * @ORM\ManyToOne(targetEntity="App\Http\Models\User", inversedBy="commandLog")
+     * @ORM\ManyToOne(targetEntity="App\Http\Models\User", inversedBy="commands")
      * @ORM\JoinColumn(name="created_by", referencedColumnName="id", nullable=false)
      */
     protected $createdBy;
@@ -68,6 +68,26 @@ class CommandModel
     public function __construct()
     {
         $this->createdBy = auth()->user();
+    }
+
+    /**
+     * @return CommandTypeModel
+     */
+    public function getType(): CommandType
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param CommandTypeModel $type
+     *
+     * @return CommandModel
+     */
+    public function setType(CommandTypeModel $type): self
+    {
+        $this->type = $type;
+
+        return $this;
     }
 
     /**
