@@ -6,7 +6,7 @@ use App\Http\Models\Commands\CommandModel;
 use App\Http\Models\User;
 use App\Http\Models\Commands\CommandTypeModel;
 
-class CommandSeeder extends Seeder
+class CommandsSeeder extends Seeder
 {
     /** EntityManagerInterface $em */
     protected $em;

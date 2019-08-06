@@ -6,7 +6,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Seeder;
 
-class UsersTableSeeder extends Seeder
+class UsersSeeder extends Seeder
 {
     public function __construct(EntityManagerInterface $em)
     {
