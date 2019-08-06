@@ -55,9 +55,9 @@ class CommandsSeeder extends Seeder
 
         $commandNewsCheck = new CommandModel();
         $commandNewsCheck->name = 'news:check';
-        $commandNewsCollect->createdAt = new \DateTime();
-        $commandNewsCollect->setType($this->commandTypes['explorer']);
-        $commandNewsCollect->setCreatedBy($this->creator);
-        $this->em->persist($commandNewsCollect);
+        $commandNewsCheck->createdAt = new \DateTime();
+        $commandNewsCheck->setType($this->commandTypes['explorer']);
+        $commandNewsCheck->setCreatedBy($this->creator);
+        $this->em->persist($commandNewsCheck);
     }
 }
