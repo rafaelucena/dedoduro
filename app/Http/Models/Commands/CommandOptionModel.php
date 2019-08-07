@@ -102,9 +102,29 @@ class CommandOptionModel
      *
      * @return CommandOptionModel
      */
-    public function setCreatedBy(User $createdBy): CommandOptionModel
+    public function setCreatedBy(User $createdBy): self
     {
         $this->createdBy = $createdBy;
+
+        return $this;
+    }
+
+    /**
+     * @return CommandModel
+     */
+    public function getCommand(): CommandModel
+    {
+        return $this->command;
+    }
+
+    /**
+     * @param CommandModel $command
+     *
+     * @return CommandOptionModel
+     */
+    public function setCommand(CommandModel $command): self
+    {
+        $this->command = $command;
 
         return $this;
     }
